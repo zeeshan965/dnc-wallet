@@ -5,17 +5,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #f1f1f1; 
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #888; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #555; 
 }
 </style>
 <template>
@@ -39,7 +39,7 @@
   import DncModal from './components/popup-modals/DncModal.vue'
   import EtheriumModal from './components/popup-modals/EtheriumModal.vue'
   import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
-
+  
   export default {
     name: 'app',
     components: {
