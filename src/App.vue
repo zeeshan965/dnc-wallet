@@ -39,6 +39,7 @@
   import DncModal from './components/popup-modals/DncModal.vue'
   import EtheriumModal from './components/popup-modals/EtheriumModal.vue'
   import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
+  
   export default {
     name: 'app',
     components: {

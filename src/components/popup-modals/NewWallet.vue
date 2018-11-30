@@ -40,7 +40,7 @@
                             </p>
                         </div>
                         <hr>
-                        <form method="post">
+                        <form method="post" v-on:submit.prevent="">
                             <fieldset>
                                 <div class="form-group">
                                     <label>Account Name</label>
@@ -91,12 +91,31 @@
 
                                 </div>
                             </fieldset>
-                        </form>
+                            <fieldset v-if="step == 2 || step == 3 || step == 4">
+                                <div class="form-group" v-if="step == 2">
+                                    <h3>Save your Keystore File.</h3>
+                                    <button class="btn btn-lg btn-primary" @click="step = 3">Save keystore/json</button>
+                                </div>
+                                <p class="text-white">
+                                    **Do not lose it!** It cannot be recovered if you lose it.
 
+                                    **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
+
+                                    **Make a backup!** Secure it like the millions of dollars it may one day be worth.
+                                </p>
+                                <div class="form-group" v-if="step == 4">
+                                    <button class="btn btn-lg btn-primary">Print Paper Wallet</button>
+                                </div>
+                                <div class="form-group" v-if="step == 3">
+                                    <button class="btn btn-lg btn-primary" @click="step = 4">I Understand Continue</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -105,6 +124,10 @@
 </template>
 <script>
     export default {
-
+        data: function(){
+            return {
+                step: 1
+            }
+        }
     }
 </script>
