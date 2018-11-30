@@ -7,6 +7,8 @@
     <div class="text-left">
         <new-wallet-modal></new-wallet-modal>
         <dnc-modal></dnc-modal>
+        <etherium-modal></etherium-modal>
+        <bitcoin-modal></bitcoin-modal>
     </div>
 </template>
 <script>

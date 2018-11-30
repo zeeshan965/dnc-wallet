@@ -1,32 +1,32 @@
 <template>
     <div>
-        <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+        <div id="Bitcoin-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="display: none;">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content p-0">
                     <ul class="nav nav-tabs navtab-custom nav-justified">
                         <li class="active">
-                            <a href="#dnc-details" data-toggle="tab" aria-expanded="true">
+                            <a href="#11" data-toggle="tab" aria-expanded="true">
 
                                 <span>Details</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#dnc-send-transfer" data-toggle="tab" aria-expanded="false">
+                            <a href="#22" data-toggle="tab" aria-expanded="false">
 
                                 <span>Send/Transfer</span>
                             </a>
                         </li>
 
                         <li class="">
-                            <a href="#dnc-mint-burn" data-toggle="tab" aria-expanded="false">
+                            <a href="#55" data-toggle="tab" aria-expanded="false">
 
                                 <span>Mint/Burn</span>
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="dnc-details">
+                        <div class="tab-pane active" id="11">
                             <div>
 
                                 <div class="row">
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="dnc-send-transfer">
+                        <div class="tab-pane" id="22">
                             <p> </p>
                             <p>Send Dinarcoin from 0xc0d594d4dccf49f79e43e427a696678da6bc11ba</p>
                             <p>DinarCoin transactions are written to a global transaction log called the Ethereum
@@ -169,7 +169,7 @@
                             </form>
                             <p></p>
                         </div>
-                        <div class="tab-pane" id="dnc-mint-burn">
+                        <div class="tab-pane" id="55">
                             <p></p>
                             <div class="row">
                                 <div class="col-lg-12">

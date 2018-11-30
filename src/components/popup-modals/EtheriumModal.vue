@@ -1,32 +1,32 @@
 <template>
     <div>
-        <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+        <div id="Etherium-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="display: none;">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content p-0">
                     <ul class="nav nav-tabs navtab-custom nav-justified">
                         <li class="active">
-                            <a href="#dnc-details" data-toggle="tab" aria-expanded="true">
+                            <a href="#details-eth" data-toggle="tab" aria-expanded="true">
 
                                 <span>Details</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#dnc-send-transfer" data-toggle="tab" aria-expanded="false">
+                            <a href="#send-transfer-eth" data-toggle="tab" aria-expanded="false">
 
                                 <span>Send/Transfer</span>
                             </a>
                         </li>
 
                         <li class="">
-                            <a href="#dnc-mint-burn" data-toggle="tab" aria-expanded="false">
+                            <a href="#burn" data-toggle="tab" aria-expanded="false">
 
                                 <span>Mint/Burn</span>
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="dnc-details">
+                        <div class="tab-pane active" id="details-eth">
                             <div>
 
                                 <div class="row">
@@ -95,15 +95,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="dnc-send-transfer">
+                        <div class="tab-pane" id="send-transfer-eth">
                             <p> </p>
                             <p>Send Dinarcoin from 0xc0d594d4dccf49f79e43e427a696678da6bc11ba</p>
                             <p>DinarCoin transactions are written to a global transaction log called the Ethereum
                                 blockchain. Because there is no central authority controlling the log, we wait for
                                 multiple confirmations before allowing use of the DinarCoin.</p>
-
-
-
                             <form action="#" data-parsley-validate="" novalidate="">
                                 <div class="form-group">
                                     <label for="userName">Receiving SmartX address*</label>
@@ -169,17 +166,11 @@
                             </form>
                             <p></p>
                         </div>
-                        <div class="tab-pane" id="dnc-mint-burn">
+                        <div class="tab-pane" id="burn">
                             <p></p>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <ul class="nav nav-tabs navtab-custom">
-                                        <li class="active">
-                                            <a href="#Mint" data-toggle="tab" aria-expanded="false">
-                                                <span class="visible-xs"><i class="fa fa-home"></i></span>
-                                                <span class="hidden-xs">Mint</span>
-                                            </a>
-                                        </li>
                                         <li class="">
                                             <a href="#Burn" data-toggle="tab" aria-expanded="false">
                                                 <span class="visible-xs"><i class="fa fa-user"></i></span>
@@ -188,51 +179,6 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="Mint">
-                                            <ul class="list-unstyled">
-                                                <li>DinarCoin Balance: 2 DinarCoins</li>
-                                                <li>DinarCoin Price: $205.32 USD (0.3561627677031908 BTC)</li>
-                                            </ul>
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="">
-                                                <div class="form-group">
-                                                    <label for="userName">Amount of DinarCoin to mint</label>
-                                                    <input type="number" placeholder="1DNC" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="userName">Wallet To Use</label>
-                                                    <select class="form-control">
-                                                        <option>Please Choose</option>
-                                                        <option>BTC - 123345536279</option>
-                                                        <option>ETC - 223444567432</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="userName">Choose your destination for mint :</label>
-                                                    <select class="form-control">
-                                                        <option>Please Choose</option>
-                                                        <option>SmartX Address :
-                                                            0xc0d594d4dccf49f79e43e427a696678da6bc11ba</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="pass1">Your Security Password*</label>
-                                                    <input id="pass1" type="password" placeholder="Security Password"
-                                                        required="" class="form-control" data-parsley-id="8">
-                                                    <small>Please Confirm the send with your security password</small>
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button class="btn btn-default waves-effect waves-light" type="submit">
-                                                        Send
-                                                    </button>
-                                                    <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
                                         <div class="tab-pane" id="Burn">
                                             <ul class="list-unstyled">
                                                 <li>DinarCoin Balance: 2 DinarCoins</li>

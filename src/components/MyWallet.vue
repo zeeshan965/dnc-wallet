@@ -2,7 +2,6 @@ r<template>
     <div>
         <div class="content m-t-40">
             <div class="container">
-
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
@@ -15,25 +14,11 @@ r<template>
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-box">
-
                             <h4 class="header-title m-t-0">Wallet Information</h4>
-
-
-
                             <div class="row">
-
-
-
-
-
-
-
                                 <div class="btn-group pull-right" style="margin: 19px;margin-top: -36px;margin-right: 10px;">
                                     <!-- CURRENCY, BOOTSTRAP DROPDOWN -->
                                     <!--<a class="btn btn-primary" href="javascript:void(0);">Currency</a>-->
@@ -115,7 +100,7 @@ r<template>
                                             <td>
 
                                                 <button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"
-                                                    data-toggle="modal" data-target="#ETH-modal">My EtherCoin <i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+                                                    data-toggle="modal" data-target="#Etherium-modal">My EtherCoin <i class="glyphicon glyphicon-circle-arrow-right"></i></button>
 
                                             </td>
                                         </tr>
@@ -135,7 +120,7 @@ r<template>
                                                 <hr class="hr_b"> <small><span id="currency_btc"> <i class="fa fa-usd"
                                                             aria-hidden="true"></i> 0.00 usd </span></small></td>
                                             <td><button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"
-                                                    data-toggle="modal" data-target="#BTC-modal">My BitCoin <i class="glyphicon glyphicon-circle-arrow-right"></i></button></td>
+                                                    data-toggle="modal" data-target="#Bitcoin-modal">My BitCoin <i class="glyphicon glyphicon-circle-arrow-right"></i></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
