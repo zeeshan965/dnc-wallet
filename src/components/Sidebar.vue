@@ -15,9 +15,10 @@
                                 src="assets/images/icon/math-add-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 New Wallet </span></a>
                     </li>
-                    <li>
+                    <li><router-link to="/profile">
                         <a href="profile.html" class="waves-effect waves-primary"><img src="assets/images/icon/User-blue-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Profile </span></a>
+                    </router-link>
                     </li>
                     <li class="has_sub">
                         <a href="#" class="waves-effect waves-primary"><img src="assets/images/icon/settings-icon.png">&nbsp;&nbsp;&nbsp;
