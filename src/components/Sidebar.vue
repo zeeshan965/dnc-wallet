@@ -15,10 +15,10 @@
                                 New Wallet </span></a>
                     </li>
                     <li>
-                        <router-link to="/contracts" class="waves-effect waves-primary"><img src="assets/images/icon/Play-Books-icon.png">&nbsp;&nbsp;&nbsp;<span>
+                        <router-link  class="waves-effect waves-primary"><img src="assets/images/icon/Play-Books-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Contracts </span></router-link>
                     </li>
-                    <li><router-link to="/profile">
+                    <li><router-link >
                         <a href="profile.html" class="waves-effect waves-primary"><img src="assets/images/icon/User-blue-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Profile </span></a>
                     </router-link>

@@ -21,41 +21,14 @@
 <template>
   <div id="wrapper" class="enlarged">
     <div id="app">
-      <topbar></topbar>
-      <sidebar></sidebar>
-      <main-content></main-content>
-      <popup-modals></popup-modals>
-    </div>
+      <router-view></router-view>
+ 0   </div>
   </div>
 </template>
 
 <script>
-  import Topbar from './components/Topbar.vue'
-  import Sidebar from './components/Sidebar.vue'
-  import Footer from './components/Footer.vue'
-  import MainContent from './components/MainContent.vue'
-  import PopUpModals from './components/popup-modals/PopupModals.vue'
-  import NewWallet from './components/popup-modals/NewWallet.vue'
-  import DncModal from './components/popup-modals/DncModal.vue'
-  import EtheriumModal from './components/popup-modals/EtheriumModal.vue'
-  import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
-  
-  export default {
-    name: 'app',
-    components: {
-      Topbar,
-      Sidebar,
-      Footer,
-      MainContent,
-      PopUpModals,
-      NewWallet,
-      DncModal,
-      EtheriumModal,
-      BitcoinModal
-    },
-    mounted: function(){
-      $(".modal").modal('hide');
-    }
+  export default{
+      name: 'app'
   }
 </script>
 

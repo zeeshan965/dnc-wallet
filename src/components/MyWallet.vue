@@ -1,4 +1,4 @@
-r<template>
+<template>
     <div>
         <div class="content m-t-40">
             <div class="container">

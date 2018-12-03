@@ -50,32 +50,32 @@
                                 <div class="form-group">
                                     <label>Wallet</label>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input  type="checkbox">
+                                        <label >
                                             DinarCoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="checkbox1" type="checkbox">
+                                        <label >
                                             Bitcoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="checkbox2" type="checkbox">
+                                        <label >
                                             EtherCoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="checkbox3" type="checkbox">
+                                        <label >
                                             GSC
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="checkbox4" type="checkbox">
+                                        <label >
                                             DND
                                         </label>
                                     </div>
