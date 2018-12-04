@@ -117,8 +117,8 @@
 
 
                                 <div class="form-group">
-                                    <label for="pass1">You Security Password*</label>
-                                    <input id="pass1" type="password" placeholder="Security Password" required="" class="form-control"
+                                    <label >You Security Password*</label>
+                                    <input  type="password" placeholder="Security Password" required="" class="form-control"
                                         data-parsley-id="8">
                                     <small>Please Confirm the send with your security password</small>
                                 </div>
@@ -218,8 +218,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="pass1">Your Security Password*</label>
-                                                    <input id="pass1" type="password" placeholder="Security Password"
+                                                    <label >Your Security Password*</label>
+                                                    <input  type="password" placeholder="Security Password"
                                                         required="" class="form-control" data-parsley-id="8">
                                                     <small>Please Confirm the send with your security password</small>
                                                 </div>
@@ -263,8 +263,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="pass1">Your Security Password*</label>
-                                                    <input id="pass1" type="password" placeholder="Security Password"
+                                                    <label >Your Security Password*</label>
+                                                    <input  type="password" placeholder="Security Password"
                                                         required="" class="form-control" data-parsley-id="8">
                                                     <small>Please Confirm the send with your security password</small>
                                                 </div>

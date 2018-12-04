@@ -50,33 +50,21 @@
                                 <div class="form-group">
                                     <label>Wallet</label>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="customcoin_checkbox" type="checkbox">
+                                        <label for="customcoin_checkbox">
                                             DinarCoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="bitcoin_checkbox" type="checkbox">
+                                        <label for="bitcoin_checkbox">
                                             Bitcoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
+                                        <input id="ethercoin_checkbox" type="checkbox">
+                                        <label for="ethercoin_checkbox">
                                             EtherCoin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
-                                            GSC
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox7" type="checkbox">
-                                        <label for="checkbox7">
-                                            DND
                                         </label>
                                     </div>
                                 </div>
@@ -88,7 +76,6 @@
                                 <div class="form-group">
                                     <label>Confirm password</label>
                                     <input class="form-control " type="text" value="">
-
                                 </div>
                             </fieldset>
                             <fieldset v-if="step == 2 || step == 3 || step == 4">

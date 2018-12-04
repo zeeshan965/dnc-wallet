@@ -21,40 +21,29 @@
 <template>
   <div id="wrapper" class="enlarged">
     <div id="app">
-      <topbar></topbar>
-      <sidebar></sidebar>
-      <main-content></main-content>
-      <popup-modals></popup-modals>
+      <transition name="slidefadesmall" mode="out-in" appear>
+      <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-  import Topbar from './components/Topbar.vue'
-  import Sidebar from './components/Sidebar.vue'
-  import Footer from './components/Footer.vue'
-  import MainContent from './components/MainContent.vue'
-  import PopUpModals from './components/popup-modals/PopupModals.vue'
-  import NewWallet from './components/popup-modals/NewWallet.vue'
-  import DncModal from './components/popup-modals/DncModal.vue'
-  import EtheriumModal from './components/popup-modals/EtheriumModal.vue'
-  import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
-  
   export default {
     name: 'app',
-    components: {
-      Topbar,
-      Sidebar,
-      Footer,
-      MainContent,
-      PopUpModals,
-      NewWallet,
-      DncModal,
-      EtheriumModal,
-      BitcoinModal
+    data: function(){
+      return {
+        user: null
+      }
     },
-    mounted: function(){
-      $(".modal").modal('hide');
+    methods:{
+      isLoggedIn(){
+        return localStorage.getItem("auth_user") ? JSON.parse(localStorage.getItem("auth_user")) : null;
+      }
+    },
+    mounted(){
+        this.user = this.isLoggedIn();
+
     }
   }
 </script>
