@@ -19,7 +19,7 @@
                             </p>
                             <p>
                                 <span class="translation_missing" title="translation missing: en.views.accounts.newaccount.recommend">Recommend</span>
-                                <a href="/blog/are_you_guilty_of_the_following_password_mistakes" target="_blank">Common
+                                <a href="" target="_blank">Common
                                     Password Mistakes</a>
                             </p>
                             <p>
@@ -40,66 +40,19 @@
                             </p>
                         </div>
                         <hr>
-                        <!-- <form method="post">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label>Account Name</label>
-                                    <input class="form-control " type="text" value="">
-                                    <p class="help-block">You now need to supply a secure password for this account.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label>Wallet</label>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-
-                                        <input id="customcoin_checkbox" type="checkbox">
-                                        <label for="customcoin_checkbox">
-                                        <input  type="checkbox">
-                                        <label >
-                                            DinarCoin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-
-                                        <input id="bitcoin_checkbox" type="checkbox">
-                                        <label for="bitcoin_checkbox">
-
-                                        <input id="checkbox1" type="checkbox">
-                                        <label >
-                                            Bitcoin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="ethercoin_checkbox" type="checkbox">
-                                        <label for="ethercoin_checkbox">
-                                            EtherCoin
-                                        </label>
-                                    </div>
-                                        
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox3" type="checkbox">
-                                        <label >
-                                            GSC
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-info checkbox-circle">
-                                        <input id="checkbox4" type="checkbox">
-                                        <label >
-                                            DND
-                                        </label>
-                                    </div>
-                                
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="form-control " type="text" value="">
-
-                                </div>
-                                <div class="form-group">
-                                    <label>Confirm password</label>
-                                    <input class="form-control " type="text" value="">
-                                </div>
-                            </fieldset>
-                            <fieldset v-if="step == 2 || step == 3 || step == 4">
+                        <form method="post">
+                            <fieldset><div class="form-group"><label>Account Name</label><input type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div><div class="form-group"><label>Wallet</label><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                DinarCoin
+                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                Bitcoin
+                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                EtherCoin
+                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                GSC
+                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                DND
+                            </label></div></div><div class="form-group"><label>Password</label><input type="text" value="" class="form-control "></div><div class="form-group"><label>Confirm password</label><input type="text" value="" class="form-control "></div></fieldset>
+                            <fieldset v-if="step == 2 || step == 3 || step == 4" @click.prevent=''>
                                 <div class="form-group" v-if="step == 2">
                                     <h3>Save your Keystore File.</h3>
                                     <button class="btn btn-lg btn-primary" @click="step = 3">Save keystore/json</button>
@@ -111,15 +64,16 @@
 
                                     **Make a backup!** Secure it like the millions of dollars it may one day be worth.
                                 </p>
-                                <div class="form-group" v-if="step == 4">
-                                    <button class="btn btn-lg btn-primary">Print Paper Wallet</button>
-                                </div>
                                 <div class="form-group" v-if="step == 3">
                                     <button class="btn btn-lg btn-primary" @click="step = 4">I Understand Continue</button>
                                 </div>
+                                <div class="form-group" v-if="step == 4">
+                                    <button class="btn btn-lg btn-primary">Print Paper Wallet</button>
+
+                                </div>
                             </fieldset>
                         </form>
-                         -->
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
@@ -136,6 +90,7 @@
             return {
                 step: 1
             }
+
         }
     }
 </script>

@@ -10,14 +10,14 @@
 
                                 <li class="active">Dashboard</li>
                             </ol>
-                            <h4 class="page-title">Welcome !</h4>
+                            <h4 class="page-title text-left">Welcome !</h4>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-box">
-                            <h4 class="header-title m-t-0">Wallet Information</h4>
+                            <h4 class="header-title m-t-0 text-left">Wallet Information</h4>
                             <div class="row">
                                 <div class="btn-group pull-right" style="margin: 19px;margin-top: -36px;margin-right: 10px;">
                                     <!-- CURRENCY, BOOTSTRAP DROPDOWN -->

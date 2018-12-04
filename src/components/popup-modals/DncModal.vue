@@ -3,7 +3,9 @@
         <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="display: none;">
             <div class="modal-dialog modal-lg">
+
                 <div class="modal-content p-0">
+
                     <ul class="nav nav-tabs navtab-custom nav-justified">
                         <li class="active">
                             <a href="#dnc-details" data-toggle="tab" aria-expanded="true">
@@ -40,7 +42,7 @@
 
                                             <li><i class="fa fa-tags" aria-hidden="true"></i>
 
-                                                <small><span class="label label-success">Mineable</span></small>
+                                                <small><span class="label label-success " style="margin-left:5px;">Mineable</span></small>
 
                                                 <small><span class="label label-success">Currency</span></small>
                                             </li>
@@ -119,6 +121,7 @@
                                 <div class="form-group">
 
                                   
+                                    <label>You Security Password*</label>
                                     <label>You Security Password*</label>
                                     <input type="password" placeholder="Security Password" required="" class="form-control"
                                         data-parsley-id="8">
