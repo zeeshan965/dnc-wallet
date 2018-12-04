@@ -40,7 +40,7 @@
                             </p>
                         </div>
                         <hr>
-                        <form method="post" v-on:submit.prevent="">
+                        <!-- <form method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <label>Account Name</label>
@@ -50,39 +50,31 @@
                                 <div class="form-group">
                                     <label>Wallet</label>
                                     <div class="checkbox checkbox-info checkbox-circle">
-<<<<<<< HEAD
+
                                         <input id="customcoin_checkbox" type="checkbox">
                                         <label for="customcoin_checkbox">
-=======
                                         <input  type="checkbox">
                                         <label >
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
                                             DinarCoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-<<<<<<< HEAD
+
                                         <input id="bitcoin_checkbox" type="checkbox">
                                         <label for="bitcoin_checkbox">
-=======
+
                                         <input id="checkbox1" type="checkbox">
                                         <label >
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
                                             Bitcoin
                                         </label>
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
-<<<<<<< HEAD
                                         <input id="ethercoin_checkbox" type="checkbox">
                                         <label for="ethercoin_checkbox">
                                             EtherCoin
                                         </label>
                                     </div>
-=======
-                                        <input id="checkbox2" type="checkbox">
-                                        <label >
-                                            EtherCoin
-                                        </label>
+                                        
                                     </div>
                                     <div class="checkbox checkbox-info checkbox-circle">
                                         <input id="checkbox3" type="checkbox">
@@ -96,8 +88,7 @@
                                             DND
                                         </label>
                                     </div>
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
-                                </div>
+                                
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="form-control " type="text" value="">
@@ -128,7 +119,7 @@
                                 </div>
                             </fieldset>
                         </form>
-                        
+                         -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>

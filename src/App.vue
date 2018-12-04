@@ -21,20 +21,18 @@
 <template>
   <div id="wrapper" class="enlarged">
     <div id="app">
-<<<<<<< HEAD
+
       <transition name="slidefadesmall" mode="out-in" appear>
       <router-view></router-view>
       </transition>
     </div>
-=======
-      <router-view></router-view>
- 0   </div>
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
-  </div>
+
+      </div>
+
 </template>
 
 <script>
-<<<<<<< HEAD
+
   export default {
     name: 'app',
     data: function(){
@@ -51,11 +49,8 @@
         this.user = this.isLoggedIn();
 
     }
-=======
-  export default{
-      name: 'app'
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
-  }
+}
+ 
 </script>
 
 <style>

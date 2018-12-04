@@ -4,7 +4,6 @@ import MyWallet from './components/MyWallet.vue'
 import profile from './components/Profile.vue'
 import Authenticated from './components/Authenticated.vue'
 import Contracts from './components/Contracts.vue'
-<<<<<<< HEAD
 import Main from './components/Main.vue'
 import Login from './components/Auth/Login.vue'
 import Register from './components/Auth/Register.vue'
@@ -26,6 +25,11 @@ export default new Router({
           component: MyWallet
         },
         {
+          path: '/profile',
+          name: 'Profile',
+          component:  profile
+        },
+        {
           path: '/contracts',
           name: 'contracts',
           component: Contracts
@@ -43,56 +47,56 @@ export default new Router({
       component: Register
     }
   ]
-=======
-import Login from "./components/Login.vue";
-Vue .use(Router)
+});
 
-let router = new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Authenticated,
-            children: [
-                {
-                  path: '/',
-                    component: MyWallet,
-                    name: 'mywallet'
-                },
-                {
-                    path: '/profile',
-                    name: 'Profile',
-                    component:  profile
-                },
-                {
-                    path: '/contracts',
-                    name: 'contracts',
-                    component: Contracts
-                }
-            ]
-        },
-        //login
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
-        },
+//import Login from "./components/Login.vue";
+//Vue.use(Router);
 
-    ]
-})
-const openRoutes =  [ 'Login' , 'contracts', 'home', 'Profile' ,'mywallet'];
+// let router = new Router({
+//     mode: 'history',
+//     base: process.env.BASE_URL,
+//     routes: [
+//         {
+//             path: '/',
+//             name: 'home',
+//             component: Authenticated,
+//             children: [
+//                 {
+//                   path: '/',
+//                     component: MyWallet,
+//                     name: 'mywallet'
+//                 },
+//                 {
+//                     path: '/profile',
+//                     name: 'Profile',
+//                     component:  profile
+//                 },
+//                 {
+//                     path: '/contracts',
+//                     name: 'contracts',
+//                     component: Contracts
+//                 }
+//             ]
+//         },
+//         //login
+//         {
+//             path: '/login',
+//             name: 'Login',
+//             component: Login
+//         },
 
-router.beforeEach((to, from, next) => {
-    if (openRoutes.includes(to.name) ){
-        next()
-    }else if(window.tokem){
-        next()
-    }else
-        {
-        next('/')
-    }
->>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
-})
-export default router
+//     ]
+// })
+//const openRoutes =  [ 'Login' , 'contracts', 'home', 'Profile' ,'mywallet'];
+
+// router.beforeEach((to, from, next) => {
+//     if (openRoutes.includes(to.name) ){
+//         next()
+//     }else if(window.tokem){
+//         next()
+//     }else
+//         {
+//         next('/')
+//     }
+// })
+//export default router;
