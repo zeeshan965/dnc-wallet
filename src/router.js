@@ -7,6 +7,7 @@ import Contracts from './components/Contracts.vue'
 import Main from './components/Main.vue'
 import Login from './components/Auth/Login.vue'
 import Register from './components/Auth/Register.vue'
+import Forgetpass from './components/Auth/Forgetpass.vue'
 
 Vue.use(Router)
 
@@ -45,7 +46,12 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
-    }
+    },
+      {
+          path: '/forgetpass',
+          name: 'Forgetpass',
+          component: Forgetpass
+      }
   ]
 });
 
