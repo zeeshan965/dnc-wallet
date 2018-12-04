@@ -106,25 +106,30 @@
 
                             <form action="#" data-parsley-validate="" novalidate="">
                                 <div class="form-group">
-                                    <label for="userName">Receiving SmartX address*</label>
+                                    <label>Receiving SmartX address*</label>
                                     <input type="text" placeholder="DinarCoin Address" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userName">Amount in Dinarcoin*</label>
+                                    <label>Amount in Dinarcoin*</label>
                                     <input type="number" placeholder="Amount DinarCoin" class="form-control">
                                 </div>
 
 
 
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label >You Security Password*</label>
                                     <input  type="password" placeholder="Security Password" required="" class="form-control"
+=======
+                                    <label>You Security Password*</label>
+                                    <input type="password" placeholder="Security Password" required="" class="form-control"
+>>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
                                         data-parsley-id="8">
                                     <small>Please Confirm the send with your security password</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="userName">Description</label>
+                                    <label>Description</label>
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <input type="text" placeholder="Amount DinarCoin" class="form-control">
@@ -149,7 +154,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="userName">Value DinarCoin</label>
+                                    <label >Value DinarCoin</label>
                                     <input type="number" placeholder="Value DinarCoin" class="form-control">
                                 </div>
 
@@ -218,8 +223,13 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+<<<<<<< HEAD
                                                     <label >Your Security Password*</label>
                                                     <input  type="password" placeholder="Security Password"
+=======
+                                                    <label>Your Security Password*</label>
+                                                    <input type="password" placeholder="Security Password"
+>>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
                                                         required="" class="form-control" data-parsley-id="8">
                                                     <small>Please Confirm the send with your security password</small>
                                                 </div>
@@ -263,8 +273,13 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+<<<<<<< HEAD
                                                     <label >Your Security Password*</label>
                                                     <input  type="password" placeholder="Security Password"
+=======
+                                                    <label>Your Security Password*</label>
+                                                    <input type="password" placeholder="Security Password"
+>>>>>>> 6862fcf2c2bb321637b296c7491371c01f591fd0
                                                         required="" class="form-control" data-parsley-id="8">
                                                     <small>Please Confirm the send with your security password</small>
                                                 </div>

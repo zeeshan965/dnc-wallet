@@ -106,12 +106,12 @@
 
                             <form action="#" data-parsley-validate="" novalidate="">
                                 <div class="form-group">
-                                    <label for="userName">Receiving SmartX address*</label>
-                                    <input type="text" placeholder="DinarCoin Address" class="form-control">
+                                    <label for="receiving-address">Receiving SmartX address*</label>
+                                    <input id="receiving-address" type="text" placeholder="DinarCoin Address" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userName">Amount in Dinarcoin*</label>
-                                    <input type="number" placeholder="Amount DinarCoin" class="form-control">
+                                    <label >Amount in Dinarcoin*</label>
+                                    <input id="amount" type="number" placeholder="Amount DinarCoin" class="form-control">
                                 </div>
 
 
@@ -124,7 +124,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="userName">Description</label>
+                                    <label>Description</label>
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <input type="text" placeholder="Amount DinarCoin" class="form-control">

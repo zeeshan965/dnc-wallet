@@ -24,33 +24,33 @@
                                 <div class="row">
                                     <div class="col-sm-8">
                                         <div class="form-group">
-                                            <label for="search-input">Email</label>
+                                            <label for="email-field">Email</label>
 
-                                            <input type="text" id="normal-field" class="form-control" placeholder="Email">
-
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="search-input">Password</label>
-
-                                            <input type="text" id="normal-field" class="form-control" placeholder="Password">
+                                            <input type="text" id="email-field" class="form-control" placeholder="Email">
 
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="search-input">Confirm Password</label>
+                                            <label for="password-field">Password</label>
 
-                                            <input type="text" id="normal-field" class="form-control" placeholder="Confirm Password">
+                                            <input type="text" id="password-field" class="form-control" placeholder="Password">
 
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="search-input">Current Password</label>
+                                            <label for="confirm-password-field">Confirm Password</label>
 
-                                            <input type="text" id="normal-field" class="form-control" placeholder="Current Password">
+                                            <input type="text" id="confirm-password-field" class="form-control" placeholder="Confirm Password">
+
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="current-password-field">Current Password</label>
+
+                                            <input type="text" id="current-password-field" class="form-control" placeholder="Current Password">
                                         </div>
                                     </div>
                                 </div>

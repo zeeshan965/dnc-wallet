@@ -104,11 +104,11 @@
                             <form action="#" data-parsley-validate="" novalidate="">
                                 <div class="form-group">
                                     <label for="userName">Receiving SmartX address*</label>
-                                    <input type="text" placeholder="DinarCoin Address" class="form-control">
+                                    <input id="username" type="text" placeholder="DinarCoin Address" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="userName">Amount in Dinarcoin*</label>
-                                    <input type="number" placeholder="Amount DinarCoin" class="form-control">
+                                    <label >Amount in Dinarcoin*</label>
+                                    <input  type="number" placeholder="Amount DinarCoin" class="form-control">
                                 </div>
 
 
