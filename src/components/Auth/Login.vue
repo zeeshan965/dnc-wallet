@@ -45,8 +45,10 @@
 
                 <div class="form-group m-t-30">
                     <div class="col-sm-7">
-                        <a href="forgot_password.html" class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your
+                        <router-link to="/forgetpassword">
+                        <a  class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your
                             password?</a>
+                        </router-link>    
                     </div>
                     <div class="col-sm-5 text-right">
                         <router-link to="/register" class="text-muted">Create an account</router-link>
