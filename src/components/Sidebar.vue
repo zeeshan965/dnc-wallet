@@ -24,21 +24,21 @@
                                 Profile </span></a>
                     </router-link>
                     </li>
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect waves-primary"><img src="assets/images/icon/settings-icon.png">&nbsp;&nbsp;&nbsp;
-                            <span> Setting </span>
-                        </a>
-                        <ul class="list-unstyled">
-                            <li><a href="security.html">Increase Your Security</a></li>
-                            <li><a href="pdf.html">Paper Backup (PDF)</a></li>
-                            <li><a href="key_import.html">Key Import (Advanced)</a></li>
+                    <!--<li class="has_sub">-->
+                        <!--<a href="#" class="waves-effect waves-primary"><img src="assets/images/icon/settings-icon.png">&nbsp;&nbsp;&nbsp;-->
+                            <!--<span> Setting </span>-->
+                        <!--</a>-->
+                        <!--<ul class="list-unstyled">-->
+                            <!--<li><a href="">Increase Your Security</a></li>-->
+                            <!--<li><a href="">Paper Backup (PDF)</a></li>-->
+                            <!--<li><a href="">Key Import (Advanced)</a></li>-->
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="blockchain_explore.html" class="waves-effect waves-primary"><img src="assets/images/icon/Alternative-Explorer-2-icon.png">&nbsp;&nbsp;&nbsp;<span>
-                                Blockchain Explorer </span></a>
-                    </li>
+                        <!--</ul>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="blockchain_explore.html" class="waves-effect waves-primary"><img src="assets/images/icon/Alternative-Explorer-2-icon.png">&nbsp;&nbsp;&nbsp;<span>-->
+                                <!--Blockchain Explorer </span></a>-->
+                    <!--</li>-->
                 </ul>
                 <div class="clearfix"></div>
             </div>

@@ -3,17 +3,6 @@
         <div class="container">
             <!-- Page-Title -->
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="page-title-box">
-                        <ol class="breadcrumb pull-right">
-
-                            <li class="active">Profile</li>
-                        </ol>
-                        <h4 class="page-title">Welcome !</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-12">
                     <div class="card-box">
 

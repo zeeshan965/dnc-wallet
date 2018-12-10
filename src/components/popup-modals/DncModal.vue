@@ -23,7 +23,7 @@
                         <li class="">
                             <a href="#dnc-mint-burn" data-toggle="tab" aria-expanded="false">
 
-                                <span>Mint/Burn</span>
+                                <span>Burn</span>
                             </a>
                         </li>
                     </ul>
@@ -180,11 +180,11 @@
                                 <div class="col-lg-12">
                                     <ul class="nav nav-tabs navtab-custom">
                                         <li class="active">
-                                            <a href="#Mint" data-toggle="tab" aria-expanded="false">
-                                                <span class="visible-xs"><i class="fa fa-home"></i></span>
-                                                <span class="hidden-xs">Mint</span>
-                                            </a>
-                                        </li>
+                                            <!--<a href="#Mint" data-toggle="tab" aria-expanded="false">-->
+                                                <!--<span class="visible-xs"><i class="fa fa-home"></i></span>-->
+                                                <!--<span class="hidden-xs">Mint</span>-->
+                                            <!--</a>-->
+                                        <!--</li>-->
                                         <li class="">
                                             <a href="#Burn" data-toggle="tab" aria-expanded="false">
                                                 <span class="visible-xs"><i class="fa fa-user"></i></span>
@@ -350,6 +350,10 @@
                                 </div>
                             </div>
                             <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button>-->
                         </div>
                     </div>
                 </div><!-- /.modal-content -->
