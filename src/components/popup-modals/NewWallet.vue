@@ -43,18 +43,19 @@
                         <form method="post">
                             <fieldset><div class="form-group"><label>Account Name</label><input type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div><div class="form-group"><label>Wallet</label><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
                                 DinarCoin
-                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
-                                Bitcoin
-                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                            </label>
+                            </div>
+                                <div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
                                 EtherCoin
-                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
-                                GSC
-                            </label></div><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
-                                DND
-                            </label></div></div><div class="form-group"><label>Password</label><input type="text" value="" class="form-control "></div><div class="form-group"><label>Confirm password</label><input type="text" value="" class="form-control "></div></fieldset>
+                            </label>
+                            </div>
+                            </div>
+                                <button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Create Wallet</button>
+                            </fieldset>
                             <fieldset v-if="step == 2 || step == 3 || step == 4" @click.prevent=''>
                                 <div class="form-group" v-if="step == 2">
                                     <h3>Save your Keystore File.</h3>
+                                    <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div>
                                     <button class="btn btn-lg btn-primary" @click="step = 3">Save keystore/json</button>
                                 </div>
                                 <p class="text-white">
@@ -67,8 +68,9 @@
                                 <div class="form-group" v-if="step == 3">
                                     <button class="btn btn-lg btn-primary" @click="step = 4">I Understand Continue</button>
                                 </div>
+
                                 <div class="form-group" v-if="step == 4">
-                                    <button class="btn btn-lg btn-primary">Print Paper Wallet</button>
+                                    <!--<button class="btn btn-lg btn-primary">Print Paper Wallet</button>-->
 
                                 </div>
                             </fieldset>
@@ -88,7 +90,8 @@
     export default {
         data: function(){
             return {
-                step: 1
+                step: 1,
+                createWallet: true
             }
 
         }

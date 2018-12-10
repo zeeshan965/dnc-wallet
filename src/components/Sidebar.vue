@@ -18,12 +18,12 @@
                         <router-link to="/contracts" class="waves-effect waves-primary"><img src="assets/images/icon/Play-Books-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Contracts </span></router-link>
                     </li>
-                    <li>
-                        <router-link to="/profile" >
-                        <a  class="waves-effect waves-primary"><img src="assets/images/icon/User-blue-icon.png">&nbsp;&nbsp;&nbsp;<span>
-                                Profile </span></a>
-                    </router-link>
-                    </li>
+                    <!--<li>-->
+                        <!--<router-link to="/profile" >-->
+                        <!--<a  class="waves-effect waves-primary"><img src="assets/images/icon/User-blue-icon.png">&nbsp;&nbsp;&nbsp;<span>-->
+                                <!--Profile </span></a>-->
+                    <!--</router-link>-->
+                    <!--</li>-->
                     <!--<li class="has_sub">-->
                         <!--<a href="#" class="waves-effect waves-primary"><img src="assets/images/icon/settings-icon.png">&nbsp;&nbsp;&nbsp;-->
                             <!--<span> Setting </span>-->
