@@ -21,7 +21,15 @@
                 </div>
 
             </form>
+
+            <div class="form-group m-t-30">
+                    <div class="col-sm-12 text-center">
+                        <router-link to="/login" class="text-muted">Already have account?</router-link>
+                    </div>
+                </div>
         </div>
+
+        
 
     </div>
 </template>
