@@ -41,30 +41,36 @@
                         </div>
                         <hr>
                         <form method="post">
-                            <fieldset><div class="form-group"><label>Account Name</label><input type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div><div class="form-group"><label>Wallet</label><div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                            <fieldset><div class="form-group"><label>Account Name</label><input  type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div><div class="form-group"><label>Wallet</label><div class="checkbox checkbox-info checkbox-circle"><input @click="step = 1" id="cb_post" type="checkbox"><label for="cb_post">
                                 DinarCoin
                             </label>
                             </div>
-                                <div class="checkbox checkbox-info checkbox-circle"><input id="checkbox7" type="checkbox"><label for="checkbox7">
+                                <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
                                 EtherCoin
                             </label>
                             </div>
                             </div>
-                                <button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Create Wallet</button>
+                                <!--<div v-if="step == 1">-->
+                                <!--<div class="form-group" >-->
+                                    <!--<div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>-->
+                                <!--</div>-->
+                                <!--<button @click="step = 2" class="btn btn-primary waves-effect waves-light"-->
+                                        <!--type="button">Create Wallet</button>-->
+                                <!--</div>-->
                             </fieldset>
-                            <fieldset v-if="step == 2 || step == 3 || step == 4" @click.prevent=''>
+                            <fieldset id = "hiddenDiv" v-if="step == 1 || step == 2 || step == 3 || step == 4" @click.prevent=''>
                                 <div class="form-group" v-if="step == 2">
                                     <h3>Save your Keystore File.</h3>
-                                    <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "><p class="help-block">You now need to supply a secure password for this account.</p></div>
+                                    <div class="form-group"><p class="help-block">You now need to supply a secure password for this account.</p></div>
                                     <button class="btn btn-lg btn-primary" @click="step = 3">Save keystore/json</button>
+                                    <p class="text-white">
+                                        **Do not lose it!** It cannot be recovered if you lose it.
+
+                                        **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
+
+                                        **Make a backup!** Secure it like the millions of dollars it may one day be worth.
+                                    </p>
                                 </div>
-                                <p class="text-white">
-                                    **Do not lose it!** It cannot be recovered if you lose it.
-
-                                    **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
-
-                                    **Make a backup!** Secure it like the millions of dollars it may one day be worth.
-                                </p>
                                 <div class="form-group" v-if="step == 3">
                                     <button class="btn btn-lg btn-primary" @click="step = 4">I Understand Continue</button>
                                 </div>
@@ -72,6 +78,43 @@
                                 <div class="form-group" v-if="step == 4">
                                     <!--<button class="btn btn-lg btn-primary">Print Paper Wallet</button>-->
 
+                                </div>
+                                <div v-if="step == 1">
+                                    <div class="form-group" >
+                                        <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>
+                                    </div>
+                                    <button @click="step = 2" class="btn btn-primary waves-effect waves-light"
+                                            type="button">Create Wallet</button>
+                                </div>
+                            </fieldset>
+
+                            <fieldset id = "hiddenDiv1" v-if="ethstep == 1 || ethstep == 2 || ethstep == 3 || ethstep == 4" @click.prevent=''>
+                                <div class="form-group" v-if="ethstep == 2">
+                                    <h3>Save your Keystore File.</h3>
+                                    <div class="form-group"><p class="help-block">You now need to supply a secure password for this account.</p></div>
+                                    <button class="btn btn-lg btn-primary" @click="ethstep = 3">Save keystore/json</button>
+                                    <p class="text-white">
+                                        **Do not lose it!** It cannot be recovered if you lose it.
+
+                                        **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
+
+                                        **Make a backup!** Secure it like the millions of dollars it may one day be worth.
+                                    </p>
+                                </div>
+                                <div class="form-group" v-if="ethstep == 3">
+                                    <button class="btn btn-lg btn-primary" @click="ethstep = 4">I Understand Continue</button>
+                                </div>
+
+                                <div class="form-group" v-if="ethstep == 4">
+                                    <!--<button class="btn btn-lg btn-primary">Print Paper Wallet</button>-->
+
+                                </div>
+                                <div v-if="ethstep == 1">
+                                    <div class="form-group" >
+                                        <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>
+                                    </div>
+                                    <button @click="ethstep = 2" class="btn btn-primary waves-effect waves-light"
+                                            type="button">Create Wallet</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -90,10 +133,37 @@
     export default {
         data: function(){
             return {
-                step: 1,
-                createWallet: true
+                step: 0,
+                ethstep: 0,
+                createWallet: false
             }
+        },
+        mounted: function () {
+            $("#cb_post").on('click', function(){
+                $("#hiddenDiv").toggle();
 
+            });
+            $("#cb_post1").on('click', function(){
+                $("#hiddenDiv1").toggle();
+
+            });
+            $(function() {
+                $("input:checkbox").on('click', function() {
+                    // in the handler, 'this' refers to the box clicked on
+                    var $box = $(this);
+                    if ($box.is(":checked")) {
+                        // the name of the box is retrieved using the .attr() method
+                        // as it is assumed and expected to be immutable
+                        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                        // the checked state of the group/box on the other hand will change
+                        // and the current value is retrieved using .prop() method
+                        $(group).prop("checked", false);
+                        $box.prop("checked", true);
+                    } else {
+                        $box.prop("checked", false);
+                    }
+                });
+            });
         }
     }
 </script>
