@@ -45,10 +45,10 @@
                                 DinarCoin
                             </label>
                             </div>
-                                <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
+                                <!-- <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
                                 EtherCoin
                             </label>
-                            </div>
+                            </div> -->
                             </div>
                                 <!--<div v-if="step == 1">-->
                                 <!--<div class="form-group" >-->
@@ -81,42 +81,16 @@
                                 </div>
                                 <div v-if="step == 1">
                                     <div class="form-group" >
-                                        <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>
+                                        <div class="form-group"><label></label>
+                                        <!-- <input type="text" value=""  v-model="walletName" class="form-control "> -->
+                                        </div>
                                     </div>
-                                    <button @click="step = 2" class="btn btn-primary waves-effect waves-light"
+                                    {{this.walletName}}
+                                    <button @click="step = 2;createNewWallet()" class="btn btn-primary waves-effect waves-light"
                                             type="button">Create Wallet</button>
                                 </div>
                             </fieldset>
 
-                            <fieldset id = "hiddenDiv1" v-if="ethstep == 1 || ethstep == 2 || ethstep == 3 || ethstep == 4" @click.prevent=''>
-                                <div class="form-group" v-if="ethstep == 2">
-                                    <h3>Save your Keystore File.</h3>
-                                    <div class="form-group"><p class="help-block">You now need to supply a secure password for this account.</p></div>
-                                    <button class="btn btn-lg btn-primary" @click="ethstep = 3">Save keystore/json</button>
-                                    <p class="text-white">
-                                        **Do not lose it!** It cannot be recovered if you lose it.
-
-                                        **Do not share it!** Your funds will be stolen if you use this file on a malicious/phishing site.
-
-                                        **Make a backup!** Secure it like the millions of dollars it may one day be worth.
-                                    </p>
-                                </div>
-                                <div class="form-group" v-if="ethstep == 3">
-                                    <button class="btn btn-lg btn-primary" @click="ethstep = 4">I Understand Continue</button>
-                                </div>
-
-                                <div class="form-group" v-if="ethstep == 4">
-                                    <!--<button class="btn btn-lg btn-primary">Print Paper Wallet</button>-->
-
-                                </div>
-                                <div v-if="ethstep == 1">
-                                    <div class="form-group" >
-                                        <div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>
-                                    </div>
-                                    <button @click="ethstep = 2" class="btn btn-primary waves-effect waves-light"
-                                            type="button">Create Wallet</button>
-                                </div>
-                            </fieldset>
                         </form>
 
                     </div>
@@ -130,13 +104,27 @@
     </div>
 </template>
 <script>
+   import Web3 from 'web3';
+   import Web3EthAccounts from 'web3-eth-accounts';
+   var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
+
     export default {
         data: function(){
             return {
                 step: 0,
                 ethstep: 0,
-                createWallet: false
+                walletName:''
+               // createWallet: false
             }
+        },
+        methods: {
+       createNewWallet: function() {
+           
+           var account = new Web3EthAccounts('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa');
+           var new_acc = account.create();
+           console.log(this.walletName)
+           //console.log(new_acc.address); 
+         }
         },
         mounted: function () {
             $("#cb_post").on('click', function(){
