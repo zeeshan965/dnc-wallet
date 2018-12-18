@@ -164,24 +164,25 @@
                                         <!-- <input type="text" value=""  v-model="walletName" class="form-control "> -->
                                         </div>
                                     </div>
-                                    
+
                                       <!-- fake button for 'loading' -->
-                      
-                                    <button id="myBtn"  @click="step = 2;disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
-                                    type="button" ><span class="spinner  spinner--small" >Loading…</span>
+
+                                    <button id="myBtn"  @click="disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
+                                    type="button" >
+                                        <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
                                     Create Wallet
-                                     </button>  
-                        
-        
-                                                                    
+                                     </button>
+
                                 </div>
-                                           
+
 
                             </fieldset>
- 
+
 
                         </form>
-
+<div id="spinnerr" style="display: none">
+    <vue-simple-spinner ></vue-simple-spinner>
+</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
@@ -209,6 +210,7 @@ export default {
     return {
       step: 0,
       ethstep: 0,
+        loaderr: false,
       myDate: new Date().toISOString().slice(0, 10),
       web3: "",
       newAccountAddress: "",
@@ -224,6 +226,7 @@ export default {
 
   methods: {
     disabledWalletBtn: function() {
+
       document.getElementById("myBtn").disabled = true;
     },
     saveFile: function() {
@@ -263,25 +266,27 @@ export default {
       a.dispatchEvent(e);
     },
     createNewWallet: function() {
-      $(".btn").click(function() {
-        $(".spinner").css("display", "none");
-      });
+        $('#spinnerr').show();
+        var _this = this;
+        setTimeout(function(){
+            _this.web3 = new Web3(
+                new Web3.providers.HttpProvider(
+                    "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
+                )
+            );
+            var account = new Web3EthAccounts(
+                "https://rinkeby.infura.io/v3/4e962d53cc894df2a63436f519d1e9d0"
+            );
+            _this.newAccountAddress = account.create();
+            console.log("Account Public Address", _this.newAccountAddress.address);
+            console.log("Account Private Key", _this.newAccountAddress.privateKey);
+            _this.newAccount = _this.newAccountAddress.address;
 
-      this.web3 = new Web3(
-        new Web3.providers.HttpProvider(
-          "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
-        )
-      );
-      var account = new Web3EthAccounts(
-        "https://rinkeby.infura.io/v3/4e962d53cc894df2a63436f519d1e9d0"
-      );
-      this.newAccountAddress = account.create();
-      console.log("Account Public Address", this.newAccountAddress.address);
-      console.log("Account Private Key", this.newAccountAddress.privateKey);
-      this.newAccount = this.newAccountAddress.address;
-
-      this.generateKeyStoreFile();
-
+            _this.generateKeyStoreFile();
+            console.log("process completed");
+            _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
+            $('#spinnerr').hide();
+        }, 500);
       // this.getBalance();
     },
     getBalance: function() {
@@ -305,12 +310,12 @@ export default {
       //  this.key = Buffer.from(this.private,'hex');
       this.key = new Buffer(this.acconntPrivateKey, "hex");
       this.walletFromPrivateKey = ethereumJsWallet.fromPrivateKey(this.key);
-      console.log(
-        "Wallet from private key",
-        this.walletFromPrivateKey.toV3String("password")
-      );
       this.fileData = this.walletFromPrivateKey.toV3String("password");
-      console.log("File Data is ", this.fileData);
+      console.log(
+        "File Data is : ",
+        this.fileData
+      );
+
     },
     clearDinarCheckBox : function(){
         document.getElementById("cb_post").checked = false;
