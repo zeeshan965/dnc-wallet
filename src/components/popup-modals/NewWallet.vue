@@ -120,14 +120,17 @@
                         <hr>
                         <form method="post">
                             <fieldset>
-                                <div class="form-group"><label>Wallet</label><div class="checkbox checkbox-info checkbox-circle"><input @click="step = 1" id="cb_post" type="checkbox"><label for="cb_post">
-                                DinarCoin
+                                <div class="nav nav-pills">
+                                <div class="form-group"><label>Wallet</label>
+                                    <div class="checkbox checkbox-info checkbox-circle"><input id="myCheck" @click="step = 1;disableCheckbox()" type="checkbox"><label for="myCheck">
+                                    <a data-toggle="pill" href="#home">DinarCoin</a>
                             </label>
                             </div>
                                 <!-- <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
                                 EtherCoin
                             </label>
                             </div> -->
+                            </div>
                             </div>
                                 <!--<div v-if="step == 1">-->
                                 <!--<div class="form-group" >-->
@@ -151,7 +154,7 @@
                                     </p>
                                 </div>
                                 <div class="form-group" v-if="step == 3">
-                                    <button class="btn btn-lg btn-primary" data-dismiss="modal" @click="step = 4; clearDinarCheckBox()">I Understand Continue</button>
+                                    <button class="btn btn-lg btn-primary" data-dismiss="modal" @click="step = 4;removeClick()" >I Understand Continue</button>
                                 </div>
 
                                 <div class="form-group" v-if="step == 4">
@@ -167,31 +170,34 @@
 
                                       <!-- fake button for 'loading' -->
 
-                                    <button id="myBtn"  @click="disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
-                                    type="button" >
-                                        <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
-                                    Create Wallet
-                                     </button>
 
+                                    <div class="tab-content">
+                                        <div id="home" class="tab-pane fade in active">
+                                            <button id="myBtn"  @click="disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
+                                                    type="button" >
+                                                <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
+                                                {{ createWallet }}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-
-
                             </fieldset>
-
-
                         </form>
-<div id="spinnerr" style="display: none">
+                    </div>
+
+
+                    <div id="spinnerr" style="display: none">
     <vue-simple-spinner ></vue-simple-spinner>
 </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
                         <!-- <button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button> -->
                     </div>
+                    </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
-    </div>
+
 </template>
 <script>
 import axios from "axios";
@@ -223,17 +229,22 @@ export default {
       acconntPrivateKey: "",
       key: "",
       walletFromPrivateKey: "",
-      fileData: ""
+      fileData: "",
 
-      // createWallet: false
+      createWallet: "Create Wallet"
     };
   },
 
   methods: {
     disabledWalletBtn: function() {
+<<<<<<< HEAD
 
     
 
+=======
+        var _this = this;
+        _this.createWallet = "Creating Wallet";
+>>>>>>> 4961ae2d36a7d0e9bed8438a0f4dcafcb925c02d
       document.getElementById("myBtn").disabled = true;
       
     },
@@ -299,11 +310,15 @@ export default {
             console.log("process completed");
             _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
             $('#spinnerr').hide();
+            _this.createWallet = "Create Wallet";
+            _this.getBalance();
         }, 500);
-      // this.getBalance();
+
     },
     getBalance: function() {
-      var balance = this.web3.eth.getBalance(
+        var _this = this;
+
+      var balance = _this.web3.eth.getBalance(
         "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
       );
       console.log(balance.c[0]);
@@ -312,33 +327,45 @@ export default {
       balInit = balInit + balLast;
       console.log(balInit);
 
-      var value = this.web3.fromWei(balInit, "ether");
+      var value = _this.web3.fromWei(balInit, "ether");
       console.log(value);
     },
     generateKeyStoreFile: function() {
+        var _this = this;
       //    console.log('Account Balance' + web3.eth.getBalance(this.newAccount));
-      this.acconntPrivateKey = "" + this.newAccountAddress.privateKey;
-      this.acconntPrivateKey = this.acconntPrivateKey.substring(2);
+      _this.acconntPrivateKey = "" + _this.newAccountAddress.privateKey;
+      _this.acconntPrivateKey = _this.acconntPrivateKey.substring(2);
       console.log("Account Private Key with substring", this.acconntPrivateKey);
       //  this.key = Buffer.from(this.private,'hex');
-      this.key = new Buffer(this.acconntPrivateKey, "hex");
-      this.walletFromPrivateKey = ethereumJsWallet.fromPrivateKey(this.key);
-      this.fileData = this.walletFromPrivateKey.toV3String("password");
+      _this.key = new Buffer(_this.acconntPrivateKey, "hex");
+      _this.walletFromPrivateKey = ethereumJsWallet.fromPrivateKey(this.key);
+      _this.fileData = _this.walletFromPrivateKey.toV3String("password");
       console.log(
         "File Data is : ",
-        this.fileData
+        _this.fileData
       );
 
     },
     clearDinarCheckBox : function(){
-        document.getElementById("cb_post").checked = false;
+        document.getElementById("myCheck").checked = false;
+    },
+       disableCheckbox : function() {
+    document.getElementById("myCheck").disabled = true;
+
+},
+
+      removeClick : function() {
+          var _this = this;
+          document.getElementById("myCheck").disabled = false;
+          _this.clearDinarCheckBox();
     }
   },
 
   mounted: function() {
-    $("#cb_post").on("click", function() {
-      $("#hiddenDiv").toggle();
-    });
+    // $("#cb_post").on("click", function() {
+    //   $("#hiddenDiv").toggle();
+    // });
+
     $("#cb_post1").on("click", function() {
       $("#hiddenDiv1").toggle();
     });
