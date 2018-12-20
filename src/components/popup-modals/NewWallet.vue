@@ -1,81 +1,4 @@
 
-<style>
-.spinner {
-  position: relative; /* [1] */
-  display: inline-block;
-  width: 1em; /* [2] */
-  height: 1em; /* [2] */
-  font-size: 32px; /* [3] */
-  border-bottom: 1px solid; /* [4] */
-  vertical-align: middle;
-  overflow: hidden; /* [5] */
-  text-indent: 100%; /* [5] */
-  -webkit-animation: 0.5s spinner linear infinite;
-  -moz-animation: 0.5s spinner linear infinite;
-  animation: 0.5s spinner linear infinite;
-
-  /**
-		 * 1. Make the spinner a circle.
-		 */
-  &,
-  &:after {
-    border-radius: 100%; /* [1] */
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border: 1px solid; /* [1] */
-    opacity: 0.5; /* [2] */
-  }
-}
-
-/**
-	 * Size variants (built by adjusting `font-size`).
-	 */
-.spinner--small {
-  font-size: 16px;
-}
-
-@-webkit-keyframes spinner {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@-moz-keyframes spinner {
-  to {
-    -moz-transform: rotate(360deg);
-  }
-}
-
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/**
-	 * Demo elements.
-	 */
-
-.btn {
-  font: inherit;
-  cursor: pointer;
-
-  border: none;
-  padding: 1em 2em;
-  border-radius: 3px;
-  .spinner {
-    margin-right: 3px;
-  }
-}
-</style>
-
 <template>
     <div>
         <div id="new_wallet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -123,7 +46,7 @@
                                 <div class="nav nav-pills">
                                 <div class="form-group"><label>Wallet</label>
                                     <div class="checkbox checkbox-info checkbox-circle"><input id="myCheck" @click="step = 1;disableCheckbox()" type="checkbox"><label for="myCheck">
-                                    <a data-toggle="pill" href="#home">DinarCoin</a>
+                                    <a data-toggle="pill" href="#homeNewWallet">DinarCoin</a>
                             </label>
                             </div>
                                 <!-- <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
@@ -172,7 +95,7 @@
 
 
                                     <div class="tab-content">
-                                        <div id="home" class="tab-pane fade in active">
+                                        <div id="homeNewWallet" class="tab-pane fade in active">
                                             <button id="myBtn"  @click="disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
                                                     type="button" >
                                                 <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
@@ -242,7 +165,7 @@ export default {
         var _this = this;
         _this.createWallet = "Creating Wallet";
       document.getElementById("myBtn").disabled = true;
-      
+
     },
     saveFile: function() {
       //Random String
@@ -289,13 +212,13 @@ export default {
             //         "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
             //     )
             // );
-            
-            
+
+
             _this.web3 = WalletService.initializeWalletProvider();
-              
-                           
+
+
             var account = WalletService.initializeWeb3EthAccount();
-            
+
             _this.newAccountAddress = account.create();
             console.log("Account Public Address", _this.newAccountAddress.address);
             console.log("Account Private Key", _this.newAccountAddress.privateKey);
