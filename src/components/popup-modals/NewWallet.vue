@@ -211,6 +211,10 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 // Initialize the Web3 provider
 //var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
 
+var WalletService = require('./wallet');
+
+
+
 export default {
   data: function() {
     return {
@@ -219,6 +223,7 @@ export default {
         loaderr: false,
       myDate: new Date().toISOString().slice(0, 10),
       web3: "",
+      account:"",
       newAccountAddress: "",
       newAccount: "",
       acconntPrivateKey: "",
@@ -232,9 +237,16 @@ export default {
 
   methods: {
     disabledWalletBtn: function() {
+<<<<<<< HEAD
+
+    
+
+=======
         var _this = this;
         _this.createWallet = "Creating Wallet";
+>>>>>>> 4961ae2d36a7d0e9bed8438a0f4dcafcb925c02d
       document.getElementById("myBtn").disabled = true;
+      
     },
     saveFile: function() {
       //Random String
@@ -276,20 +288,25 @@ export default {
         $('#spinnerr').show();
         var _this = this;
         setTimeout(function(){
-            _this.web3 = new Web3(
-                new Web3.providers.HttpProvider(
-                    "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
-                )
-            );
-            var account = new Web3EthAccounts(
-                "https://rinkeby.infura.io/v3/4e962d53cc894df2a63436f519d1e9d0"
-            );
+            // _this.web3 = new Web3(
+            //     new Web3.providers.HttpProvider(
+            //         "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
+            //     )
+            // );
+            
+            
+            _this.web3 = WalletService.initializeWalletProvider();
+              
+                           
+            var account = WalletService.initializeWeb3EthAccount();
+            
             _this.newAccountAddress = account.create();
             console.log("Account Public Address", _this.newAccountAddress.address);
             console.log("Account Private Key", _this.newAccountAddress.privateKey);
             _this.newAccount = _this.newAccountAddress.address;
 
             _this.generateKeyStoreFile();
+            WalletService.getBalance();
             console.log("process completed");
             _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
             $('#spinnerr').hide();
