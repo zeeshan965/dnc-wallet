@@ -211,7 +211,9 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 // Initialize the Web3 provider
 //var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
 
-var WalletService = require('./wallet');
+//var WalletService = require('./wallet');
+  var WalletService = require('./../../services/wallet');
+
 
 
 
@@ -237,14 +239,9 @@ export default {
 
   methods: {
     disabledWalletBtn: function() {
-<<<<<<< HEAD
 
-    
-
-=======
         var _this = this;
         _this.createWallet = "Creating Wallet";
->>>>>>> 4961ae2d36a7d0e9bed8438a0f4dcafcb925c02d
       document.getElementById("myBtn").disabled = true;
       
     },
@@ -311,25 +308,10 @@ export default {
             _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
             $('#spinnerr').hide();
             _this.createWallet = "Create Wallet";
-            _this.getBalance();
         }, 500);
 
     },
-    getBalance: function() {
-        var _this = this;
 
-      var balance = _this.web3.eth.getBalance(
-        "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
-      );
-      console.log(balance.c[0]);
-      var balInit = balance.c[0];
-      var balLast = "" + balance.c[1];
-      balInit = balInit + balLast;
-      console.log(balInit);
-
-      var value = _this.web3.fromWei(balInit, "ether");
-      console.log(value);
-    },
     generateKeyStoreFile: function() {
         var _this = this;
       //    console.log('Account Balance' + web3.eth.getBalance(this.newAccount));
