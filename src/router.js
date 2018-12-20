@@ -4,6 +4,8 @@ import MyWallet from './components/MyWallet.vue'
 import profile from './components/Profile.vue'
 import Authenticated from './components/Authenticated.vue'
 import Contracts from './components/Contracts.vue'
+import ImportAccounts from './components/importaccounts'
+
 //import Main from './components/Main.vue'
 import Login from './components/Auth/Login.vue'
 import Register from './components/Auth/Register.vue'
@@ -35,6 +37,11 @@ export default new Router({
           name: 'contracts',
           component: Contracts
         },
+          {
+              path: '/importaccounts',
+              name: 'importaccounts',
+              component: ImportAccounts
+          },
       ]
     },
     {
