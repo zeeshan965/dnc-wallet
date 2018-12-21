@@ -30,7 +30,7 @@
                             <span>Jason File</span>
                         </div>
                         <div class="modal-footer">
-                            <button data-v-92875dbe="" type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                            <button data-v-92875dbe=""  type="reset" data-dismiss="modal" class="btn btn-default waves-effect waves-light m-l-5">
                                 Cancel
                             </button><!--<button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button>-->
                         </div>
