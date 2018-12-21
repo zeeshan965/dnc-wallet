@@ -49,7 +49,7 @@
                                     </button>
                                 </div>
                           </div>
-                        <hr>
+                      
                         <form method="post">
 
                             <div  v-if="step == 4">
@@ -126,6 +126,8 @@ import Web3EthAccounts from "web3-eth-accounts";
 var ethereumJsWallet = require("ethereumjs-wallet");
 // Initialize the Web3 provider
 //var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
+
+
 
 var WalletService = require('./../../services/wallet');
 
