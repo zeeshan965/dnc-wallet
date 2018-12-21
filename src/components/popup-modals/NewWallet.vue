@@ -127,8 +127,7 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 // Initialize the Web3 provider
 //var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
 
-//var WalletService = require('./wallet');
-  var WalletService = require('./../../services/wallet');
+var WalletService = require('./../../services/wallet');
 
 export default {
   data: function() {
