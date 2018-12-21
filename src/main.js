@@ -24,6 +24,8 @@ Vue.component('etherium-modal', EtheriumModal)
 Vue.component('BitcoinModal', BitcoinModal)
 Vue.component('contractSendTokenModal', contractSendTokenModal)
 Vue.component('vue-simple-spinner', Spinner)
+import VeeValidate from "vee-validate";
+Vue.use(VeeValidate);
 
 Vue.config.productionTip = false
 new Vue({

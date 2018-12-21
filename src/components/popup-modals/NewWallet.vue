@@ -1,3 +1,8 @@
+<style>
+    .invalid-feedback{
+        color: red;
+    }
+</style>
 <template>
     <div>
         <div id="new_wallet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -39,16 +44,28 @@
                                 </strong>
                             </p>
                         </div>
-                        <div class="form-group">
-                            <label >Enter password</label>
-                            <input placeholder="Password" class="form-control">
-                                <div id="" class="m-t-10">
-                                    <button  @click="step = 4"  class=" btn btn-primary waves-effect waves-light" type="button" >
-                                        <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
-                                        Create Password
-                                    </button>
+                        <!--<div class="form-group">-->
+                            <!--<label >Enter password</label>-->
+                            <!--<input placeholder="Password" class="form-control">-->
+                                <!--<div id="" class="m-t-10">-->
+                                    <!--<button  @click="step = 4"  class=" btn btn-primary waves-effect waves-light" type="button" >-->
+                                        <!--&lt;!&ndash;<span class="spinner  spinner&#45;&#45;small" >Loading…</span>&ndash;&gt;-->
+                                        <!--Create Password-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                          <!--</div>-->
+                        <div id="reg">
+                            <form @submit.prevent="handleSubmit">
+                                <div class="form-group">
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
+                                    <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                                 </div>
-                          </div>
+                                <div class="form-group">
+                                    <button  class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                        </div>
                         <hr>
                         <form method="post">
 
@@ -127,7 +144,8 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 // Initialize the Web3 provider
 //var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
 
-var WalletService = require('./../../services/wallet');
+//var WalletService = require('./wallet');
+  var WalletService = require('./../../services/wallet');
 
 export default {
   data: function() {
@@ -144,12 +162,26 @@ export default {
       key: "",
       walletFromPrivateKey: "",
       fileData: "",
-
-      createWallet: "Create Wallet"
+      createWallet: "Create Wallet",
+        user: {
+            password: ''
+        },
+        submitted: false
     };
   },
 
   methods: {
+      handleSubmit(e) {
+          this.submitted = true;
+          this.$validator.validate().then(valid => {
+              if (valid) {
+                  // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.user))
+                this.step = 4
+                  $('#reg').hide();
+              }
+
+          });
+      },
     disabledWalletBtn: function() {
 
         var _this = this;
