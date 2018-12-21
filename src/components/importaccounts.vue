@@ -96,12 +96,20 @@
                                     </ul>
                                     <!---->
                                     <br>
-                                    <div class="form-group">
-        <textarea id="aria6" class="form-control ng-pristine ng-untouched ng-valid ng-empty is-invalid" placeholder="Private Key
-" rows="4"></textarea>
-                                    </div>
+                                    <form @submit.prevent="handlePrivateKey">
+                                    
+                                    <!-- <div class="form-group">
+        <input id="aria6" v-model="userKey" v-validate="'required'" name="userKey" class="form-control ng-pristine ng-untouched ng-valid ng-empty is-invalid" placeholder="Private Key"/>
+                                    </div> -->
+<div class="form-group">
+                              <label for="user key">Private Key</label>
+                              <input type="text" v-model="userKey" v-validate="'required'" name="userKey" class="form-control" :class="{ 'is-invalid': submitted && errors.has('userKey') }" />
+                              <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">{{ errors.first('userKey') }}</div>
+                          </div>
 
-                                    <a data-v-f4d961ca="" tabindex="0" role="button" ng-click="decryptWallet()" translate="translate" class="btn btn-primary  ng-hide">Import Account</a>
+                                    <button type="submit"   class="btn btn-primary">Import Account</button>
+                                </form>
+
                                 </div>
                             </div>
                         </div>
@@ -113,11 +121,28 @@
 </template>
 
 <script>
+
+ var WalletService = require('./../services/wallet');
     export default {
         data: function(){
             return {
-                step: 1
+                step: 1,
+                userKey:'',
+                submitted: false
             }
-        }
+        },
+    methods:{
+        handlePrivateKey(e) {
+            e.preventDefault();
+            var fromValue = this.userKey;
+             console.log(fromValue);
+          this.submitted = true;
+          this.$validator.validate().then(valid => {
+             if (valid) {
+                  WalletService.unlockAccount(fromValue);
+                }
+          });
+      },
+     }
     }
 </script>

@@ -1,9 +1,14 @@
+import { join } from 'path';
 
 var Web3 = require('web3');
 var Web3EthAccounts = require('web3-eth-accounts');
 var Wallet = require('ethereumjs-wallet');
 var ethereumJsWallet = require("ethereumjs-wallet");
 
+
+export function helloWorld(){
+    alert('Hello World');
+}
 
 export  function  initializeWalletProvider(){
     return new Web3(
@@ -32,4 +37,17 @@ export function getBalance(){
 
       var value = web3.fromWei(balInit, "ether");
       console.log(value);
+}
+
+export function unlockAccount( privateKey){
+  
+    console.log(privateKey);
+    var userPrivateKey = privateKey 
+   // userPrivateKey = userPrivateKey.substring(2);
+
+var key = Buffer.from(userPrivateKey, 'hex');
+var wallet = Wallet.fromPrivateKey(key);
+
+console.log('Wallet '+ JSON.stringify(wallet));
+return wallet;
 }
