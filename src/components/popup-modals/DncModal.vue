@@ -103,9 +103,6 @@
                             <p>DinarCoin transactions are written to a global transaction log called the Ethereum
                                 blockchain. Because there is no central authority controlling the log, we wait for
                                 multiple confirmations before allowing use of the DinarCoin.</p>
-
-
-
                             <form action="#" data-parsley-validate="" novalidate="">
                                 <div class="form-group">
                                     <label>Receiving SmartX address*</label>
@@ -115,12 +112,7 @@
                                     <label>Amount in Dinarcoin*</label>
                                     <input type="number" placeholder="Amount DinarCoin" class="form-control">
                                 </div>
-
-
-
                                 <div class="form-group">
-
-                                  
                                     <label>You Security Password*</label>
                                     <label>You Security Password*</label>
                                     <input type="password" placeholder="Security Password" required="" class="form-control"
