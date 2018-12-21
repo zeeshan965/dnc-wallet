@@ -4,6 +4,7 @@
         <sidebar></sidebar>
         <main-content></main-content>
         <popup-modals></popup-modals>
+        <contractSendTokenModal></contractSendTokenModal>
     </div>
 </template>
 <script>
@@ -16,9 +17,11 @@
     import DncModal from './popup-modals/DncModal.vue'
     import EtheriumModal from './popup-modals/EtheriumModal.vue'
     import BitcoinModal from './popup-modals/BitcoinModal.vue'
+    import contractSendTokenModal from './popup-modals/contractSendTokens-Modal.vue'
 
     export default {
         components: {
+            contractSendTokenModal,
             Topbar,
             Sidebar,
             Footer,

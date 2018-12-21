@@ -16,11 +16,19 @@
                     </li>
                     <li>
                         <router-link to="/contracts" class="waves-effect waves-primary"><img src="assets/images/icon/Play-Books-icon.png">&nbsp;&nbsp;&nbsp;<span>
-                                Contracts </span></router-link>
+                               DNC Contract </span></router-link>
                     </li>
                     <li>
                         <router-link to="/importaccounts" class="waves-effect waves-primary"><img src="assets/images/icon/Alternative-Explorer-2-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Import Accounts </span></router-link>
+                    </li>
+                    <li>
+                        <router-link to="#" class="waves-effect waves-primary"><img src="assets/images/icon/dinar-icon.png">&nbsp;&nbsp;&nbsp;<span>
+                                DNC Explorer </span></router-link>
+                    </li>
+                    <li>
+                        <router-link to="#" class="waves-effect waves-primary"><img src="assets/images/icon/dnd-icon.png">&nbsp;&nbsp;&nbsp;<span>
+                                Mint DNC </span></router-link>
                     </li>
                     <!--<li>-->
                         <!--<router-link to="/profile" >-->

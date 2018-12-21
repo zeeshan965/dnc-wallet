@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <div id="new_wallet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -40,29 +39,31 @@
                                 </strong>
                             </p>
                         </div>
+                        <div class="form-group">
+                            <label >Enter password</label>
+                            <input placeholder="Password" class="form-control">
+                                <div id="" class="m-t-10">
+                                    <button  @click="step = 4"  class=" btn btn-primary waves-effect waves-light" type="button" >
+                                        <!--<span class="spinner  spinner&#45;&#45;small" >Loading…</span>-->
+                                        Create Password
+                                    </button>
+                                </div>
+                          </div>
                         <hr>
                         <form method="post">
-                            <fieldset>
-                                <div class="nav nav-pills">
-                                <div class="form-group"><label>Wallet</label>
-                                    <div class="checkbox checkbox-info checkbox-circle"><input id="myCheck" @click="step = 1;disableCheckbox()" type="checkbox"><label for="myCheck">
-                                    <a data-toggle="pill" href="#homeNewWallet">DinarCoin</a>
-                            </label>
+
+                            <div  v-if="step == 4">
+                                <fieldset>
+                                    <div class="nav nav-pills">
+                                        <div class="form-group"><label>Wallet</label>
+                                            <div class="checkbox checkbox-info checkbox-circle"><input id="myCheck" @click="step = 1;disableCheckbox()" type="checkbox"><label for="myCheck">
+                                                <a data-toggle="pill" href="#homeNewWallet">DinarCoin</a>
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </div>
-                                <!-- <div class="checkbox checkbox-info checkbox-circle"><input @click="ethstep = 1" id="cb_post1" type="checkbox"><label for="cb_post1">
-                                EtherCoin
-                            </label>
-                            </div> -->
-                            </div>
-                            </div>
-                                <!--<div v-if="step == 1">-->
-                                <!--<div class="form-group" >-->
-                                    <!--<div class="form-group"><label>key Name</label><input type="text" value="" class="form-control "></div>-->
-                                <!--</div>-->
-                                <!--<button @click="step = 2" class="btn btn-primary waves-effect waves-light"-->
-                                        <!--type="button">Create Wallet</button>-->
-                                <!--</div>-->
-                            </fieldset>
                             <fieldset id = "hiddenDiv" v-if=" step == 1 || step == 2 || step == 3 || step == 4" @click.prevent=''>
                                 <div class="form-group" v-if="step == 2">
                                     <h3>Save your Keystore File.</h3>
@@ -80,20 +81,12 @@
                                     <button class="btn btn-lg btn-primary" data-dismiss="modal" @click="step = 4;removeClick()" >I Understand Continue</button>
                                 </div>
 
-                                <div class="form-group" v-if="step == 4">
-                                    <!--<button class="btn btn-lg btn-primary">Print Paper Wallet</button>-->
-
-                                </div>
                                 <div v-if="step == 1">
                                     <div class="form-group" >
                                         <div class="form-group"><label></label>
                                         <!-- <input type="text" value=""  v-model="walletName" class="form-control "> -->
                                         </div>
                                     </div>
-
-                                      <!-- fake button for 'loading' -->
-
-
                                     <div class="tab-content">
                                         <div id="homeNewWallet" class="tab-pane fade in active">
                                             <button id="myBtn"  @click="disabledWalletBtn();createNewWallet()" class=" btn btn-primary waves-effect waves-light"
@@ -136,9 +129,6 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 
 //var WalletService = require('./wallet');
   var WalletService = require('./../../services/wallet');
-
-
-
 
 export default {
   data: function() {
@@ -232,9 +222,7 @@ export default {
             $('#spinnerr').hide();
             _this.createWallet = "Create Wallet";
         }, 500);
-
     },
-
     generateKeyStoreFile: function() {
         var _this = this;
       //    console.log('Account Balance' + web3.eth.getBalance(this.newAccount));

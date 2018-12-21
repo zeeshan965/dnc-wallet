@@ -30,7 +30,6 @@
                                     <div >
                                     <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
                                     <h5 style="color:  rgb(217, 83, 79);">
-
                                         This is <u>not</u> a recommended way to access your wallet.
                                     </h5>
                                     <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
@@ -101,8 +100,8 @@
         <textarea id="aria6" class="form-control ng-pristine ng-untouched ng-valid ng-empty is-invalid" placeholder="Private Key
 " rows="4"></textarea>
                                     </div>
-                                    <!-- ngIf: requirePPass -->
 
+                                    <a data-v-f4d961ca="" tabindex="0" role="button" ng-click="decryptWallet()" translate="translate" class="btn btn-primary  ng-hide">Import Account</a>
                                 </div>
                             </div>
                         </div>
