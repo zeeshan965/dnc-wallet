@@ -97,19 +97,28 @@
                                     <!---->
                                     <br>
                                     <form @submit.prevent="handlePrivateKey">
-                                    
-                                    <!-- <div class="form-group">
-        <input id="aria6" v-model="userKey" v-validate="'required'" name="userKey" class="form-control ng-pristine ng-untouched ng-valid ng-empty is-invalid" placeholder="Private Key"/>
-                                    </div> -->
-<div class="form-group">
+                                        <div id="hideImportKey">
+
+                                        <div class="form-group">
                               <label for="user key">Private Key</label>
                               <input type="text" v-model="userKey" v-validate="'required'" name="userKey" class="form-control" :class="{ 'is-invalid': submitted && errors.has('userKey') }" />
                               <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">{{ errors.first('userKey') }}</div>
                           </div>
 
-                                    <button type="submit"   class="btn btn-primary">Import Account</button>
-                                </form>
-
+                                            <!--<button type="submit"   class="btn btn-primary">enter key</button>-->
+                                        </div>
+                                        <!--passWord section-->
+                                        <div v-if="step == 2">
+                                            <div class="form-group">
+                                                <label htmlFor="password">Password</label>
+                                                <input type="password" v-model="user.password" v-validate="{ required: true, min: 9 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
+                                                <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
+                                            </div>
+                                            <!--<button type="submit"  class="btn btn-primary">Enter Password</button>-->
+                                        </div>
+                                        <!--passWord section-->
+                                        <button type="submit"   class="btn btn-primary">{{ btnText }}</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -122,25 +131,35 @@
 
 <script>
 
- var WalletService = require('./../services/wallet');
-    export default {
+ // var WalletService = require('./../services/wallet');
+    import Register from "./Auth/Register";
+
+ export default {
         data: function(){
             return {
                 step: 1,
                 userKey:'',
-                submitted: false
+                submitted: false,
+                user: {
+                    password: ''
+                },
+                btnText: 'Enter key'
             }
         },
     methods:{
         handlePrivateKey(e) {
+            var _this = this
             e.preventDefault();
             var fromValue = this.userKey;
              console.log(fromValue);
           this.submitted = true;
           this.$validator.validate().then(valid => {
              if (valid) {
-                  WalletService.unlockAccount(fromValue);
-                }
+                  // WalletService.unlockAccount(fromValue);
+                 $('#hideImportKey').hide();
+                 _this.step = 2,
+                     _this.btnText = 'Enter Password'
+             }
           });
       },
      }
