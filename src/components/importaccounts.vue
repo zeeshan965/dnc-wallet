@@ -104,8 +104,6 @@
                               <input type="text" v-model="userKey" v-validate="'required'" name="userKey" class="form-control" :class="{ 'is-invalid': submitted && errors.has('userKey') }" />
                               <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">{{ errors.first('userKey') }}</div>
                           </div>
-
-                                            <!--<button type="submit"   class="btn btn-primary">enter key</button>-->
                                         </div>
                                         <!--passWord section-->
                                         <div v-if="step == 2">
@@ -114,7 +112,6 @@
                                                 <input type="password" v-model="user.password" v-validate="{ required: true, min: 9 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
                                                 <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                                             </div>
-                                            <!--<button type="submit"  class="btn btn-primary">Enter Password</button>-->
                                         </div>
                                         <!--passWord section-->
                                         <button type="submit"   class="btn btn-primary">{{ btnText }}</button>
