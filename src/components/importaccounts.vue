@@ -96,26 +96,33 @@
                                     </ul>
                                     <!---->
                                     <br>
-                                    <form @submit.prevent="handlePrivateKey">
-                                        <div id="hideImportKey">
-
+                                  
+                                        <div id="hideImportKey" v-if="step == 1">
+                                         <form @submit.prevent="handlePrivateKey">
                                         <div class="form-group">
                               <label for="user key">Private Key</label>
                               <input type="text" v-model="userKey" v-validate="'required'" name="userKey" class="form-control" :class="{ 'is-invalid': submitted && errors.has('userKey') }" />
                               <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">{{ errors.first('userKey') }}</div>
                           </div>
+                           <button type="submit"   class="btn btn-primary">Enter Key</button>
+                          </form> 
                                         </div>
+                                        
                                         <!--passWord section-->
                                         <div v-if="step == 2">
+                                            <form @submit.prevent="handlePassword">
                                             <div class="form-group">
                                                 <label htmlFor="password">Password</label>
                                                 <input type="password" v-model="user.password" v-validate="{ required: true, min: 9 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
                                                 <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                                             </div>
+                                               <!--passWord section-->
+                                        <button type="submit"   class="btn btn-primary">Enter Password</button>
+                                            </form>
+                                            <div id="spinnerr" style="display: none"></div>
                                         </div>
-                                        <!--passWord section-->
-                                        <button type="submit"   class="btn btn-primary">{{ btnText }}</button>
-                                    </form>
+                                     
+                                   
                                 </div>
                             </div>
                         </div>
@@ -128,14 +135,17 @@
 
 <script>
 
- // var WalletService = require('./../services/wallet');
+    var WalletService = require('./../services/wallet');
     import Register from "./Auth/Register";
+import { async } from 'q';
 
  export default {
         data: function(){
             return {
                 step: 1,
                 userKey:'',
+                userPassword:'',
+                walletResponse: '',
                 submitted: false,
                 user: {
                     password: ''
@@ -150,15 +160,37 @@
             var fromValue = this.userKey;
              console.log(fromValue);
           this.submitted = true;
-          this.$validator.validate().then(valid => {
+         
+         this.$validator.validate().then(valid => {
              if (valid) {
-                  // WalletService.unlockAccount(fromValue);
+                  
                  $('#hideImportKey').hide();
-                 _this.step = 2,
-                     _this.btnText = 'Enter Password'
+                 _this.step = 2;
+                   
              }
           });
+                
+           
       },
+      handlePassword(e){
+          
+             var _this = this
+            e.preventDefault();
+            var password = this.user.password;
+            $('#spinnerr').show();
+             console.log(password);
+          this.submitted = true;
+
+        this.walletResponse =   WalletService.unlockAccount(this.userKey, password);
+       console.log('Unclocked ===> ' + this.walletResponse);
+      setTimeout(()=>{
+     console.log('Unlocked address ===> ' + this.walletResponse.address);
+      },2000)
+       
+        $('#spinnerr').hide();
+       
+              
+      }
      }
     }
 </script>

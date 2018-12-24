@@ -39,15 +39,17 @@ export function getBalance(){
       console.log(value);
 }
 
-export function unlockAccount( privateKey){
+export  function unlockAccount( privateKey, password){
   
-    console.log(privateKey);
-    var userPrivateKey = privateKey 
+    console.log('User private Key' + privateKey);
+    var userPrivateKey = privateKey; 
+    console.log('User Password ' + password);
    // userPrivateKey = userPrivateKey.substring(2);
 
 var key = Buffer.from(userPrivateKey, 'hex');
 var wallet = Wallet.fromPrivateKey(key);
+var unlocked =   wallet.toV3String(password);
 
 console.log('Wallet '+ JSON.stringify(wallet));
-return wallet;
+return unlocked;
 }
