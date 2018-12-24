@@ -34,7 +34,7 @@
                                             <li>DinarCoin Price: $205.32 USD (0.3561627677031908 BTC)</li>
                                         </ul>
                                         <br>
-                                        <form action="#" data-parsley-validate="" novalidate="novalidate" @click="preventDefault">
+                                        <form action="#" data-parsley-validate="" novalidate="novalidate" @click.prevent=''>
                                             <div class="form-group">
                                                 <label for="userName">Amount of DinarCoin to mint</label>
                                                 <input type="number" placeholder="1DNC" class="form-control">

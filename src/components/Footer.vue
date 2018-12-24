@@ -1,6 +1,6 @@
 <template>
     <footer class="footer text-right">
-        2016 © DinarDirham
+        {{ new Date().getFullYear() }} © DinarDirham
     </footer>
 </template>
 
