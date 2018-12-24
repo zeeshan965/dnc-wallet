@@ -1,16 +1,19 @@
 <style scoped>
-    input, select, textarea, button{
-        border-radius:0px;
-        height:40px;
+    input, select, textarea, button {
+        border-radius: 0px;
+        height: 40px;
     }
-    .form-group label{
-        font-size:16px;
+
+    .form-group label {
+        font-size: 16px;
     }
-    textarea{
-        height:150px;
+
+    textarea {
+        height: 150px;
     }
-    .container.text-left{
-        padding-bottom:60px;
+
+    .container.text-left {
+        padding-bottom: 60px;
     }
 </style>
 <template>
@@ -27,52 +30,58 @@
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <section class="col-md-8 col-sm-6">
-                                    <div >
-                                    <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
-                                    <h5 style="color:  rgb(217, 83, 79);">
-                                        This is <u>not</u> a recommended way to access your wallet.
-                                    </h5>
-                                    <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
-                                        Entering your private key on a website dangerous. If our website is compromised or you accidentally visit a different website, your funds will be stolen. Please consider:
+                                    <div>
+                                        <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
+                                        <h5 style="color:  rgb(217, 83, 79);">
+                                            This is <u>not</u> a recommended way to access your wallet.
+                                        </h5>
+                                        <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
+                                            Entering your private key on a website dangerous. If our website is
+                                            compromised or you accidentally visit a different website, your funds will
+                                            be stolen. Please consider:
+                                        </div>
+                                        <ul style="color: white;">
+                                            <li>
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    MetaMask
+                                                </a>
+                                                or
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    A Hardware Wallet
+                                                </a>
+                                                or
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    Running MEW Offline &amp; Locally
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    Learning How to Protect Yourself and Your Funds
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <br>
+                                        <div class="form-group">
+                                            <a tabindex="0" role="button" class="btn btn-primary  ng-hide"
+                                               ng-click="decryptWallet()" translate="ADD_Label_6_short">SELECT WALLET
+                                                FILE...</a>
+                                        </div>
                                     </div>
-                                    <ul style="color: white;">
-                                        <li>
-                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                MetaMask
-                                            </a>
-                                            or
-                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                A Hardware Wallet
-                                            </a>
-                                            or
-                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                Running MEW Offline &amp; Locally
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                Learning How to Protect Yourself and Your Funds
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <br>
-                                    <div class="form-group">
-                                        <a tabindex="0" role="button" class="btn btn-primary  ng-hide" ng-click="decryptWallet()" translate="ADD_Label_6_short">SELECT WALLET FILE...</a>
-                                    </div>
-                                </div>
 
                                 </section>
                             </div>
                             <!--second tab menu-->
                             <div id="menu1" class="tab-pane fade">
-                                <div id="selectedTypeKey"  class="col-md-8">
+                                <div id="selectedTypeKey" class="col-md-8">
                                     <h4 translate="ADD_Radio_3" class="">Paste Your Private Key</h4>
                                     <h5 style="color:  rgb(217, 83, 79);">
 
                                         This is <u>not</u> a recommended way to access your wallet.
                                     </h5>
                                     <div class="form-group" style="color: rgba(255, 255, 255, 0.8);">
-                                        Entering your private key on a website is dangerous. If our website is compromised or you accidentally visit a different website, your funds will be stolen. Please consider:
+                                        Entering your private key on a website is dangerous. If our website is
+                                        compromised or you accidentally visit a different website, your funds will be
+                                        stolen. Please consider:
                                     </div>
                                     <ul style="color: white;">
                                         <li>
@@ -96,33 +105,49 @@
                                     </ul>
                                     <!---->
                                     <br>
-                                  
-                                        <div id="hideImportKey" v-if="step == 1">
-                                         <form @submit.prevent="handlePrivateKey">
-                                        <div class="form-group">
-                              <label for="user key">Private Key</label>
-                              <input type="text" v-model="userKey" v-validate="'required'" name="userKey" class="form-control" :class="{ 'is-invalid': submitted && errors.has('userKey') }" />
-                              <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">{{ errors.first('userKey') }}</div>
-                          </div>
-                           <button type="submit"   class="btn btn-primary">Enter Key</button>
-                          </form> 
-                                        </div>
-                                        
-                                        <!--passWord section-->
-                                        <div v-if="step == 2">
-                                            <form @submit.prevent="handlePassword">
+
+                                    <div id="hideImportKey" v-if="step == 1">
+                                        <form @submit.prevent="handlePrivateKey">
+                                            <div class="form-group">
+                                                <label for="user key">Private Key</label>
+                                                <input type="text" v-model="userKey" v-validate="'required'"
+                                                       name="userKey" class="form-control"
+                                                       :class="{ 'is-invalid': submitted && errors.has('userKey') }"/>
+                                                <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">
+                                                    {{ errors.first('userKey') }}
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Enter Key</button>
+                                        </form>
+                                    </div>
+
+                                    <!--passWord section-->
+                                    <div v-if="step == 2">
+                                        <form @submit.prevent="handlePassword">
                                             <div class="form-group">
                                                 <label htmlFor="password">Password</label>
-                                                <input type="password" v-model="user.password" v-validate="{ required: true, min: 9 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
-                                                <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
+                                                <input type="password" v-model="user.password"
+                                                       v-validate="{ required: true, min: 9 }" name="password"
+                                                       class="form-control"
+                                                       :class="{ 'is-invalid': submitted && errors.has('password') }"/>
+                                                <div v-if="submitted && errors.has('password')"
+                                                     class="invalid-feedback">{{ errors.first('password') }}
+                                                </div>
                                             </div>
-                                               <!--passWord section-->
-                                        <button type="submit"   class="btn btn-primary">Enter Password</button>
-                                            </form>
-                                            <div id="spinnerr" style="display: none"></div>
+                                            <!--passWord section-->
+                                            <button type="submit" class="btn btn-primary">Enter Password</button>
+
+                                        </form>
+                                        <div id="spinnerr" style="display: none">
+
+                                            <vue-simple-spinner ></vue-simple-spinner>
                                         </div>
-                                     
-                                   
+
+
+
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -137,15 +162,15 @@
 
     var WalletService = require('./../services/wallet');
     import Register from "./Auth/Register";
-import { async } from 'q';
+    import {async} from 'q';
 
- export default {
-        data: function(){
+    export default {
+        data: function () {
             return {
                 step: 1,
-                userKey:'',
-                userPassword:'',
-                walletResponse: '',
+                userKey: '',
+                userPassword: '',
+                walletResponse:[],
                 submitted: false,
                 user: {
                     password: ''
@@ -153,44 +178,45 @@ import { async } from 'q';
                 btnText: 'Enter key'
             }
         },
-    methods:{
-        handlePrivateKey(e) {
-            var _this = this
-            e.preventDefault();
-            var fromValue = this.userKey;
-             console.log(fromValue);
-          this.submitted = true;
-         
-         this.$validator.validate().then(valid => {
-             if (valid) {
-                  
-                 $('#hideImportKey').hide();
-                 _this.step = 2;
-                   
-             }
-          });
-                
-           
-      },
-      handlePassword(e){
-          
-             var _this = this
-            e.preventDefault();
-            var password = this.user.password;
-            $('#spinnerr').show();
-             console.log(password);
-          this.submitted = true;
+        methods: {
+            handlePrivateKey(e) {
+                var _this = this;
+                e.preventDefault();
+                var fromValue = _this.userKey;
+                console.log(fromValue);
+                _this.submitted = true;
 
-        this.walletResponse =   WalletService.unlockAccount(this.userKey, password);
-       console.log('Unclocked ===> ' + this.walletResponse);
-      setTimeout(()=>{
-     console.log('Unlocked address ===> ' + this.walletResponse.address);
-      },2000)
-       
-        $('#spinnerr').hide();
-       
-              
-      }
-     }
+                _this.$validator.validate().then(valid => {
+                    if (valid) {
+
+                        $('#hideImportKey').hide();
+                        _this.step = 2;
+
+                    }
+                });
+
+
+            },
+            handlePassword(e) {
+
+                var _this = this;
+                e.preventDefault();
+                var password = _this.user.password;
+                $('#spinnerr').show();
+                console.log(password);
+                _this.submitted = true;
+
+                _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
+                console.log('Unclocked ===> ' + _this.walletResponse);
+                setTimeout(() => {
+                       alert('Unlocked address ===> '+ _this.walletResponse.address);
+                    $('#spinnerr').hide();
+                }, 2000);
+
+
+
+
+            }
+        }
     }
 </script>
