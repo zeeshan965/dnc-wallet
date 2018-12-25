@@ -140,9 +140,8 @@
                                         </form>
                                         <div id="spinnerr" style="display: none">
 
-                                            <vue-simple-spinner ></vue-simple-spinner>
+                                            <vue-simple-spinner></vue-simple-spinner>
                                         </div>
-
 
 
                                     </div>
@@ -163,6 +162,7 @@
     var WalletService = require('./../services/wallet');
     import Register from "./Auth/Register";
     import {async} from 'q';
+    import router from './router'
 
     export default {
         data: function () {
@@ -170,11 +170,12 @@
                 step: 1,
                 userKey: '',
                 userPassword: '',
-                walletResponse:[],
+                walletResponse: [],
                 submitted: false,
                 user: {
                     password: ''
                 },
+
                 btnText: 'Enter key'
             }
         },
@@ -199,6 +200,7 @@
             },
             handlePassword(e) {
 
+
                 var _this = this;
                 e.preventDefault();
                 var password = _this.user.password;
@@ -209,11 +211,17 @@
                 _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
                 console.log('Unclocked ===> ' + _this.walletResponse);
                 setTimeout(() => {
-                       alert('Unlocked address ===> '+ _this.walletResponse.address);
-                    $('#spinnerr').hide();
+
+                    WalletService.addresses.push(this.walletResponse.address);
+                    alert('Unlocked address ===> ' + WalletService.addresses);
+
+
+                    _this.router.push('/');
+                    // window.location.href = '/';
+                    // console.log("Addresses is "+_this.addresses.push(_this.walletResponse.address));
+
                 }, 2000);
-
-
+                $('#spinnerr').hide();
 
 
             }

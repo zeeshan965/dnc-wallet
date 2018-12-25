@@ -5,10 +5,12 @@ var Web3EthAccounts = require('web3-eth-accounts');
 var Wallet = require('ethereumjs-wallet');
 var ethereumJsWallet = require("ethereumjs-wallet");
 
+export var addresses = [];
 
 export function helloWorld() {
     alert('Hello World');
 }
+
 
 export function initializeWalletProvider() {
     return new Web3(

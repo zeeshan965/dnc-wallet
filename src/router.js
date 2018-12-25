@@ -14,52 +14,52 @@ import Forgetpass from './components/Auth/Forgetpass.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-        path: '/',
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '/',
             name: 'home',
             component: Authenticated,
-      children: [
-        {
-          path: '/',
-          name: 'mywallet',
-          component: MyWallet
+            children: [
+                {
+                    path: '/',
+                    name: 'mywallet',
+                    component: MyWallet
+                },
+                {
+                    path: '/profile',
+                    name: 'Profile',
+                    component: profile
+                },
+                {
+                    path: '/contracts',
+                    name: 'contracts',
+                    component: Contracts
+                },
+                {
+                    path: '/importaccounts',
+                    name: 'importaccounts',
+                    component: ImportAccounts
+                },
+            ]
         },
         {
-          path: '/profile',
-          name: 'Profile',
-          component:  profile
+            path: '/login',
+            name: 'login',
+            component: Login
         },
         {
-          path: '/contracts',
-          name: 'contracts',
-          component: Contracts
+            path: '/register',
+            name: 'register',
+            component: Register
         },
-          {
-              path: '/importaccounts',
-              name: 'importaccounts',
-              component: ImportAccounts
-          },
-      ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-      {
-          path: '/forgetpass',
-          name: 'Forgetpass',
-          component: Forgetpass
-      }
-  ]
+        {
+            path: '/forgetpass',
+            name: 'Forgetpass',
+            component: Forgetpass
+        }
+    ]
 });
 
 //import Login from "./components/Login.vue";
