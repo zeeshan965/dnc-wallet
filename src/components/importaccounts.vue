@@ -62,9 +62,17 @@
                                         </ul>
                                         <br>
                                         <div class="form-group">
-                                            <a tabindex="0" role="button" class="btn btn-primary  ng-hide"
-                                               ng-click="decryptWallet()" translate="ADD_Label_6_short">SELECT WALLET
-                                                FILE...</a>
+                                              
+                                            <input id="upload" type="file" @change="onFileSelected" style="display:none"/>
+                                            <a tabindex="0" type="file"  role="button" class="btn btn-primary  ng-hide"
+                                               id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT WALLET
+                                                FILE...
+                                                
+                                    
+                                                </a>
+                                                &nbsp;
+                                                <span style="color:#fff">{{this.fileName}}</span>
+                                              
                                         </div>
                                     </div>
 
@@ -170,6 +178,7 @@
                 step: 1,
                 userKey: '',
                 userPassword: '',
+                fileName:'',
                 walletResponse: [],
                 submitted: false,
                 user: {
@@ -180,6 +189,60 @@
             }
         },
         methods: {
+            upload_link(e){
+            e.preventDefault();
+            $("#upload:hidden").trigger('click');
+            },
+
+            onFileSelected(e){
+              e.preventDefault();
+            //    console.log(e);
+               this.fileName = e.target.files[0].name;
+              console.log('File Name ' + this.fileName);
+               if(this.fileName.includes('.pdf')){
+                   alert('Invalid file format');
+                 // router.push('/importaccounts');
+                  window.location.href = "importaccounts"
+                  
+               }
+               if(this.fileName.includes('.png')){
+                   alert('Invalid file format');
+                 // router.push('/importaccounts');
+                  window.location.href = "importaccounts"
+                  
+               }
+
+ 
+                 
+              // Reference to the DOM input element
+            var input = event.target;
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                // create a new FileReader to read this image and convert to base64 format
+                var reader = new FileReader();
+                // Define a callback function to run, when FileReader finishes its job
+
+                reader.onload = (e) => {
+                  
+                  var json_Data = e.target.result;
+                     
+                     
+                   json_Data = JSON.parse(json_Data);
+                   console.log('two');
+                   
+                  console.log('Datazzzz ' +  json_Data.address );
+                  
+                  console.log('Responsezzzz ' + this.response);
+                  console.log('three');
+                  WalletService.keyStoreAddresses.push(json_Data.address);
+                  router.push('/');
+                }
+                // Start the reader job - read file 
+                reader.readAsText(input.files[0]);
+                
+             
+            }
+            },
             handlePrivateKey(e) {
                 var _this = this;
                 e.preventDefault();
@@ -214,7 +277,10 @@
 
                     WalletService.addresses.push(this.walletResponse.address);
                     alert('Unlocked address ===> ' + WalletService.addresses);
+
                     router.push('/')
+                  
+                  
                   
 
                 }, 2000);

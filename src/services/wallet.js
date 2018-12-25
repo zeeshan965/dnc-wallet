@@ -6,6 +6,7 @@ var Wallet = require('ethereumjs-wallet');
 var ethereumJsWallet = require("ethereumjs-wallet");
 
 export var addresses = [];
+export var keyStoreAddresses = [];
 
 export function helloWorld() {
     alert('Hello World');
