@@ -66,9 +66,9 @@
 
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr v-for="">
                                         <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                        <td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>
+                                        <td></td>
                                         <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                                       aria-hidden="true"></i> 167.35 </span></strong>
                                             <i class="fa fa-caret-up"
@@ -95,68 +95,68 @@
                                                     class="glyphicon glyphicon-circle-arrow-right"></i></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>
-                                        <td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>
-                                        <td class="text-success"><strong><span id="currency_price_sl"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"
-                                                                                                  aria-hidden="true"></i>
-                                        </td>
-                                        <td class="text-success"><strong><span id="currency_price_sl1"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 13.34 </span></strong> <i class="fa fa-caret-up"
-                                                                                                  aria-hidden="true"></i>
-                                        </td>
-                                        <td class="text-danger"><strong><span id="currency_price_sl2"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 11.60 </span></strong> <i
-                                                class="fa fa-caret-down"
-                                                aria-hidden="true"></i></td>
-                                        <td><img src="assets/images/icon/eth-icon2.png"> 0.00 ETH
-                                            <hr class="hr_b">
-                                            <small><span id="currency_eth"> <i class="fa fa-usd"
-                                                                               aria-hidden="true"></i> 0.00 usd </span>
-                                            </small>
-                                        </td>
-                                        <td>
+                                    <!--<tr>-->
+                                        <!--<td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>-->
+                                        <!--<td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>-->
+                                        <!--<td class="text-success"><strong><span id="currency_price_sl"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"-->
+                                                                                                  <!--aria-hidden="true"></i>-->
+                                        <!--</td>-->
+                                        <!--<td class="text-success"><strong><span id="currency_price_sl1"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 13.34 </span></strong> <i class="fa fa-caret-up"-->
+                                                                                                  <!--aria-hidden="true"></i>-->
+                                        <!--</td>-->
+                                        <!--<td class="text-danger"><strong><span id="currency_price_sl2"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 11.60 </span></strong> <i-->
+                                                <!--class="fa fa-caret-down"-->
+                                                <!--aria-hidden="true"></i></td>-->
+                                        <!--<td><img src="assets/images/icon/eth-icon2.png"> 0.00 ETH-->
+                                            <!--<hr class="hr_b">-->
+                                            <!--<small><span id="currency_eth"> <i class="fa fa-usd"-->
+                                                                               <!--aria-hidden="true"></i> 0.00 usd </span>-->
+                                            <!--</small>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
 
-                                            <button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"
-                                                    data-toggle="modal" data-target="#Etherium-modal">My EtherCoin <i
-                                                    class="glyphicon glyphicon-circle-arrow-right"></i></button>
+                                            <!--<button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"-->
+                                                    <!--data-toggle="modal" data-target="#Etherium-modal">My EtherCoin <i-->
+                                                    <!--class="glyphicon glyphicon-circle-arrow-right"></i></button>-->
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="assets/images/icon/Bitcoin-icon.png">&nbsp; BTC</td>
-                                        <td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>
-                                        <td class="text-danger"><strong><span id="currency_price_m"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 629.667 </span></strong> <i
-                                                class="fa fa-caret-down"
-                                                aria-hidden="true"></i></td>
-                                        <td class="text-danger"><strong><span id="currency_price_m1"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 804.5745 </span></strong> <i
-                                                class="fa fa-caret-down"
-                                                aria-hidden="true"></i></td>
-                                        <td class="text-danger"><strong><span id="currency_price_m2"> <i
-                                                class="fa fa-usd"
-                                                aria-hidden="true"></i> 699.63 </span></strong> <i
-                                                class="fa fa-caret-down"
-                                                aria-hidden="true"></i></td>
-                                        <td><img src="assets/images/icon/Bitcoin-icon2.png"> 0.00 BTC
-                                            <hr class="hr_b">
-                                            <small><span id="currency_btc"> <i class="fa fa-usd"
-                                                                               aria-hidden="true"></i> 0.00 usd </span>
-                                            </small>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"
-                                                    data-toggle="modal" data-target="#Bitcoin-modal">My BitCoin <i
-                                                    class="glyphicon glyphicon-circle-arrow-right"></i></button>
-                                        </td>
-                                    </tr>
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td><img src="assets/images/icon/Bitcoin-icon.png">&nbsp; BTC</td>-->
+                                        <!--<td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>-->
+                                        <!--<td class="text-danger"><strong><span id="currency_price_m"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 629.667 </span></strong> <i-->
+                                                <!--class="fa fa-caret-down"-->
+                                                <!--aria-hidden="true"></i></td>-->
+                                        <!--<td class="text-danger"><strong><span id="currency_price_m1"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 804.5745 </span></strong> <i-->
+                                                <!--class="fa fa-caret-down"-->
+                                                <!--aria-hidden="true"></i></td>-->
+                                        <!--<td class="text-danger"><strong><span id="currency_price_m2"> <i-->
+                                                <!--class="fa fa-usd"-->
+                                                <!--aria-hidden="true"></i> 699.63 </span></strong> <i-->
+                                                <!--class="fa fa-caret-down"-->
+                                                <!--aria-hidden="true"></i></td>-->
+                                        <!--<td><img src="assets/images/icon/Bitcoin-icon2.png"> 0.00 BTC-->
+                                            <!--<hr class="hr_b">-->
+                                            <!--<small><span id="currency_btc"> <i class="fa fa-usd"-->
+                                                                               <!--aria-hidden="true"></i> 0.00 usd </span>-->
+                                            <!--</small>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"-->
+                                                    <!--data-toggle="modal" data-target="#Bitcoin-modal">My BitCoin <i-->
+                                                    <!--class="glyphicon glyphicon-circle-arrow-right"></i></button>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -179,29 +179,34 @@
                 address: [],
             }
         },
-        mounted: function () {
+        method:{
+            getBalnce: function(){
+                var _this = this;
 
-            var _this = this;
+                _this.address = WalletService.addresses;
+                console.log(_this.address);
 
-            _this.address = WalletService.addresses;
-            console.log(_this.address);
-            for(var i = 0; i < WalletService.addresses.length; i++){
-                var web3 = WalletService.initializeWalletProvider();
-                var bal = web3.eth.getBalance(
+                for(var i = 0; i < WalletService.addresses.length; i++){
+                    var web3 = WalletService.initializeWalletProvider();
+                    var bal = web3.eth.getBalance(
 
-                    "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
-                    // _this.address[i]
-                );
-                console.log(bal.c[0]);
-                var balInit = bal.c[0];
-                var balLast = "" + bal.c[1];
-                _this.balance = balInit + balLast;
-                console.log( _this.balance);
+                        "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
+                        // _this.address[i]
+                    );
+                    console.log(bal.c[0]);
+                    var balInit = bal.c[0];
+                    var balLast = "" + bal.c[1];
+                    _this.balance = balInit + balLast;
+                    console.log( _this.balance);
 
-                var value = web3.fromWei( _this.balance, "ether");
-                console.log(value);
+                    var value = web3.fromWei( _this.balance, "ether");
+                    console.log(value);
 
-            }
+                }
+            },
+        },
+
+                mounted: function () {
 
 
         }
