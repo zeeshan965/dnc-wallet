@@ -161,8 +161,8 @@
 
     var WalletService = require('./../services/wallet');
     import Register from "./Auth/Register";
-    import {async} from 'q';
-    import router from './router'
+   // import router from './router'
+     import router from './../router';
 
     export default {
         data: function () {
@@ -214,11 +214,8 @@
 
                     WalletService.addresses.push(this.walletResponse.address);
                     alert('Unlocked address ===> ' + WalletService.addresses);
-
-
-                    _this.router.push('/');
-                    // window.location.href = '/';
-                    // console.log("Addresses is "+_this.addresses.push(_this.walletResponse.address));
+                    router.push('/')
+                  
 
                 }, 2000);
                 $('#spinnerr').hide();
