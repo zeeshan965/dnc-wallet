@@ -180,7 +180,7 @@
             }
         },
         method: {
-            getBalnce: function () {
+            getBalance: function () {
                 var _this = this;
 
                 _this.address = WalletService.addresses;
@@ -230,6 +230,9 @@
         },
 
         mounted: function () {
+            var _this =this;
+            _this.getBalance();
+            _this.getKeyStoreBalance();
 
 
         }
