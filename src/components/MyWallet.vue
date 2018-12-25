@@ -182,9 +182,26 @@
         mounted: function () {
 
             var _this = this;
-            _this.address = WalletService.addresses[0];
 
+            _this.address = WalletService.addresses;
             console.log(_this.address);
+            for(var i = 0; i < WalletService.addresses.length; i++){
+                var web3 = WalletService.initializeWalletProvider();
+                var bal = web3.eth.getBalance(
+
+                    "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
+                    // _this.address[i]
+                );
+                console.log(bal.c[0]);
+                var balInit = bal.c[0];
+                var balLast = "" + bal.c[1];
+                _this.balance = balInit + balLast;
+                console.log( _this.balance);
+
+                var value = web3.fromWei( _this.balance, "ether");
+                console.log(value);
+
+            }
 
 
         }
