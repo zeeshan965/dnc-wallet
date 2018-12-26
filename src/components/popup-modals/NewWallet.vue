@@ -163,6 +163,8 @@
     //var WalletService = require('./wallet');
     var WalletService = require('./../../services/wallet');
 
+    var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
+
     export default {
         data: function () {
             return {
@@ -245,25 +247,16 @@
                 $('#spinnerr').show();
                 var _this = this;
                 setTimeout(function () {
-                    // _this.web3 = new Web3(
-                    //     new Web3.providers.HttpProvider(
-                    //         "https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa"
-                    //     )
-                    // );
-
-
                     _this.web3 = WalletService.initializeWalletProvider();
+                    //var account = web3.eth.accounts.create();
 
-
-                    var account = WalletService.initializeWeb3EthAccount();
-
-                    _this.newAccountAddress = account.create();
+                    _this.newAccountAddress = web3.eth.accounts.create();
                     console.log("Account Public Address", _this.newAccountAddress.address);
                     console.log("Account Private Key", _this.newAccountAddress.privateKey);
                     _this.newAccount = _this.newAccountAddress.address;
 
                     _this.generateKeyStoreFile();
-                    WalletService.getBalance();
+                   WalletService.getBalance();
                     console.log("process completed");
                     _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
                     $('#spinnerr').hide();
