@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="form-group" v-if="step == 3">
                                     <button class="btn btn-lg btn-primary" data-dismiss="modal"
-                                            @click="step = 4;removeClick()">I Understand Continue
+                                            @click="removeClick();">I Understand Continue
                                     </button>
                                 </div>
 
@@ -295,11 +295,14 @@
             },
 
             removeClick: function () {
+                $('new_wallet').hide();
+                $('#reg').show();
                 var _this = this;
+                _this.user.password = ""
                 document.getElementById("myCheck").disabled = false;
                 _this.clearDinarCheckBox();
-            }
-        },
+            },
+    },
 
         mounted: function () {
             // $("#cb_post").on("click", function() {
