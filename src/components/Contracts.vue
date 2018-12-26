@@ -56,15 +56,17 @@
                                     </div>
                                 </div>
                             </div>
+
+                        <div id="menu1" class="tab-pane fade">
+                            <h3 style="color: #ffffff">Menu 2</h3>
+                            <p>Some content in menu 2.</p>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3 style="color: #ffffff">Menu 2</h3>
+                            <p>Some content in menu 3.</p>
+                        </div>
                        </div>
                     </div>
-                    <div id="menu1" class="tab-pane fade">
-                               Burn
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-                                <h3>Menu 2</h3>
-                                <p>Some content in menu 2.</p>
-                            </div>
                             </div>
                         </div>
                     </div>
