@@ -202,13 +202,24 @@
                 this.fileName = e.target.files[0].name;
                 console.log('File Name ' + this.fileName);
                 if (this.fileName.includes('.pdf')) {
-                    alert('Invalid file format');
+
+                    $.Toast("Wait", "Invalid file format", "error", {});
+
+
+                    // alert('Invalid file format');
                     // router.push('/importaccounts');
-                    window.location.href = "importaccounts"
+
+                    setTimeout(() => {
+                        window.location.href = "importaccounts"
+
+                    }, 2000);
 
                 }
                 if (this.fileName.includes('.png')) {
-                    alert('Invalid file format');
+                    setTimeout(() => {
+                        $.Toast("Wait", "Invalid file format", "warning", {});
+                    }, 2000);
+                    // alert('Invalid file format');
                     // router.push('/importaccounts');
                     window.location.href = "importaccounts"
 

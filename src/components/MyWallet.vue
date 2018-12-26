@@ -66,9 +66,10 @@
 
                                     </thead>
                                     <tbody>
-                                    <tr v-for="">
+                                    <tr v-for="(addr,index) in address" :key="index">
+                                    <tr >
                                         <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                        <td></td>
+                                        <td>{{ address}}</td>
                                         <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                                       aria-hidden="true"></i> 167.35 </span></strong>
                                             <i class="fa fa-caret-up"
@@ -83,7 +84,7 @@
                                                 aria-hidden="true"></i> 211.05 </span></strong> <i
                                                 class="fa fa-caret-up"
                                                 aria-hidden="true"></i></td>
-                                        <td><img src="assets/images/icon/dinar-icon2.png"> 0.00 DNC
+                                        <td><img src="assets/images/icon/dinar-icon2.png"> {{ balance}}DNC
                                             <hr class="hr_b">
                                             <small><span id="currency_dnc"> <i class="fa fa-usd"
                                                                                aria-hidden="true"></i> 0.00 usd </span>
@@ -170,6 +171,10 @@
 
 <script>
 
+    var Toasted = require('vue-toasted');
+
+
+
     var WalletService = require('./../services/wallet');
     export default {
 
@@ -195,11 +200,11 @@
                     console.log(bal.c[0]);
                     var balInit = bal.c[0];
                     var balLast = "" + bal.c[1];
-                    _this.balance = balInit + balLast;
-                    console.log(_this.balance);
+                    balInit = balInit + balLast;
+                    console.log(balInit);
 
-                    var value = web3.fromWei(_this.balance, "ether");
-                    console.log(value);
+                    _this.balance = web3.fromWei(balInit, "ether");
+                    console.log(_this.balance);
 
                 }
             },
@@ -219,20 +224,19 @@
                     console.log(bal.c[0]);
                     var balInit = bal.c[0];
                     var balLast = "" + bal.c[1];
-                    _this.balance = balInit + balLast;
-                    console.log(_this.balance);
+                    balInit = balInit + balLast;
+                    console.log(balInit);
 
-                    var value = web3.fromWei(_this.balance, "ether");
-                    console.log(value);
+                    _this.balance= web3.fromWei(balInit, "ether");
+                    console.log(_this.balance);
 
                 }
             },
         },
 
         mounted: function () {
-            var _this =this;
-            _this.getBalance();
-            _this.getKeyStoreBalance();
+
+
 
 
         }
