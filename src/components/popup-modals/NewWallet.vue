@@ -107,7 +107,7 @@
                                         worth.
                                     </p>
                                 </div>
-                                <div class="form-group" v-if="step == 3">
+                                <div id="asd" class="form-group" v-if="step == 3">
                                     <button class="btn btn-lg btn-primary" data-dismiss="modal"
                                             @click="removeClick();">I Understand Continue
                                     </button>
@@ -297,12 +297,13 @@
             removeClick: function () {
                 $('new_wallet').hide();
                 $('#reg').show();
+                $('#asd').hide();
                 var _this = this;
                 _this.user.password = ""
                 document.getElementById("myCheck").disabled = false;
                 _this.clearDinarCheckBox();
             },
-    },
+        },
 
         mounted: function () {
             // $("#cb_post").on("click", function() {
