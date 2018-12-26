@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <div class="content m-t-40">
             <div class="container">
@@ -67,9 +68,9 @@
                                     </thead>
                                     <tbody>
                                     <tr v-for="(addr,index) in address" :key="index">
-                                    <tr >
+                                    <!-- <tr > -->
                                         <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                        <td>{{ address}}</td>
+                                        <td>{{ addr}}</td>
                                         <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                                       aria-hidden="true"></i> 167.35 </span></strong>
                                             <i class="fa fa-caret-up"
@@ -84,7 +85,7 @@
                                                 aria-hidden="true"></i> 211.05 </span></strong> <i
                                                 class="fa fa-caret-up"
                                                 aria-hidden="true"></i></td>
-                                        <td><img src="assets/images/icon/dinar-icon2.png"> {{ balance}}DNC
+                                        <td><img src="assets/images/icon/dinar-icon2.png"> {{ WalletServiceProvider.getBalance(addr)}}DNC
                                             <hr class="hr_b">
                                             <small><span id="currency_dnc"> <i class="fa fa-usd"
                                                                                aria-hidden="true"></i> 0.00 usd </span>
@@ -182,32 +183,33 @@
             return {
                 balance: 0,
                 address: [],
+                WalletServiceProvider:''
             }
         },
         method: {
-            getBalance: function () {
-                var _this = this;
+            // getBalance: function () {
+            //     var _this = this;
 
-                _this.address = WalletService.addresses;
-                console.log(_this.address);
+            //     _this.address = WalletService.addresses;
+            //     console.log(_this.address);
 
-                for (var i = 0; i < WalletService.addresses.length; i++) {
-                    var web3 = WalletService.initializeWalletProvider();
-                    var bal = web3.eth.getBalance(
-                        "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
-                        // _this.address[i]
-                    );
-                    console.log(bal.c[0]);
-                    var balInit = bal.c[0];
-                    var balLast = "" + bal.c[1];
-                    balInit = balInit + balLast;
-                    console.log(balInit);
+            //     for (var i = 0; i < WalletService.addresses.length; i++) {
+            //         var web3 = WalletService.initializeWalletProvider();
+            //         var bal = web3.eth.getBalance(
+            //             "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
+            //             // _this.address[i]
+            //         );
+            //         console.log(bal.c[0]);
+            //         var balInit = bal.c[0];
+            //         var balLast = "" + bal.c[1];
+            //         balInit = balInit + balLast;
+            //         console.log(balInit);
 
-                    _this.balance = web3.fromWei(balInit, "ether");
-                    console.log(_this.balance);
+            //         _this.balance = web3.fromWei(balInit, "ether");
+            //         console.log(_this.balance);
 
-                }
-            },
+            //     }
+            // },
 
             getKeyStoreBalance: function () {
                 var _this = this;
@@ -234,10 +236,35 @@
             },
         },
 
-        mounted: function () {
+        mounted: function mounted () {
+        
+              var _this = this;
+              this.WalletServiceProvider = WalletService;
 
+                _this.address = WalletService.addresses;
+                console.log('Addresses length ' + _this.address);
+             
+                // for (var i = 0; i < WalletService.addresses.length; i++) {
+                //     WalletService.getBalance(_this.address[i]);
+                //     console.log(WalletService.getBalance("0X"+_this.address[i]));
 
+                    
+                //     // var web3 = WalletService.initializeWalletProvider();
+                //     // var bal = web3.eth.getBalance(
+                //     //     "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
+                //     //     _this.address[i]
+                //     // );
+                //     // console.log(bal.c[0]);
+                //     // var balInit = bal.c[0];
+                //     // var balLast = "" + bal.c[1];
+                //     // balInit = balInit + balLast;
+                //     // console.log(balInit);
 
+                //     // _this.balance = web3.fromWei(balInit, "ether");
+                //     // console.log(_this.balance);
+                // }
+
+            
 
         }
     }

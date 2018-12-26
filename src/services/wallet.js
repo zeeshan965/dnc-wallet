@@ -1,6 +1,7 @@
-import {join} from 'path';
-
 var Web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
+var Wallet = require('ethereumjs-wallet');
+
 var Web3EthAccounts = require('web3-eth-accounts');
 var Wallet = require('ethereumjs-wallet');
 var ethereumJsWallet = require("ethereumjs-wallet");
@@ -11,6 +12,7 @@ export var keyStoreAddresses = [];
 export function helloWorld() {
     alert('Hello World');
 }
+
 
 
 export function initializeWalletProvider() {
@@ -28,18 +30,13 @@ export function initializeWeb3EthAccount() {
 }
 
 export function getBalance() {
-    var web3 = this.initializeWalletProvider();
-    var balance = web3.eth.getBalance(
-        "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0"
-    );
-    console.log(balance.c[0]);
-    var balInit = balance.c[0];
-    var balLast = "" + balance.c[1];
-    balInit = balInit + balLast;
-    console.log(balInit);
+    
+    web3.eth.getBalance("0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0")
+.then(function(balance){
+    var value = web3.utils.fromWei(balance, 'ether');
+    console.log('Balnce is zzzzz ' + value);
+});
 
-    var value = web3.fromWei(balInit, "ether");
-    console.log(value);
 }
 
 export function unlockAccount(privateKey, password) {
