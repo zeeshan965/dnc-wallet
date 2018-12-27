@@ -297,32 +297,40 @@
 
                             _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
                             console.log('Unclocked ===> ' + _this.walletResponse);
+                            if(_this.walletResponse === false){
+                                $.Toast("Wait", "Invalid Private Key", "warning", {});
+                                this.$router.push('/importaccounts');
+                                 // window.location.href = "importaccounts"
+                            }
+                            else {
+                                WalletService.addresses.push(this.walletResponse.address);
+
+                                //Eth Private Balance
+                                var myBalance;
+                                var balance = WalletService.getBalance(this.walletResponse.address).then((res) => {
+                                    myBalance = res;
+                                    console.log('Response inside get balance ' + myBalance);
+                                });
+
+                                setTimeout(() => {
+                                    console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
+                                    WalletService.addressesBlancess.push(myBalance);
+                                    console.log('First address is ' + addressesBlancess[0]);
+                                }, 3000);
 
 
-                            WalletService.addresses.push(this.walletResponse.address);
-
-                            //Eth Private Balance
-                            var myBalance;
-                            var balance = WalletService.getBalance(this.walletResponse.address).then((res) => {
-                                myBalance = res;
-                                console.log('Response inside get balance ' + myBalance);
-                            });
-
-                            setTimeout(() => {
-                                console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
-                                WalletService.addressesBlancess.push(myBalance);
-                                console.log('First address is ' + addressesBlancess[0]);
-                            }, 3000);
+                                //DNC Private Balance
 
 
-                            //DNC Private Balance
+                                alert('Unlocked address ===> ' + WalletService.addresses);
+
+                                router.push('/');
+
+                                $('#spinnerr').hide();
+                            }
 
 
-                            alert('Unlocked address ===> ' + WalletService.addresses);
 
-                            router.push('/');
-
-                            $('#spinnerr').hide();
 
                         },2000);
 

@@ -45,7 +45,7 @@ export async function getBalance(address) {
          var data;
          var addressBalance = await web3.eth.getBalance(address).then((res) =>{
             data = res;
-         });;
+         });
          console.log('Address Balance is ' + data);
          var newBalance = web3.utils.fromWei(data,'ether');
          console.log('new Balance is ' + data);
@@ -60,9 +60,17 @@ export function unlockAccount(privateKey, password) {
     console.log('User private Key' + privateKey);
     var userPrivateKey = privateKey;
     console.log('User Password ' + password);
+
+    console.log("Size of Private Key" + userPrivateKey.length);
+
+
+    if(userPrivateKey.length < 64) {
+        return false;
+    }
     // userPrivateKey = userPrivateKey.substring(2);
 
     var key = Buffer.from(userPrivateKey, 'hex');
+
     var wallet = Wallet.fromPrivateKey(key);
     var unlocked = wallet.toV3String(password);
 
