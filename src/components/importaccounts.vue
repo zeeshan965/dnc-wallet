@@ -299,7 +299,9 @@
                             console.log('Unclocked ===> ' + _this.walletResponse);
                             if(_this.walletResponse === false){
                                 $.Toast("Wait", "Invalid Private Key", "warning", {});
-                                this.$router.push('/importaccounts');
+                               // this.$router.push('/#importaccounts');
+                             router.push({  name:"importaccounts"} );
+                                //router.push('/');
                                  // window.location.href = "importaccounts"
                             }
                             else {
