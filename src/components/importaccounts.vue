@@ -314,8 +314,12 @@
                             if(_this.walletResponse === false){
                                 $.Toast("Wait", "Invalid Private Key", "warning", {});
                                // this.$router.push('/#importaccounts');
-                             router.push({  name:"importaccounts"} );
-                                //router.push('/');
+                             // router.push({  name:"importaccounts"} );
+                             //    router.push('/');
+                                _this.userKey = ""
+                                _this.password = ""
+                                _this.step = 1
+                                document.getElementById("xyz").style["margin-top"] = "100px";
                                  // window.location.href = "importaccounts"
                             }
                             else {
