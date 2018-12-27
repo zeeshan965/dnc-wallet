@@ -172,6 +172,7 @@
     var WalletService = require('./../services/wallet');
     import router from './../router';
     import {addressesBlancess} from '../services/wallet';
+     var DncTokenBalance = require('./../services/getTokenBalance');
 
     export default {
         data: function () {
@@ -376,6 +377,12 @@
 
 
             }
+        },
+
+        mounted: function mounted() {
+
+          DncTokenBalance.getDncBalance('0x41e98269C80a7133De019261f6F4d96d77cc6821');
+
         }
     }
 </script>

@@ -151,6 +151,8 @@
 
 
     var WalletService = require('./../services/wallet');
+    var DncToken = require('./../services/sendToken');
+
 
     export default {
 
@@ -175,6 +177,8 @@
 
             console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
             this.userBalance = WalletService.addressesBlancess[0];
+           // DncToken.hi();
+            DncToken.getTransactionCount();
 
 
         }

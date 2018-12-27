@@ -1,8 +1,8 @@
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/Lc2vdbhIswp6iQDRcmSa'));
 var Wallet = require('ethereumjs-wallet');
-
 var Web3EthAccounts = require('web3-eth-accounts');
+
 // var Wallet = require('ethereumjs-wallet');
 // var ethereumJsWallet = require("ethereumjs-wallet");
 
