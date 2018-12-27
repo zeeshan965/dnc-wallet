@@ -170,11 +170,8 @@
 <script>
 
     var WalletService = require('./../services/wallet');
-    import Register from "./Auth/Register";
-    // import router from './router'
     import router from './../router';
-import { async } from 'q';
-import { addressesBlancess } from '../services/wallet';
+    import {addressesBlancess} from '../services/wallet';
 
     export default {
         data: function () {
@@ -206,11 +203,6 @@ import { addressesBlancess } from '../services/wallet';
                 if (this.fileName.includes('.pdf')) {
 
                     $.Toast("Wait", "Invalid file format", "error", {});
-
-
-                    // alert('Invalid file format');
-                    // router.push('/importaccounts');
-
                     setTimeout(() => {
                         window.location.href = "importaccounts"
 
@@ -221,8 +213,6 @@ import { addressesBlancess } from '../services/wallet';
                     setTimeout(() => {
                         $.Toast("Wait", "Invalid file format", "warning", {});
                     }, 2000);
-                    // alert('Invalid file format');
-                    // router.push('/importaccounts');
                     window.location.href = "importaccounts"
 
                 }
@@ -248,7 +238,23 @@ import { addressesBlancess } from '../services/wallet';
 
                         console.log('Responsezzzz ' + this.response);
                         console.log('three');
-                        WalletService.keyStoreAddresses.push(json_Data.address);
+                        WalletService.addresses.push(json_Data.address);
+
+                        //Eth key Store Balance
+                        var keystoreBalance;
+                        var balance = WalletService.getBalance(json_Data.address).then((res) => {
+                            keystoreBalance = res;
+                            console.log('Response inside get balance ' + keystoreBalance);
+                        });
+
+                        setTimeout(() => {
+                            console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
+                            WalletService.addressesBlancess.push(keystoreBalance);
+                            console.log('First address is ' + addressesBlancess[0]);
+                        }, 3000);
+
+                        //DNC  Keystore Balance
+
                         router.push('/');
                     }
                     // Start the reader job - read file
@@ -275,56 +281,88 @@ import { addressesBlancess } from '../services/wallet';
 
 
             },
-//             async handleBalance(e){
-//            var myBalance;
-//  var balance =  await  WalletService.getBalance(this.walletResponse.address).then((res)=>{
-//                         myBalance = res;
-//                         console.log('Response inside get balance ' + myBalance);
-//                     });
-
-//                 console.log('Balance inside handlebalnce ' + myBalance);
-//                     return myBalance;
-//             },
             handlePassword(e) {
 
-
+                console.log("Button Clicked");
                 var _this = this;
                 e.preventDefault();
-                var password = _this.user.password;
-                $('#spinnerr').show();
-                console.log(password);
                 _this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
 
-                _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
-                console.log('Unclocked ===> ' + _this.walletResponse);
-              
-                     
-                    WalletService.addresses.push(this.walletResponse.address);
-                    // var yes;
-                    // var hellOWorld  =   this.handleBalance().then((res) => {
-                    //      yes = res;
-                    //      console.log('yesssssss ' + yes);
-                    // });
-                    
-                      var myBalance;
-                    var balance =   WalletService.getBalance(this.walletResponse.address).then((res)=>{
-                        myBalance = res;
-                        console.log('Response inside get balance ' + myBalance);
-                    });
-                    
-                    setTimeout(()=>{
-                        console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
-                       WalletService.addressesBlancess.push(myBalance);
-                       console.log('First address is ' + addressesBlancess[0]);
-                    },3000);
-                   
-                    alert('Unlocked address ===> ' + WalletService.addresses);
+                        var password = _this.user.password;
+                        $('#spinnerr').show();
+                        console.log(password);
+                        setTimeout(()=>{
 
-                    router.push('/')
+                            _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
+                            console.log('Unclocked ===> ' + _this.walletResponse);
 
 
-           
-                $('#spinnerr').hide();
+                            WalletService.addresses.push(this.walletResponse.address);
+
+                            //Eth Private Balance
+                            var myBalance;
+                            var balance = WalletService.getBalance(this.walletResponse.address).then((res) => {
+                                myBalance = res;
+                                console.log('Response inside get balance ' + myBalance);
+                            });
+
+                            setTimeout(() => {
+                                console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
+                                WalletService.addressesBlancess.push(myBalance);
+                                console.log('First address is ' + addressesBlancess[0]);
+                            }, 3000);
+
+
+                            //DNC Private Balance
+
+
+                            alert('Unlocked address ===> ' + WalletService.addresses);
+
+                            router.push('/');
+
+                            $('#spinnerr').hide();
+
+                        },2000);
+
+
+                    }
+                });
+
+                // var password = _this.user.password;
+                // $('#spinnerr').show();
+                // console.log(password);
+                //
+                //
+                // _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
+                // console.log('Unclocked ===> ' + _this.walletResponse);
+                //
+                //
+                // WalletService.addresses.push(this.walletResponse.address);
+                //
+                // //Eth Private Balance
+                // var myBalance;
+                // var balance = WalletService.getBalance(this.walletResponse.address).then((res) => {
+                //     myBalance = res;
+                //     console.log('Response inside get balance ' + myBalance);
+                // });
+                //
+                // setTimeout(() => {
+                //     console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
+                //     WalletService.addressesBlancess.push(myBalance);
+                //     console.log('First address is ' + addressesBlancess[0]);
+                // }, 3000);
+                //
+                //
+                // //DNC Private Balance
+                //
+                //
+                // alert('Unlocked address ===> ' + WalletService.addresses);
+                //
+                // router.push('/');
+                //
+                // $('#spinnerr').hide();
 
 
             }

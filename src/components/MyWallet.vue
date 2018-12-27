@@ -67,10 +67,12 @@
 
                                     </thead>
                                     <tbody>
-                                    <tr v-for="(addr,index) in userAddresses " :key="index">
-                                    <!-- <tr > -->
+
+                                    <!-- DNC Lisitng-->
+                                    <tr v-for="(dncAddr,index) in DNCAddresses " :key="index">
+                                        <!-- <tr > -->
                                         <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                        <td>{{ addr}}</td>
+                                        <td>{{ dncAddr}}</td>
                                         <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                                       aria-hidden="true"></i> 167.35 </span></strong>
                                             <i class="fa fa-caret-up"
@@ -85,9 +87,9 @@
                                                 aria-hidden="true"></i> 211.05 </span></strong> <i
                                                 class="fa fa-caret-up"
                                                 aria-hidden="true"></i></td>
-                                        <td><img src="assets/images/icon/dinar-icon2.png" > {{ 
-                                           userAddressesBalance[index]
-                                         }} DNC.
+                                        <td><img src="assets/images/icon/dinar-icon2.png"> {{
+                                            DNCAddressesBalance[index]
+                                            }} DNC.
                                             <hr class="hr_b">
                                             <small><span id="currency_dnc"> <i class="fa fa-usd"
                                                                                aria-hidden="true"></i> 0.00 usd </span>
@@ -99,68 +101,41 @@
                                                     class="glyphicon glyphicon-circle-arrow-right"></i></button>
                                         </td>
                                     </tr>
-                                    <!--<tr>-->
-                                    <!--<td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>-->
-                                    <!--<td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>-->
-                                    <!--<td class="text-success"><strong><span id="currency_price_sl"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"-->
-                                    <!--aria-hidden="true"></i>-->
-                                    <!--</td>-->
-                                    <!--<td class="text-success"><strong><span id="currency_price_sl1"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 13.34 </span></strong> <i class="fa fa-caret-up"-->
-                                    <!--aria-hidden="true"></i>-->
-                                    <!--</td>-->
-                                    <!--<td class="text-danger"><strong><span id="currency_price_sl2"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 11.60 </span></strong> <i-->
-                                    <!--class="fa fa-caret-down"-->
-                                    <!--aria-hidden="true"></i></td>-->
-                                    <!--<td><img src="assets/images/icon/eth-icon2.png"> 0.00 ETH-->
-                                    <!--<hr class="hr_b">-->
-                                    <!--<small><span id="currency_eth"> <i class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 0.00 usd </span>-->
-                                    <!--</small>-->
-                                    <!--</td>-->
-                                    <!--<td>-->
+                                    <!--Eth Listing -->
+                                    <tr  v-for="(addr,index) in userAddresses " :key="'eth'+index">
+                                        <td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>
+                                        <td>{{ addr}}</td>
+                                        <td class="text-success"><strong><span id="currency_price_sl"> <i
+                                                class="fa fa-usd"
+                                                aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"
+                                                                                                  aria-hidden="true"></i>
+                                        </td>
+                                        <td class="text-success"><strong><span id="currency_price_sl1"> <i
+                                                class="fa fa-usd"
+                                                aria-hidden="true"></i> 13.34 </span></strong> <i class="fa fa-caret-up"
+                                                                                                  aria-hidden="true"></i>
+                                        </td>
+                                        <td class="text-danger"><strong><span id="currency_price_sl2"> <i
+                                                class="fa fa-usd"
+                                                aria-hidden="true"></i> 11.60 </span></strong> <i
+                                                class="fa fa-caret-down"
+                                                aria-hidden="true"></i></td>
+                                        <td><img src="assets/images/icon/eth-icon2.png"> {{
+                                            userAddressesBalance[index]
+                                            }} ETH
+                                            <hr class="hr_b">
+                                            <small><span id="currency_eth"> <i class="fa fa-usd"
+                                                                               aria-hidden="true"></i> 0.00 usd </span>
+                                            </small>
+                                        </td>
+                                        <td>
 
-                                    <!--<button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"-->
-                                    <!--data-toggle="modal" data-target="#Etherium-modal">My EtherCoin <i-->
-                                    <!--class="glyphicon glyphicon-circle-arrow-right"></i></button>-->
+                                            <button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"
+                                                    data-toggle="modal" data-target="#Etherium-modal">My EtherCoin <i
+                                                    class="glyphicon glyphicon-circle-arrow-right"></i></button>
 
-                                    <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                    <!--<td><img src="assets/images/icon/Bitcoin-icon.png">&nbsp; BTC</td>-->
-                                    <!--<td>1GPvzAiHHccus82ZCWK2eXU65Py8cUQo5Z</td>-->
-                                    <!--<td class="text-danger"><strong><span id="currency_price_m"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 629.667 </span></strong> <i-->
-                                    <!--class="fa fa-caret-down"-->
-                                    <!--aria-hidden="true"></i></td>-->
-                                    <!--<td class="text-danger"><strong><span id="currency_price_m1"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 804.5745 </span></strong> <i-->
-                                    <!--class="fa fa-caret-down"-->
-                                    <!--aria-hidden="true"></i></td>-->
-                                    <!--<td class="text-danger"><strong><span id="currency_price_m2"> <i-->
-                                    <!--class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 699.63 </span></strong> <i-->
-                                    <!--class="fa fa-caret-down"-->
-                                    <!--aria-hidden="true"></i></td>-->
-                                    <!--<td><img src="assets/images/icon/Bitcoin-icon2.png"> 0.00 BTC-->
-                                    <!--<hr class="hr_b">-->
-                                    <!--<small><span id="currency_btc"> <i class="fa fa-usd"-->
-                                    <!--aria-hidden="true"></i> 0.00 usd </span>-->
-                                    <!--</small>-->
-                                    <!--</td>-->
-                                    <!--<td>-->
-                                    <!--<button class="btn btn-block btn-default2 waves-effect waves-light m-b-5"-->
-                                    <!--data-toggle="modal" data-target="#Bitcoin-modal">My BitCoin <i-->
-                                    <!--class="glyphicon glyphicon-circle-arrow-right"></i></button>-->
-                                    <!--</td>-->
-                                    <!--</tr>-->
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -174,41 +149,33 @@
 
 <script>
 
-    var Toasted = require('vue-toasted');
+
     var WalletService = require('./../services/wallet');
 
     export default {
 
         data: function () {
             return {
-                
-                balance: 0,
-                address: [],
-                WalletServiceProvider:WalletService,
-                userAddresses : WalletService.addresses,
-                userAddressesBalance : WalletService.addressesBlancess
+
+                WalletServiceProvider: WalletService,
+                // DNC Variables
+                DNCAddresses: WalletService.addresses,
+                DNCAddressesBalance: WalletService.dncAddressesBlancess,
+                //Eth Variables
+                userAddresses: WalletService.addresses,
+                userAddressesBalance: WalletService.addressesBlancess,
+
             }
         },
-        method: {
-           
 
-            getKeyStoreBalance: function () {
-                var _this = this;
 
-                _this.address = WalletService.addresses;
-                console.log(_this.address);
+        mounted: function mounted() {
 
-        
-            },
-        },
+            var _this = this;
 
-        mounted: function mounted () {
-        
-              var _this = this;
+            console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
+            this.userBalance = WalletService.addressesBlancess[0];
 
-               console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
-              this.userBalance = WalletService.addressesBlancess[0];
-            
 
         }
     }

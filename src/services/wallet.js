@@ -3,12 +3,14 @@ var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/L
 var Wallet = require('ethereumjs-wallet');
 
 var Web3EthAccounts = require('web3-eth-accounts');
-var Wallet = require('ethereumjs-wallet');
-var ethereumJsWallet = require("ethereumjs-wallet");
+// var Wallet = require('ethereumjs-wallet');
+// var ethereumJsWallet = require("ethereumjs-wallet");
 
 export var addresses = [];
-export var keyStoreAddresses = [];
+//Eth Address Balance
 export var addressesBlancess =  [];
+//DNC Address Baalance
+export var dncAddressesBlancess =  [];
 
 export function helloWorld() {
     alert('Hello World');
