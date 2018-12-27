@@ -102,7 +102,7 @@
                                         </td>
                                     </tr>
                                     <!--Eth Listing -->
-                                    <tr  v-for="(addr,index) in userAddresses " :key="'eth'+index">
+                                    <tr v-for="(addr,index) in userAddresses " :key="'eth'+index">
                                         <td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>
                                         <td>{{ addr}}</td>
                                         <td class="text-success"><strong><span id="currency_price_sl"> <i
@@ -177,7 +177,7 @@
 
             console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
             this.userBalance = WalletService.addressesBlancess[0];
-           // DncToken.hi();
+
             //DncToken.getTransactionCount();
 
 

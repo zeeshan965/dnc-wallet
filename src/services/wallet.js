@@ -8,14 +8,13 @@ var Web3EthAccounts = require('web3-eth-accounts');
 
 export var addresses = [];
 //Eth Address Balance
-export var addressesBlancess =  [];
+export var addressesBlancess = [];
 //DNC Address Baalance
-export var dncAddressesBlancess =  [];
+export var dncAddressesBlancess = [];
 
 export function helloWorld() {
     alert('Hello World');
 }
-
 
 
 export function initializeWalletProvider() {
@@ -33,24 +32,15 @@ export function initializeWeb3EthAccount() {
 }
 
 export async function getBalance(address) {
-//     var userbalance;
-//      await web3.eth.getBalance(address)
-// .then(function(balance){
-//     userbalance = web3.utils.fromWei(balance, 'ether');
-//     console.log('Balnce is zzzzz ' + userbalance);
-//     return userbalance;
-// });
-// console.log('My balance is ' + userbalance);
-// return userbalance;
-         var data;
-         var addressBalance = await web3.eth.getBalance(address).then((res) =>{
-            data = res;
-         });
-         console.log('Address Balance is ' + data);
-         var newBalance = web3.utils.fromWei(data,'ether');
-         console.log('new Balance is ' + data);
-         return newBalance;
 
+    var data;
+    var addressBalance = await web3.eth.getBalance(address).then((res) => {
+        data = res;
+    });
+    console.log('Address Balance is ' + data);
+    var newBalance = web3.utils.fromWei(data, 'ether');
+    console.log('new Balance is ' + data);
+    return newBalance;
 
 
 }
@@ -64,18 +54,17 @@ export function unlockAccount(privateKey, password) {
     console.log("Size of Private Key" + userPrivateKey.length);
 
 
-    if(userPrivateKey.length < 64) {
+    if (userPrivateKey.length < 64 && userPrivateKey.length > 64) {
         return false;
     }
-    // userPrivateKey = userPrivateKey.substring(2);
+
 
     var key = Buffer.from(userPrivateKey, 'hex');
 
     var wallet = Wallet.fromPrivateKey(key);
     var unlocked = wallet.toV3String(password);
 
-    ///phle humrey pass strign arae thi unki parse kr ky json object bnya hai then us mai sy address utha liya hai
-    // jo addressa rha wo thek hai mai ny verify kr liya hai agy challty hen hum ab
+
     var unlooked_json = JSON.parse(unlocked);
 
     console.log('Wallet ' + JSON.stringify(wallet));
