@@ -173,6 +173,8 @@
     import Register from "./Auth/Register";
     // import router from './router'
     import router from './../router';
+import { async } from 'q';
+import { addressesBlancess } from '../services/wallet';
 
     export default {
         data: function () {
@@ -273,6 +275,16 @@
 
 
             },
+//             async handleBalance(e){
+//            var myBalance;
+//  var balance =  await  WalletService.getBalance(this.walletResponse.address).then((res)=>{
+//                         myBalance = res;
+//                         console.log('Response inside get balance ' + myBalance);
+//                     });
+
+//                 console.log('Balance inside handlebalnce ' + myBalance);
+//                     return myBalance;
+//             },
             handlePassword(e) {
 
 
@@ -285,15 +297,33 @@
 
                 _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
                 console.log('Unclocked ===> ' + _this.walletResponse);
-                setTimeout(() => {
-
+              
+                     
                     WalletService.addresses.push(this.walletResponse.address);
+                    // var yes;
+                    // var hellOWorld  =   this.handleBalance().then((res) => {
+                    //      yes = res;
+                    //      console.log('yesssssss ' + yes);
+                    // });
+                    
+                      var myBalance;
+                    var balance =   WalletService.getBalance(this.walletResponse.address).then((res)=>{
+                        myBalance = res;
+                        console.log('Response inside get balance ' + myBalance);
+                    });
+                    
+                    setTimeout(()=>{
+                        console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
+                       WalletService.addressesBlancess.push(myBalance);
+                       console.log('First address is ' + addressesBlancess[0]);
+                    },3000);
+                   
                     alert('Unlocked address ===> ' + WalletService.addresses);
 
                     router.push('/')
 
 
-                }, 2000);
+           
                 $('#spinnerr').hide();
 
 

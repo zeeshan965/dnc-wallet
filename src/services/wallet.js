@@ -8,6 +8,7 @@ var ethereumJsWallet = require("ethereumjs-wallet");
 
 export var addresses = [];
 export var keyStoreAddresses = [];
+export var addressesBlancess =  [];
 
 export function helloWorld() {
     alert('Hello World');
@@ -29,13 +30,26 @@ export function initializeWeb3EthAccount() {
     );
 }
 
-export function getBalance() {
-    
-    web3.eth.getBalance("0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0")
-.then(function(balance){
-    var value = web3.utils.fromWei(balance, 'ether');
-    console.log('Balnce is zzzzz ' + value);
-});
+export async function getBalance(address) {
+//     var userbalance;
+//      await web3.eth.getBalance(address)
+// .then(function(balance){
+//     userbalance = web3.utils.fromWei(balance, 'ether');
+//     console.log('Balnce is zzzzz ' + userbalance);
+//     return userbalance;
+// });
+// console.log('My balance is ' + userbalance);
+// return userbalance;
+         var data;
+         var addressBalance = await web3.eth.getBalance(address).then((res) =>{
+            data = res;
+         });;
+         console.log('Address Balance is ' + data);
+         var newBalance = web3.utils.fromWei(data,'ether');
+         console.log('new Balance is ' + data);
+         return newBalance;
+
+
 
 }
 
