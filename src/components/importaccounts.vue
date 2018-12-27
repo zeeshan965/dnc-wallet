@@ -171,7 +171,7 @@
 
     var WalletService = require('./../services/wallet');
     import router from './../router';
-    import {addressesBlancess} from '../services/wallet';
+    import {addressesBlancess, dncAddressesBlancess} from '../services/wallet';
      var DncTokenBalance = require('./../services/getTokenBalance');
 
     export default {
@@ -256,6 +256,19 @@
 
                         //DNC  Keystore Balance
 
+                        var myDNCkeyStoreBalance;
+                        var keystoreBalancednc = DncTokenBalance.getDncBalance(json_Data.address).then((dncres)=>{
+                            myDNCkeyStoreBalance =dncres;
+                            console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
+                        });
+
+                        setTimeout(()=>{
+                            console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
+                            WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
+                            console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
+                        },3000);
+
+
                         router.push('/');
                     }
                     // Start the reader job - read file
@@ -323,6 +336,19 @@
 
 
                                 //DNC Private Balance
+                                var myDNCBalance;
+                                var balancednc = DncTokenBalance.getDncBalance(this.walletResponse.address).then((dncres)=>{
+                                    myDNCBalance =dncres;
+                                    console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
+                                });
+
+                                setTimeout(()=>{
+                                    console.log("Balcne i get for dnc is" + myDNCBalance);
+                                    WalletService.dncAddressesBlancess.push(myDNCBalance);
+                                    console.log("DNC first Address is " + dncAddressesBlancess[0]);
+                                },3000);
+
+
 
 
                                 alert('Unlocked address ===> ' + WalletService.addresses);
@@ -381,7 +407,7 @@
 
         mounted: function mounted() {
 
-          DncTokenBalance.getDncBalance('0x41e98269C80a7133De019261f6F4d96d77cc6821');
+          // DncTokenBalance.getDncBalance('0x41e98269C80a7133De019261f6F4d96d77cc6821');
 
         }
     }

@@ -14,16 +14,40 @@ export function hi(){
     alert('heyyyy');
 }
 
-export function getDncBalance(address){
+export  async function getDncBalance(address){
 
-    contract.methods.balanceOf(walletAddress).call().then( balance =>{
-        contract.methods.decimals().call().then(decimals =>{
-            console.log(decimals);
-            balance = balance/(10**decimals);
-            console.log(balance.toString());
-        });
-    }).catch((error) => {
-        console.log(error);
-    });
+
+    //  await contract.methods.balanceOf(address).call().then( balance =>{
+    //      contract.methods.decimals().call().then(decimals =>{
+    //         console.log(decimals);
+    //         balance = balance/(10**decimals);
+    //         console.log(balance.toString());
+    //
+    //         response = balance;
+    //         console.log('Balance inisde function  ' + response);
+    //
+    //
+    //     });
+    // }).catch((error) => {
+    //     console.log(error);
+    // });
+
+     var data;
+      var addressBalance =  await contract.methods.balanceOf(address).call().then((balance) => {
+          data = balance;
+          console.log('Balnance  insidezzzzzzzzzzzz ' + data);
+      });
+
+      var  addresssBalanceInDecimals = await contract.methods.decimals().call().then((decimals)=>{
+          console.log('Decimals =>>>' + decimals);
+          data = data  /(10**decimals);
+          console.log('Balance is inside decimal ' + data);
+      });
+
+
+
+
+    console.log('Balnace outsidezzzzzzz  ' + data);
+    return data;
 }
  
