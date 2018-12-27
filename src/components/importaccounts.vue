@@ -120,7 +120,7 @@
                                         <form @submit.prevent="handlePrivateKey">
                                             <div class="form-group">
                                                 <label for="user key">Private Key</label>
-                                                <input type="text" v-model="userKey" v-validate="'required'"
+                                                <input id="xyz" type="text" v-model="userKey" v-validate="'required'"
                                                        name="userKey" class="form-control"
                                                        :class="{ 'is-invalid': submitted && errors.has('userKey') }"/>
                                                 <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">
@@ -172,7 +172,7 @@
     var WalletService = require('./../services/wallet');
     import router from './../router';
     import {addressesBlancess} from '../services/wallet';
-     var DncTokenBalance = require('./../services/getTokenBalance');
+    var DncTokenBalance = require('./../services/getTokenBalance');
 
     export default {
         data: function () {
@@ -301,8 +301,12 @@
                             if(_this.walletResponse === false){
                                 $.Toast("Wait", "Invalid Private Key", "warning", {});
                                // this.$router.push('/#importaccounts');
-                             router.push({  name:"importaccounts"} );
-                                //router.push('/');
+                             // router.push({  name:"importaccounts"} );
+                             //    router.push('/');
+                                _this.userKey = ""
+                                _this.password = ""
+                                _this.step = 1
+                                document.getElementById("xyz").style["margin-top"] = "100px";
                                  // window.location.href = "importaccounts"
                             }
                             else {
