@@ -4,7 +4,6 @@
         <sidebar></sidebar>
         <main-content></main-content>
         <popup-modals></popup-modals>
-        <contractSendTokenModal></contractSendTokenModal>
     </div>
 </template>
 <script>

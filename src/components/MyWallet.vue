@@ -1,8 +1,10 @@
 <template>
 
     <div>
+
         <div class="content m-t-40">
             <div class="container">
+
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
@@ -14,6 +16,9 @@
                             <h4 class="page-title text-left">Welcome !</h4>
                         </div>
                     </div>
+                </div>
+                <div v-if="spinnerr == true">
+                    <vue-simple-spinner></vue-simple-spinner>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -44,14 +49,8 @@
                                                 class="select7__caret"></span>
                                         </div>
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
-
                             <div class="table-responsive">
                                 <table class="table table-striped table-color">
                                     <thead>
@@ -166,21 +165,34 @@
                 //Eth Variables
                 userAddresses: WalletService.addresses,
                 userAddressesBalance: WalletService.addressesBlancess,
-
+                spinnerr: false
             }
         },
+        created() {
+            var _this = this;
+            setTimeout(() => {
+                _this.spinnerr = true
 
+                console.log('created')
+            }, 100)
+        },
 
         mounted: function mounted() {
-
             var _this = this;
+            setTimeout(() => {
 
-            console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
-            this.userBalance = WalletService.addressesBlancess[0];
+                console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
+                this.userBalance = WalletService.addressesBlancess[0];
+                _this.spinnerr = false
 
+                console.log('destroyed')
+
+                //DncToken.getTransactionCount();
             DncToken.getTransactionCount();
 
 
-        }
+            }, 2000)
+        },
+
     }
 </script>
