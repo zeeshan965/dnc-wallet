@@ -317,7 +317,6 @@
                                 _this.userKey = "";
                                 _this.user.password = "";
                                 _this.step = 1;
-
                             }
                             else {
                                 WalletService.addresses.push(this.walletResponse.address);
@@ -328,13 +327,11 @@
                                     myBalance = res;
                                     console.log('Response inside get balance ' + myBalance);
                                 });
-
                                 setTimeout(() => {
                                     console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
                                     WalletService.addressesBlancess.push(myBalance);
                                     console.log('First address is ' + addressesBlancess[0]);
                                 }, 3000);
-
 
                                 //DNC Private Balance
                                 var myDNCBalance;

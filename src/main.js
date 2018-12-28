@@ -9,7 +9,6 @@ import NewWallet from './components/popup-modals/NewWallet.vue'
 import DncModal from './components/popup-modals/DncModal.vue'
 import EtheriumModal from './components/popup-modals/EtheriumModal.vue'
 import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
-import contractSendTokenModal from './components/popup-modals/contractSendTokens-Modal.vue'
 
 import Spinner from 'vue-simple-spinner'
 import router from './router'
@@ -22,7 +21,6 @@ Vue.component('new-wallet-modal', NewWallet)
 Vue.component('dnc-modal', DncModal)
 Vue.component('etherium-modal', EtheriumModal)
 Vue.component('BitcoinModal', BitcoinModal)
-Vue.component('contractSendTokenModal', contractSendTokenModal)
 Vue.component('vue-simple-spinner', Spinner)
 import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);

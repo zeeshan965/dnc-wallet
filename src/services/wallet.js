@@ -42,7 +42,6 @@ export async function getBalance(address) {
     console.log('new Balance is ' + data);
     return newBalance;
 
-
 }
 
 export function unlockAccount(privateKey, password) {
