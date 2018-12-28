@@ -279,6 +279,7 @@ export function getAddressAndTokenValues(toAddress, tokenValue) {
     console.log("DNC Get Address" + toAddress);
     console.log("DNC Get Balance" + tokenValue);
 
+    web3.eth.defaultAccount = fromAddress;
     data = contract.methods.transfer(toAddress, tokenValue).encodeABI();
     console.log("DAta inside fucntion is" + data);
 
@@ -296,7 +297,7 @@ export function getPrivateKey(priKey) {
 
 console.log("Private keyy outise fucntion is " + privateKey);
 console.log("DAta" + data);
-web3.eth.defaultAccount = fromAddress;
+//web3.eth.defaultAccount = fromAddress;
 gasPrice = web3.eth.getGasPrice();
 gasLimit = 200000;
 
