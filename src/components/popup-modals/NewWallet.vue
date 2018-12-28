@@ -108,6 +108,9 @@
                                     </p>
                                 </div>
                                 <div id="asd" class="form-group" v-if="step == 3">
+
+                                    <div data-v-92875dbe="" class="form-group"><label data-v-92875dbe="">Save your private key</label><input  type="text" v-model="acconntPrivateKey"  class="form-control">
+                                    </div>
                                     <button class="btn btn-lg btn-primary" data-dismiss="modal"
                                             @click="removeClick();">I Understand Continue
                                     </button>
