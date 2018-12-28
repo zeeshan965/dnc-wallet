@@ -287,7 +287,10 @@ export function getAddressAndTokenValues(toAddress, tokenValue) {
 
 export function getPrivateKey(priKey) {
     console.log("Private KEy inside function is " + priKey);
+
     privateKey = priKey;
+
+    this.getTransactionCount();
     return privateKey;
 }
 
@@ -299,18 +302,17 @@ gasLimit = 200000;
 
 
 export function sendSigned(rawTransaction) {
-
+console.log("Send fucntion private key: " + privateKey);
 
     var privKey = new Buffer(privateKey, 'hex');
     // console.log(privKey);
     const tx = new Tx(rawTransaction);
-    // console.log(tx);
+    // console.log("Trasnaction objecct "+tx);
 
     tx.sign(privKey);
     var serializedTx = tx.serialize().toString('hex');
-    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
-        console.log("Tranasaction hash is  ===>   " + transactionHash);
-    });
+    // console.log("Serialized " + serializedTx);
+    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
     // console.log('Raw Tranaction ' + rawTransaction);
     //
     // var privKey = new Buffer(privateKey, 'hex');
