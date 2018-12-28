@@ -168,11 +168,10 @@
                 spinnerr: false
             }
         },
-        created() {
+        beforeCreate() {
             var _this = this;
             setTimeout(() => {
                 _this.spinnerr = true
-
                 console.log('created')
             }, 100)
         },

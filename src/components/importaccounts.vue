@@ -317,8 +317,7 @@
                                 _this.userKey = "";
                                 _this.user.password = "";
                                 _this.step = 1;
-                            }
-                            else {
+                            } else {
                                 WalletService.addresses.push(this.walletResponse.address);
 
                                 //Eth Private Balance
