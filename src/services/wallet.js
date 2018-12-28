@@ -53,7 +53,7 @@ export function unlockAccount(privateKey, password) {
     console.log("Size of Private Key" + userPrivateKey.length);
 
 
-    if (userPrivateKey.length < 64 && userPrivateKey.length > 64) {
+    if (userPrivateKey.length < 64 || userPrivateKey.length > 64) {
         return false;
     }
 
