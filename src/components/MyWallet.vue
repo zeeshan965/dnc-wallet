@@ -188,6 +188,7 @@
                 console.log('destroyed')
 
                 //DncToken.getTransactionCount();
+            DncToken.getTransactionCount();
 
 
             }, 2000)
