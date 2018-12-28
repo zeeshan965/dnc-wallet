@@ -11,7 +11,6 @@
     textarea {
         height: 150px;
     }
-
     .container.text-left {
         padding-bottom: 60px;
     }

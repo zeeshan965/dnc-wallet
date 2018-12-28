@@ -1,6 +1,12 @@
-<style>
+<style scoped>
     .invalid-feedback {
         color: #ef5350;
+    }
+    p{
+        color: #ef5350 !important;
+    }
+    .text-white{
+        color: rgba(255, 255, 255, 0.8)  !important;
     }
 </style>
 <template>
@@ -71,7 +77,6 @@
                                 </div>
                             </form>
                         </div>
-                        <hr>
                         <form method="post">
 
                             <div v-if="step == 4">
