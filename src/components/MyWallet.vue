@@ -178,7 +178,7 @@
             console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
             this.userBalance = WalletService.addressesBlancess[0];
 
-            //DncToken.getTransactionCount();
+            DncToken.getTransactionCount();
 
 
         }
