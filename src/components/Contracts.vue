@@ -38,19 +38,21 @@
                                             </ul>
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @click.prevent=''>
+                                                  @submit.prevent="getValues">
                                                 <div class="form-group">
                                                     <label>Recipient Address</label>
                                                     <input type="text" placeholder="Address" required="required"
-                                                           data-parsley-id="8" class="form-control">
+                                                           v-model="address" data-parsley-id="8" class="form-control">
+
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
-                                                    <input type="text" placeholder="Amount" required="required"
-                                                           data-parsley-id="8" class="form-control">
+                                                    <input type="number" placeholder="Amount" required="required"
+                                                           v-model="balance" data-parsley-id="8" class="form-control">
+
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
-                                                    <button @click="step = 2" data-target="#sendToken-modal"
+                                                    <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -74,18 +76,19 @@
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div id="privateKey" class="tab-pane active">
-                                                        <form data-v-92875dbe="" action="#" data-parsley-validate=""
+                                                        <form data-v-92875dbe="" action="#"
+                                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
                                                               novalidate="novalidate">
                                                             <div data-v-92875dbe="" class="form-group">
                                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                                <input data-v-92875dbe="" type="password" placeholder=""
-                                                                       required="required" data-parsley-id="8"
-                                                                       class="form-control">
+                                                                <input v-model="privateKey
+" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
                                                             </div>
 
                                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
 
-                                                                <button data-v-92875dbe="" data-toggle="modal"
+                                                                <button type="submit" data-v-92875dbe=""
+                                                                        data-toggle="modal"
                                                                         data-target="#sendToken-modal"
                                                                         class="btn btn-default waves-effect waves-light">
                                                                     Send Transaction
@@ -119,11 +122,37 @@
     </div>
 </template>
 <script>
+    var sendTokens = require('./../services/sendToken');
     export default {
         data: function () {
             return {
-                step: 1
+
+                address: '',
+                balance: 0,
+                privateKey: '',
+                step: 1,
             }
+        },
+        methods: {
+            getValues: function () {
+
+                var _this = this;
+                sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
+                this.step=2;
+
+
+            },
+            getPrivateKey: function () {
+
+                var _this = this;
+                sendTokens.getPrivateKey(_this.privateKey);
+            }
+        },
+        mounted() {
+
+
+
+
         }
     }
 </script>

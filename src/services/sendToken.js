@@ -2,6 +2,8 @@ const Web3 = require("web3");
 const web3 = new Web3();
 const Tx = require('ethereumjs-tx');
 web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+import router from './../router'
+
 var abi = [{
     "constant": true,
     "inputs": [],
@@ -257,9 +259,10 @@ var contractAddress = "0x3a84b2d899253a0D01aC89B948DB376c9af06064";
 var contract = new web3.eth.Contract(abi, contractAddress);
 
 var fromAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
-var privateKey = "2bb290ea4c091b6998643a60b6d0e06afeaa2fe57f5fa4e02c1dc48bc7acd0db";
-var toAddress = "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0";
-var tokenValue = 1;
+
+// export var privateKey = "2bb290ea4c091b6998643a60b6d0e06afeaa2fe57f5fa4e02c1dc48bc7acd0db";
+// export var toAddress = "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0";
+// export var tokenValue = 1;
 
 // tokenValue = web3.toWei(tokenValue, 'ether');
 
@@ -267,23 +270,50 @@ export function hi() {
     alert('Hi to everyOne');
 }
 
-web3.eth.defaultAccount = fromAddress;
-var data = contract.methods.transfer(toAddress, tokenValue).encodeABI();
-var gasPrice = web3.eth.getGasPrice();
-var gasLimit = 200000;
+var data;
+var gasPrice;
+var gasLimit;
+var privateKey;
 
-export  function sendSigned(rawTransaction) {
+export function getAddressAndTokenValues(toAddress, tokenValue) {
+    console.log("DNC Get Address" + toAddress);
+    console.log("DNC Get Balance" + tokenValue);
+
+    web3.eth.defaultAccount = fromAddress;
+    data = contract.methods.transfer(toAddress, tokenValue).encodeABI();
+    console.log("DAta inside fucntion is" + data);
+
+    return data;
+}
+
+export function getPrivateKey(priKey) {
+    console.log("Private KEy inside function is " + priKey);
+
+    privateKey = priKey;
+
+    this.getTransactionCount();
+    return privateKey;
+}
+
+console.log("Private keyy outise fucntion is " + privateKey);
+console.log("DAta" + data);
+//web3.eth.defaultAccount = fromAddress;
+gasPrice = web3.eth.getGasPrice();
+gasLimit = 200000;
+
+
+export function sendSigned(rawTransaction) {
+console.log("Send fucntion private key: " + privateKey);
 
     var privKey = new Buffer(privateKey, 'hex');
     // console.log(privKey);
     const tx = new Tx(rawTransaction);
-    // console.log(tx);
+    // console.log("Trasnaction objecct "+tx);
 
     tx.sign(privKey);
     var serializedTx = tx.serialize().toString('hex');
-    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
-        console.log("Tranasaction hash is  ===>   " + transactionHash);
-    });
+    // console.log("Serialized " + serializedTx);
+    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
     // console.log('Raw Tranaction ' + rawTransaction);
     //
     // var privKey = new Buffer(privateKey, 'hex');
@@ -321,7 +351,7 @@ export  function sendSigned(rawTransaction) {
 
 export function getTransactionCount() {
 
-    web3.eth.getTransactionCount(web3.eth.defaultAccount).then( count => {
+    web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
         var rawTransaction = {
             nonce: web3.utils.toHex(count),
             gasPrice: web3.utils.toHex(gasPrice),
@@ -335,7 +365,7 @@ export function getTransactionCount() {
         sendSigned(rawTransaction);
         // sendSigned(rawTransaction).then(console.log);
 
-    }).catch((error)=>{
+    }).catch((error) => {
         console.log(error);
     });
 

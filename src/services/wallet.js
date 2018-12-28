@@ -3,6 +3,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/L
 var Wallet = require('ethereumjs-wallet');
 var Web3EthAccounts = require('web3-eth-accounts');
 
+
 // var Wallet = require('ethereumjs-wallet');
 // var ethereumJsWallet = require("ethereumjs-wallet");
 
@@ -62,6 +63,10 @@ export function unlockAccount(privateKey, password) {
 
     var wallet = Wallet.fromPrivateKey(key);
     var unlocked = wallet.toV3String(password);
+
+   // var parivateKeyCheck = Wallet.fromPrivateKey(userPrivateKey);
+ 
+    console.log('Private Key checkzzzzzzzzzzz ' + JSON.stringify(wallet));
 
 
     var unlooked_json = JSON.parse(unlocked);
