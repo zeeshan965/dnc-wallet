@@ -271,10 +271,11 @@ var privateKey;
 
 
 export function getAddressAndTokenValues(toAddress, tokenValue) {
-    console.log("DNC Get Address" + toAddress);
+    console.log("DNC Get  Address" + toAddress);
     console.log("DNC Get Balance" + tokenValue);
 
     web3.eth.defaultAccount = fromAddress;
+
     data = contract.methods.MinterFunction(toAddress, tokenValue).encodeABI();
     console.log("DAta inside fucntion is" + data);
 
