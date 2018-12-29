@@ -202,6 +202,17 @@
                 //    console.log(e);
                 this.fileName = e.target.files[0].name;
                 console.log('File Name ' + this.fileName);
+
+                var newFileName = this.fileName.split('.');
+                console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
+
+                if(newFileName[1].length > 46 ||newFileName[1].length < 46 ){
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.error('Invalid file format');
+                    this.fileName ='';
+                    return false;
+                }
+
                 if (this.fileName.includes('.pdf')) {
 
                      alertify.set('notifier','position', 'top-right');
