@@ -4,7 +4,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="" class="logo"><img src="assets/images/dd2.png" width="150" height="61" alt="Logo"></a>
+                <a href="" class="logo"><img src="assets/images/dd2.png" width="70" height="61" alt="Logo"></a>
             </div>
         </div>
         <!-- Navbar -->

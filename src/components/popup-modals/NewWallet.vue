@@ -301,8 +301,8 @@
                 $('#asd').hide();
                 var _this = this;
                 _this.user.password = ""
-                document.getElementById("myCheck").disabled = false;
-                _this.clearDinarCheckBox();
+                // document.getElementById("myCheck").disabled = false;
+                // _this.clearDinarCheckBox();
             },
         },
 
