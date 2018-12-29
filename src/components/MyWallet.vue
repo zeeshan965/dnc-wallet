@@ -7,15 +7,15 @@
 
                 <!-- Page-Title -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <!-- <div class="col-sm-12">
                         <div class="page-title-box">
                             <ol class="breadcrumb pull-right">
 
                                 <li class="active">Dashboard</li>
                             </ol>
-                            <h4 class="page-title text-left">Welcome !</h4>
+                            <!-- <h4 class="page-title text-left">Welcome !</h4> -->
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div v-if="spinnerr == true">
                     <vue-simple-spinner></vue-simple-spinner>
@@ -23,13 +23,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-box">
-                            <h4 class="header-title m-t-0 text-left">Wallet Information</h4>
+                            <!-- <h4 class="header-title m-t-0 text-left">Wallet Information</h4> -->
                             <div class="row">
                                 <div class="btn-group pull-right"
                                      style="margin: 19px;margin-top: -36px;margin-right: 10px;">
                                     <!-- CURRENCY, BOOTSTRAP DROPDOWN -->
                                     <!--<a class="btn btn-primary" href="javascript:void(0);">Currency</a>-->
-                                    <label> Price :&nbsp;&nbsp; </label>
+                                    <!-- <label> Price :&nbsp;&nbsp; </label>
                                     <select class="select7" style="display: none;">
                                         <option value="USD" data-icon="assets/flag2/us.png">USD</option>
                                         <option value="SGD" data-icon="assets/flag2/sg.png">SGD</option>
@@ -39,8 +39,8 @@
                                         <option value="BD" data-icon="assets/flag2/bh.png">BHD</option>
                                         <option value="JPY" data-icon="assets/flag2/jp.png">JPY</option>
                                         <option value="IND" data-icon="assets/flag2/in.png">IND</option>
-                                    </select>
-                                    <div class="select7 ">
+                                    </select> -->
+                                    <!-- <div class="select7 ">
                                         <div class="select7__current">
                                             <span data-role="value" class="select7__current-value"
                                                   data-value="USD"><span
@@ -48,7 +48,7 @@
                                                     src="assets/flag2/us.png"></span>USD</span><span
                                                 class="select7__caret"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="table-responsive">
