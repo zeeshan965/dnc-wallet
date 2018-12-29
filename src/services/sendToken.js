@@ -1,7 +1,10 @@
 const Web3 = require("web3");
-const web3 = new Web3();
+// const web3 = new Web3();
+
 const Tx = require('ethereumjs-tx');
-web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+
+const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/Lc2vdbhIswp6iQDRcmSa'));
+// web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
 import router from './../router'
 
 var abi = [{
@@ -258,7 +261,7 @@ var abi = [{
 var contractAddress = "0x3a84b2d899253a0D01aC89B948DB376c9af06064";
 var contract = new web3.eth.Contract(abi, contractAddress);
 
-var fromAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
+var fromAddress = "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0";
 
 // export var privateKey = "2bb290ea4c091b6998643a60b6d0e06afeaa2fe57f5fa4e02c1dc48bc7acd0db";
 // export var toAddress = "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0";
@@ -274,6 +277,7 @@ var data;
 var gasPrice;
 var gasLimit;
 var privateKey;
+
 
 export function getAddressAndTokenValues(toAddress, tokenValue) {
     console.log("DNC Get Address" + toAddress);
@@ -303,7 +307,7 @@ gasLimit = 200000;
 
 
 export function sendSigned(rawTransaction) {
-console.log("Send fucntion private key: " + privateKey);
+    console.log("Send fucntion private key: " + privateKey);
 
     var privKey = new Buffer(privateKey, 'hex');
     // console.log(privKey);
@@ -314,40 +318,9 @@ console.log("Send fucntion private key: " + privateKey);
     var serializedTx = tx.serialize().toString('hex');
     // console.log("Serialized " + serializedTx);
     web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
-    // console.log('Raw Tranaction ' + rawTransaction);
-    //
-    // var privKey = new Buffer(privateKey, 'hex');
-    // console.log('Private key flow ' + privKey);
-    // const tx = new Tx(rawTransaction);
-    // console.log('Tx flow ' +tx );
-    // console.log('Private key flow after tx flow ' + privKey);
-    // var txResponse = tx.sign(privKey);
-    // console.log('txResponse ' + txResponse);
-    // var serializedTx = tx.serialize().toString('hex');
-    // console.log('serializeTx ' + serializedTx);
-    //
-    // // var data = web3.eth.sendSignedTransaction('0x' + serializedTx)
-    // // var data= await web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
-    // // console.log("Daata is ::" + data);
-    // var dataResponse = await web3.eth.sendSignedTransaction('0x' + serializedTx)
-    //     .on('error', function (error) {
-    //         console.log("-> error");
-    //         console.log(error.message)
-    //     })
-    //     .on('transactionHash', function (transactionHash) {
-    //         console.log("-> transactionHash");
-    //         console.log(transactionHash);
-    //     })
-    //     // .on('receipt', function (receipt) {
-    //     //     console.log("-> receipt");
-    //     //     console.log(receipt.contractAddress); // contains the new contract address
-    //     // })
-    //     .on('confirmation', function (confirmationNumber, receipt) {
-    //         console.log("-> confirmation " + confirmationNumber);
-    //     });
-    //
-    // console.log("Response Data is ::" + dataResponse);
+
 }
+
 
 export function getTransactionCount() {
 
@@ -368,6 +341,24 @@ export function getTransactionCount() {
     }).catch((error) => {
         console.log(error);
     });
+
+
+}
+
+//0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9'
+
+
+export async function transactionStatus(txStatus) {
+
+    var data;
+
+    await web3.eth.getTransactionReceipt(txStatus).then((res) => {
+        console.log("Trasancctio staatus respsoe is " + res);
+        data = res;
+    });
+    console.log("Data is :" + JSON.stringify(data));
+
+    return (JSON.stringify(data));
 
 
 }
