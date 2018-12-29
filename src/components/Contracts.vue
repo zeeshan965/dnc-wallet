@@ -192,7 +192,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
-                                                            @click="mintStep = 2"
+                                                            @click="step = true"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -200,7 +200,6 @@
                                             </form>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div id="menu3" class="tab-pane fade">
                                     <div class="tab-content">
@@ -208,15 +207,9 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
-
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
+                                                <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
-                                                            @click="burnStep = 2"
+                                                            @click="step = true"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -232,21 +225,9 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
-                                                           v-model="address" data-parsley-id="8" class="form-control">
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
-
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
+                                                <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
-                                                            @click="mintStep = 2"
+                                                            @click="step = true"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -255,9 +236,7 @@
                                         </div>
 
                                     </div>
-
                                 </div>
-
                                 <!--modal start -->
 
                                 <div v-if="step === true">
