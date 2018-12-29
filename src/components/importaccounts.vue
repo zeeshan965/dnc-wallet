@@ -204,7 +204,9 @@
                 console.log('File Name ' + this.fileName);
                 if (this.fileName.includes('.pdf')) {
 
-                    $.Toast("Wait", "Invalid file format", "error", {});
+                     alertify.set('notifier','position', 'top-right');
+                     alertify.error('Invalid file format');
+
                     setTimeout(() => {
                         window.location.href = "importaccounts"
 
@@ -213,7 +215,9 @@
                 }
                 if (this.fileName.includes('.png')) {
                     setTimeout(() => {
-                        $.Toast("Wait", "Invalid file format", "warning", {});
+                        
+                     alertify.set('notifier','position', 'top-right');
+                     alertify.error('Invalid file format');
                     }, 2000);
                     window.location.href = "importaccounts"
 
