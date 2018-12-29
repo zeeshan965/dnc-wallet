@@ -38,7 +38,7 @@
                     </li>
                     <li>
                         <router-link to="/checkTxStatus" class="waves-effect waves-primary"><img
-                                src="assets/images/icon/dnd-icon.png">&nbsp;&nbsp;&nbsp;<span>
+                                src="assets/images/icon/hashtag.png">&nbsp;&nbsp;&nbsp;<span>
                                 Check Tx Status </span></router-link>
                     </li>
                     <!--<li>-->
