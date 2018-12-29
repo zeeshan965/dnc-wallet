@@ -57,140 +57,6 @@
                                             </form>
                                         </div>
 
-                                        <div v-if="step === 2">
-                                            <div class=" p-0" style="margin-top: 15px">
-                                                <ul class="nav nav-tabs navtab-custom nav-justified">
-                                                    <li class="active">
-                                                        <a href="#privateKey" data-toggle="tab" aria-expanded="true">
-                                                            <span>Private key</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                                            <span>Jason File</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div id="privateKey" class="tab-pane active">
-                                                        <form data-v-92875dbe="" action="#"
-                                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
-                                                              novalidate="novalidate">
-                                                            <div data-v-92875dbe="" class="form-group">
-                                                                <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                                <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
-                                                            </div>
-
-                                                            <div data-v-92875dbe="" class="form-group text-right m-b-0">
-
-                                                                <button type="submit" data-v-92875dbe=""
-                                                                        data-toggle="modal"
-                                                                        data-target="#sendToken-modal"
-                                                                        class="btn btn-default waves-effect waves-light">
-                                                                    Send Transaction
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div id="jasonFile" class="tab-pane ">
-                                                        <div>
-                                                            <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
-                                                            <h5 style="color:  rgb(217, 83, 79);">
-                                                                This is <u>not</u> a recommended way to access your wallet.
-                                                            </h5>
-                                                            <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
-                                                                Entering your private key on a website dangerous. If our website is
-                                                                compromised or you accidentally visit a different website, your funds will
-                                                                be stolen. Please consider:
-                                                            </div>
-                                                            <ul style="color: white;">
-                                                                <li>
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        MetaMask
-                                                                    </a>
-                                                                    or
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        A Hardware Wallet
-                                                                    </a>
-                                                                    or
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        Running MEW Offline &amp; Locally
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        Learning How to Protect Yourself and Your Funds
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <br>
-                                                            <div class="form-group">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <div class="tab-content">
-                                        <div id="" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-                                                            @click="step = true"
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="menu2" class="tab-pane fade">
-                                    <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
-                                                           v-model="address" data-parsley-id="8" class="form-control">
-
-                                                                <input id="upload" type="file" @change="onFileSelected"
-                                                                       style="display:none"/>
-                                                                <a tabindex="0" type="file" role="button" class="btn btn-primary  ng-hide"
-                                                                   id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT
-                                                                    WALLET
-                                                                    FILE...
-
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-                                                   @click="step = true"
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                                                </a>
-                                                                &nbsp;
-                                                                <span style="color:#fff">{{this.fileName}}</span>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-
-                                        </div>
                                     </div>
                                 </div>
                                 <div id="menu1" class="tab-pane fade">
@@ -206,11 +72,8 @@
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
 
-                                                            @click="step = true"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -218,96 +81,148 @@
                                             </form>
                                         </div>
 
-                                        <div v-if="burnStep === 2">
-                                            <div class=" p-0" style="margin-top: 15px">
-                                                <ul class="nav nav-tabs navtab-custom nav-justified">
-                                                    <li class="active">
-                                                        <a href="#privateKey" data-toggle="tab" aria-expanded="true">
-                                                            <span>Private key</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                                            <span>Jason File</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div id="privateKey" class="tab-pane active">
-                                                        <form data-v-92875dbe="" action="#"
-                                                              @submit.prevent="getBurnPrivateKey" data-parsley-validate=""
-                                                              novalidate="novalidate">
-                                                            <div data-v-92875dbe="" class="form-group">
-                                                                <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                                <input v-model="burnprivateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
-                                                            </div>
+                                        <!--<div v-if="burnStep === 2">-->
+                                            <!--<div class=" p-0" style="margin-top: 15px">-->
+                                                <!--<ul class="nav nav-tabs navtab-custom nav-justified">-->
+                                                    <!--<li class="active">-->
+                                                        <!--<a href="#privateKey" data-toggle="tab" aria-expanded="true">-->
+                                                            <!--<span>Private key</span>-->
+                                                        <!--</a>-->
+                                                    <!--</li>-->
+                                                    <!--<li class="">-->
+                                                        <!--<a href="#jasonFile" data-toggle="tab" aria-expanded="false">-->
+                                                            <!--<span>Jason File</span>-->
+                                                        <!--</a>-->
+                                                    <!--</li>-->
+                                                <!--</ul>-->
+                                                <!--<div class="tab-content">-->
+                                                    <!--<div id="privateKey" class="tab-pane active">-->
+                                                        <!--<form data-v-92875dbe="" action="#"-->
+                                                              <!--@submit.prevent="getBurnPrivateKey" data-parsley-validate=""-->
+                                                              <!--novalidate="novalidate">-->
+                                                            <!--<div data-v-92875dbe="" class="form-group">-->
+                                                                <!--<label data-v-92875dbe="">Enter Your Private Key</label>-->
+                                                                <!--<input v-model="burnprivateKey-->
+<!--" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">-->
+                                                            <!--</div>-->
 
-                                                            <div data-v-92875dbe="" class="form-group text-right m-b-0">
+                                                            <!--<div data-v-92875dbe="" class="form-group text-right m-b-0">-->
 
-                                                                <button type="submit" data-v-92875dbe=""
-                                                                        data-toggle="modal"
-                                                                        data-target="#sendToken-modal"
-                                                                        class="btn btn-default waves-effect waves-light">
-                                                                    Send Transaction
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div id="jasonFile" class="tab-pane ">
-                                                        <div>
-                                                            <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
-                                                            <h5 style="color:  rgb(217, 83, 79);">
-                                                                This is <u>not</u> a recommended way to access your wallet.
-                                                            </h5>
-                                                            <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
-                                                                Entering your private key on a website dangerous. If our website is
-                                                                compromised or you accidentally visit a different website, your funds will
-                                                                be stolen. Please consider:
-                                                            </div>
-                                                            <ul style="color: white;">
-                                                                <li>
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        MetaMask
-                                                                    </a>
-                                                                    or
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        A Hardware Wallet
-                                                                    </a>
-                                                                    or
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        Running MEW Offline &amp; Locally
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                                        Learning How to Protect Yourself and Your Funds
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <br>
-                                                            <div class="form-group">
+                                                                <!--<button type="submit" data-v-92875dbe=""-->
+                                                                        <!--data-toggle="modal"-->
+                                                                        <!--data-target="#sendToken-modal"-->
+                                                                        <!--class="btn btn-default waves-effect waves-light">-->
+                                                                    <!--Send Transaction-->
+                                                                <!--</button>-->
+                                                            <!--</div>-->
+                                                        <!--</form>-->
+                                                    <!--</div>-->
+                                                    <!--<div id="jasonFile" class="tab-pane ">-->
+                                                        <!--<div>-->
+                                                            <!--<h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>-->
+                                                            <!--<h5 style="color:  rgb(217, 83, 79);">-->
+                                                                <!--This is <u>not</u> a recommended way to access your wallet.-->
+                                                            <!--</h5>-->
+                                                            <!--<div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">-->
+                                                                <!--Entering your private key on a website dangerous. If our website is-->
+                                                                <!--compromised or you accidentally visit a different website, your funds will-->
+                                                                <!--be stolen. Please consider:-->
+                                                            <!--</div>-->
+                                                            <!--<ul style="color: white;">-->
+                                                                <!--<li>-->
+                                                                    <!--<a href="" target="_blank" rel="noopener noreferrer">-->
+                                                                        <!--MetaMask-->
+                                                                    <!--</a>-->
+                                                                    <!--or-->
+                                                                    <!--<a href="" target="_blank" rel="noopener noreferrer">-->
+                                                                        <!--A Hardware Wallet-->
+                                                                    <!--</a>-->
+                                                                    <!--or-->
+                                                                    <!--<a href="" target="_blank" rel="noopener noreferrer">-->
+                                                                        <!--Running MEW Offline &amp; Locally-->
+                                                                    <!--</a>-->
+                                                                <!--</li>-->
+                                                                <!--<li>-->
+                                                                    <!--<a href="" target="_blank" rel="noopener noreferrer">-->
+                                                                        <!--Learning How to Protect Yourself and Your Funds-->
+                                                                    <!--</a>-->
+                                                                <!--</li>-->
+                                                            <!--</ul>-->
+                                                            <!--<br>-->
+                                                            <!--<div class="form-group">-->
 
-                                                                <input id="upload" type="file" @change="onFileSelected"
-                                                                       style="display:none"/>
-                                                                <a tabindex="0" type="file" role="button" class="btn btn-primary  ng-hide"
-                                                                   id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT
-                                                                    WALLET
-                                                                    FILE...
+                                                                <!--<input id="upload" type="file" @change="onFileSelected"-->
+                                                                       <!--style="display:none"/>-->
+                                                                <!--<a tabindex="0" type="file" role="button" class="btn btn-primary  ng-hide"-->
+                                                                   <!--id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT-->
+                                                                    <!--WALLET-->
+                                                                    <!--FILE...-->
 
 
-                                                                </a>
-                                                                &nbsp;
-                                                                <span style="color:#fff">{{this.fileName}}</span>
+                                                                <!--</a>-->
+                                                                <!--&nbsp;-->
+                                                                <!--<span style="color:#fff">{{this.fileName}}</span>-->
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div id="menu2" class="tab-pane fade">
+                                    <div class="tab-content">
+                                        <div id="Mint" class="tab-pane active">
+                                            <br>
+                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
+                                                  @submit.prevent="getValues">
+                                                <div class="form-group">
+                                                    <label>Recipient Address</label>
+                                                    <input type="text" placeholder="Address" required="required"
+                                                           v-model="address" data-parsley-id="8" class="form-control">
+
                                                 </div>
-                                            </div><!-- /.modal-content -->
+                                                <div class="form-group">
+                                                    <label>Value</label>
+                                                    <input type="number" placeholder="Amount" required="required"
+                                                           v-model="balance" data-parsley-id="8" class="form-control">
 
+                                                </div>
+                                                <div class="form-group text-right m-b-0">
+                                                    <button type="submit" data-target="#sendToken-modal"
+                                                            @click="mintStep = 2"
+                                                            class="btn btn-default waves-effect waves-light">
+                                                        Generate Transaction
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
+
+                                </div>
+                                <div id="menu3" class="tab-pane fade">
+                                    <div class="tab-content">
+                                        <div id="" class="tab-pane active">
+                                            <br>
+                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
+                                                  @submit.prevent="getValues">
+                                                <div class="form-group">
+                                                    <label>Value</label>
+                                                    <input type="number" placeholder="Amount" required="required"
+                                                           v-model="balance" data-parsley-id="8" class="form-control">
+
+                                                </div>
+                                                <div class="form-group text-right m-b-0">
+                                                    <button type="submit" data-target="#sendToken-modal"
+                                                            @click="burnStep = 2"
+                                                            class="btn btn-default waves-effect waves-light">
+                                                        Generate Transaction
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -317,9 +232,21 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getValues">
-                                                <div class="form-group text-center m-b-0">
+                                                <div class="form-group">
+                                                    <label>Recipient Address</label>
+                                                    <input type="text" placeholder="Address" required="required"
+                                                           v-model="address" data-parsley-id="8" class="form-control">
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Value</label>
+                                                    <input type="number" placeholder="Amount" required="required"
+                                                           v-model="balance" data-parsley-id="8" class="form-control">
+
+                                                </div>
+                                                <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
-                                                            @click="step = true"
+                                                            @click="mintStep = 2"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -328,9 +255,11 @@
                                         </div>
 
                                     </div>
+
                                 </div>
 
-                                <!--end of private key jason file-->
+                                <!--modal start -->
+
                                 <div v-if="step === true">
                                     <div class=" p-0" style="margin-top: 15px">
                                         <ul class="nav nav-tabs navtab-custom nav-justified">
@@ -353,10 +282,11 @@
                                                     <div data-v-92875dbe="" class="form-group">
                                                         <label data-v-92875dbe="">Enter Your Private Key</label>
                                                         <input v-model="privateKey
-                                " data-v-92875dbe="" type="password" placeholder="" required="required"
-                                                               data-parsley-id="8" class="form-control">
+" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
                                                     </div>
+
                                                     <div data-v-92875dbe="" class="form-group text-right m-b-0">
+
                                                         <button type="submit" data-v-92875dbe=""
                                                                 data-toggle="modal"
                                                                 data-target="#sendToken-modal"
@@ -367,229 +297,62 @@
                                                 </form>
                                             </div>
                                             <div id="jasonFile" class="tab-pane ">
-                                                <span>Jason File</span>
+                                                <div>
+                                                    <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
+                                                    <h5 style="color:  rgb(217, 83, 79);">
+                                                        This is <u>not</u> a recommended way to access your wallet.
+                                                    </h5>
+                                                    <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
+                                                        Entering your private key on a website dangerous. If our website is
+                                                        compromised or you accidentally visit a different website, your funds will
+                                                        be stolen. Please consider:
+                                                    </div>
+                                                    <ul style="color: white;">
+                                                        <li>
+                                                            <a href="" target="_blank" rel="noopener noreferrer">
+                                                                MetaMask
+                                                            </a>
+                                                            or
+                                                            <a href="" target="_blank" rel="noopener noreferrer">
+                                                                A Hardware Wallet
+                                                            </a>
+                                                            or
+                                                            <a href="" target="_blank" rel="noopener noreferrer">
+                                                                Running MEW Offline &amp; Locally
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="" target="_blank" rel="noopener noreferrer">
+                                                                Learning How to Protect Yourself and Your Funds
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <br>
+                                                    <div class="form-group">
+
+                                                        <input id="upload" type="file" @change="onFileSelected"
+                                                               style="display:none"/>
+                                                        <a tabindex="0" type="file" role="button" class="btn btn-primary  ng-hide"
+                                                           id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT
+                                                            WALLET
+                                                            FILE...
+
+
+                                                        </a>
+                                                        &nbsp;
+                                                        <span style="color:#fff">{{this.fileName}}</span>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div><!-- /.modal-content -->
+
                                 </div>
-                                <!--<div id="menu2" class="tab-pane fade">-->
-                                    <!--<div class="tab-content">-->
-                                        <!--<div id="Mint" class="tab-pane active">-->
-                                            <!--<br>-->
-                                            <!--<form action="#" data-parsley-validate="" novalidate="novalidate"-->
-                                                  <!--@submit.prevent="getValues">-->
-                                                <!--<div class="form-group">-->
-                                                    <!--<label>Recipient Address</label>-->
-                                                    <!--<input type="text" placeholder="Address" required="required"-->
-                                                           <!--v-model="address" data-parsley-id="8" class="form-control">-->
+                                <!--modal end-->
 
-                                                <!--</div>-->
-                                                <!--<div class="form-group">-->
-                                                    <!--<label>Value</label>-->
-                                                    <!--<input type="number" placeholder="Amount" required="required"-->
-                                                           <!--v-model="balance" data-parsley-id="8" class="form-control">-->
-
-                                                <!--</div>-->
-                                                <!--<div class="form-group text-right m-b-0">-->
-                                                    <!--<button type="submit" data-target="#sendToken-modal"-->
-                                                   <!--@click="mintStep = 2"-->
-                                                            <!--class="btn btn-default waves-effect waves-light">-->
-                                                        <!--Generate Transaction-->
-                                                    <!--</button>-->
-                                                <!--</div>-->
-                                            <!--</form>-->
-                                        <!--</div>-->
-
-                                        <!--<div v-if="mintStep === 2">-->
-                                            <!--<div class=" p-0" style="margin-top: 15px">-->
-                                                <!--<ul class="nav nav-tabs navtab-custom nav-justified">-->
-                                                    <!--<li class="active">-->
-                                                        <!--<a href="#privateKey" data-toggle="tab" aria-expanded="true">-->
-                                                            <!--<span>Private key</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                    <!--<li class="">-->
-                                                        <!--<a href="#jasonFile" data-toggle="tab" aria-expanded="false">-->
-                                                            <!--<span>Jason File</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                <!--</ul>-->
-                                                <!--<div class="tab-content">-->
-                                                    <!--<div id="privateKey" class="tab-pane active">-->
-                                                        <!--<form data-v-92875dbe="" action="#"-->
-                                                              <!--@submit.prevent="getPrivateKey" data-parsley-validate=""-->
-                                                              <!--novalidate="novalidate">-->
-                                                            <!--<div data-v-92875dbe="" class="form-group">-->
-                                                                <!--<label data-v-92875dbe="">Enter Your Private Key</label>-->
-                                                                <!--<input v-model="privateKey-->
-<!--" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">-->
-                                                            <!--</div>-->
-
-                                                            <!--<div data-v-92875dbe="" class="form-group text-right m-b-0">-->
-
-                                                                <!--<button type="submit" data-v-92875dbe=""-->
-                                                                        <!--data-toggle="modal"-->
-                                                                        <!--data-target="#sendToken-modal"-->
-                                                                        <!--class="btn btn-default waves-effect waves-light">-->
-                                                                    <!--Send Transaction-->
-                                                                <!--</button>-->
-                                                            <!--</div>-->
-                                                        <!--</form>-->
-                                                    <!--</div>-->
-                                                    <!--<div id="jasonFile" class="tab-pane ">-->
-                                                        <!--<span>Jason File</span>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-
-                                        <!--</div>-->
-                                    <!--</div>-->
-
-                                <!--</div>-->
-                                <!--<div id="menu3" class="tab-pane fade">-->
-                                    <!--<div class="tab-content">-->
-                                        <!--<div id="" class="tab-pane active">-->
-                                            <!--<br>-->
-                                            <!--<form action="#" data-parsley-validate="" novalidate="novalidate"-->
-                                                  <!--@submit.prevent="getValues">-->
-                                                <!--<div class="form-group">-->
-                                                    <!--<label>Value</label>-->
-                                                    <!--<input type="number" placeholder="Amount" required="required"-->
-                                                           <!--v-model="balance" data-parsley-id="8" class="form-control">-->
-
-                                                <!--</div>-->
-                                                <!--<div class="form-group text-right m-b-0">-->
-                                                    <!--<button type="submit" data-target="#sendToken-modal"-->
-                                                            <!--@click="burnStep = 2"-->
-                                                            <!--class="btn btn-default waves-effect waves-light">-->
-                                                        <!--Generate Transaction-->
-                                                    <!--</button>-->
-                                                <!--</div>-->
-                                            <!--</form>-->
-                                        <!--</div>-->
-
-                                        <!--<div v-if="burnStep === 2">-->
-                                            <!--<div class=" p-0" style="margin-top: 15px">-->
-                                                <!--<ul class="nav nav-tabs navtab-custom nav-justified">-->
-                                                    <!--<li class="active">-->
-                                                        <!--<a href="#privateKey" data-toggle="tab" aria-expanded="true">-->
-                                                            <!--<span>Private key</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                    <!--<li class="">-->
-                                                        <!--<a href="#jasonFile" data-toggle="tab" aria-expanded="false">-->
-                                                            <!--<span>Jason File</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                <!--</ul>-->
-                                                <!--<div class="tab-content">-->
-                                                    <!--<div id="privateKey" class="tab-pane active">-->
-                                                        <!--<form data-v-92875dbe="" action="#"-->
-                                                              <!--@submit.prevent="getPrivateKey" data-parsley-validate=""-->
-                                                              <!--novalidate="novalidate">-->
-                                                            <!--<div data-v-92875dbe="" class="form-group">-->
-                                                                <!--<label data-v-92875dbe="">Enter Your Private Key</label>-->
-                                                                <!--<input v-model="privateKey-->
-<!--" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">-->
-                                                            <!--</div>-->
-
-                                                            <!--<div data-v-92875dbe="" class="form-group text-right m-b-0">-->
-
-                                                                <!--<button type="submit" data-v-92875dbe=""-->
-                                                                        <!--data-toggle="modal"-->
-                                                                        <!--data-target="#sendToken-modal"-->
-                                                                        <!--class="btn btn-default waves-effect waves-light">-->
-                                                                    <!--Send Transaction-->
-                                                                <!--</button>-->
-                                                            <!--</div>-->
-                                                        <!--</form>-->
-                                                    <!--</div>-->
-                                                    <!--<div id="jasonFile" class="tab-pane ">-->
-                                                        <!--<span>Jason File</span>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div id="menu4" class="tab-pane fade">-->
-                                    <!--<div class="tab-content">-->
-                                        <!--<div id="Mint" class="tab-pane active">-->
-                                            <!--<br>-->
-                                            <!--<form action="#" data-parsley-validate="" novalidate="novalidate"-->
-                                                  <!--@submit.prevent="getValues">-->
-                                                <!--<div class="form-group">-->
-                                                    <!--<label>Recipient Address</label>-->
-                                                    <!--<input type="text" placeholder="Address" required="required"-->
-                                                           <!--v-model="address" data-parsley-id="8" class="form-control">-->
-
-                                                <!--</div>-->
-                                                <!--<div class="form-group">-->
-                                                    <!--<label>Value</label>-->
-                                                    <!--<input type="number" placeholder="Amount" required="required"-->
-                                                           <!--v-model="balance" data-parsley-id="8" class="form-control">-->
-
-                                                <!--</div>-->
-                                                <!--<div class="form-group text-right m-b-0">-->
-                                                    <!--<button type="submit" data-target="#sendToken-modal"-->
-                                                            <!--@click="mintStep = 2"-->
-                                                            <!--class="btn btn-default waves-effect waves-light">-->
-                                                        <!--Generate Transaction-->
-                                                    <!--</button>-->
-                                                <!--</div>-->
-                                            <!--</form>-->
-                                        <!--</div>-->
-
-                                        <!--<div v-if="mintStep === 2">-->
-                                            <!--<div class=" p-0" style="margin-top: 15px">-->
-                                                <!--<ul class="nav nav-tabs navtab-custom nav-justified">-->
-                                                    <!--<li class="active">-->
-                                                        <!--<a href="#privateKey" data-toggle="tab" aria-expanded="true">-->
-                                                            <!--<span>Private key</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                    <!--<li class="">-->
-                                                        <!--<a href="#jasonFile" data-toggle="tab" aria-expanded="false">-->
-                                                            <!--<span>Jason File</span>-->
-                                                        <!--</a>-->
-                                                    <!--</li>-->
-                                                <!--</ul>-->
-                                                <!--<div class="tab-content">-->
-                                                    <!--<div id="privateKey" class="tab-pane active">-->
-                                                        <!--<form data-v-92875dbe="" action="#"-->
-                                                              <!--@submit.prevent="getPrivateKey" data-parsley-validate=""-->
-                                                              <!--novalidate="novalidate">-->
-                                                            <!--<div data-v-92875dbe="" class="form-group">-->
-                                                                <!--<label data-v-92875dbe="">Enter Your Private Key</label>-->
-                                                                <!--<input v-model="privateKey-->
-<!--" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">-->
-                                                            <!--</div>-->
-
-                                                            <!--<div data-v-92875dbe="" class="form-group text-right m-b-0">-->
-
-                                                                <!--<button type="submit" data-v-92875dbe=""-->
-                                                                        <!--data-toggle="modal"-->
-                                                                        <!--data-target="#sendToken-modal"-->
-                                                                        <!--class="btn btn-default waves-effect waves-light">-->
-                                                                    <!--Send Transaction-->
-                                                                <!--</button>-->
-                                                            <!--</div>-->
-                                                        <!--</form>-->
-                                                    <!--</div>-->
-                                                    <!--<div id="jasonFile" class="tab-pane ">-->
-                                                        <!--<span>Jason File</span>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-
-                                        <!--</div>-->
-                                    <!--</div>-->
-
-                                <!--</div>-->
                             </div>
                         </div>
-                        <!--end of private key jason file-->
                     </div>
                 </div>
             </div>
@@ -612,17 +375,12 @@
                 balance: 0,
                 privateKey: '',
                 step: false,
-                burnStep: 1,
-                step: 1,
 
-                mintStep: 1,
-                pauseStep: 1,
-                unPauseStep: 1,
 
                 //Burn Tokens
                 burnTokenValue:0,
                 burnprivateKey:'',
-                burnStep: 1,
+
 
             }
         },
@@ -662,13 +420,13 @@
                         var json_Data = e.target.result;
 
 
-                       // json_Data = json_Data;
+                        // json_Data = json_Data;
                         console.log("Json resposne is  " + json_Data);
                         var jsonBackResposne;
                         var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res)=>{
-                           jsonBackResposne= res;
-                           console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                           console.log("Bacck json resposne of private key " +jsonBackResposne.privateKey);
+                            jsonBackResposne= res;
+                            console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+                            console.log("Bacck json resposne of private key " +jsonBackResposne.privateKey);
                             sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
                         });
 
@@ -686,7 +444,7 @@
 
                 var _this = this;
                 sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
-                _this.step = true;
+                this.step=true;
 
 
             },
@@ -694,7 +452,7 @@
 
                 var _this = this;
                 burnTokens.getTokenValues(_this.burnTokenValue);
-                this.burnStep=2;
+                this.step=true;
             },
 
             //Burn Tokens Tab
