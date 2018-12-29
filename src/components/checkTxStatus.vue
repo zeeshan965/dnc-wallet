@@ -20,10 +20,19 @@
                         <input class="form-control ng-pristine ng-untouched ng-valid ng-empty is-invalid"
                                v-model="txStatus"
                                type="text"
+
+                               name="txStatus"
                                placeholder="0x3f0efedfe0a0cd611f2465fac9a3699f92d6a06613bc3ead4f786856f5c73e9c"
-                               ng-model="txInfo.hash" ng-keyup="$event.keyCode == 13 &amp;&amp; checkTxStatus()"
-                               aria-label="TX Hash
-" ng-class="Validator.isValidTxHash(txInfo.hash) ? 'is-valid' : 'is-invalid'">
+
+                               v-validate="{ required: true}"
+
+                               :class="{ 'is-invalid':  submitted && errors.has('txStatus') }"
+                               aria-label="TX Hash">
+
+                        <div style="color:red; text-align: left !important;" v-if=" submitted && errors.has('txStatus')"
+                             class="invalid-feedback">{{ errors.first('txStatus') }}
+                        </div>
+
                         <button style="margin:  15px" type="submit" role="button" class="btn btn-primary ng-scope">Check
                             TX Status
                         </button>
@@ -207,28 +216,36 @@
         data: function () {
             return {
                 txStatus: '',
+                submitted: false,
                 step: 1,
             }
         },
         methods: {
-            checkTransactionStatus() {
+            checkTransactionStatus(e) {
+                console.log("Button Clicked");
                 var _this = this;
-                var txResposne;
-                console.log("stsstuu siis" + _this.txStatus);
-                var resposne = transactionStatus.transactionStatus(_this.txStatus).then((res) => {
-                    txResposne = res;
+                e.preventDefault();
+                _this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        var txResposne;
+                        console.log("stsstuu siis" + _this.txStatus);
+                        var resposne = transactionStatus.transactionStatus(_this.txStatus).then((res) => {
+                            txResposne = res;
 
-                    console.log("REsposnen inside check statyus call" + txResposne);
+                            console.log("REsposnen inside check statyus call" + txResposne);
+                        });
+                        _this.step =2;
+                    }
+
                 });
-                _this.step = 2;
-
+            }
             },
-        },
-        mounted() {
+            mounted() {
 
 
+            }
         }
-    }
 
 
 </script>

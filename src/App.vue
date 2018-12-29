@@ -17,6 +17,9 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
+.alertify-notifier.ajs-right{
+  color:white !important;
+}
 </style>
 <template>
   <div id="wrapper" class="enlarged">
@@ -47,6 +50,8 @@
     },
     mounted(){
         this.user = this.isLoggedIn();
+        alertify.set('notifier','position', 'top-right');
+       alertify.success('Current position : ' + alertify.get('notifier','position'));
 
     }
 }
