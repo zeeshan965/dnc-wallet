@@ -347,6 +347,7 @@
             return {
                 //Json import file
                 fileName: '',
+                tabValue:'',
 
 
                 //send Tokens
@@ -424,6 +425,7 @@
                 var _this = this;
                 sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
                 this.step=true;
+                this.tabValue='SendTokens';
 
 
             },
@@ -432,6 +434,7 @@
                 var _this = this;
                 burnTokens.getTokenValues(_this.burnTokenValue);
                 this.step=true;
+                this.tabValue="Burn";
             },
 
             //Burn Tokens Tab
@@ -442,8 +445,24 @@
             },
             getPrivateKey: function () {
 
+
+
                 var _this = this;
-                sendTokens.getPrivateKey(_this.privateKey);
+                switch (this.tabValue){
+                    case 'SendTokens':
+                        console.log('Send Token value is ' + this.tabValue);
+                        break;
+                    case 'Burn' :
+                         console.log('Inside burn' + this.tabValue);
+                         break;
+                    default:
+                        alert('Bye');
+                        break;
+
+                }
+
+
+                // sendTokens.getPrivateKey(_this.privateKey);
             }
         },
         mounted() {
