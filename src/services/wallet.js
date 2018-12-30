@@ -64,8 +64,8 @@ export function unlockAccount(privateKey, password) {
     var wallet = Wallet.fromPrivateKey(key);
     var unlocked = wallet.toV3String(password);
 
-   // var parivateKeyCheck = Wallet.fromPrivateKey(userPrivateKey);
- 
+    // var parivateKeyCheck = Wallet.fromPrivateKey(userPrivateKey);
+
     console.log('Private Key checkzzzzzzzzzzz ' + JSON.stringify(wallet));
 
 

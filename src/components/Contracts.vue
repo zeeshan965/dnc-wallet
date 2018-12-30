@@ -259,6 +259,8 @@
     var sendTokens = require('./../services/sendToken');
     var burnTokens = require('./../services/burnToken');
     var mintTokens = require('./../services/mint');
+    var pauseTokens = require('./../services/pause');
+    var unPauseTokens = require('./../services/unpause');
     var getAccountFroomJson = require('./../services/getAccountFromJson');
     export default {
         data: function () {
@@ -296,6 +298,7 @@
             onFileSelected(e) {
                 e.preventDefault();
                 //    console.log(e);
+                var _this =this;
                 this.fileName = e.target.files[0].name;
                 var newFileName = this.fileName.split('.');
                 console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
@@ -317,6 +320,7 @@
                     // Define a callback function to run, when FileReader finishes its job
 
                     reader.onload = (e) => {
+
 
                         var json_Data = e.target.result;
 
@@ -350,10 +354,12 @@
                                     break;
                                 case 'Pause' :
                                     console.log('Inside Pause' + this.tabValue);
+                                    pauseTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
                                     _this.init();
                                     break;
                                 case 'Unpause' :
                                     console.log('Inside Unpause' + this.tabValue);
+                                    unPauseTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
                                     _this.init();
                                     break;
                                 default:
@@ -432,10 +438,13 @@
                         break;
                     case 'Pause' :
                         console.log('Inside Pause' + this.tabValue);
+                        pauseTokens.getPrivateKey(_this.privateKey);
+
                         _this.init();
                         break;
                     case 'Unpause' :
                         console.log('Inside Unpause' + this.tabValue);
+                        unPauseTokens.getPrivateKey(_this.privateKey);
                         _this.init();
                         break;
                     default:

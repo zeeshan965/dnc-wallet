@@ -2,6 +2,7 @@ const Web3 = require("web3");
 const web3 = new Web3();
 const Tx = require('ethereumjs-tx');
 web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+
 var abi = [{
     "constant": true,
     "inputs": [],
@@ -259,7 +260,6 @@ var fromAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
 // var toAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
 // var tokenValue = 10;
 
-
 export function hi() {
     alert('Hi to everyOne');
 }
@@ -270,18 +270,10 @@ var gasLimit;
 var privateKey;
 
 
-export function getAddressAndTokenValues(toAddress, tokenValue) {
-    console.log("DNC Get  Address" + toAddress);
-    console.log("DNC Get Balance" + tokenValue);
+export function getPrivateKey(priKey) {
 
     web3.eth.defaultAccount = fromAddress;
-    data = contract.methods.mint(toAddress, tokenValue).encodeABI();
-    console.log("DAta inside fucntion is" + data);
-
-    return data;
-}
-
-export function getPrivateKey(priKey) {
+    data = contract.methods.pause().encodeABI();
     console.log("Private KEy inside function is " + priKey);
 
     privateKey = priKey;
@@ -309,7 +301,7 @@ export function getTransactionCount() {
     web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
         var rawTransaction = {
             nonce: web3.utils.toHex(count),
-            gasPrice: web3.utils.toHex(gasPrice),
+            gasPrice: web3.utils.toHex(2000000000),
             gasLimit: web3.utils.toHex(gasLimit),
             to: contractAddress,
             data: data,
