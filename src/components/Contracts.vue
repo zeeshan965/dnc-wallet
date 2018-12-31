@@ -291,7 +291,7 @@
             onFileSelected(e) {
                 e.preventDefault();
                 //    console.log(e);
-                var _this =this;
+                var _this = this;
                 this.fileName = e.target.files[0].name;
                 var newFileName = this.fileName.split('.');
                 console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
@@ -448,7 +448,6 @@
                 _this.burnTokenValue = 0;
                 _this.mintAddress = '';
                 _this.mintBalance = 0;
-                _this.fileName = '';
                 _this.step = false;
                 _this.tabValue = '';
 

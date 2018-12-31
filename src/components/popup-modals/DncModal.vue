@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-            style="display: none;">
+        <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true"
+             style="display: none;">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content p-0">
                     <ul class="nav nav-tabs navtab-custom nav-justified">
@@ -37,7 +38,8 @@
 
                                             <li><i class="fa fa-tags" aria-hidden="true"></i>
 
-                                                <small><span class="label label-success " style="margin-left:5px;">Mineable</span></small>
+                                                <small><span class="label label-success " style="margin-left:5px;">Mineable</span>
+                                                </small>
 
                                                 <small><span class="label label-success">Currency</span></small>
                                             </li>
@@ -49,23 +51,23 @@
                                         <div class="table-responsive">
                                             <table class="table m-0">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Market Cap</th>
-                                                        <th>Volume(24H)</th>
-                                                        <th>Available Supply</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th>Market Cap</th>
+                                                    <th>Volume(24H)</th>
+                                                    <th>Available Supply</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>$ 00,000&nbsp;</td>
-                                                        <td>$ 00,000</td>
-                                                        <td>00,000 DNC</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>00,000 BTC</td>
-                                                        <td>00,000 BTC</td>
-                                                        <td>&nbsp;</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>$ 00,000&nbsp;</td>
+                                                    <td>$ 00,000</td>
+                                                    <td>00,000 DNC</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>00,000 BTC</td>
+                                                    <td>00,000 BTC</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -76,7 +78,8 @@
                                         <ul class="nav nav-tabs navtab-custom">
                                             <li class="active">
                                                 <a href="#dinar_chart2" data-toggle="tab" aria-expanded="true">
-                                                    <span class="visible-xs"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                                                    <span class="visible-xs"><i class="fa fa-list-alt"
+                                                                                aria-hidden="true"></i></span>
                                                     <span class="hidden-xs">Markets</span>
                                                 </a>
                                             </li>
@@ -84,7 +87,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="dinar_chart2">
                                                 <h3>DinarCoin Markets</h3>
-                                                <p> <br>In Progress</p>
+                                                <p><br>In Progress</p>
 
                                             </div>
                                         </div>
@@ -100,18 +103,19 @@
                                           @submit.prevent="getValues">
                                         <div class="form-group">
                                             <label>Recipient Address</label>
-                                            <input type="text" placeholder="Address" required="required" data-parsley-id="8" class="form-control">
+                                            <input type="text" placeholder="Address" required="required"
+                                                   data-parsley-id="8" class="form-control" v-model="address">
 
                                         </div>
                                         <div class="form-group">
                                             <label>Value</label>
                                             <input type="number" placeholder="Amount" required="required"
-                                                    data-parsley-id="8" class="form-control">
+                                                   data-parsley-id="8" class="form-control" v-model="balance">
 
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" data-target="#sendToken-modal"
-                                                    @click="step = true"
+
                                                     class="btn btn-default waves-effect waves-light">
                                                 Generate Transaction
                                             </button>
@@ -129,10 +133,10 @@
                                     <ul class="nav nav-tabs navtab-custom">
                                         <li class="active">
                                             <!--<a href="#Mint" data-toggle="tab" aria-expanded="false">-->
-                                                <!--<span class="visible-xs"><i class="fa fa-home"></i></span>-->
-                                                <!--<span class="hidden-xs">Mint</span>-->
+                                            <!--<span class="visible-xs"><i class="fa fa-home"></i></span>-->
+                                            <!--<span class="hidden-xs">Mint</span>-->
                                             <!--</a>-->
-                                        <!--</li>-->
+                                            <!--</li>-->
                                         <li class="">
                                             <a href="#Burn" data-toggle="tab" aria-expanded="false">
                                                 <span class="visible-xs"><i class="fa fa-user"></i></span>
@@ -144,22 +148,17 @@
                                         <div id="Mint" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
-                                                            data-parsley-id="8" class="form-control">
+                                                  @submit.prevent="getTokenValue">
 
-                                                </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
                                                     <input type="number" placeholder="Amount" required="required"
-                                                           data-parsley-id="8" class="form-control">
+                                                           data-parsley-id="8" class="form-control"
+                                                           v-model="burnTokenValue">
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
-                                                            @click="step = true"
                                                             class="btn btn-default waves-effect waves-light">
                                                         Generate Transaction
                                                     </button>
@@ -174,7 +173,8 @@
                             <p></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close
+                            </button>
                             <!--<button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button>-->
                         </div>
                         <!--modal start -->
@@ -195,13 +195,16 @@
                                 <div class="tab-content">
                                     <div id="privateKey" class="tab-pane active">
                                         <form data-v-92875dbe="" action="#"
-                                               data-parsley-validate=""
+                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
                                               novalidate="novalidate">
                                             <div data-v-92875dbe="" class="form-group">
                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                <input  data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+                                                <input v-model="privateKey
+" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
                                             </div>
+
                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
+
                                                 <button type="submit" data-v-92875dbe=""
                                                         data-toggle="modal"
                                                         data-target="#sendToken-modal"
@@ -259,7 +262,7 @@
 
                                                 </a>
                                                 &nbsp;
-                                                <span style="color:#fff"></span>
+                                                <span style="color:#fff">{{this.fileName}}</span>
 
                                             </div>
                                         </div>
@@ -276,11 +279,152 @@
     </div>
 </template>
 <script>
+
+    var sendTokens = require('./../../services/sendToken');
+    var burnTokens = require('./../../services/burnToken');
+    var getAccountFroomJson = require('./../../services/getAccountFromJson');
     export default {
-      data () {
-          return {
-              step: false,
-          }
-      }
+        data() {
+            return {
+                //Json import file
+                fileName: '',
+                tabValue: '',
+                //send Tokens
+                address: '',
+                balance: 0,
+                privateKey: '',
+                step: false,
+                //Burn Tokens
+                burnTokenValue: 0,
+            }
+        },
+        methods: {
+
+            //Import file
+            upload_link(e) {
+                e.preventDefault();
+                $("#upload:hidden").trigger('click');
+            },
+
+            onFileSelected(e) {
+                e.preventDefault();
+                //    console.log(e);
+                var _this = this;
+                this.fileName = e.target.files[0].name;
+                var newFileName = this.fileName.split('.');
+                console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
+
+                if (newFileName[1].length > 46 || newFileName[1].length < 46) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Invalid file format');
+                    this.fileName = '';
+                    return false;
+                }
+                console.log('File Name ' + this.fileName);
+
+                // Reference to the DOM input element
+                var input = event.target;
+                // Ensure that you have a file before attempting to read it
+                if (input.files && input.files[0]) {
+                    // create a new FileReader to read this image and convert to base64 format
+                    var reader = new FileReader();
+                    // Define a callback function to run, when FileReader finishes its job
+
+                    reader.onload = (e) => {
+
+
+                        var json_Data = e.target.result;
+
+
+                        // json_Data = json_Data;
+                        console.log("Json resposne is  " + json_Data);
+                        var jsonBackResposne;
+                        var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
+                            jsonBackResposne = res;
+                            console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+                            console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+
+                            switch (this.tabValue) {
+                                case 'SendTokens':
+                                    console.log('Send Token value is ' + this.tabValue);
+                                    sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    _this.init();
+                                    // sendTokens.getPrivateKey(_this.privateKey);
+                                    break;
+                                case 'Burn' :
+                                    console.log('Inside burn' + this.tabValue);
+                                    burnTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    _this.init();
+                                    // burnTokens.getPrivateKey(_this.privateKey);
+                                    break;
+                                default:
+                                    alert('Bye');
+                                    _this.init();
+                                    break;
+
+                            }
+                            // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                        });
+
+
+                    };
+                    // Start the reader job - read file
+                    reader.readAsText(input.files[0]);
+
+
+                }
+            },
+            // Send tokens Tab
+            getValues: function () {
+
+                var _this = this;
+                sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
+                this.step = true;
+                this.tabValue = 'SendTokens';
+
+
+            },
+            getTokenValue: function () {
+
+                var _this = this;
+                burnTokens.getTokenValues(_this.burnTokenValue);
+                this.step = true;
+                this.tabValue = "Burn";
+            },
+            getPrivateKey: function () {
+
+                var _this = this;
+                switch (this.tabValue) {
+                    case 'SendTokens':
+                        console.log('Send Token value is ' + this.tabValue);
+                        sendTokens.getPrivateKey(_this.privateKey);
+                        _this.init();
+                        break;
+                    case 'Burn' :
+                        console.log('Inside burn' + this.tabValue);
+                        burnTokens.getPrivateKey(_this.privateKey);
+                        _this.init();
+                        break;
+                    default:
+                        alert('Bye');
+                        _this.init();
+                        break;
+
+                }
+
+
+            },
+            init: function () {
+
+                var _this = this;
+                _this.privateKey = '';
+                _this.balance = 0;
+                _this.address = '';
+                _this.burnTokenValue = 0;
+                _this.step = false;
+                _this.tabValue = '';
+
+            }
+        }
     }
 </script>
