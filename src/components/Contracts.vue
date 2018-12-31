@@ -374,36 +374,26 @@
             },
             // Send tokens Tab
             getValues: function () {
-
                 var _this = this;
                 sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
                 this.step = true;
                 this.tabValue = 'SendTokens';
-
-
             },
             getTokenValue: function () {
-
                 var _this = this;
                 burnTokens.getTokenValues(_this.burnTokenValue);
                 this.step = true;
                 this.tabValue = "Burn";
             },
             getMintValues: function () {
-
                 var _this = this;
                 mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
                 this.step = true;
                 this.tabValue = 'Mint';
-
-
             },
             getPauseValues: function () {
-
                 this.step = true;
                 this.tabValue = 'Pause';
-
-
             },
             getUnPauseValues: function () {
                 this.step = true;

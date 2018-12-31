@@ -105,8 +105,8 @@
                     <!--</ul>-->
                 <!--</div>-->
 
-                <div ng-show="txInfo.status == txStatus.found || txInfo.status == txStatus.mined" class="">
-                    <h4 translate="tx_Details" class="cont-md ng-scope">Transaction Details</h4>
+                <div  class="table-responsive">
+                    <h4 >Transaction Details</h4>
                     <br>
                     <table class="table table-striped txstatus__2 cont-md">
                         <!-- ng-show="tx.status=='foundOnChain' || foundInPending'"-->
@@ -250,7 +250,7 @@
 
 </script>
 
-<style scoped>
+<style >
     .block {
         margin: 1.5rem 2rem !important;
         background-color: #262c3b;
@@ -260,6 +260,7 @@
         min-height: 1.5rem;
         margin: 1rem auto;
         position: relative !important;
+        z-index: 100;
     }
 
     p {
@@ -277,8 +278,9 @@
         color: #98a6ad;
         text-align: left !important;
         padding: 20px 30px;
-        position: relative;
+        position: absolute;
         right: 0;
         left: 240px;
     }
+
 </style>
