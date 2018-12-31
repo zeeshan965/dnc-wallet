@@ -188,31 +188,17 @@
                         console.log("stsstuu siis" + _this.txStatus);
                         var resposne = transactionStatus.transactionStatus(_this.txStatus).then((res) => {
 
-                            console.log("tx Status is =>" + this.txStatus.length);
-                            console.log("Res is =>" + res);
-                            if ((this.txStatus > 66 || this.txStatus < 66)  || res === false){
-                                this.txError = true;
-                            }else {
+                            console.log("tx Status ffffffffffffffffffffffffffffffffffffffffffff =>" + res);
+                            if(res){
                                 this.txResposne = res;
-                                console.log('Heyyyyyy response ' + this.txResposne);
-                                _this.txError = false;
+                                this.txError = false;
                             }
 
+                        }).catch((error) => {
 
-
-
-
-
-                            console.log("REsposnen inside check statyus call" + this.txResposne);
+                           this.txError = true;
+                           console.log('I am inside error  section ');
                         });
-
-                        //     .catch((error) => {
-                        //     console.log("Error is  =>" + error.toString().split(":")[1]);
-                        //     this.txResposne = error.toString().split(":")[1];
-                        //     this.txError =true;
-                        //
-                        //
-                        // });
 
                     }
 
