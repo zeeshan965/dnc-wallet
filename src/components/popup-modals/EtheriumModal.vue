@@ -14,17 +14,9 @@
                         </li>
                         <li class="">
                             <a href="#22" data-toggle="tab" aria-expanded="false">
-
                                 <span>Send/Transfer</span>
                             </a>
                         </li>
-
-                        <!--<li class="">-->
-                        <!--<a href="#55" data-toggle="tab" aria-expanded="false">-->
-
-                        <!--<span>Burn</span>-->
-                        <!--</a>-->
-                        <!--</li>-->
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="11">
@@ -101,17 +93,17 @@
                                 <div>
                                     <br>
                                     <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                          @submit.prevent="getValues">
+                                          >
                                         <div class="form-group">
                                             <label>Recipient Address</label>
                                             <input type="text" placeholder="Address" required="required"
-                                                   v-model="address" data-parsley-id="8" class="form-control">
+                                                   data-parsley-id="8" class="form-control">
 
                                         </div>
                                         <div class="form-group">
                                             <label>Value</label>
                                             <input type="number" placeholder="Amount" required="required"
-                                                   v-model="balance" data-parsley-id="8" class="form-control">
+                                                    data-parsley-id="8" class="form-control">
 
                                         </div>
                                         <div class="form-group text-right m-b-0">
@@ -148,12 +140,11 @@
                                 <div class="tab-content">
                                     <div id="privateKey" class="tab-pane active">
                                         <form data-v-92875dbe="" action="#"
-                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
+                                               data-parsley-validate=""
                                               novalidate="novalidate">
                                             <div data-v-92875dbe="" class="form-group">
                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+                                                <input data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
                                             </div>
 
                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
@@ -211,12 +202,7 @@
                                                    translate="ADD_Label_6_short">SELECT
                                                     WALLET
                                                     FILE...
-
-
                                                 </a>
-                                                &nbsp;
-                                                <span style="color:#fff">{{this.fileName}}</span>
-
                                             </div>
                                         </div>
                                     </div>

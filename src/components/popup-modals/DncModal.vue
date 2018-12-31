@@ -3,13 +3,10 @@
         <div id="DNC-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="display: none;">
             <div class="modal-dialog modal-lg">
-
                 <div class="modal-content p-0">
-
                     <ul class="nav nav-tabs navtab-custom nav-justified">
                         <li class="active">
                             <a href="#dnc-details" data-toggle="tab" aria-expanded="true">
-
                                 <span>Details</span>
                             </a>
                         </li>
@@ -19,10 +16,8 @@
                                 <span>Send/Transfer</span>
                             </a>
                         </li>
-
                         <li class="">
                             <a href="#dnc-mint-burn" data-toggle="tab" aria-expanded="false">
-
                                 <span>Burn</span>
                             </a>
                         </li>
@@ -105,14 +100,13 @@
                                           @submit.prevent="getValues">
                                         <div class="form-group">
                                             <label>Recipient Address</label>
-                                            <input type="text" placeholder="Address" required="required"
-                                                   v-model="address" data-parsley-id="8" class="form-control">
+                                            <input type="text" placeholder="Address" required="required" data-parsley-id="8" class="form-control">
 
                                         </div>
                                         <div class="form-group">
                                             <label>Value</label>
                                             <input type="number" placeholder="Amount" required="required"
-                                                   v-model="balance" data-parsley-id="8" class="form-control">
+                                                    data-parsley-id="8" class="form-control">
 
                                         </div>
                                         <div class="form-group text-right m-b-0">
@@ -154,13 +148,13 @@
                                                 <div class="form-group">
                                                     <label>Recipient Address</label>
                                                     <input type="text" placeholder="Address" required="required"
-                                                           v-model="address" data-parsley-id="8" class="form-control">
+                                                            data-parsley-id="8" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
                                                     <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
+                                                           data-parsley-id="8" class="form-control">
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
@@ -201,16 +195,13 @@
                                 <div class="tab-content">
                                     <div id="privateKey" class="tab-pane active">
                                         <form data-v-92875dbe="" action="#"
-                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
+                                               data-parsley-validate=""
                                               novalidate="novalidate">
                                             <div data-v-92875dbe="" class="form-group">
                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+                                                <input  data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
                                             </div>
-
                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
-
                                                 <button type="submit" data-v-92875dbe=""
                                                         data-toggle="modal"
                                                         data-target="#sendToken-modal"
@@ -268,7 +259,7 @@
 
                                                 </a>
                                                 &nbsp;
-                                                <span style="color:#fff">{{this.fileName}}</span>
+                                                <span style="color:#fff"></span>
 
                                             </div>
                                         </div>

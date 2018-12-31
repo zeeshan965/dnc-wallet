@@ -96,134 +96,258 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="22">
-                            <div class="tab-content">
-                                <div>
-                                    <br>
-                                    <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                          @submit.prevent="getValues">
-                                        <div class="form-group">
-                                            <label>Recipient Address</label>
-                                            <input type="text" placeholder="Address" required="required"
-                                                   v-model="address" data-parsley-id="8" class="form-control">
+                            <p> </p>
+                            <p>Send Dinarcoin from 0xc0d594d4dccf49f79e43e427a696678da6bc11ba</p>
+                            <p>DinarCoin transactions are written to a global transaction log called the Ethereum
+                                blockchain. Because there is no central authority controlling the log, we wait for
+                                multiple confirmations before allowing use of the DinarCoin.</p>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Value</label>
-                                            <input type="number" placeholder="Amount" required="required"
-                                                   v-model="balance" data-parsley-id="8" class="form-control">
 
-                                        </div>
-                                        <div class="form-group text-right m-b-0">
-                                            <button type="submit" data-target="#sendToken-modal"
-                                                    @click="step = true"
-                                                    class="btn btn-default waves-effect waves-light">
-                                                Generate Transaction
-                                            </button>
-                                        </div>
-                                    </form>
+
+                            <form action="#" data-parsley-validate="" novalidate="">
+                                <div class="form-group">
+                                    <label for="receiving-address">Receiving SmartX address*</label>
+                                    <input id="receiving-address" type="text" placeholder="DinarCoin Address" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label >Amount in Dinarcoin*</label>
+                                    <input id="amount" type="number" placeholder="Amount DinarCoin" class="form-control">
                                 </div>
 
+
+
+                                <div class="form-group">
+                                    <label >You Security Password*</label>
+                                    <input  type="password" placeholder="Security Password" required="" class="form-control"
+                                        data-parsley-id="8">
+                                    <small>Please Confirm the send with your security password</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <input type="text" placeholder="Amount DinarCoin" class="form-control">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <select class="form-control">
+                                                <option>USD</option>
+                                                <option>SGD</option>
+                                                <option>MYR</option>
+                                                <option>IDR</option>
+                                                <option>THB</option>
+                                                <option>BHD</option>
+                                                <option>JPY</option>
+                                                <option>IND</option>
+
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="userName">Value DinarCoin</label>
+                                    <input type="number" placeholder="Value DinarCoin" class="form-control">
+                                </div>
+
+
+
+
+
+                                <div class="form-group text-right m-b-0">
+                                    <button class="btn btn-default waves-effect waves-light" type="submit">
+                                        Send Dinar Coin
+                                    </button>
+                                    <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                                        Cancel
+                                    </button>
+                                </div>
+
+                            </form>
+                            <p></p>
+                        </div>
+                        <div class="tab-pane" id="55">
+                            <p></p>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-tabs navtab-custom">
+                                        <li class="active">
+                                            <!--<a href="#Mint" data-toggle="tab" aria-expanded="false">-->
+                                                <!--<span class="visible-xs"><i class="fa fa-home"></i></span>-->
+                                                <!--<span class="hidden-xs">Mint</span>-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                        <li class="">
+                                            <a href="#Burn" data-toggle="tab" aria-expanded="false">
+                                                <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                                <span class="hidden-xs">Burn</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!--<div class="tab-content">-->
+                                        <!--<div class="tab-pane active" id="Mint">-->
+                                            <!--<ul class="list-unstyled">-->
+                                                <!--<li>DinarCoin Balance: 2 DinarCoins</li>-->
+                                                <!--<li>DinarCoin Price: $205.32 USD (0.3561627677031908 BTC)</li>-->
+                                            <!--</ul>-->
+                                            <!--<br>-->
+                                            <!--<form action="#" data-parsley-validate="" novalidate="">-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Amount of DinarCoin to mint</label>-->
+                                                    <!--<input type="number" placeholder="1DNC" class="form-control">-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Wallet To Use</label>-->
+                                                    <!--<select class="form-control">-->
+                                                        <!--<option>Please Choose</option>-->
+                                                        <!--<option>BTC - 123345536279</option>-->
+                                                        <!--<option>ETC - 223444567432</option>-->
+
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Choose your destination for mint :</label>-->
+                                                    <!--<select class="form-control">-->
+                                                        <!--<option>Please Choose</option>-->
+                                                        <!--<option>SmartX Address :-->
+                                                            <!--0xc0d594d4dccf49f79e43e427a696678da6bc11ba</option>-->
+
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label >Your Security Password*</label>-->
+                                                    <!--<input  type="password" placeholder="Security Password"-->
+                                                        <!--required="" class="form-control" data-parsley-id="8">-->
+                                                    <!--<small>Please Confirm the send with your security password</small>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group text-right m-b-0">-->
+                                                    <!--<button class="btn btn-default waves-effect waves-light" type="submit">-->
+                                                        <!--Send-->
+                                                    <!--</button>-->
+                                                    <!--<button type="reset" class="btn btn-default waves-effect waves-light m-l-5">-->
+                                                        <!--Cancel-->
+                                                    <!--</button>-->
+                                                <!--</div>-->
+                                            <!--</form>-->
+                                        <!--</div>-->
+                                        <!--<div class="tab-pane" id="Burn">-->
+                                            <!--<ul class="list-unstyled">-->
+                                                <!--<li>DinarCoin Balance: 2 DinarCoins</li>-->
+                                                <!--<li>DinarCoin Price: $162.32 USD (0.2861627677031908 BTC)</li>-->
+                                            <!--</ul>-->
+                                            <!--<br>-->
+                                            <!--<form action="#" data-parsley-validate="" novalidate="">-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Amount of DinarCoin to burn</label>-->
+                                                    <!--<input type="number" placeholder="1DNC" class="form-control">-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Wallet To Use</label>-->
+                                                    <!--<select class="form-control">-->
+                                                        <!--<option>Please Choose</option>-->
+                                                        <!--<option>BTC - 123345536279</option>-->
+                                                        <!--<option>ETC - 223444567432</option>-->
+
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userName">Choose your destination for burn :</label>-->
+                                                    <!--<select class="form-control">-->
+                                                        <!--<option>Please Choose</option>-->
+                                                        <!--<option>BTC Address : 2321nasdhWdqwoiuye128y9821y98983y</option>-->
+                                                        <!--<option>ETH Address : x372831987fjkhdfkjhjkhkjhkjhjkhdsf1237</option>-->
+
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label >Your Security Password*</label>-->
+                                                    <!--<input  type="password" placeholder="Security Password"-->
+                                                        <!--required="" class="form-control" data-parsley-id="8">-->
+                                                    <!--<small>Please Confirm the send with your security password</small>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group text-right m-b-0">-->
+                                                    <!--<button class="btn btn-default waves-effect waves-light" type="submit">-->
+                                                        <!--Send-->
+                                                    <!--</button>-->
+                                                    <!--<button type="reset" class="btn btn-default waves-effect waves-light m-l-5">-->
+                                                        <!--Cancel-->
+                                                    <!--</button>-->
+                                                <!--</div>-->
+
+                                            <!--</form>-->
+
+                                            <!--<div class="row">-->
+
+                                                <!--<div class="col-lg-12">-->
+                                                    <!--<br>-->
+                                                    <!--<p class="text-danger">Current Order (0)</p>-->
+                                                    <!--<table class="table table-striped table-color">-->
+                                                        <!--<tbody>-->
+                                                            <!--<tr>-->
+                                                                <!--<td>Order Time</td>-->
+                                                                <!--<td>Type</td>-->
+                                                                <!--<td>Resource</td>-->
+                                                                <!--<td>Order Price</td>-->
+                                                                <!--<td>Order Volume</td>-->
+                                                                <!--<td>Residual Volume</td>-->
+                                                                <!--<td>Status</td>-->
+                                                                <!--<td>Operation</td>-->
+                                                            <!--</tr>-->
+                                                            <!--<tr>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                            <!--</tr>-->
+                                                        <!--</tbody>-->
+                                                    <!--</table>-->
+                                                    <!--<br>-->
+                                                    <!--<p class="text-danger">Order History</p>-->
+                                                    <!--<table class="table table-striped table-color">-->
+                                                        <!--<tbody>-->
+                                                            <!--<tr>-->
+                                                                <!--<td>Order Time</td>-->
+                                                                <!--<td>Type</td>-->
+                                                                <!--<td>Resource</td>-->
+                                                                <!--<td>Order Price</td>-->
+                                                                <!--<td>Order Volume</td>-->
+                                                                <!--<td>Any Trading Price</td>-->
+                                                                <!--<td>Trading Volume</td>-->
+                                                                <!--<td>Trading Amount</td>-->
+                                                                <!--<td>Status</td>-->
+                                                            <!--</tr>-->
+                                                            <!--<tr>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                                <!--<td>&nbsp;</td>-->
+                                                            <!--</tr>-->
+                                                        <!--</tbody>-->
+                                                    <!--</table>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
                             </div>
+                            <p></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
                             <!--<button type="button" class="btn btn-primary waves-effect waves-light" @click="step = 2">Save changes</button>-->
                         </div>
-                        <!--modal start -->
-                        <div v-if="step === true">
-                            <div class=" p-0" style="margin-top: 15px">
-                                <ul class="nav nav-tabs navtab-custom nav-justified">
-                                    <li class="active">
-                                        <a href="#privateKey" data-toggle="tab" aria-expanded="true">
-                                            <span>Private key</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                            <span>Jason File</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="privateKey" class="tab-pane active">
-                                        <form data-v-92875dbe="" action="#"
-                                              @submit.prevent="getPrivateKey" data-parsley-validate=""
-                                              novalidate="novalidate">
-                                            <div data-v-92875dbe="" class="form-group">
-                                                <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
-                                            </div>
-
-                                            <div data-v-92875dbe="" class="form-group text-right m-b-0">
-
-                                                <button type="submit" data-v-92875dbe=""
-                                                        data-toggle="modal"
-                                                        data-target="#sendToken-modal"
-                                                        class="btn btn-default waves-effect waves-light">
-                                                    Send Transaction
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="jasonFile" class="tab-pane ">
-                                        <div>
-                                            <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
-                                            <h5 style="color:  rgb(217, 83, 79);">
-                                                This is <u>not</u> a recommended way to access your wallet.
-                                            </h5>
-                                            <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
-                                                Entering your private key on a website dangerous. If our website
-                                                is
-                                                compromised or you accidentally visit a different website, your
-                                                funds will
-                                                be stolen. Please consider:
-                                            </div>
-                                            <ul style="color: white;">
-                                                <li>
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        MetaMask
-                                                    </a>
-                                                    or
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        A Hardware Wallet
-                                                    </a>
-                                                    or
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        Running MEW Offline &amp; Locally
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        Learning How to Protect Yourself and Your Funds
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <br>
-                                            <div class="form-group">
-
-                                                <input id="upload" type="file" @change="onFileSelected"
-                                                       style="display:none"/>
-                                                <a tabindex="0" type="file" role="button"
-                                                   class="btn btn-primary  ng-hide"
-                                                   id="upload_link" @click="upload_link"
-                                                   translate="ADD_Label_6_short">SELECT
-                                                    WALLET
-                                                    FILE...
-
-
-                                                </a>
-                                                &nbsp;
-                                                <span style="color:#fff">{{this.fileName}}</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- /.modal-content -->
-
-                        </div>
-                        <!--modal end-->
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -232,10 +356,6 @@
 </template>
 <script>
     export default {
-        data () {
-            return {
-                step: false,
-            }
-        }
+
     }
 </script>
