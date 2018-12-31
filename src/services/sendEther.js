@@ -11,6 +11,8 @@ var fromAddress = "0x88951e18fEd6D792d619B4A472d5C0D2E5B9b5F0";
 var gasPrice;
 var gasLimit;
 var privateKey;
+var toAddress;
+var Value;
 web3.eth.defaultAccount = fromAddress;
 
 
@@ -24,7 +26,7 @@ export function getTokenValue(tokenValue) {
 
 export function gettoAddress(address) {
 
-    console.log("DNC Get Address" + toAddress);
+    console.log("DNC Get Address" + address);
     toAddress = address;
     console.log(toAddress);
     return toAddress;
