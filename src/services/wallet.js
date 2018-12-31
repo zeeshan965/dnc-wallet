@@ -61,6 +61,7 @@ export function unlockAccount(privateKey, password) {
 
     var key = Buffer.from(userPrivateKey, 'hex');
 
+
     var wallet = Wallet.fromPrivateKey(key);
     var unlocked = wallet.toV3String(password);
 

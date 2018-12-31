@@ -328,7 +328,8 @@
                             _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
                             console.log('Unclocked ===> ' + _this.walletResponse);
                             if (_this.walletResponse === false) {
-                                $.Toast("Wait", "Invalid Private Key", "warning", {});
+                                alertify.set('notifier','position', 'top-right');
+                                alertify.error('Invalid Privaate key');
                                 _this.userKey = "";
                                 _this.user.password = "";
                                 _this.step = 1;
