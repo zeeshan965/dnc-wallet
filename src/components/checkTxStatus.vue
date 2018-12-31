@@ -128,7 +128,7 @@
                                 </small>
                             </td>
                         </tr>
-                        
+
                         </tbody>
                     </table>
                 </div>
@@ -155,7 +155,7 @@
                 </div>
 
 
-                
+
             </section>
         </div>
 
@@ -190,7 +190,7 @@
 
                             console.log("REsposnen inside check statyus call" + this.txResposne);
                         }).catch((error) => {
-                           
+
                             this.txResposne = error.toString().split(":")[0];
                             this.txError = true;
                              console.log("Error is  =>" + this.txResposne);
@@ -240,8 +240,9 @@
         color: #98a6ad;
         text-align: left !important;
         padding: 20px 30px;
-        position: relative;
+        position: absolute;
         right: 0;
         left: 240px;
     }
+
 </style>
