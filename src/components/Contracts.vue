@@ -268,23 +268,16 @@
                 //Json import file
                 fileName: '',
                 tabValue: '',
-
-
                 //send Tokens
                 address: '',
                 balance: 0,
                 privateKey: '',
                 step: false,
-
-
                 //Burn Tokens
                 burnTokenValue: 0,
-
                 //Mint Token
                 mintAddress: '',
                 mintBalance: 0,
-
-
             }
         },
         methods: {
