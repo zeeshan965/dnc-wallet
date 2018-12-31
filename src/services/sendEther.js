@@ -13,6 +13,7 @@ var gasLimit;
 var privateKey;
 var toAddress;
 var Value;
+export var txHash;
 web3.eth.defaultAccount = fromAddress;
 
 
@@ -44,13 +45,16 @@ gasPrice = web3.eth.getGasPrice().then(console.log);
 gasLimit = 200000;
 
 
-export function sendSigned(rawTransaction) {
+export async function sendSigned(rawTransaction) {
     var privKey = new Buffer(privateKey, 'hex');
     const tx = new Tx(rawTransaction);
 
     tx.sign(privKey);
     var serializedTx = tx.serialize().toString('hex');
-    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
+   await web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
+        txHash = transactionHash;
+        console.log("TxHash " + txHash);
+    });
 }
 
 export function getTransactionCount() {

@@ -46,8 +46,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
+                                                    <input type="number" placeholder="Amount"
+                                                           v-model="balance" data-parsley-id="8"
+                                                           class="form-control">
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
@@ -69,7 +70,7 @@
                                                   @submit.prevent="getTokenValue">
                                                 <div class="form-group">
                                                     <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
+                                                    <input type="number" placeholder="Amount"
                                                            v-model="burnTokenValue" data-parsley-id="8"
                                                            class="form-control">
 
@@ -94,16 +95,17 @@
                                                   @submit.prevent="getMintValues">
                                                 <div class="form-group">
                                                     <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
+                                                    <input type="text" placeholder="Address"
                                                            v-model="mintAddress" data-parsley-id="8"
                                                            class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
+                                                    <input type="number" placeholder="Amount"
                                                            v-model="mintBalance" data-parsley-id="8"
                                                            class="form-control">
+
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
@@ -156,11 +158,12 @@
                                         <div id="Mint" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
+                                                  @submit.prevent="getUpdateTokenValue">
                                                 <div class="form-group">
                                                     <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
+                                                    <input type="number" placeholder="Amount" name="balance"
+                                                           v-model="updateTokenValue" data-parsley-id="8"
+                                                           class="form-control">
 
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
@@ -198,7 +201,15 @@
                                                     <div data-v-92875dbe="" class="form-group">
                                                         <label data-v-92875dbe="">Enter Your Private Key</label>
                                                         <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+
+" v-validate="{ required: true, min: 64 }" name="password" class="form-control"
+                                                               :class="{ 'is-invalid': submitted && errors.has('password') }"
+                                                               data-v-92875dbe=""
+                                                               type="password" placeholder=""
+                                                               data-parsley-id="8">
+                                                    </div>
+                                                    <div style="color:red;" v-if="submitted && errors.has('password')"
+                                                         class="invalid-feedback">{{ errors.first('password') }}
                                                     </div>
 
                                                     <div data-v-92875dbe="" class="form-group text-right m-b-0">
@@ -284,6 +295,7 @@
     var mintTokens = require('./../services/mint');
     var pauseTokens = require('./../services/pause');
     var unPauseTokens = require('./../services/unpause');
+    var updateToken = require('./../services/updateRate');
     var getAccountFroomJson = require('./../services/getAccountFromJson');
     export default {
         data: function () {
@@ -296,11 +308,15 @@
                 balance: 0,
                 privateKey: '',
                 step: false,
+                submitted: false,
                 //Burn Tokens
                 burnTokenValue: 0,
                 //Mint Token
                 mintAddress: '',
                 mintBalance: 0,
+
+                //Update Toekn  price
+                updateTokenValue: 0
             }
         },
         methods: {
@@ -310,11 +326,10 @@
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
-
             onFileSelected(e) {
                 e.preventDefault();
                 //    console.log(e);
-                var _this =this;
+                var _this = this;
                 this.fileName = e.target.files[0].name;
                 var newFileName = this.fileName.split('.');
                 console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
@@ -378,6 +393,11 @@
                                     unPauseTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
                                     _this.init();
                                     break;
+                                case 'updateToken' :
+                                    console.log('Inside Update Token' + this.tabValue);
+                                    updateToken.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    _this.init();
+                                    break;
                                 default:
                                     alert('Bye');
                                     _this.init();
@@ -398,21 +418,86 @@
             // Send tokens Tab
             getValues: function () {
                 var _this = this;
-                sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
-                this.step = true;
-                this.tabValue = 'SendTokens';
+                console.log("Address 0 index " + _this.address[0]);
+                console.log("Address 1 index  " + _this.address[1]);
+                if(_this.address === '')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required');
+                }
+                // else if(_this.address[0] === '0' && _this.address[1] === 'x')
+                // {
+                //     alertify.set('notifier', 'position', 'top-right');
+                //     alertify.error('Address field start with 0x');
+                // }
+                else if(_this.address.length > 42){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not greater than 42');
+                }
+                else if(_this.address.length < 42){
+
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not less than 42');
+                }
+                else if(_this.balance === 0){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else{
+                    sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
+                    this.step = true;
+                    this.tabValue = 'SendTokens';
+                }
+
+
             },
             getTokenValue: function () {
                 var _this = this;
-                burnTokens.getTokenValues(_this.burnTokenValue);
-                this.step = true;
-                this.tabValue = "Burn";
+
+                if(_this.burnTokenValue === 0){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else {
+                    burnTokens.getTokenValues(_this.burnTokenValue);
+                    this.step = true;
+                    this.tabValue = "Burn";
+                }
+
+
+
             },
             getMintValues: function () {
                 var _this = this;
-                mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
-                this.step = true;
-                this.tabValue = 'Mint';
+                if(_this.mintAddress === '')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required');
+                }
+                // else if(_this.mintAddress[0] === '0' && _this.mintAddress[1] === 'x')
+                // {
+                //     alertify.set('notifier', 'position', 'top-right');
+                //     alertify.error('Address field start with 0x');
+                // }
+                else if(_this.mintAddress.length > 42){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not greater than 42');
+                }
+                else if(_this.mintAddress.length < 42){
+
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not less than 42');
+                }
+                else if(_this.mintBalance === 0){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else {
+                    mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
+                    this.step = true;
+                    this.tabValue = 'Mint';
+                }
+
             },
             getPauseValues: function () {
                 this.step = true;
@@ -423,42 +508,67 @@
                 this.tabValue = 'Unpause';
 
             },
-            getPrivateKey: function () {
+            getUpdateTokenValue: function () {
+                var _this = this;
+                if(_this.updateTokenValue === 0){
+
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else{
+                    updateToken.getTokenValues(_this.updateTokenValue);
+                    this.step = true;
+                    this.tabValue = 'updateToken';
+                }
+
+                },
+            getPrivateKey: function (e) {
 
                 var _this = this;
-                switch (this.tabValue) {
-                    case 'SendTokens':
-                        console.log('Send Token value is ' + this.tabValue);
-                        sendTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    case 'Burn' :
-                        console.log('Inside burn' + this.tabValue);
-                        burnTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    case 'Mint' :
-                        console.log('Inside Mint' + this.tabValue);
-                        mintTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    case 'Pause' :
-                        console.log('Inside Pause' + this.tabValue);
-                        pauseTokens.getPrivateKey(_this.privateKey);
+                e.preventDefault();
+                _this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
 
-                        _this.init();
-                        break;
-                    case 'Unpause' :
-                        console.log('Inside Unpause' + this.tabValue);
-                        unPauseTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    default:
-                        alert('Bye');
-                        _this.init();
-                        break;
+                        switch (this.tabValue) {
+                            case 'SendTokens':
+                                console.log('Send Token value is ' + this.tabValue);
+                                sendTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'Burn' :
+                                console.log('Inside burn' + this.tabValue);
+                                burnTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'Mint' :
+                                console.log('Inside Mint' + this.tabValue);
+                                mintTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'Pause' :
+                                console.log('Inside Pause' + this.tabValue);
+                                pauseTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'Unpause' :
+                                console.log('Inside Unpause' + this.tabValue);
+                                unPauseTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'updateToken' :
+                                console.log('Inside updateToken' + this.tabValue);
+                                updateToken.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            default:
+                                alert('Bye');
+                                _this.init();
+                                break;
 
-                }
+                        }
+                    }
+                });
 
 
             },
@@ -471,9 +581,12 @@
                 _this.burnTokenValue = 0;
                 _this.mintAddress = '';
                 _this.mintBalance = 0;
+                _this.updateTokenValue = 0;
                 _this.fileName = '';
                 _this.step = false;
                 _this.tabValue = '';
+                _this.submitted = false;
+
 
             }
         },

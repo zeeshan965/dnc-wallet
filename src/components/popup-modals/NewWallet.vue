@@ -115,6 +115,15 @@
                                 <div id="asd" class="form-group" v-if="step == 3">
 
                                     <div data-v-92875dbe="" class="form-group"><label data-v-92875dbe="">Save your private key</label><input  type="text" v-model="acconntPrivateKey"  class="form-control">
+                                        <p class="text-white">
+                                            **Do not lose it!** It cannot be recovered if you lose it.
+
+                                            **Do not share it!** Your funds will be stolen if you use this file on a
+                                            malicious/phishing site.
+
+                                            **Make a backup!** Secure it like the millions of dollars it may one day be
+                                            worth.
+                                        </p>
                                     </div>
                                     <button class="btn btn-lg btn-primary" data-dismiss="modal"
                                             @click="removeClick();">I Understand Continue

@@ -148,7 +148,14 @@
                                             <div data-v-92875dbe="" class="form-group">
                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
                                                 <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+" data-v-92875dbe="" v-validate="{ required: true, min: 64 }" name="password" class="form-control"
+                                                       :class="{ 'is-invalid': submitted && errors.has('password') }"
+                                                       data-v-92875dbe=""
+                                                       type="password" placeholder=""
+                                                       data-parsley-id="8">
+                                            </div>
+                                            <div style="color:red;" v-if="submitted && errors.has('password')"
+                                                 class="invalid-feedback">{{ errors.first('password') }}
                                             </div>
 
                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
@@ -240,6 +247,8 @@
                 balance: 0,
                 privateKey: '',
                 step: false,
+                submitted: false,
+                txHash: sendEther.txHash,
             }
         },
         methods: {
@@ -310,18 +319,54 @@
                 }
             },
 
-            getPrivateKey() {
+            getPrivateKey(e) {
                 console.log("Private Key  =>" + this.privateKey);
-                sendEther.getPrivateKey(this.privateKey);
-                this.init();
+                var _this = this;
+                e.preventDefault();
+                _this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        sendEther.getPrivateKey(this.privateKey);
+                        // setTimeout(function () {
+                        //     alert("Trx Hash is " + _this.txHash);
+                        // },3000);
+
+                        this.init();
+                    }
+                });
             },
             getAddressAndTokenValue() {
+                var _this =this;
                 console.log("Address is =>" + this.address);
                 console.log("Balance is =>" + this.balance);
+                if(_this.address === '')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required');
+                }
+                // else if(_this.address[0] === '0' && _this.address[1] === 'x')
+                // {
+                //     alertify.set('notifier', 'position', 'top-right');
+                //     alertify.error('Address field start with 0x');
+                // }
+                else if(_this.address.length > 42){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not greater than 42');
+                }
+                else if(_this.address.length < 42){
 
-                sendEther.gettoAddress(this.address);
-                sendEther.getTokenValue(this.balance);
-                this.step = true;
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not less than 42');
+                }
+                else if(_this.balance === 0){
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else {
+                    sendEther.gettoAddress(this.address);
+                    sendEther.getTokenValue(this.balance);
+                    this.step = true;
+                }
             },
             init: function () {
 

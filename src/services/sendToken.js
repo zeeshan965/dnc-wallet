@@ -305,8 +305,8 @@ console.log("DAta" + data);
 gasPrice = web3.eth.getGasPrice();
 gasLimit = 200000;
 
-
-export function sendSigned(rawTransaction) {
+var txHash;
+export async function sendSigned(rawTransaction) {
     console.log("Send fucntion private key: " + privateKey);
 
     var privKey = new Buffer(privateKey, 'hex');
@@ -317,7 +317,11 @@ export function sendSigned(rawTransaction) {
     tx.sign(privKey);
     var serializedTx = tx.serialize().toString('hex');
     // console.log("Serialized " + serializedTx);
-    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
+   var res =await web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
+        console.log("Transacction hash ::" + transactionHash);
+        txHash =transactionHash;
+    });
+
 
 }
 

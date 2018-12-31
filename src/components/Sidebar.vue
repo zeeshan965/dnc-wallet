@@ -32,9 +32,9 @@
                                 DNC Explorer </span></router-link>
                     </li>
                     <li>
-                        <router-link to="#" class="waves-effect waves-primary"><img
+                        <a  target="_blank" href="http://13.59.238.20/en" class="waves-effect waves-primary"><img
                                 src="assets/images/icon/dnd-icon.png">&nbsp;&nbsp;&nbsp;<span>
-                                Mint DNC </span></router-link>
+                                Mint DNC </span></a>
                     </li>
                     <li>
                         <router-link to="/checkTxStatus" class="waves-effect waves-primary"><img

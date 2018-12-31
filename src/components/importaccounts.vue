@@ -120,10 +120,10 @@
                                         <form @submit.prevent="handlePrivateKey">
                                             <div class="form-group">
                                                 <label for="user key">Private Key</label>
-                                                <input type="text" v-model="userKey" v-validate="'required'"
+                                                <input type="text" v-model="userKey" v-validate="{required:true,min:64,max:64}"
                                                        name="userKey" class="form-control"
                                                        :class="{ 'is-invalid': submitted && errors.has('userKey') }"/>
-                                                <div v-if="submitted && errors.has('userKey')" class="invalid-feedback">
+                                                <div style="color:red" v-if="submitted && errors.has('userKey')" class="invalid-feedback">
                                                     {{ errors.first('userKey') }}
                                                 </div>
                                             </div>
@@ -140,7 +140,7 @@
                                                        v-validate="{ required: true, min: 9 }" name="password"
                                                        class="form-control"
                                                        :class="{ 'is-invalid': submitted && errors.has('password') }"/>
-                                                <div v-if="submitted && errors.has('password')"
+                                                <div style="color:red" v-if="submitted && errors.has('password')"
                                                      class="invalid-feedback">{{ errors.first('password') }}
                                                 </div>
                                             </div>

@@ -64,7 +64,7 @@
                             <td>
                                 <a href="https://ropsten.etherscan.io/tx/0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9"
                                    target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9
+                                    {{ this.txResposne.transactionHash}}
                                 </a>
                             </td>
                         </tr>
@@ -72,7 +72,7 @@
                             <td translate="OFFLINE_Step1_Label_1" class="ng-scope">From Address</td>
                             <td>
                                 <a target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    0x41e98269C80a7133De019261f6F4d96d77cc6821
+                                   {{ this.txResposne.from}}
                                 </a>
                             </td>
                         </tr>
@@ -80,7 +80,7 @@
                             <td translate="OFFLINE_Step2_Label_1" class="ng-scope">To Address</td>
                             <td>
                                 <a target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    0x3a84b2d899253a0D01aC89B948DB376c9af06064
+                                    {{ this.txResposne.to}}
                                 </a>
                             </td>
                         </tr>
@@ -190,7 +190,8 @@
 
                             console.log("tx Status ffffffffffffffffffffffffffffffffffffffffffff =>" + res);
                             if(res){
-                                this.txResposne = res;
+                                this.txResposne = JSON.parse(res);
+                                console.log("Tx hash is " + this.txResposne.transactionHash);
                                 this.txError = false;
                             }
 

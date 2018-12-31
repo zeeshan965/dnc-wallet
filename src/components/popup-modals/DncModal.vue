@@ -200,7 +200,15 @@
                                             <div data-v-92875dbe="" class="form-group">
                                                 <label data-v-92875dbe="">Enter Your Private Key</label>
                                                 <input v-model="privateKey
-" data-v-92875dbe="" type="password" placeholder="" required="required" data-parsley-id="8" class="form-control">
+
+" v-validate="{ required: true, min: 64 }" name="password" class="form-control"
+                                                       :class="{ 'is-invalid': submitted && errors.has('password') }"
+                                                       data-v-92875dbe=""
+                                                       type="password" placeholder=""
+                                                       data-parsley-id="8">
+                                            </div>
+                                            <div style="color:red;" v-if="submitted && errors.has('password')"
+                                                 class="invalid-feedback">{{ errors.first('password') }}
                                             </div>
 
                                             <div data-v-92875dbe="" class="form-group text-right m-b-0">
@@ -296,6 +304,7 @@
                 step: false,
                 //Burn Tokens
                 burnTokenValue: 0,
+                submitted: false,
             }
         },
         methods: {
@@ -378,39 +387,78 @@
             getValues: function () {
 
                 var _this = this;
-                sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
-                this.step = true;
-                this.tabValue = 'SendTokens';
+                if (_this.address === '') {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required');
+                }
+                // else if(_this.mintAddress[0] === '0' && _this.mintAddress[1] === 'x')
+                // {
+                //     alertify.set('notifier', 'position', 'top-right');
+                //     alertify.error('Address field start with 0x');
+                // }
+                else if (_this.address.length > 42) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not greater than 42');
+                }
+                else if (_this.address.length < 42) {
+
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is not less than 42');
+                }
+                else if (_this.balance === 0) {
+
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else {
+                    sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
+                    this.step = true;
+                    this.tabValue = 'SendTokens';
+                }
 
 
             },
             getTokenValue: function () {
 
                 var _this = this;
-                burnTokens.getTokenValues(_this.burnTokenValue);
-                this.step = true;
-                this.tabValue = "Burn";
+
+                if (_this.burnTokenValue === 0) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field is required and not equal to 0 ');
+                }
+                else {
+                    burnTokens.getTokenValues(_this.burnTokenValue);
+                    this.step = true;
+                    this.tabValue = "Burn";
+                }
             },
-            getPrivateKey: function () {
+            getPrivateKey: function (e) {
 
                 var _this = this;
-                switch (this.tabValue) {
-                    case 'SendTokens':
-                        console.log('Send Token value is ' + this.tabValue);
-                        sendTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    case 'Burn' :
-                        console.log('Inside burn' + this.tabValue);
-                        burnTokens.getPrivateKey(_this.privateKey);
-                        _this.init();
-                        break;
-                    default:
-                        alert('Bye');
-                        _this.init();
-                        break;
+                e.preventDefault();
+                _this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
 
-                }
+                        switch (this.tabValue) {
+                            case 'SendTokens':
+                                console.log('Send Token value is ' + this.tabValue);
+                                sendTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            case 'Burn' :
+                                console.log('Inside burn' + this.tabValue);
+                                burnTokens.getPrivateKey(_this.privateKey);
+                                _this.init();
+                                break;
+                            default:
+                                alert('Bye');
+                                _this.init();
+                                break;
+
+                        }
+                    }
+                });
 
 
             },
@@ -423,6 +471,7 @@
                 _this.burnTokenValue = 0;
                 _this.step = false;
                 _this.tabValue = '';
+                _this.submitted = false;
 
             }
         }
