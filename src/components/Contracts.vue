@@ -28,8 +28,7 @@
                             <li><a data-toggle="pill" @click="step = false" href="#menu2">Mint</a></li>
                             <li><a data-toggle="pill" @click="step = false" href="#menu3">Pause</a></li>
                             <li><a data-toggle="pill" @click="step = false" href="#menu4">UnPause</a></li>
-                            <li><a data-toggle="pill" @click="step = false" href="#menu5">Update Rates</a></li>
-                            <li><a data-toggle="pill" @click="step = false" href="#menu6">Buy Token</a></li>
+                            <li><a data-toggle="pill" @click="step = false" href="#menu5">Update Rate</a></li>
                         </ul>
                         <div class="col-md-8 ">
                             <div class="tab-content">
@@ -152,41 +151,12 @@
 
                                     </div>
                                 </div>
-                                <div id="menu5" class="tab-pane fade in active">
+                                <div id="menu5" class="tab-pane fade ">
                                     <div class="tab-content">
                                         <div id="Mint" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount" required="required"
-                                                           v-model="balance" data-parsley-id="8" class="form-control">
-
-                                                </div>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div id="menu6" class="tab-pane fade">
-                                    <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
-                                                           v-model="address" data-parsley-id="8" class="form-control">
-
-                                                </div>
                                                 <div class="form-group">
                                                     <label>Value</label>
                                                     <input type="number" placeholder="Amount" required="required"

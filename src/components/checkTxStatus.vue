@@ -136,7 +136,7 @@
             </section>
         </div>
         <div v-if="txError === true">
-            <section class="block txstatus__2">
+            <section class="block txstatus__2 sh">
 
                 <div class="cont-md" >
                     <h3 class="text-danger ng-scope" translate="tx_notFound">Transaction Not Found</h3>
@@ -224,6 +224,7 @@
         min-height: 1.5rem;
         margin: 1rem auto;
         position: relative !important;
+        z-index: 99;
     }
 
     p {
