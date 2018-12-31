@@ -42,70 +42,17 @@
             </article>
         </section>
 
-        <div v-if="step == 2">
+        <div v-if="step == 2 ">
             <section class="block txstatus__2"
-                     ng-show="txInfo.status==txStatus.mined || txInfo.status==txStatus.notFound || txInfo.status==txStatus.found">
+                     >
 
-                <div class="cont-md"  v-if="txResposne">
+                <div class="cont-md" v-if=" txError == false">
                     <h3 class="text-success ng-scope" translate="tx_FoundOnChain">Transaction Found</h3>
                     <h5><a href="https://etherscan.io/tx/" target="_blank" rel="noopener noreferrer"
                            class="ng-binding"> </a></h5>
                     <p><strong translate="tx_FoundOnChain_1" class="ng-scope">Your transaction was successfully mined
                         and is on the blockchain.</strong></p>
-                    <!--<ul>-->
-                    <!--<li translate="tx_FoundOnChain_2" class="ng-scope"><strong>If you see a red <code>( ! )</code>,-->
-                    <!--a <code>BAD INSTRUCTION</code> or <code>OUT OF GAS</code> error message</strong>, it means-->
-                    <!--that the transaction was not successfully <em>sent</em>. You cannot cancel or replace this-->
-                    <!--transaction. Instead, send a new transaction. If you received an "Out of Gas" error, you-->
-                    <!--should double the gas limit you specified originally.-->
-                    <!--</li>-->
-                    <!--<li translate="tx_FoundOnChain_3" class="ng-scope"><strong>If you do not see any errors, your-->
-                    <!--transaction was successfully sent.</strong> Your ETH or Tokens are where you sent them. If-->
-                    <!--you cannot see this ETH or Tokens credited in your other wallet / exchange account, and it-->
-                    <!--has been 24+ hours since you sent, please <a target="_blank" rel="noopener noreferrer"-->
-                    <!--href="https://kb.myetherwallet.com/diving-deeper/ethereum-list-of-support-and-communities.html">contact-->
-                    <!--that service</a>. Send them the <em>link</em> to your transaction and ask them, nicely,-->
-                    <!--to look into your situation.-->
-                    <!--</li>-->
-                    <!--</ul>-->
-                </div>
-
-                <div class="cont-md ng-hide" v-if="txError === 'NULL' || txError === 'Returned error'" >
-                    <h3 class="text-danger ng-scope" translate="tx_notFound">Transaction Not Found</h3>
-                    <p>
-                        <strong translate="tx_notFound_1" class="ng-scope">This TX cannot be found in the TX Pool of the
-                            node you are connected to.</strong>
-                    </p>
-                    <ul>
-                        <li translate="tx_notFound_2" class="ng-scope">If you just sent the transaction, please wait 15
-                            seconds and press the "Check TX Status" button again.
-                        </li>
-                        <li translate="tx_notFound_3" class="ng-scope">It could still be in the TX Pool of a different
-                            node, waiting to be mined.
-                        </li>
-                        <li translate="tx_notFound_4" class="ng-scope">Please use the dropdown in the top-right &amp;
-                            select a different ETH node (e.g. <code>ETH (Etherscan.io)</code> or <code>ETH
-                                (Infura.io)</code> or <code>ETH (MyEtherWallet)</code>) and check again.
-                        </li>
-                    </ul>
-                </div>
-
-                <!--<div class="cont-md ng-hide" ng-show="txInfo.status == txStatus.found">-->
-                    <!--<h3 class="text-warning ng-scope" translate="tx_foundInPending">Pending Transaction Found</h3>-->
-                    <!--<ul>-->
-                        <!--<li translate="tx_foundInPending_1" class="ng-scope">Your transaction was located in the TX Pool-->
-                            <!--of the node you are connected to.-->
-                        <!--</li>-->
-                        <!--<li translate="tx_foundInPending_2" class="ng-scope">It is currently pending (waiting to be-->
-                            <!--mined).-->
-                        <!--</li>-->
-                        <!--<li translate="tx_foundInPending_3" class="ng-scope">There is a chance you can "cancel" or-->
-                            <!--replace this transaction. Unlock your wallet below.-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-
-                <div ng-show="txInfo.status == txStatus.found || txInfo.status == txStatus.mined" class="">
+                    <div v-if=" txError == false" class="">
                     <h4 translate="tx_Details" class="cont-md ng-scope">Transaction Details</h4>
                     <br>
                     <table class="table table-striped txstatus__2 cont-md">
@@ -181,29 +128,34 @@
                                 </small>
                             </td>
                         </tr>
-                        <!--
-                          <tr>
-                            <td>
-                              <a class="account-help-icon"
-                                 href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html"
-                                 target="_blank"
-                                 rel="noopener noreferrer">
-                                   <img src="images/icon-help.svg" class="help-icon" />
-                                   <p class="account-help-text" translate="TXFEE_Desc"></p>
-                              </a>
-                              <span translate="x_TXFee">
-                                TX Fee
-                              </span>
-                            </td>
-                            <td>
-                              ({{ txFee.eth }} ETH)
-                              <small>({{ txFee.usd }} USD)</small>
-                            </td>
-                          </tr>
-                        -->
+                        
                         </tbody>
                     </table>
                 </div>
+                </div>
+
+                <div class="cont-md ng-hide" v-if=" txError == true" >
+                    <h3 class="text-danger ng-scope" translate="tx_notFound">Transaction Not Found</h3>
+                    <p>
+                        <strong translate="tx_notFound_1" class="ng-scope">This TX cannot be found in the TX Pool of the
+                            node you are connected to.</strong>
+                    </p>
+                    <ul>
+                        <li translate="tx_notFound_2" class="ng-scope">If you just sent the transaction, please wait 15
+                            seconds and press the "Check TX Status" button again.
+                        </li>
+                        <li translate="tx_notFound_3" class="ng-scope">It could still be in the TX Pool of a different
+                            node, waiting to be mined.
+                        </li>
+                        <li translate="tx_notFound_4" class="ng-scope">Please use the dropdown in the top-right &amp;
+                            select a different ETH node (e.g. <code>ETH (Etherscan.io)</code> or <code>ETH
+                                (Infura.io)</code> or <code>ETH (MyEtherWallet)</code>) and check again.
+                        </li>
+                    </ul>
+                </div>
+
+
+                
             </section>
         </div>
 
@@ -218,7 +170,7 @@
                 txStatus: '',
                 submitted: false,
                 step: 1,
-                txError: '',
+                txError: false,
                 txResposne:'',
             }
         },
@@ -234,11 +186,14 @@
                         console.log("stsstuu siis" + _this.txStatus);
                         var resposne = transactionStatus.transactionStatus(_this.txStatus).then((res) => {
                             this.txResposne = res;
+                            this.txError = false;
 
                             console.log("REsposnen inside check statyus call" + this.txResposne);
                         }).catch((error) => {
-                            console.log("Error is  =>" + error.toString().split(":")[1]);
-                            this.txError = error.toString().split(":")[1];
+                           
+                            this.txResposne = error.toString().split(":")[0];
+                            this.txError = true;
+                             console.log("Error is  =>" + this.txResposne);
 
 
                         });
