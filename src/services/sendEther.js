@@ -51,7 +51,7 @@ export async function sendSigned(rawTransaction) {
 
     tx.sign(privKey);
     var serializedTx = tx.serialize().toString('hex');
-   await web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
+    await web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
         txHash = transactionHash;
         console.log("TxHash " + txHash);
     });

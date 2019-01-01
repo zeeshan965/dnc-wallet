@@ -356,7 +356,7 @@ export async function transactionStatus(txStatus) {
 
     var data;
 
-    await web3.eth.getTransactionReceipt(txStatus).then((res) => {
+    await web3.eth.getTransaction(txStatus).then((res) => {
         console.log("Trasancction staatus respsoe is zzzzzzzzzzzzzzzzzzzzzzzz" + JSON.stringify(res));
         data = res;
     });

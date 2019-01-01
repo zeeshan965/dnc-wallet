@@ -64,7 +64,7 @@
                             <td>
                                 <a href="https://ropsten.etherscan.io/tx/0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9"
                                    target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    {{ this.txResposne.transactionHash}}
+                                    {{ this.txResposne.hash}}
                                 </a>
                             </td>
                         </tr>
@@ -87,7 +87,7 @@
                         <tr>
                             <td translate="SEND_amount_short" class="ng-scope">Amount</td>
                             <td class="ng-binding">
-                                0 ETH
+                                {{ this.txResposne.value}}
                             </td>
                         </tr>
                         <tr>
@@ -99,7 +99,7 @@
                                 <span translate="OFFLINE_Step2_Label_5" class="ng-scope">Nonce</span>
                             </td>
                             <td class="ng-binding">
-                                377
+                                {{ this.txResposne.nonce}}
                             </td>
                         </tr>
                         <tr>
@@ -108,10 +108,10 @@
                                    href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html" target="_blank"
                                    rel="noopener noreferrer">
                                 </a>
-                                <span translate="OFFLINE_Step2_Label_4" class="ng-scope">Gas Limit</span>
+                                <span translate="OFFLINE_Step2_Label_4" class="ng-scope">Gas </span>
                             </td>
                             <td class="ng-binding">
-                                90000
+                                {{ this.txResposne.gas}}
                             </td>
                         </tr>
                         <tr>
@@ -123,10 +123,7 @@
                                 <span translate="OFFLINE_Step2_Label_3" class="ng-scope">Gas Price</span>
                             </td>
                             <td class="ng-binding">
-                                1 GWEI
-                                <small class="ng-binding">
-                                    (1000000000 WEI)
-                                </small>
+                                {{ this.txResposne.gasPrice}}
                             </td>
                         </tr>
 
