@@ -51,6 +51,7 @@
                                                            class="form-control">
 
                                                 </div>
+                                                <p style="color:white;"> {{ newres}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -202,7 +203,7 @@
                                                         <label data-v-92875dbe="">Enter Your Private Key</label>
                                                         <input v-model="privateKey
 
-" v-validate="{ required: true, min: 64 }" name="password" class="form-control"
+" v-validate="{ required: true, min: 64,max:64 }" name="password" class="form-control"
                                                                :class="{ 'is-invalid': submitted && errors.has('password') }"
                                                                data-v-92875dbe=""
                                                                type="password" placeholder=""
@@ -316,7 +317,8 @@
                 mintBalance: 0,
 
                 //Update Toekn  price
-                updateTokenValue: 0
+                updateTokenValue: 0,
+                newres:'',
             }
         },
         methods: {
@@ -522,6 +524,20 @@
                 }
 
                 },
+            getTxHash: async function(){
+                var resss;
+
+                var _this =this;
+
+
+                await sendTokens.getTransactionCount(_this.privateKey).then((res)=>{
+
+                    console.log("res 12345" + res);
+                    resss= res;
+                    console.log("resss" + resss);
+                });
+                console.log("res outside " + resss);
+            },
             getPrivateKey: function (e) {
 
                 var _this = this;
@@ -533,8 +549,18 @@
                         switch (this.tabValue) {
                             case 'SendTokens':
                                 console.log('Send Token value is ' + this.tabValue);
-                                sendTokens.getPrivateKey(_this.privateKey);
-                                _this.init();
+                                _this.getTxHash();
+                                setTimeout(function () {
+                                    var res =sendTokens.txxxxx();
+
+                                    res.then((res1)=>{
+                                        console.log("ssssssssssssssssssssssssss " + res1);
+                                        _this.newres =res1;
+                                    })
+                                },2000);
+
+
+                                // _this.init();
                                 break;
                             case 'Burn' :
                                 console.log('Inside burn' + this.tabValue);
