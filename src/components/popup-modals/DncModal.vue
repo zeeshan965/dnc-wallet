@@ -113,6 +113,8 @@
                                                    data-parsley-id="8" class="form-control" v-model="balance">
 
                                         </div>
+
+                                        <p style="color:white;"> {{ sendTokenTxHash}}</p>
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" data-target="#sendToken-modal"
 
@@ -157,6 +159,7 @@
                                                            v-model="burnTokenValue">
 
                                                 </div>
+                                                <p style="color:white;"> {{ burnTokenTxHash}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -305,15 +308,41 @@
                 //Burn Tokens
                 burnTokenValue: 0,
                 submitted: false,
+
+                //tx hash variables
+
+                sendTokenTxHash:'',
+                burnTokenTxHash:'',
+
+                //import file private key
+                importPrivateKey:'',
             }
         },
         methods: {
 
+
+            // get tx hash when importing file to get private key
+            getimportsendTokenTxHash: async function(){
+
+                var _this =this;
+
+                console.log("under Import file private key :" + _this.importPrivateKey);
+                await sendTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportburnTokenTxHash: async function(){
+
+                var _this =this;
+                await burnTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
             //Import file
             upload_link(e) {
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
+
+
 
             onFileSelected(e) {
                 e.preventDefault();
@@ -350,21 +379,44 @@
                         var jsonBackResposne;
                         var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
                             jsonBackResposne = res;
+
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
                                 case 'SendTokens':
                                     console.log('Send Token value is ' + this.tabValue);
-                                    sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                                    _this.init();
+                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
                                     // sendTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportsendTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =sendTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("send token tx hash  " + res);
+                                            _this.sendTokenTxHash =res;
+                                        })
+                                    },2000);
+                                    _this.init();
                                     break;
                                 case 'Burn' :
                                     console.log('Inside burn' + this.tabValue);
-                                    burnTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                                    _this.init();
+                                    // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
                                     // burnTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportburnTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =burnTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("burn token tx hash  " + res);
+                                            _this.burnTokenTxHash =res;
+                                        })
+                                    },2000);
+                                    _this.init();
                                     break;
                                 default:
                                     alert('Bye');
@@ -432,6 +484,24 @@
                     this.tabValue = "Burn";
                 }
             },
+
+
+
+            //get tx hash when providing prviate key from input
+            getsendTokenTxHash: async function(){
+
+                var _this =this;
+                await sendTokens.getTransactionCount(_this.privateKey);
+
+            },
+            getburnTokenTxHash: async function(){
+
+                var _this =this;
+                await burnTokens.getTransactionCount(_this.privateKey);
+
+            },
+
+
             getPrivateKey: function (e) {
 
                 var _this = this;
@@ -443,12 +513,30 @@
                         switch (this.tabValue) {
                             case 'SendTokens':
                                 console.log('Send Token value is ' + this.tabValue);
-                                sendTokens.getPrivateKey(_this.privateKey);
+                                _this.getsendTokenTxHash();
+                                setTimeout(function () {
+                                    var response =sendTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("send token tx hash  " + res);
+                                        _this.sendTokenTxHash =res;
+                                    })
+                                },2000);
+
+
                                 _this.init();
                                 break;
                             case 'Burn' :
                                 console.log('Inside burn' + this.tabValue);
-                                burnTokens.getPrivateKey(_this.privateKey);
+                                // burnTokens.getPrivateKey(_this.privateKey);
+
+                                _this.getburnTokenTxHash();
+                                setTimeout(function () {
+                                    var response =burnTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("burn token tx hash " + res);
+                                        _this.burnTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             default:

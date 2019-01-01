@@ -51,7 +51,7 @@
                                                            class="form-control">
 
                                                 </div>
-                                                <p style="color:white;"> {{ newres}}</p>
+                                                <p style="color:white;"> {{ sendTokenTxHash}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -76,6 +76,7 @@
                                                            class="form-control">
 
                                                 </div>
+                                                <p style="color:white;"> {{ burnTokenTxHash}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
 
@@ -109,6 +110,7 @@
 
 
                                                 </div>
+                                                <p style="color:white;"> {{ mintTokenTxHash}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -125,6 +127,7 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getPauseValues">
+                                                <p style="color:white;"> {{ pauseTokenTxHash}}</p>
                                                 <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -142,6 +145,7 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getUnPauseValues">
+                                                <p style="color:white;"> {{ unPauseTokenTxHash}}</p>
                                                 <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             @click="step = true"
@@ -160,6 +164,7 @@
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getUpdateTokenValue">
+                                                <p style="color:white;"> {{ updateTokenTxHash}}</p>
                                                 <div class="form-group">
                                                     <label>Value</label>
                                                     <input type="number" placeholder="Amount" name="balance"
@@ -318,10 +323,61 @@
 
                 //Update Toekn  price
                 updateTokenValue: 0,
-                newres:'',
+
+                //tx hash variables
+
+                sendTokenTxHash:'',
+                burnTokenTxHash:'',
+                mintTokenTxHash:'',
+                pauseTokenTxHash:'',
+                unPauseTokenTxHash:'',
+                updateTokenTxHash:'',
+
+                //import file private key
+                importPrivateKey:'',
             }
         },
         methods: {
+
+            // get tx hash when importing file to get private key
+            getimportsendTokenTxHash: async function(){
+
+                var _this =this;
+
+                console.log("under Import file private key :" + _this.importPrivateKey);
+                await sendTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportburnTokenTxHash: async function(){
+
+                var _this =this;
+                await burnTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportmintTokenTxHash: async function(){
+
+                var _this =this;
+                await mintTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportpauseTokenTxHash: async function(){
+
+                var _this =this;
+                await pauseTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportunpauseTokenTxHash: async function(){
+
+                var _this =this;
+                await unPauseTokens.getTransactionCount(_this.importPrivateKey);
+
+            },
+            getimportupdateTokenTxHash: async function(){
+
+                var _this =this;
+                await updateToken.getTransactionCount(_this.importPrivateKey);
+
+            },
 
             //Import file
             upload_link(e) {
@@ -365,40 +421,101 @@
                             jsonBackResposne = res;
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
                                 case 'SendTokens':
                                     console.log('Send Token value is ' + this.tabValue);
-                                    sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                                    _this.init();
+                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
                                     // sendTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportsendTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =sendTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("send token tx hash  " + res);
+                                            _this.sendTokenTxHash =res;
+                                        })
+                                    },2000);
+                                    _this.init();
                                     break;
                                 case 'Burn' :
                                     console.log('Inside burn' + this.tabValue);
-                                    burnTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                                    _this.init();
+                                    // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
                                     // burnTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportburnTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =burnTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("burn token tx hash  " + res);
+                                            _this.burnTokenTxHash =res;
+                                        })
+                                    },2000);
+                                    _this.init();
                                     break;
                                 case 'Mint' :
                                     console.log('Inside Mint' + this.tabValue);
-                                    mintTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                                    _this.init();
+                                    // mintTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
                                     // mintTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportmintTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =mintTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("mind token tx hash  " + res);
+                                            _this.mintTokenTxHash =res;
+                                        })
+                                    },2000);
+                                    _this.init();
                                     break;
                                 case 'Pause' :
                                     console.log('Inside Pause' + this.tabValue);
-                                    pauseTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    // pauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
+                                    _this.getimportpauseTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =pauseTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("pause token tx hash  " + res);
+                                            _this.pauseTokenTxHash =res;
+                                        })
+                                    },2000);
                                     _this.init();
                                     break;
                                 case 'Unpause' :
                                     console.log('Inside Unpause' + this.tabValue);
-                                    unPauseTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    // unPauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
+
+                                    _this.getimportunpauseTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =unPauseTokens.trxHash();
+                                        response.then((res)=>{
+                                            console.log("unpause token tx hash  " + res);
+                                            _this.unPauseTokenTxHash =res;
+                                        })
+                                    },2000);
                                     _this.init();
                                     break;
                                 case 'updateToken' :
                                     console.log('Inside Update Token' + this.tabValue);
-                                    updateToken.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                    // updateToken.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
+                                    _this.getimportupdateTokenTxHash();
+                                    setTimeout(function () {
+                                        var response =updateToken.trxHash();
+                                        response.then((res)=>{
+                                            console.log("update token tx hash  " + res);
+                                            _this.updateTokenTxHash =res;
+                                        })
+                                    },2000);
                                     _this.init();
+
                                     break;
                                 default:
                                     alert('Bye');
@@ -417,7 +534,8 @@
 
                 }
             },
-            // Send tokens Tab
+
+            // Get Tabs Value
             getValues: function () {
                 var _this = this;
                 console.log("Address 0 index " + _this.address[0]);
@@ -524,19 +642,43 @@
                 }
 
                 },
-            getTxHash: async function(){
-                var resss;
+
+            //get tx hash when providing prviate key from input
+            getsendTokenTxHash: async function(){
 
                 var _this =this;
+                await sendTokens.getTransactionCount(_this.privateKey);
 
+            },
+            getburnTokenTxHash: async function(){
 
-                await sendTokens.getTransactionCount(_this.privateKey).then((res)=>{
+                var _this =this;
+                await burnTokens.getTransactionCount(_this.privateKey);
 
-                    console.log("res 12345" + res);
-                    resss= res;
-                    console.log("resss" + resss);
-                });
-                console.log("res outside " + resss);
+            },
+            getmintTokenTxHash: async function(){
+
+                var _this =this;
+                await mintTokens.getTransactionCount(_this.privateKey);
+
+            },
+            getpauseTokenTxHash: async function(){
+
+                var _this =this;
+                await pauseTokens.getTransactionCount(_this.privateKey);
+
+            },
+            getunpauseTokenTxHash: async function(){
+
+                var _this =this;
+                await unPauseTokens.getTransactionCount(_this.privateKey);
+
+            },
+            getupdateTokenTxHash: async function(){
+
+                var _this =this;
+                await updateToken.getTransactionCount(_this.privateKey);
+
             },
             getPrivateKey: function (e) {
 
@@ -549,42 +691,89 @@
                         switch (this.tabValue) {
                             case 'SendTokens':
                                 console.log('Send Token value is ' + this.tabValue);
-                                _this.getTxHash();
+                                _this.getsendTokenTxHash();
                                 setTimeout(function () {
-                                    var res =sendTokens.txxxxx();
-
-                                    res.then((res1)=>{
-                                        console.log("ssssssssssssssssssssssssss " + res1);
-                                        _this.newres =res1;
+                                    var response =sendTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("send token tx hash  " + res);
+                                        _this.sendTokenTxHash =res;
                                     })
                                 },2000);
 
 
-                                // _this.init();
+                                _this.init();
                                 break;
                             case 'Burn' :
                                 console.log('Inside burn' + this.tabValue);
-                                burnTokens.getPrivateKey(_this.privateKey);
+                                // burnTokens.getPrivateKey(_this.privateKey);
+
+                                _this.getburnTokenTxHash();
+                                setTimeout(function () {
+                                    var response =burnTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("burn token tx hash " + res);
+                                        _this.burnTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             case 'Mint' :
                                 console.log('Inside Mint' + this.tabValue);
-                                mintTokens.getPrivateKey(_this.privateKey);
+                                // mintTokens.getPrivateKey(_this.privateKey);
+
+                                // _this.init();
+                                _this.getmintTokenTxHash();
+                                setTimeout(function () {
+                                    var response =mintTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("mint token tx hash " + res);
+                                        _this.mintTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             case 'Pause' :
                                 console.log('Inside Pause' + this.tabValue);
-                                pauseTokens.getPrivateKey(_this.privateKey);
+                                // pauseTokens.getPrivateKey(_this.privateKey);
+                                // _this.init();
+                                _this.getpauseTokenTxHash();
+                                setTimeout(function () {
+                                    var response =pauseTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("pause token tx hash " + res);
+                                        _this.pauseTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             case 'Unpause' :
                                 console.log('Inside Unpause' + this.tabValue);
-                                unPauseTokens.getPrivateKey(_this.privateKey);
+                                // unPauseTokens.getPrivateKey(_this.privateKey);
+                                // _this.init();
+
+                                _this.getunpauseTokenTxHash();
+                                setTimeout(function () {
+                                    var response =unPauseTokens.trxHash();
+                                    response.then((res)=>{
+                                        console.log("unpause token tx hash " + res);
+                                        _this.unPauseTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             case 'updateToken' :
                                 console.log('Inside updateToken' + this.tabValue);
-                                updateToken.getPrivateKey(_this.privateKey);
+                                // updateToken.getPrivateKey(_this.privateKey);
+                                // _this.init();
+
+                                _this.getupdateTokenTxHash();
+                                setTimeout(function () {
+                                    var response =updateToken.trxHash();
+                                    response.then((res)=>{
+                                        console.log("update Token token tx hash " + res);
+                                        _this.updateTokenTxHash =res;
+                                    })
+                                },2000);
                                 _this.init();
                                 break;
                             default:

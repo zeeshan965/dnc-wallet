@@ -265,35 +265,58 @@ var gasLimit;
 var privateKey;
 
 
-export function getPrivateKey(priKey) {
+// export function getPrivateKey(priKey) {
+//
+//
+//     console.log("Private KEy inside function is " + priKey);
+//
+//     privateKey = priKey;
+//
+//     this.getTransactionCount();
+//     return privateKey;
+// }
 
-    web3.eth.defaultAccount = fromAddress;
+web3.eth.defaultAccount = fromAddress;
     data = contract.methods.unpause().encodeABI();
-    console.log("Private KEy inside function is " + priKey);
-
-    privateKey = priKey;
-
-    this.getTransactionCount();
-    return privateKey;
-}
-
-
 gasPrice = web3.eth.getGasPrice().then(console.log);
 gasLimit = 700000;
+var txHash;
 
-export function sendSigned(rawTransaction) {
-    // console.log(rawTransaction);
-    var privKey = new Buffer(privateKey, 'hex');
-    // console.log(privKey);
-    const tx = new Tx(rawTransaction);
-    // console.log(tx);
+// export function sendSigned(rawTransaction) {
+//     // console.log(rawTransaction);
+//     var privKey = new Buffer(privateKey, 'hex');
+//     // console.log(privKey);
+//     const tx = new Tx(rawTransaction);
+//     // console.log(tx);
+//
+//     tx.sign(privKey);
+//     var serializedTx = tx.serialize().toString('hex');
+//     web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
+// }
+//
+// export function getTransactionCount() {
+//     web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
+//         var rawTransaction = {
+//             nonce: web3.utils.toHex(count),
+//             gasPrice: web3.utils.toHex(2000000000),
+//             gasLimit: web3.utils.toHex(gasLimit),
+//             to: contractAddress,
+//             data: data,
+//             from: fromAddress,
+//             _chainId: 0x03
+//         };
+//         // console.log(rawTransaction);
+//         sendSigned(rawTransaction);
+//         // sendSigned(rawTransaction).then(console.log);
+//
+//     }).catch((error) => {
+//         console.log(error);
+//     });
+// }
+//
 
-    tx.sign(privKey);
-    var serializedTx = tx.serialize().toString('hex');
-    web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', console.log);
-}
+export async function getTransactionCount(privateKey) {
 
-export function getTransactionCount() {
     web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
         var rawTransaction = {
             nonce: web3.utils.toHex(count),
@@ -304,12 +327,46 @@ export function getTransactionCount() {
             from: fromAddress,
             _chainId: 0x03
         };
+
+        console.log("Send fucntion private key: " + privateKey);
+
+        var privKey = new Buffer(privateKey, 'hex');
+        // console.log(privKey);
+        const tx = new Tx(rawTransaction);
+        // console.log("Trasnaction objecct "+tx);
+
+        tx.sign(privKey);
+        var serializedTx = tx.serialize().toString('hex');
+        // console.log("Serialized " + serializedTx);
+
+
+        var res = web3.eth.sendSignedTransaction('0x' + serializedTx).on('transactionHash', function (transactionHash) {
+            console.log("Transacction hash ::" + transactionHash);
+            txHash = transactionHash;
+            console.log("Txx Hashhh" + txHash);
+
+        });
+        setTimeout(function () {
+            console.log("tx outside is " + txHash);
+            return txHash;
+        }, 2000);
+
+
+
+
+
         // console.log(rawTransaction);
-        sendSigned(rawTransaction);
+        // sendSigned(rawTransaction);
         // sendSigned(rawTransaction).then(console.log);
 
     }).catch((error) => {
         console.log(error);
     });
+
+
 }
-    
+export  async function trxHash() {
+    console.log("tx sssdsdsdsdsdsdsd" + txHash);
+    return txHash;
+
+}

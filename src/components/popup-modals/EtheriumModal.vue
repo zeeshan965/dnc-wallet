@@ -108,6 +108,7 @@
                                                    data-parsley-id="8" class="form-control" v-model="balance">
 
                                         </div>
+                                        <p style="color:white;"> {{ sendEtherTxHash}}</p>
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" data-target="#sendToken-modal"
 
@@ -248,10 +249,25 @@
                 privateKey: '',
                 step: false,
                 submitted: false,
-                txHash: sendEther.txHash,
+
+                sendEtherTxHash:'',
+
+
+                //import file private key
+                importPrivateKey:'',
             }
         },
         methods: {
+
+            // get tx hash when importing file to get private key
+            getimportsenEtherTxHash: async function(){
+
+                var _this =this;
+
+                console.log("under Import file private key :" + _this.importPrivateKey);
+                await sendEther.getTransactionCount(_this.importPrivateKey);
+
+            },
             //Import file
             upload_link(e) {
                 e.preventDefault();
@@ -295,11 +311,24 @@
                             jsonBackResposne = res;
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
-                                case 'SendTokens':
-                                    console.log('Send Token value is ' + this.tabValue);
-                                    sendEther.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                                case 'SendEther':
+                                    console.log('Send ether value is ' + this.tabValue);
+                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                    // _this.init();
+                                    // sendTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getimportsenEtherTxHash();
+                                    setTimeout(function () {
+                                        var response =sendEther.trxHash();
+                                        response.then((res)=>{
+                                            console.log("send ether tx hash  " + res);
+                                            _this.sendEtherTxHash =res;
+                                        })
+                                    },2000);
                                     _this.init();
                                     break;
                                 default:
@@ -318,7 +347,13 @@
 
                 }
             },
+            //get tx hash when providing prviate key from input
+            getsendEtherTxHash: async function(){
 
+                var _this =this;
+                await sendEther.getTransactionCount(_this.privateKey);
+
+            },
             getPrivateKey(e) {
                 console.log("Private Key  =>" + this.privateKey);
                 var _this = this;
@@ -326,12 +361,18 @@
                 _this.submitted = true;
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        sendEther.getPrivateKey(this.privateKey);
-                        // setTimeout(function () {
-                        //     alert("Trx Hash is " + _this.txHash);
-                        // },3000);
+                        console.log('Send Ether value is ' + this.tabValue);
+                        _this.getsendEtherTxHash();
+                        setTimeout(function () {
+                            var response =sendEther.trxHash();
+                            response.then((res)=>{
+                                console.log("send ether tx hash  " + res);
+                                _this.sendEtherTxHash =res;
+                            })
+                        },2000);
 
-                        this.init();
+
+                        _this.init();
                     }
                 });
             },
@@ -366,6 +407,7 @@
                     sendEther.gettoAddress(this.address);
                     sendEther.getTokenValue(this.balance);
                     this.step = true;
+                    this.tabValue ="SendEther"
                 }
             },
             init: function () {
