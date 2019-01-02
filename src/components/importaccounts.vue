@@ -96,6 +96,10 @@
 
 
                                     </div>
+                                    <div v-if="loader == true">
+                                        <vue-simple-spinner></vue-simple-spinner>
+                                    </div>
+
 
                                 </section>
                                 <!--passWord section-->
@@ -155,6 +159,10 @@
                                         </form>
                                     </div>
 
+                                    <div v-if="loader == true">
+                                        <vue-simple-spinner></vue-simple-spinner>
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -179,6 +187,7 @@
     export default {
         data: function () {
             return {
+                loader: false,
                 step: 1,
                 userKey: '',
                 userPassword: '',
@@ -269,7 +278,10 @@
 
                 _this.$validator.validate().then(valid => {
                     if (valid) {
+
+                        _this.loader = true;
                         setTimeout(() => {
+
 
                             _this.walletResponse = WalletService.unlockAccount(_this.userKey, '123456789');
                             console.log('Unclocked ===> ' + _this.walletResponse);
@@ -280,34 +292,36 @@
                                 _this.user.password = "";
                                 _this.step = 1;
                             } else {
-                                WalletService.addresses.push(this.walletResponse.address);
 
-                                //Eth Private Balance
-                                var myBalance;
-                                var balance = WalletService.getBalance(this.walletResponse.address).then((res) => {
-                                    myBalance = res;
-                                    console.log('Response inside get balance ' + myBalance);
-                                });
-                                setTimeout(() => {
-                                    console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
-                                    WalletService.addressesBlancess.push(myBalance);
-                                    console.log('First address is ' + addressesBlancess[0]);
-                                }, 3000);
+                                setTimeout(function () {
+                                    WalletService.addresses.push(_this.walletResponse.address);
 
-                                //DNC Private Balance
-                                var myDNCBalance;
-                                var balancednc = DncTokenBalance.getDncBalance(this.walletResponse.address).then((dncres) => {
-                                    myDNCBalance = dncres;
-                                    console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
-                                });
+                                    //Eth Private Balance
+                                    var myBalance;
+                                    var balance = WalletService.getBalance(_this.walletResponse.address).then((res) => {
+                                        myBalance = res;
+                                        console.log('Response inside get balance ' + myBalance);
+                                    });
+                                    setTimeout(() => {
+                                        console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
+                                        WalletService.addressesBlancess.push(myBalance);
+                                        console.log('First address is ' + addressesBlancess[0]);
+                                    }, 3000);
 
-                                setTimeout(() => {
-                                    console.log("Balcne i get for dnc is" + myDNCBalance);
-                                    WalletService.dncAddressesBlancess.push(myDNCBalance);
-                                    console.log("DNC first Address is " + dncAddressesBlancess[0]);
-                                }, 3000);
+                                    //DNC Private Balance
+                                    var myDNCBalance;
+                                    var balancednc = DncTokenBalance.getDncBalance(_this.walletResponse.address).then((dncres) => {
+                                        myDNCBalance = dncres;
+                                        console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
+                                    });
 
+                                    setTimeout(() => {
+                                        console.log("Balcne i get for dnc is" + myDNCBalance);
+                                        WalletService.dncAddressesBlancess.push(myDNCBalance);
+                                        console.log("DNC first Address is " + dncAddressesBlancess[0]);
+                                    }, 3000);
 
+                                }, 1000);
                                 // alert('Unlocked address ===> ' + WalletService.addresses);
 
                                 router.push('/');
@@ -345,61 +359,64 @@
                     var password = _this.user.password;
                     $('#spinnerr').show();
                     console.log(password);
+                    _this.loader=true;
                     console.log('two');
                     var jsonBackResposne;
                     var jsonResponseError;
                     var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
                         jsonBackResposne = res;
-                    }).catch((e)=>{
+                    }).catch((e) => {
                         console.log("Error " + e);
-                        jsonResponseError =e;
+                        jsonResponseError = e;
                     });
-                    if(jsonResponseError){
+                    if (jsonResponseError) {
                         alertify.set('notifier', 'position', 'top-right');
                         alertify.error("Possibly Wrong Password");
-                        _this.user.password ='';
+                        _this.user.password = '';
                         return;
                     }
 
-
-                    console.log('Datazzzz ' + _this.json_Data.address);
-
-
-                    console.log('three');
-                    WalletService.addresses.push(_this.json_Data.address);
-
-                    console.log("Json resposne is  " + _this.json_Data);
+                    setTimeout(function () {
+                        console.log('Datazzzz ' + _this.json_Data.address);
 
 
-                    console.log("Json resposne is  " + _this.json_Data);
+                        console.log('three');
+                        WalletService.addresses.push(_this.json_Data.address);
 
-                    //Eth key Store Balance
-                    var keystoreBalance;
-                    var balance = WalletService.getBalance(_this.json_Data.address).then((res) => {
-                        keystoreBalance = res;
-                        console.log('Response inside get balance ' + keystoreBalance);
-                    });
+                        console.log("Json resposne is  " + _this.json_Data);
 
-                    setTimeout(() => {
-                        console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
-                        WalletService.addressesBlancess.push(keystoreBalance);
-                        console.log('First address is ' + addressesBlancess[0]);
-                    }, 3000);
 
-                    //DNC  Keystore Balance
+                        console.log("Json resposne is  " + _this.json_Data);
 
-                    var myDNCkeyStoreBalance;
-                    var keystoreBalancednc = DncTokenBalance.getDncBalance(_this.json_Data.address).then((dncres) => {
-                        myDNCkeyStoreBalance = dncres;
-                        console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
-                    });
+                        //Eth key Store Balance
+                        var keystoreBalance;
+                        var balance = WalletService.getBalance(_this.json_Data.address).then((res) => {
+                            keystoreBalance = res;
+                            console.log('Response inside get balance ' + keystoreBalance);
+                        });
 
-                    setTimeout(() => {
-                        console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
-                        WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
-                        console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
-                    }, 3000);
+                        setTimeout(() => {
+                            console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
+                            WalletService.addressesBlancess.push(keystoreBalance);
+                            console.log('First address is ' + addressesBlancess[0]);
+                        }, 3000);
 
+                        //DNC  Keystore Balance
+
+                        var myDNCkeyStoreBalance;
+                        var keystoreBalancednc = DncTokenBalance.getDncBalance(_this.json_Data.address).then((dncres) => {
+                            myDNCkeyStoreBalance = dncres;
+                            console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
+                        });
+
+                        setTimeout(() => {
+                            console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
+                            WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
+                            console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
+                        }, 3000);
+
+
+                    }, 1000);
 
                     router.push('/');
 
