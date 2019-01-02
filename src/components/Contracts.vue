@@ -327,6 +327,7 @@
     export default {
         data: function () {
             return {
+
                 //Json import file
                 fileName: '',
                 tabValue: '',
