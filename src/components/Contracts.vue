@@ -34,7 +34,7 @@
                             <div class="tab-content">
                                 <div id="home" class="tab-pane fade in active">
                                     <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
+                                        <div id="Mintt" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getValues">
@@ -51,7 +51,6 @@
                                                            class="form-control">
 
                                                 </div>
-                                                <p style="color:white;"> {{ sendTokenTxHash}}</p>
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -60,12 +59,15 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        <div v-if="sendTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ sendTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="menu1" class="tab-pane fade">
                                     <div class="tab-content">
-                                        <div id="" class="tab-pane active">
+                                        <div id="menu11" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getTokenValue">
@@ -76,7 +78,7 @@
                                                            class="form-control">
 
                                                 </div>
-                                                <p style="color:white;"> {{ burnTokenTxHash}}</p>
+                                                <!--<p style="color:white;"> {{ burnTokenTxHash}}</p>-->
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
 
@@ -86,12 +88,15 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        <div v-if="burnTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ burnTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="menu2" class="tab-pane fade">
                                     <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
+                                        <div id="menu22" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getMintValues">
@@ -110,7 +115,7 @@
 
 
                                                 </div>
-                                                <p style="color:white;"> {{ mintTokenTxHash}}</p>
+                                                <!--<p style="color:white;"> {{ mintTokenTxHash}}</p>-->
                                                 <div class="form-group text-right m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -119,15 +124,20 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div v-if="mintTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ mintTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div id="menu3" class="tab-pane fade">
                                     <div class="tab-content">
-                                        <div id="" class="tab-pane active">
+                                        <div id="menu33" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getPauseValues">
-                                                <p style="color:white;"> {{ pauseTokenTxHash}}</p>
+                                                <!--<p style="color:white;"> {{ pauseTokenTxHash}}</p>-->
                                                 <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
@@ -136,16 +146,20 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        <div v-if="pauseTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ pauseTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div id="menu4" class="tab-pane fade">
                                     <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
+                                        <div id="menu44" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getUnPauseValues">
-                                                <p style="color:white;"> {{ unPauseTokenTxHash}}</p>
+                                                <!--<p style="color:white;"> {{ unPauseTokenTxHash}}</p>-->
                                                 <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             @click="step = true"
@@ -155,16 +169,20 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        <div v-if="unPauseTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ unPauseTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div id="menu5" class="tab-pane fade ">
                                     <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
+                                        <div id="menu55" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getUpdateTokenValue">
-                                                <p style="color:white;"> {{ updateTokenTxHash}}</p>
+                                                <!--<p style="color:white;"> {{ updateTokenTxHash}}</p>-->
                                                 <div class="form-group">
                                                     <label>Value</label>
                                                     <input type="number" placeholder="Amount" name="balance"
@@ -180,7 +198,10 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        <div v-if="updateTokenTxHash">
+                                            <h2>Save your hash</h2>
+                                            <p style="color:white;"> {{ updateTokenTxHash }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -690,6 +711,9 @@
 
                         switch (this.tabValue) {
                             case 'SendTokens':
+                                setTimeout(function () {
+                                    $('#Mintt').hide();
+                                },1000);
                                 console.log('Send Token value is ' + this.tabValue);
                                 _this.getsendTokenTxHash();
                                 setTimeout(function () {
@@ -704,6 +728,9 @@
                                 _this.init();
                                 break;
                             case 'Burn' :
+                                setTimeout(function () {
+                                    $('#menu11').hide();
+                                },1000);
                                 console.log('Inside burn' + this.tabValue);
                                 // burnTokens.getPrivateKey(_this.privateKey);
 
@@ -718,6 +745,9 @@
                                 _this.init();
                                 break;
                             case 'Mint' :
+                                setTimeout(function () {
+                                    $('#menu22').hide();
+                                },1000);
                                 console.log('Inside Mint' + this.tabValue);
                                 // mintTokens.getPrivateKey(_this.privateKey);
 
@@ -733,6 +763,9 @@
                                 _this.init();
                                 break;
                             case 'Pause' :
+                                setTimeout(function () {
+                                    $('#menu33').hide();
+                                },1000);
                                 console.log('Inside Pause' + this.tabValue);
                                 // pauseTokens.getPrivateKey(_this.privateKey);
                                 // _this.init();
@@ -747,6 +780,9 @@
                                 _this.init();
                                 break;
                             case 'Unpause' :
+                                setTimeout(function () {
+                                    $('#menu44').hide();
+                                },1000);
                                 console.log('Inside Unpause' + this.tabValue);
                                 // unPauseTokens.getPrivateKey(_this.privateKey);
                                 // _this.init();
@@ -762,6 +798,9 @@
                                 _this.init();
                                 break;
                             case 'updateToken' :
+                                setTimeout(function () {
+                                    $('#menu55').hide();
+                                },1000);
                                 console.log('Inside updateToken' + this.tabValue);
                                 // updateToken.getPrivateKey(_this.privateKey);
                                 // _this.init();

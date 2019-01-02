@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <ul class="nav nav-pills">
-                            <li class="active"><a data-toggle="pill" href="#home">Keystore / Jason File</a></li>
+                            <li class="active"><a data-toggle="pill" href="#home">Keystore / Json File</a></li>
                             <li><a data-toggle="pill" href="#menu1">Private key</a></li>
                         </ul>
 
@@ -226,7 +226,7 @@
                 }
                 if (this.fileName.includes('.png')) {
                     setTimeout(() => {
-                        
+
                      alertify.set('notifier','position', 'top-right');
                      alertify.error('Invalid file format');
                     }, 2000);
