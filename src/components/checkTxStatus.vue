@@ -43,7 +43,7 @@
         </section>
 
         <div v-if="txError === false">
-            <section class="block txstatus__2">
+            <section class="block1 txstatus__2">
 
                 <div class="cont-md">
                     <h3 class="text-success ng-scope" translate="tx_FoundOnChain">Transaction Found</h3>
@@ -214,6 +214,16 @@
 
 <style scoped>
     .block {
+        margin: 1.5rem 2rem !important;
+        background-color: #262c3b;
+        -webkit-box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        padding: 1.5rem 2rem;
+        min-height: 1.5rem;
+        margin: 1rem auto;
+        position: relative !important;
+    }
+    .block1{
         margin: 1.5rem 2rem !important;
         background-color: #262c3b;
         -webkit-box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
