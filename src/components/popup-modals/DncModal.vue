@@ -243,6 +243,11 @@
                                                 </button>
                                             </div>
                                         </form>
+
+                                    </div>
+
+                                    <div v-if="loader == true">
+                                        <vue-simple-spinner></vue-simple-spinner>
                                     </div>
                                     <div id="jasonFile" class="tab-pane ">
                                         <div>
@@ -278,7 +283,25 @@
                                                 </li>
                                             </ul>
                                             <br>
-                                            <div class="form-group">
+                                            <!--<div class="form-group">-->
+
+                                                <!--<input id="upload" type="file" @change="onFileSelected"-->
+                                                       <!--style="display:none"/>-->
+                                                <!--<a tabindex="0" type="file" role="button"-->
+                                                   <!--class="btn btn-primary  ng-hide"-->
+                                                   <!--id="upload_link" @click="upload_link"-->
+                                                   <!--translate="ADD_Label_6_short">SELECT-->
+                                                    <!--WALLET-->
+                                                    <!--FILE...-->
+
+
+                                                <!--</a>-->
+                                                <!--&nbsp;-->
+                                                <!--<span style="color:#fff">{{this.fileName}}</span>-->
+
+                                            <!--</div>-->
+
+                                            <div v-if="jsonStep == 1" class="form-group">
 
                                                 <input id="upload" type="file" @change="onFileSelected"
                                                        style="display:none"/>
@@ -294,6 +317,29 @@
                                                 &nbsp;
                                                 <span style="color:#fff">{{this.fileName}}</span>
 
+                                            </div>
+                                            <div v-if="jsonStep == 2">
+                                                <form @submit.prevent="handlePassword">
+                                                    <div class="form-group">
+                                                        <label htmlFor="password">Password</label>
+                                                        <input type="password" v-model="user.password"
+                                                               class="form-control"
+                                                        />
+                                                        <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
+                                                        <!--class="invalid-feedback">{{ errors.first('password') }}-->
+                                                        <!--</div>-->
+                                                    </div>
+                                                    <!--passWord section-->
+                                                    <button type="submit" class="btn btn-primary">Enter
+                                                        Password
+                                                    </button>
+
+                                                </form>
+
+
+                                            </div>
+                                            <div v-if="loader == true">
+                                                <vue-simple-spinner></vue-simple-spinner>
                                             </div>
                                         </div>
                                     </div>
@@ -335,6 +381,12 @@
 
                 //import file private key
                 importPrivateKey: '',
+                loader:false,
+                json_Data: '',
+                jsonStep: 1,
+                user: {
+                    password: ''
+                },
             }
         },
         methods: {
@@ -360,7 +412,6 @@
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
-
 
             onFileSelected(e) {
                 e.preventDefault();
@@ -389,61 +440,10 @@
                     reader.onload = (e) => {
 
 
-                        var json_Data = e.target.result;
+                        _this.json_Data = e.target.result;
 
-
-                        // json_Data = json_Data;
-                        console.log("Json resposne is  " + json_Data);
-                        var jsonBackResposne;
-                        var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
-                            jsonBackResposne = res;
-
-                            console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                            console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-                            console.log("Import file private key :" + _this.importPrivateKey);
-
-                            switch (this.tabValue) {
-                                case 'SendTokens':
-                                    console.log('Send Token value is ' + this.tabValue);
-                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // sendTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportsendTokenTxHash();
-                                    setTimeout(function () {
-                                        var response = sendTokens.trxHash();
-                                        response.then((res) => {
-                                            console.log("send token tx hash  " + res);
-                                            _this.sendTokenTxHash = res;
-                                        })
-                                    }, 2000);
-                                    _this.init();
-                                    break;
-                                case 'Burn' :
-                                    console.log('Inside burn' + this.tabValue);
-                                    // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // burnTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportburnTokenTxHash();
-                                    setTimeout(function () {
-                                        var response = burnTokens.trxHash();
-                                        response.then((res) => {
-                                            console.log("burn token tx hash  " + res);
-                                            _this.burnTokenTxHash = res;
-                                        })
-                                    }, 2000);
-                                    _this.init();
-                                    break;
-                                default:
-                                    alert('Bye');
-                                    _this.init();
-                                    break;
-
-                            }
-                            // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                        });
+                        _this.json_Data = JSON.parse(_this.json_Data);
+                        _this.jsonStep = 2;
 
 
                     };
@@ -453,6 +453,193 @@
 
                 }
             },
+            handlePassword: async function (e) {
+                console.log("Button  zzzzzzzzzzzzzzzzzz");
+                var _this = this;
+                e.preventDefault();
+                console.log("Submiitted" + _this.submitted);
+                _this.submitted = true;
+                console.log("Submiitted" + _this.submitted);
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater thaan or equal to 9');
+                }
+                else {
+                    var password = _this.user.password;
+                    $('#spinnerr').show();
+                    _this.loader = true;
+                    console.log(password);
+                    console.log('two');
+                    // json_Data = json_Data;
+                    console.log("Json resposne is  " + _this.json_Data);
+                    var jsonBackResposne;
+
+                    var jsonResponseError;
+
+                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
+                        jsonBackResposne = res;
+
+                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                    }).catch((e) => {
+                        console.log("Error is" + e);
+                        jsonResponseError = e;
+                    });
+                    if (jsonResponseError) {
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error("Possibly Wrong Password");
+                        _this.user.password = '';
+                        return;
+                    }
+                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
+                    console.log("Import file private key :" + _this.importPrivateKey);
+
+
+                    switch (this.tabValue) {
+                        case 'SendTokens':
+                            setTimeout(function () {
+                                setTimeout(function () {
+                                    $('#Mintt').hide();
+                                }, 1000);
+                                console.log('Send Token value is ' + this.tabValue);
+                                // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                // _this.init();
+                                // sendTokens.getPrivateKey(_this.privateKey);
+
+                                _this.getimportsendTokenTxHash();
+                                setTimeout(function () {
+                                    var response = sendTokens.trxHash();
+                                    response.then((res) => {
+                                        console.log("send token tx hash  " + res);
+                                        _this.sendTokenTxHash = res;
+                                    })
+                                }, 2000);
+                                _this.init();
+                            }, 1000);
+                            break;
+                        case 'Burn':
+                            setTimeout(function () {
+                                setTimeout(function () {
+                                    $('#menu11').hide();
+                                }, 1000);
+                                console.log('Inside burn' + this.tabValue);
+                                // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                // _this.init();
+                                // burnTokens.getPrivateKey(_this.privateKey);
+
+                                _this.getimportburnTokenTxHash();
+                                setTimeout(function () {
+                                    var response = burnTokens.trxHash();
+                                    response.then((res) => {
+                                        console.log("burn token tx hash  " + res);
+                                        _this.burnTokenTxHash = res;
+                                    })
+                                }, 2000);
+                                _this.init();
+                            }, 2000);
+                            break;
+
+                        default:
+                            alert('Bye');
+                            _this.init();
+                            break;
+
+                    }
+                }
+
+            },
+            // onFileSelected(e) {
+            //     e.preventDefault();
+            //     //    console.log(e);
+            //     var _this = this;
+            //     this.fileName = e.target.files[0].name;
+            //     var newFileName = this.fileName.split('.');
+            //     console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
+            //
+            //     if (newFileName[1].length > 46 || newFileName[1].length < 46) {
+            //         alertify.set('notifier', 'position', 'top-right');
+            //         alertify.error('Invalid file format');
+            //         this.fileName = '';
+            //         return false;
+            //     }
+            //     console.log('File Name ' + this.fileName);
+            //
+            //     // Reference to the DOM input element
+            //     var input = event.target;
+            //     // Ensure that you have a file before attempting to read it
+            //     if (input.files && input.files[0]) {
+            //         // create a new FileReader to read this image and convert to base64 format
+            //         var reader = new FileReader();
+            //         // Define a callback function to run, when FileReader finishes its job
+            //
+            //         reader.onload = (e) => {
+            //
+            //
+            //             var json_Data = e.target.result;
+            //
+            //
+            //             // json_Data = json_Data;
+            //             console.log("Json resposne is  " + json_Data);
+            //             var jsonBackResposne;
+            //             var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
+            //                 jsonBackResposne = res;
+            //
+            //                 console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+            //                 console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+            //                 _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
+            //                 console.log("Import file private key :" + _this.importPrivateKey);
+            //
+            //                 switch (this.tabValue) {
+            //                     case 'SendTokens':
+            //                         console.log('Send Token value is ' + this.tabValue);
+            //                         // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+            //                         // _this.init();
+            //                         // sendTokens.getPrivateKey(_this.privateKey);
+            //
+            //                         _this.getimportsendTokenTxHash();
+            //                         setTimeout(function () {
+            //                             var response = sendTokens.trxHash();
+            //                             response.then((res) => {
+            //                                 console.log("send token tx hash  " + res);
+            //                                 _this.sendTokenTxHash = res;
+            //                             })
+            //                         }, 2000);
+            //                         _this.init();
+            //                         break;
+            //                     case 'Burn' :
+            //                         console.log('Inside burn' + this.tabValue);
+            //                         // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+            //                         // _this.init();
+            //                         // burnTokens.getPrivateKey(_this.privateKey);
+            //
+            //                         _this.getimportburnTokenTxHash();
+            //                         setTimeout(function () {
+            //                             var response = burnTokens.trxHash();
+            //                             response.then((res) => {
+            //                                 console.log("burn token tx hash  " + res);
+            //                                 _this.burnTokenTxHash = res;
+            //                             })
+            //                         }, 2000);
+            //                         _this.init();
+            //                         break;
+            //                     default:
+            //                         alert('Bye');
+            //                         _this.init();
+            //                         break;
+            //
+            //                 }
+            //                 // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+            //             });
+            //
+            //
+            //         };
+            //         // Start the reader job - read file
+            //         reader.readAsText(input.files[0]);
+            //
+            //
+            //     }
+            // },
             // Send tokens Tab
             getValues: function () {
 
@@ -518,7 +705,6 @@
 
             },
 
-
             getPrivateKey: function (e) {
 
                 var _this = this;
@@ -526,36 +712,50 @@
                 _this.submitted = true;
                 this.$validator.validate().then(valid => {
                     if (valid) {
-
+                        _this.loader = true;
                         switch (this.tabValue) {
+
                             case 'SendTokens':
-                                console.log('Send Token value is ' + this.tabValue);
-                                _this.getsendTokenTxHash();
                                 setTimeout(function () {
-                                    var response = sendTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("send token tx hash  " + res);
-                                        _this.sendTokenTxHash = res;
-                                    })
+                                    setTimeout(function () {
+                                        $('#Mintt').hide();
+                                    }, 1000);
+
+                                    console.log('Send Token value is ' + _this.tabValue);
+                                    _this.getsendTokenTxHash();
+                                    setTimeout(function () {
+                                        var response = sendTokens.trxHash();
+                                        response.then((res) => {
+                                            console.log("send token tx hash  " + res);
+                                            _this.sendTokenTxHash = res;
+                                        })
+                                    }, 2000);
+
+                                    _this.init();
                                 }, 2000);
 
 
-                                _this.init();
                                 break;
                             case 'Burn' :
-                                console.log('Inside burn' + this.tabValue);
-                                // burnTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getburnTokenTxHash();
                                 setTimeout(function () {
-                                    var response = burnTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("burn token tx hash " + res);
-                                        _this.burnTokenTxHash = res;
-                                    })
+                                    setTimeout(function () {
+                                        $('#menu11').hide();
+                                    }, 1000);
+                                    console.log('Inside burn' + this.tabValue);
+                                    // burnTokens.getPrivateKey(_this.privateKey);
+
+                                    _this.getburnTokenTxHash();
+                                    setTimeout(function () {
+                                        var response = burnTokens.trxHash();
+                                        response.then((res) => {
+                                            console.log("burn token tx hash " + res);
+                                            _this.burnTokenTxHash = res;
+                                        })
+                                    }, 2000);
+                                    _this.init();
                                 }, 2000);
-                                _this.init();
                                 break;
+
                             default:
                                 alert('Bye');
                                 _this.init();
@@ -567,6 +767,54 @@
 
 
             },
+            // getPrivateKey: function (e) {
+            //
+            //     var _this = this;
+            //     e.preventDefault();
+            //     _this.submitted = true;
+            //     this.$validator.validate().then(valid => {
+            //         if (valid) {
+            //
+            //             switch (this.tabValue) {
+            //                 case 'SendTokens':
+            //                     console.log('Send Token value is ' + this.tabValue);
+            //                     _this.getsendTokenTxHash();
+            //                     setTimeout(function () {
+            //                         var response = sendTokens.trxHash();
+            //                         response.then((res) => {
+            //                             console.log("send token tx hash  " + res);
+            //                             _this.sendTokenTxHash = res;
+            //                         })
+            //                     }, 2000);
+            //
+            //
+            //                     _this.init();
+            //                     break;
+            //                 case 'Burn' :
+            //                     console.log('Inside burn' + this.tabValue);
+            //                     // burnTokens.getPrivateKey(_this.privateKey);
+            //
+            //                     _this.getburnTokenTxHash();
+            //                     setTimeout(function () {
+            //                         var response = burnTokens.trxHash();
+            //                         response.then((res) => {
+            //                             console.log("burn token tx hash " + res);
+            //                             _this.burnTokenTxHash = res;
+            //                         })
+            //                     }, 2000);
+            //                     _this.init();
+            //                     break;
+            //                 default:
+            //                     alert('Bye');
+            //                     _this.init();
+            //                     break;
+            //
+            //             }
+            //         }
+            //     });
+            //
+            //
+            // },
             init: function () {
 
                 var _this = this;
@@ -577,6 +825,10 @@
                 _this.step = false;
                 _this.tabValue = '';
                 _this.submitted = false;
+                _this.jsonStep = 1;
+                _this.loader=false;
+                _this.user.password ='';
+                _this.fileName ='';
 
             }
         }

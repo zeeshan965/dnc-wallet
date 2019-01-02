@@ -89,8 +89,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="!sendEtherTxHash">
+
                         <div class="tab-pane" id="22">
+                            <div v-if="!sendEtherTxHash">
                             <div class="tab-content">
                                 <div>
                                     <br>
@@ -121,14 +122,15 @@
                                 </div>
 
                             </div>
+                            </div>
+                            <div v-if="sendEtherTxHash">
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label>Save your hash</label>
+                                    <input type="text" v-model="sendEtherTxHash"
+                                           class="form-control"></div>
+                            </div>
                         </div>
-                        </div>
-                        <div v-if="sendEtherTxHash">
-                            <div class="form-group" style="margin-top: 20px;">
-                                <label>Save your hash</label>
-                                <input type="text" v-model="sendEtherTxHash"
-                                       class="form-control"></div>
-                        </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close
                             </button>
@@ -149,7 +151,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <div class="tab-content">
+                                <div  class="tab-content">
                                     <div id="privateKey" class="tab-pane active">
                                         <form data-v-92875dbe="" action="#"
                                               @submit.prevent="getPrivateKey" data-parsley-validate=""
@@ -177,7 +179,11 @@
                                                 </button>
                                             </div>
                                         </form>
+                                        <div v-if="loader == true">
+                                            <vue-simple-spinner></vue-simple-spinner>
+                                        </div>
                                     </div>
+
                                     <div id="jasonFile" class="tab-pane ">
                                         <div>
                                             <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
@@ -212,14 +218,12 @@
                                                 </li>
                                             </ul>
                                             <br>
-                                            <div class="form-group">
+                                            <div class="form-group" v-if="jsonStep == 1">
 
                                                 <input id="upload" type="file" @change="onFileSelected"
                                                        style="display:none"/>
-                                                <a tabindex="0" type="file" role="button"
-                                                   class="btn btn-primary  ng-hide"
-                                                   id="upload_link" @click="upload_link"
-                                                   translate="ADD_Label_6_short">SELECT
+                                                <a tabindex="0" type="file" role="button" class="btn btn-primary  ng-hide"
+                                                   id="upload_link" @click="upload_link" translate="ADD_Label_6_short">SELECT
                                                     WALLET
                                                     FILE...
 
@@ -229,7 +233,29 @@
                                                 <span style="color:#fff">{{this.fileName}}</span>
 
                                             </div>
+                                            <div v-if="jsonStep == 2">
+                                                <form @submit.prevent="handlePassword">
+                                                    <div class="form-group">
+                                                        <label htmlFor="password">Password</label>
+                                                        <input type="password" v-model="user.password"
+                                                               class="form-control"
+                                                        />
+                                                        <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
+                                                        <!--class="invalid-feedback">{{ errors.first('password') }}-->
+                                                        <!--</div>-->
+                                                    </div>
+                                                    <!--passWord section-->
+                                                    <button type="submit" class="btn btn-primary">Enter Password</button>
+
+                                                </form>
+
+
+                                            </div>
+                                            <div v-if="loader == true">
+                                                <vue-simple-spinner></vue-simple-spinner>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -263,6 +289,14 @@
 
                 //import file private key
                 importPrivateKey: '',
+
+
+                loader:false,
+                json_Data: '',
+                jsonStep: 1,
+                user: {
+                    password: ''
+                },
             }
         },
         methods: {
@@ -281,6 +315,81 @@
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
+
+            // onFileSelected(e) {
+            //     e.preventDefault();
+            //     //    console.log(e);
+            //     var _this = this;
+            //     this.fileName = e.target.files[0].name;
+            //     var newFileName = this.fileName.split('.');
+            //     console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
+            //
+            //     if (newFileName[1].length > 46 || newFileName[1].length < 46) {
+            //         alertify.set('notifier', 'position', 'top-right');
+            //         alertify.error('Invalid file format');
+            //         this.fileName = '';
+            //         return false;
+            //     }
+            //     console.log('File Name ' + this.fileName);
+            //
+            //     // Reference to the DOM input element
+            //     var input = event.target;
+            //     // Ensure that you have a file before attempting to read it
+            //     if (input.files && input.files[0]) {
+            //         // create a new FileReader to read this image and convert to base64 format
+            //         var reader = new FileReader();
+            //         // Define a callback function to run, when FileReader finishes its job
+            //
+            //         reader.onload = (e) => {
+            //
+            //
+            //             var json_Data = e.target.result;
+            //
+            //
+            //             // json_Data = json_Data;
+            //             console.log("Json resposne is  " + json_Data);
+            //             var jsonBackResposne;
+            //             var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
+            //                 jsonBackResposne = res;
+            //                 console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+            //                 console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+            //                 _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
+            //                 console.log("Import file private key :" + _this.importPrivateKey);
+            //
+            //                 switch (this.tabValue) {
+            //                     case 'SendEther':
+            //                         console.log('Send ether value is ' + this.tabValue);
+            //                         // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+            //                         // _this.init();
+            //                         // sendTokens.getPrivateKey(_this.privateKey);
+            //
+            //                         _this.getimportsenEtherTxHash();
+            //                         setTimeout(function () {
+            //                             var response = sendEther.trxHash();
+            //                             response.then((res) => {
+            //                                 console.log("send ether tx hash  " + res);
+            //                                 _this.sendEtherTxHash = res;
+            //                             })
+            //                         }, 2000);
+            //                         _this.init();
+            //                         break;
+            //                     default:
+            //                         alert('Bye');
+            //                         _this.init();
+            //                         break;
+            //
+            //                 }
+            //             });
+            //
+            //
+            //         };
+            //         // Start the reader job - read file
+            //         reader.readAsText(input.files[0]);
+            //
+            //
+            //     }
+            // },
+
 
             onFileSelected(e) {
                 e.preventDefault();
@@ -309,43 +418,10 @@
                     reader.onload = (e) => {
 
 
-                        var json_Data = e.target.result;
+                        _this.json_Data = e.target.result;
 
-
-                        // json_Data = json_Data;
-                        console.log("Json resposne is  " + json_Data);
-                        var jsonBackResposne;
-                        var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
-                            jsonBackResposne = res;
-                            console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                            console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-                            console.log("Import file private key :" + _this.importPrivateKey);
-
-                            switch (this.tabValue) {
-                                case 'SendEther':
-                                    console.log('Send ether value is ' + this.tabValue);
-                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // sendTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportsenEtherTxHash();
-                                    setTimeout(function () {
-                                        var response = sendEther.trxHash();
-                                        response.then((res) => {
-                                            console.log("send ether tx hash  " + res);
-                                            _this.sendEtherTxHash = res;
-                                        })
-                                    }, 2000);
-                                    _this.init();
-                                    break;
-                                default:
-                                    alert('Bye');
-                                    _this.init();
-                                    break;
-
-                            }
-                        });
+                        _this.json_Data = JSON.parse(_this.json_Data);
+                        _this.jsonStep = 2;
 
 
                     };
@@ -354,6 +430,81 @@
 
 
                 }
+            },
+            handlePassword: async function (e) {
+                console.log("Button  zzzzzzzzzzzzzzzzzz");
+                var _this = this;
+                e.preventDefault();
+                console.log("Submiitted" + _this.submitted);
+                _this.submitted = true;
+                console.log("Submiitted" + _this.submitted);
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater thaan or equal to 9');
+                }
+                else {
+                    var password = _this.user.password;
+                    $('#spinnerr').show();
+                    _this.loader = true;
+                    console.log(password);
+                    console.log('two');
+                    // json_Data = json_Data;
+                    console.log("Json resposne is  " + _this.json_Data);
+                    var jsonBackResposne;
+
+                    var jsonResponseError;
+
+                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
+                        jsonBackResposne = res;
+
+                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                    }).catch((e) => {
+                        console.log("Error is" + e);
+                        jsonResponseError = e;
+                    });
+                    if (jsonResponseError) {
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error("Possibly Wrong Password");
+                        _this.user.password = '';
+                        return;
+                    }
+                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
+                    console.log("Import file private key :" + _this.importPrivateKey);
+
+
+                    switch (this.tabValue) {
+                        case 'SendEther':
+                            setTimeout(function () {
+                                setTimeout(function () {
+                                    $('#Mintt').hide();
+                                }, 1000);
+                                console.log('Send Ether value is ' + _this.tabValue);
+                                sendEther.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                                // _this.init();
+                                // sendTokens.getPrivateKey(_this.privateKey);
+
+                                _this.getsendEtherTxHash();
+                                setTimeout(function () {
+                                    var response = sendEther.trxHash();
+                                    response.then((res) => {
+                                        console.log("send ether tx hash  " + res);
+                                        _this.sendEtherTxHash = res;
+                                    })
+                                }, 2000);
+                                _this.init();
+                            }, 1000);
+                            break;
+
+                        default:
+                            alert('Bye');
+                            _this.init();
+                            break;
+
+                    }
+                }
+
             },
             //get tx hash when providing prviate key from input
             getsendEtherTxHash: async function () {
@@ -369,18 +520,21 @@
                 _this.submitted = true;
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        console.log('Send Ether value is ' + this.tabValue);
-                        _this.getsendEtherTxHash();
-                        setTimeout(function () {
-                            var response = sendEther.trxHash();
-                            response.then((res) => {
-                                console.log("send ether tx hash  " + res);
-                                _this.sendEtherTxHash = res;
-                            })
-                        }, 2000);
+                        _this.loader = true;
+                        setTimeout(() => {
+                            console.log('Send Ether value is ' + this.tabValue);
+                            _this.getsendEtherTxHash();
+                            setTimeout(function () {
+                                var response = sendEther.trxHash();
+                                response.then((res) => {
+                                    console.log("send ether tx hash  " + res);
+                                    _this.sendEtherTxHash = res;
+                                })
+                            }, 2000);
 
 
-                        _this.init();
+                            _this.init();
+                        },2000);
                     }
                 });
             },
@@ -426,6 +580,11 @@
 
                 _this.step = false;
                 _this.tabValue = '';
+
+                _this.jsonStep = 1;
+                _this.loader=false;
+                _this.user.password ='';
+                _this.fileName ='';
 
             }
         }
