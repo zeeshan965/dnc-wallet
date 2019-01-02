@@ -252,6 +252,9 @@
                                                         </button>
                                                     </div>
                                                 </form>
+                                                <div v-if="loader == true">
+                                                    <vue-simple-spinner></vue-simple-spinner>
+                                                </div>
                                             </div>
                                             <div id="jasonFile" class="tab-pane ">
                                                 <div>
@@ -330,6 +333,7 @@
     export default {
         data: function () {
             return {
+                loader: false,
                 //Json import file
                 fileName: '',
                 tabValue: '',
@@ -723,7 +727,7 @@
                                       })
                                   }, 2000);
                                   _this.init();
-                              },1000)
+                              },2000)
                                 break;
                             case 'Burn' :
                                 setTimeout(function () {
