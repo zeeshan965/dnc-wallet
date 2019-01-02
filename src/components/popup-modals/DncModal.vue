@@ -330,28 +330,28 @@
 
                 //tx hash variables
 
-                sendTokenTxHash:'',
-                burnTokenTxHash:'',
+                sendTokenTxHash: '',
+                burnTokenTxHash: '',
 
                 //import file private key
-                importPrivateKey:'',
+                importPrivateKey: '',
             }
         },
         methods: {
 
 
             // get tx hash when importing file to get private key
-            getimportsendTokenTxHash: async function(){
+            getimportsendTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
 
                 console.log("under Import file private key :" + _this.importPrivateKey);
                 await sendTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportburnTokenTxHash: async function(){
+            getimportburnTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await burnTokens.getTransactionCount(_this.importPrivateKey);
 
             },
@@ -360,7 +360,6 @@
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
-
 
 
             onFileSelected(e) {
@@ -401,7 +400,7 @@
 
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
                             console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
@@ -413,12 +412,12 @@
 
                                     _this.getimportsendTokenTxHash();
                                     setTimeout(function () {
-                                        var response =sendTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = sendTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("send token tx hash  " + res);
-                                            _this.sendTokenTxHash =res;
+                                            _this.sendTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 case 'Burn' :
@@ -429,12 +428,12 @@
 
                                     _this.getimportburnTokenTxHash();
                                     setTimeout(function () {
-                                        var response =burnTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = burnTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("burn token tx hash  " + res);
-                                            _this.burnTokenTxHash =res;
+                                            _this.burnTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 default:
@@ -505,17 +504,16 @@
             },
 
 
-
             //get tx hash when providing prviate key from input
-            getsendTokenTxHash: async function(){
+            getsendTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await sendTokens.getTransactionCount(_this.privateKey);
 
             },
-            getburnTokenTxHash: async function(){
+            getburnTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await burnTokens.getTransactionCount(_this.privateKey);
 
             },
@@ -534,12 +532,12 @@
                                 console.log('Send Token value is ' + this.tabValue);
                                 _this.getsendTokenTxHash();
                                 setTimeout(function () {
-                                    var response =sendTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = sendTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("send token tx hash  " + res);
-                                        _this.sendTokenTxHash =res;
+                                        _this.sendTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
 
 
                                 _this.init();
@@ -550,12 +548,12 @@
 
                                 _this.getburnTokenTxHash();
                                 setTimeout(function () {
-                                    var response =burnTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = burnTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("burn token tx hash " + res);
-                                        _this.burnTokenTxHash =res;
+                                        _this.burnTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             default:

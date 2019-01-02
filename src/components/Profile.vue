@@ -15,7 +15,8 @@
                                         <div class="form-group">
                                             <label for="email-field">Email</label>
 
-                                            <input type="text" id="email-field" class="form-control" placeholder="Email">
+                                            <input type="text" id="email-field" class="form-control"
+                                                   placeholder="Email">
 
 
                                         </div>
@@ -23,7 +24,8 @@
                                         <div class="form-group">
                                             <label for="password-field">Password</label>
 
-                                            <input type="text" id="password-field" class="form-control" placeholder="Password">
+                                            <input type="text" id="password-field" class="form-control"
+                                                   placeholder="Password">
 
 
                                         </div>
@@ -31,7 +33,8 @@
                                         <div class="form-group">
                                             <label for="confirm-password-field">Confirm Password</label>
 
-                                            <input type="text" id="confirm-password-field" class="form-control" placeholder="Confirm Password">
+                                            <input type="text" id="confirm-password-field" class="form-control"
+                                                   placeholder="Confirm Password">
 
 
                                         </div>
@@ -39,7 +42,8 @@
                                         <div class="form-group">
                                             <label for="current-password-field">Current Password</label>
 
-                                            <input type="text" id="current-password-field" class="form-control" placeholder="Current Password">
+                                            <input type="text" id="current-password-field" class="form-control"
+                                                   placeholder="Current Password">
                                         </div>
                                     </div>
                                 </div>
@@ -61,8 +65,6 @@
 </template>
 
 <script>
-    export default {
-
-    }
+    export default {}
 
 </script>

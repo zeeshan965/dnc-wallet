@@ -27,9 +27,9 @@
             NewWallet,
             DncModal,
             EtheriumModal,
-           // BitcoinModal
+            // BitcoinModal
         },
-        mounted: function(){
+        mounted: function () {
             $(".modal").modal('hide');
         }
     }

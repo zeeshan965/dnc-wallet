@@ -258,19 +258,19 @@
                 step: false,
                 submitted: false,
 
-                sendEtherTxHash:'',
+                sendEtherTxHash: '',
 
 
                 //import file private key
-                importPrivateKey:'',
+                importPrivateKey: '',
             }
         },
         methods: {
 
             // get tx hash when importing file to get private key
-            getimportsenEtherTxHash: async function(){
+            getimportsenEtherTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
 
                 console.log("under Import file private key :" + _this.importPrivateKey);
                 await sendEther.getTransactionCount(_this.importPrivateKey);
@@ -319,7 +319,7 @@
                             jsonBackResposne = res;
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
                             console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
@@ -331,12 +331,12 @@
 
                                     _this.getimportsenEtherTxHash();
                                     setTimeout(function () {
-                                        var response =sendEther.trxHash();
-                                        response.then((res)=>{
+                                        var response = sendEther.trxHash();
+                                        response.then((res) => {
                                             console.log("send ether tx hash  " + res);
-                                            _this.sendEtherTxHash =res;
+                                            _this.sendEtherTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 default:
@@ -356,9 +356,9 @@
                 }
             },
             //get tx hash when providing prviate key from input
-            getsendEtherTxHash: async function(){
+            getsendEtherTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await sendEther.getTransactionCount(_this.privateKey);
 
             },
@@ -372,12 +372,12 @@
                         console.log('Send Ether value is ' + this.tabValue);
                         _this.getsendEtherTxHash();
                         setTimeout(function () {
-                            var response =sendEther.trxHash();
-                            response.then((res)=>{
+                            var response = sendEther.trxHash();
+                            response.then((res) => {
                                 console.log("send ether tx hash  " + res);
-                                _this.sendEtherTxHash =res;
+                                _this.sendEtherTxHash = res;
                             })
-                        },2000);
+                        }, 2000);
 
 
                         _this.init();
@@ -385,11 +385,10 @@
                 });
             },
             getAddressAndTokenValue() {
-                var _this =this;
+                var _this = this;
                 console.log("Address is =>" + this.address);
                 console.log("Balance is =>" + this.balance);
-                if(_this.address === '')
-                {
+                if (_this.address === '') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
@@ -398,16 +397,16 @@
                 //     alertify.set('notifier', 'position', 'top-right');
                 //     alertify.error('Address field start with 0x');
                 // }
-                else if(_this.address.length > 42){
+                else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not greater than 42');
                 }
-                else if(_this.address.length < 42){
+                else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not less than 42');
                 }
-                else if(_this.balance === 0){
+                else if (_this.balance === 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required and not equal to 0 ');
                 }
@@ -415,7 +414,7 @@
                     sendEther.gettoAddress(this.address);
                     sendEther.getTokenValue(this.balance);
                     this.step = true;
-                    this.tabValue ="SendEther"
+                    this.tabValue = "SendEther"
                 }
             },
             init: function () {

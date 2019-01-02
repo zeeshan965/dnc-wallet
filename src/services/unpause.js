@@ -255,7 +255,7 @@ var abi = [{
 var contractAddress = "0x3a84b2d899253a0D01aC89B948DB376c9af06064";
 var contract = new web3.eth.Contract(abi, contractAddress);
 
-var fromAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
+// var fromAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
 // var privateKey = "c5e727fb526b73466e4c5c94d8c92fac960a35e9355b3235a5c209d4a2083613";
 // var toAddress = "0x41e98269C80a7133De019261f6F4d96d77cc6821";
 // var tokenValue = 10;
@@ -263,6 +263,8 @@ var data;
 var gasPrice;
 var gasLimit;
 var privateKey;
+
+var fromAddress;
 
 
 // export function getPrivateKey(priKey) {
@@ -276,8 +278,8 @@ var privateKey;
 //     return privateKey;
 // }
 
-web3.eth.defaultAccount = fromAddress;
-    data = contract.methods.unpause().encodeABI();
+// web3.eth.defaultAccount = fromAddress;
+data = contract.methods.unpause().encodeABI();
 gasPrice = web3.eth.getGasPrice().then(console.log);
 gasLimit = 700000;
 var txHash;
@@ -315,7 +317,28 @@ var txHash;
 // }
 //
 
+var Wallet = require('ethereumjs-wallet');
+
 export async function getTransactionCount(privateKey) {
+
+    var privKey = new Buffer(privateKey, 'hex');
+    var wallet = Wallet.fromPrivateKey(privKey);
+    var unlocked = wallet.toV3String('123456789');
+
+    var unlooked_json = JSON.parse(unlocked);
+
+    console.log("unlocked json " + unlooked_json.address);
+
+    // var parivateKeyCheck = Wallet.fromPrivateKey(userPrivateKey);
+
+    var add_0x = '0x';
+    fromAddress = add_0x + unlooked_json.address;
+
+    console.log("From address" + fromAddress);
+
+
+    web3.eth.defaultAccount = fromAddress;
+
 
     web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
         var rawTransaction = {
@@ -330,7 +353,7 @@ export async function getTransactionCount(privateKey) {
 
         console.log("Send fucntion private key: " + privateKey);
 
-        var privKey = new Buffer(privateKey, 'hex');
+        // var privKey = new Buffer(privateKey, 'hex');
         // console.log(privKey);
         const tx = new Tx(rawTransaction);
         // console.log("Trasnaction objecct "+tx);
@@ -352,9 +375,6 @@ export async function getTransactionCount(privateKey) {
         }, 2000);
 
 
-
-
-
         // console.log(rawTransaction);
         // sendSigned(rawTransaction);
         // sendSigned(rawTransaction).then(console.log);
@@ -365,7 +385,8 @@ export async function getTransactionCount(privateKey) {
 
 
 }
-export  async function trxHash() {
+
+export async function trxHash() {
     console.log("tx sssdsdsdsdsdsdsd" + txHash);
     return txHash;
 

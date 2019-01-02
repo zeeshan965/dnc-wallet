@@ -12,6 +12,7 @@ import BitcoinModal from './components/popup-modals/BitcoinModal.vue'
 
 import Spinner from 'vue-simple-spinner'
 import router from './router'
+
 Vue.component('topbar', Topbar)
 Vue.component('sidebar', Sidebar)
 Vue.component('project-footer', Footer)
@@ -23,10 +24,11 @@ Vue.component('etherium-modal', EtheriumModal)
 Vue.component('BitcoinModal', BitcoinModal)
 Vue.component('vue-simple-spinner', Spinner)
 import VeeValidate from "vee-validate";
+
 Vue.use(VeeValidate);
 
 Vue.config.productionTip = false
 new Vue({
-  router,
-  render: h => h(App)
+    router,
+    render: h => h(App)
 }).$mount('#app')

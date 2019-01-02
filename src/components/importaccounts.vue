@@ -148,10 +148,6 @@
                                             <button type="submit" class="btn btn-primary">Enter Password</button>
 
                                         </form>
-                                        <div id="spinnerr" style="display: none">
-
-                                            <vue-simple-spinner></vue-simple-spinner>
-                                        </div>
 
 
                                     </div>
