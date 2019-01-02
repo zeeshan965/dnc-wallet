@@ -226,7 +226,7 @@
                 }
                 if (this.fileName.includes('.png')) {
                     setTimeout(() => {
-                        
+
                      alertify.set('notifier','position', 'top-right');
                      alertify.error('Invalid file format');
                     }, 2000);
@@ -362,7 +362,7 @@
                                 }, 3000);
 
 
-                                alert('Unlocked address ===> ' + WalletService.addresses);
+                                // alert('Unlocked address ===> ' + WalletService.addresses);
 
                                 router.push('/');
 

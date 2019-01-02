@@ -26,7 +26,6 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="dnc-details">
                             <div>
-
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <p><img src="assets/images/icon/dinar-icon3.png"> DinarCoin (DNC)</p>
@@ -96,6 +95,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="dnc-send-transfer">
+                            <div v-if="!sendTokenTxHash">
                             <div class="tab-content">
                                 <div id="Mint" class="tab-pane active">
                                     <br>
@@ -114,7 +114,7 @@
 
                                         </div>
 
-                                        <p style="color:white;"> {{ sendTokenTxHash}}</p>
+
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" data-target="#sendToken-modal"
 
@@ -126,10 +126,19 @@
                                 </div>
 
                             </div>
-
+                            </div>
+                            <div v-if="sendTokenTxHash">
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label>Save your hash</label>
+                                    <input type="text" v-model="sendTokenTxHash"
+                                           class="form-control">
+                                </div>
+                            </div>
                         </div>
+
                         <div class="tab-pane" id="dnc-mint-burn">
                             <p></p>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <ul class="nav nav-tabs navtab-custom">
@@ -146,6 +155,8 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    <div v-if="!burnTokenTxHash">
+
                                     <div class="tab-content">
                                         <div id="Mint" class="tab-pane active">
                                             <br>
@@ -173,7 +184,15 @@
 
                                 </div>
                             </div>
+                            </div>
                             <p></p>
+                            <div v-if="burnTokenTxHash">
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label>Save your hash</label>
+                                    <input type="text" v-model="burnTokenTxHash"
+                                           class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close

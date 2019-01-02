@@ -32,95 +32,103 @@
                         </ul>
                         <div class="col-md-8 ">
                             <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
-                                    <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address" required="required"
-                                                           v-model="address" data-parsley-id="8" class="form-control">
+                                <div v-if="!sendTokenTxHash">
+                                    <div id="home" class="tab-pane fade in active">
+                                        <div class="tab-content">
+                                            <div id="Mint" class="tab-pane active">
+                                                <br>
+                                                <form action="#" data-parsley-validate="" novalidate="novalidate"
+                                                      @submit.prevent="getValues">
+                                                    <div class="form-group">
+                                                        <label>Recipient Address</label>
+                                                        <input type="text" placeholder="Address" required="required"
+                                                               v-model="address" data-parsley-id="8" class="form-control">
 
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount"
-                                                           v-model="balance" data-parsley-id="8"
-                                                           class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Value</label>
+                                                        <input type="number" placeholder="Amount"
+                                                               v-model="balance" data-parsley-id="8"
+                                                               class="form-control">
 
-                                                </div>
-                                                <p style="color:white;"> {{ sendTokenTxHash}}</p>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                                    </div>
 
-                                    </div>
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <div class="tab-content">
-                                        <div id="" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getTokenValue">
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount"
-                                                           v-model="burnTokenValue" data-parsley-id="8"
-                                                           class="form-control">
+                                                    <div class="form-group text-right m-b-0">
+                                                        <button type="submit" data-target="#sendToken-modal"
+                                                                class="btn btn-default waves-effect waves-light">
+                                                            Generate Transaction
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
 
-                                                </div>
-                                                <p style="color:white;"> {{ burnTokenTxHash}}</p>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div id="menu2" class="tab-pane fade">
-                                    <div class="tab-content">
-                                        <div id="Mint" class="tab-pane active">
-                                            <br>
-                                            <form action="#" data-parsley-validate="" novalidate="novalidate"
-                                                  @submit.prevent="getMintValues">
-                                                <div class="form-group">
-                                                    <label>Recipient Address</label>
-                                                    <input type="text" placeholder="Address"
-                                                           v-model="mintAddress" data-parsley-id="8"
-                                                           class="form-control">
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Value</label>
-                                                    <input type="number" placeholder="Amount"
-                                                           v-model="mintBalance" data-parsley-id="8"
-                                                           class="form-control">
-
-
-                                                </div>
-                                                <p style="color:white;"> {{ mintTokenTxHash}}</p>
-                                                <div class="form-group text-right m-b-0">
-                                                    <button type="submit" data-target="#sendToken-modal"
-                                                            class="btn btn-default waves-effect waves-light">
-                                                        Generate Transaction
-                                                    </button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
+                                <div v-if="!burnTokenTxHash">
+                                    <div id="menu1" class="tab-pane fade">
+                                        <div class="tab-content">
+                                            <div id="" class="tab-pane active">
+                                                <br>
+                                                <form action="#" data-parsley-validate="" novalidate="novalidate"
+                                                      @submit.prevent="getTokenValue">
+                                                    <div class="form-group">
+                                                        <label>Value</label>
+                                                        <input type="number" placeholder="Amount"
+                                                               v-model="burnTokenValue" data-parsley-id="8"
+                                                               class="form-control">
+
+                                                    </div>
+                                                    <p style="color:white;"> {{ burnTokenTxHash}}</p>
+                                                    <div class="form-group text-right m-b-0">
+                                                        <button type="submit" data-target="#sendToken-modal"
+
+                                                                class="btn btn-default waves-effect waves-light">
+                                                            Generate Transaction
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="!mintTokenTxHash">
+                                    <div id="menu2" class="tab-pane fade">
+                                        <div class="tab-content">
+                                            <div id="Mint" class="tab-pane active">
+                                                <br>
+                                                <form action="#" data-parsley-validate="" novalidate="novalidate"
+                                                      @submit.prevent="getMintValues">
+                                                    <div class="form-group">
+                                                        <label>Recipient Address</label>
+                                                        <input type="text" placeholder="Address"
+                                                               v-model="mintAddress" data-parsley-id="8"
+                                                               class="form-control">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Value</label>
+                                                        <input type="number" placeholder="Amount"
+                                                               v-model="mintBalance" data-parsley-id="8"
+                                                               class="form-control">
+
+
+                                                    </div>
+                                                    <p style="color:white;"> {{ mintTokenTxHash}}</p>
+                                                    <div class="form-group text-right m-b-0">
+                                                        <button type="submit" data-target="#sendToken-modal"
+                                                                class="btn btn-default waves-effect waves-light">
+                                                            Generate Transaction
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div v-if="!pauseTokenTxHash">
                                 <div id="menu3" class="tab-pane fade">
                                     <div class="tab-content">
                                         <div id="" class="tab-pane active">
@@ -139,6 +147,8 @@
 
                                     </div>
                                 </div>
+                                </div>
+                                <div v-if="!unPauseTokenTxHash">
                                 <div id="menu4" class="tab-pane fade">
                                     <div class="tab-content">
                                         <div id="Mint" class="tab-pane active">
@@ -158,6 +168,8 @@
 
                                     </div>
                                 </div>
+                                </div>
+                                <div v-if="!updateTokenTxHash">
                                 <div id="menu5" class="tab-pane fade ">
                                     <div class="tab-content">
                                         <div id="Mint" class="tab-pane active">
@@ -183,7 +195,45 @@
 
                                     </div>
                                 </div>
+                                </div>
 
+                                <div v-if="pauseTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="pauseTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
+                                <div v-if="unPauseTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="unPauseTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
+                                <div v-if="updateTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="updateTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
+                                <div v-if="mintTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="mintTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
+
+                                <div v-if="burnTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="burnTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
+                                <div v-if="sendTokenTxHash">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label>Save your hash</label>
+                                        <input type="text" v-model="sendTokenTxHash"
+                                               class="form-control"></div>
+                                </div>
                                 <!--modal start -->
                                 <div v-if="step === true">
                                     <div class=" p-0" style="margin-top: 15px">
@@ -326,55 +376,55 @@
 
                 //tx hash variables
 
-                sendTokenTxHash:'',
-                burnTokenTxHash:'',
-                mintTokenTxHash:'',
-                pauseTokenTxHash:'',
-                unPauseTokenTxHash:'',
-                updateTokenTxHash:'',
+                sendTokenTxHash: '',
+                burnTokenTxHash: '',
+                mintTokenTxHash: '',
+                pauseTokenTxHash: '',
+                unPauseTokenTxHash: '',
+                updateTokenTxHash: '',
 
                 //import file private key
-                importPrivateKey:'',
+                importPrivateKey: '',
             }
         },
         methods: {
 
             // get tx hash when importing file to get private key
-            getimportsendTokenTxHash: async function(){
+            getimportsendTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
 
                 console.log("under Import file private key :" + _this.importPrivateKey);
                 await sendTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportburnTokenTxHash: async function(){
+            getimportburnTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await burnTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportmintTokenTxHash: async function(){
+            getimportmintTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await mintTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportpauseTokenTxHash: async function(){
+            getimportpauseTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await pauseTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportunpauseTokenTxHash: async function(){
+            getimportunpauseTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await unPauseTokens.getTransactionCount(_this.importPrivateKey);
 
             },
-            getimportupdateTokenTxHash: async function(){
+            getimportupdateTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await updateToken.getTransactionCount(_this.importPrivateKey);
 
             },
@@ -421,7 +471,7 @@
                             jsonBackResposne = res;
                             console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
                             console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
+                            _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
                             console.log("Import file private key :" + _this.importPrivateKey);
 
                             switch (this.tabValue) {
@@ -433,13 +483,14 @@
 
                                     _this.getimportsendTokenTxHash();
                                     setTimeout(function () {
-                                        var response =sendTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = sendTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("send token tx hash  " + res);
-                                            _this.sendTokenTxHash =res;
+                                            _this.sendTokenTxHash = res;
                                         })
-                                    },2000);
-                                    _this.init();
+                                    }, 2000);
+                                    hashValue = true,
+                                        _this.init();
                                     break;
                                 case 'Burn' :
                                     console.log('Inside burn' + this.tabValue);
@@ -449,12 +500,12 @@
 
                                     _this.getimportburnTokenTxHash();
                                     setTimeout(function () {
-                                        var response =burnTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = burnTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("burn token tx hash  " + res);
-                                            _this.burnTokenTxHash =res;
+                                            _this.burnTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 case 'Mint' :
@@ -465,12 +516,12 @@
 
                                     _this.getimportmintTokenTxHash();
                                     setTimeout(function () {
-                                        var response =mintTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = mintTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("mind token tx hash  " + res);
-                                            _this.mintTokenTxHash =res;
+                                            _this.mintTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 case 'Pause' :
@@ -479,12 +530,12 @@
                                     // _this.init();
                                     _this.getimportpauseTokenTxHash();
                                     setTimeout(function () {
-                                        var response =pauseTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = pauseTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("pause token tx hash  " + res);
-                                            _this.pauseTokenTxHash =res;
+                                            _this.pauseTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 case 'Unpause' :
@@ -494,12 +545,12 @@
 
                                     _this.getimportunpauseTokenTxHash();
                                     setTimeout(function () {
-                                        var response =unPauseTokens.trxHash();
-                                        response.then((res)=>{
+                                        var response = unPauseTokens.trxHash();
+                                        response.then((res) => {
                                             console.log("unpause token tx hash  " + res);
-                                            _this.unPauseTokenTxHash =res;
+                                            _this.unPauseTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
                                     break;
                                 case 'updateToken' :
@@ -508,12 +559,12 @@
                                     // _this.init();
                                     _this.getimportupdateTokenTxHash();
                                     setTimeout(function () {
-                                        var response =updateToken.trxHash();
-                                        response.then((res)=>{
+                                        var response = updateToken.trxHash();
+                                        response.then((res) => {
                                             console.log("update token tx hash  " + res);
-                                            _this.updateTokenTxHash =res;
+                                            _this.updateTokenTxHash = res;
                                         })
-                                    },2000);
+                                    }, 2000);
                                     _this.init();
 
                                     break;
@@ -540,8 +591,7 @@
                 var _this = this;
                 console.log("Address 0 index " + _this.address[0]);
                 console.log("Address 1 index  " + _this.address[1]);
-                if(_this.address === '')
-                {
+                if (_this.address === '') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
@@ -550,20 +600,17 @@
                 //     alertify.set('notifier', 'position', 'top-right');
                 //     alertify.error('Address field start with 0x');
                 // }
-                else if(_this.address.length > 42){
+                else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not greater than 42');
-                }
-                else if(_this.address.length < 42){
+                } else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not less than 42');
-                }
-                else if(_this.balance === 0){
+                } else if (_this.balance === 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required and not equal to 0 ');
-                }
-                else{
+                } else {
                     sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
                     this.step = true;
                     this.tabValue = 'SendTokens';
@@ -574,23 +621,20 @@
             getTokenValue: function () {
                 var _this = this;
 
-                if(_this.burnTokenValue === 0){
+                if (_this.burnTokenValue === 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required and not equal to 0 ');
-                }
-                else {
+                } else {
                     burnTokens.getTokenValues(_this.burnTokenValue);
                     this.step = true;
                     this.tabValue = "Burn";
                 }
 
 
-
             },
             getMintValues: function () {
                 var _this = this;
-                if(_this.mintAddress === '')
-                {
+                if (_this.mintAddress === '') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
@@ -599,20 +643,17 @@
                 //     alertify.set('notifier', 'position', 'top-right');
                 //     alertify.error('Address field start with 0x');
                 // }
-                else if(_this.mintAddress.length > 42){
+                else if (_this.mintAddress.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not greater than 42');
-                }
-                else if(_this.mintAddress.length < 42){
+                } else if (_this.mintAddress.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is not less than 42');
-                }
-                else if(_this.mintBalance === 0){
+                } else if (_this.mintBalance === 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required and not equal to 0 ');
-                }
-                else {
+                } else {
                     mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
                     this.step = true;
                     this.tabValue = 'Mint';
@@ -630,53 +671,52 @@
             },
             getUpdateTokenValue: function () {
                 var _this = this;
-                if(_this.updateTokenValue === 0){
+                if (_this.updateTokenValue === 0) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required and not equal to 0 ');
-                }
-                else{
+                } else {
                     updateToken.getTokenValues(_this.updateTokenValue);
                     this.step = true;
                     this.tabValue = 'updateToken';
                 }
 
-                },
+            },
 
             //get tx hash when providing prviate key from input
-            getsendTokenTxHash: async function(){
+            getsendTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await sendTokens.getTransactionCount(_this.privateKey);
 
             },
-            getburnTokenTxHash: async function(){
+            getburnTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await burnTokens.getTransactionCount(_this.privateKey);
 
             },
-            getmintTokenTxHash: async function(){
+            getmintTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await mintTokens.getTransactionCount(_this.privateKey);
 
             },
-            getpauseTokenTxHash: async function(){
+            getpauseTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await pauseTokens.getTransactionCount(_this.privateKey);
 
             },
-            getunpauseTokenTxHash: async function(){
+            getunpauseTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await unPauseTokens.getTransactionCount(_this.privateKey);
 
             },
-            getupdateTokenTxHash: async function(){
+            getupdateTokenTxHash: async function () {
 
-                var _this =this;
+                var _this = this;
                 await updateToken.getTransactionCount(_this.privateKey);
 
             },
@@ -693,12 +733,13 @@
                                 console.log('Send Token value is ' + this.tabValue);
                                 _this.getsendTokenTxHash();
                                 setTimeout(function () {
-                                    var response =sendTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = sendTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("send token tx hash  " + res);
-                                        _this.sendTokenTxHash =res;
+                                        _this.sendTokenTxHash = res;
+
                                     })
-                                },2000);
+                                }, 2000);
 
 
                                 _this.init();
@@ -709,12 +750,12 @@
 
                                 _this.getburnTokenTxHash();
                                 setTimeout(function () {
-                                    var response =burnTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = burnTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("burn token tx hash " + res);
-                                        _this.burnTokenTxHash =res;
+                                        _this.burnTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             case 'Mint' :
@@ -724,12 +765,12 @@
                                 // _this.init();
                                 _this.getmintTokenTxHash();
                                 setTimeout(function () {
-                                    var response =mintTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = mintTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("mint token tx hash " + res);
-                                        _this.mintTokenTxHash =res;
+                                        _this.mintTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             case 'Pause' :
@@ -738,12 +779,12 @@
                                 // _this.init();
                                 _this.getpauseTokenTxHash();
                                 setTimeout(function () {
-                                    var response =pauseTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = pauseTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("pause token tx hash " + res);
-                                        _this.pauseTokenTxHash =res;
+                                        _this.pauseTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             case 'Unpause' :
@@ -753,12 +794,12 @@
 
                                 _this.getunpauseTokenTxHash();
                                 setTimeout(function () {
-                                    var response =unPauseTokens.trxHash();
-                                    response.then((res)=>{
+                                    var response = unPauseTokens.trxHash();
+                                    response.then((res) => {
                                         console.log("unpause token tx hash " + res);
-                                        _this.unPauseTokenTxHash =res;
+                                        _this.unPauseTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             case 'updateToken' :
@@ -768,12 +809,12 @@
 
                                 _this.getupdateTokenTxHash();
                                 setTimeout(function () {
-                                    var response =updateToken.trxHash();
-                                    response.then((res)=>{
+                                    var response = updateToken.trxHash();
+                                    response.then((res) => {
                                         console.log("update Token token tx hash " + res);
-                                        _this.updateTokenTxHash =res;
+                                        _this.updateTokenTxHash = res;
                                     })
-                                },2000);
+                                }, 2000);
                                 _this.init();
                                 break;
                             default:

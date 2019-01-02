@@ -89,6 +89,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div v-if="!sendEtherTxHash">
                         <div class="tab-pane" id="22">
                             <div class="tab-content">
                                 <div>
@@ -108,7 +109,7 @@
                                                    data-parsley-id="8" class="form-control" v-model="balance">
 
                                         </div>
-                                        <p style="color:white;"> {{ sendEtherTxHash}}</p>
+
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" data-target="#sendToken-modal"
 
@@ -120,6 +121,13 @@
                                 </div>
 
                             </div>
+                        </div>
+                        </div>
+                        <div v-if="sendEtherTxHash">
+                            <div class="form-group" style="margin-top: 20px;">
+                                <label>Save your hash</label>
+                                <input type="text" v-model="sendEtherTxHash"
+                                       class="form-control"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close
