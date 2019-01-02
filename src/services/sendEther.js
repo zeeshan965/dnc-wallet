@@ -101,7 +101,7 @@ export async function getTransactionCount(privateKey) {
     web3.eth.getTransactionCount(web3.eth.defaultAccount).then(count => {
         var rawTransaction = {
             nonce: web3.utils.toHex(count),
-            gasPrice: web3.utils.toHex(2000000000),
+            gasPrice: web3.utils.toHex(1500000000),
             gasLimit: web3.utils.toHex(gasLimit),
             to: toAddress,
             value: Value,

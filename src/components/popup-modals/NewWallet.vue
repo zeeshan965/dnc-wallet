@@ -215,7 +215,7 @@
                 this.$validator.validate().then(valid => {
                     if (valid) {
                         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.user))
-                        this.step = 4
+                        this.step = 4;
                         $('#reg').hide();
                     }
 
@@ -293,7 +293,7 @@
                 //  this.key = Buffer.from(this.private,'hex');
                 _this.key = new Buffer(_this.acconntPrivateKey, "hex");
                 _this.walletFromPrivateKey = ethereumJsWallet.fromPrivateKey(this.key);
-                _this.fileData = _this.walletFromPrivateKey.toV3String("password");
+                _this.fileData = _this.walletFromPrivateKey.toV3String(_this.user.password);
                 console.log(
                     "File Data is : ",
                     _this.fileData

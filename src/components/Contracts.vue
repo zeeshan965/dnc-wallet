@@ -219,13 +219,14 @@
                                             </li>
                                             <li class="">
                                                 <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                                    <span>Json File</span>
+                                                    <span>Jason File</span>
                                                 </a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
                                             <div id="privateKey" class="tab-pane active">
-                                                <form @submit.prevent="getPrivateKey" data-parsley-validate=""
+                                                <form data-v-92875dbe="" action="#"
+                                                      @submit.prevent="getPrivateKey" data-parsley-validate=""
                                                       novalidate="novalidate">
                                                     <div data-v-92875dbe="" class="form-group">
                                                         <label data-v-92875dbe="">Enter Your Private Key</label>
@@ -244,19 +245,13 @@
                                                     <div data-v-92875dbe="" class="form-group text-right m-b-0">
 
                                                         <button type="submit" data-v-92875dbe=""
-
                                                                 data-toggle="modal"
                                                                 data-target="#sendToken-modal"
                                                                 class="btn btn-default waves-effect waves-light">
                                                             Send Transaction
-
-
                                                         </button>
                                                     </div>
                                                 </form>
-                                                <div v-if="loader == true">
-                                                    <vue-simple-spinner></vue-simple-spinner>
-                                                </div>
                                             </div>
                                             <div id="jasonFile" class="tab-pane ">
                                                 <div>
@@ -335,7 +330,6 @@
     export default {
         data: function () {
             return {
-                loader: false,
                 //Json import file
                 fileName: '',
                 tabValue: '',

@@ -61,7 +61,7 @@
                                             </li>
                                         </ul>
                                         <br>
-                                        <div class="form-group">
+                                        <div class="form-group" v-if="step == 1">
 
                                             <input id="upload" type="file" @change="onFileSelected"
                                                    style="display:none"/>
@@ -76,10 +76,32 @@
                                             <span style="color:#fff">{{this.fileName}}</span>
 
                                         </div>
+
+                                    </div>
+                                    <div v-if="step == 2">
+                                        <form @submit.prevent="handlePassword">
+                                            <div class="form-group">
+                                                <label htmlFor="password">Password</label>
+                                                <input type="password" v-model="user.password"
+                                                       class="form-control"
+                                                />
+                                                <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
+                                                <!--class="invalid-feedback">{{ errors.first('password') }}-->
+                                                <!--</div>-->
+                                            </div>
+                                            <!--passWord section-->
+                                            <button type="submit" class="btn btn-primary">Enter Password</button>
+
+                                        </form>
+
+
                                     </div>
 
                                 </section>
+                                <!--passWord section-->
+
                             </div>
+
                             <!--second tab menu-->
                             <div id="menu1" class="tab-pane fade">
                                 <div id="selectedTypeKey" class="col-md-8">
@@ -116,40 +138,21 @@
                                     <!---->
                                     <br>
 
-                                    <div id="hideImportKey" v-if="step == 1">
+                                    <div id="hideImportKey">
                                         <form @submit.prevent="handlePrivateKey">
                                             <div class="form-group">
-                                                <label for="user key">Private Key</label>
-                                                <input type="text" v-model="userKey" v-validate="{required:true,min:64,max:64}"
+                                                <label for="userKey">Private Key</label>
+                                                <input type="text" v-model="userKey"
+                                                       v-validate="{required:true,min:64,max:64}"
                                                        name="userKey" class="form-control"
                                                        :class="{ 'is-invalid': submitted && errors.has('userKey') }"/>
-                                                <div style="color:red" v-if="submitted && errors.has('userKey')" class="invalid-feedback">
+                                                <div style="color:red" v-if="submitted && errors.has('userKey')"
+                                                     class="invalid-feedback">
                                                     {{ errors.first('userKey') }}
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Enter Key</button>
                                         </form>
-                                    </div>
-
-                                    <!--passWord section-->
-                                    <div v-if="step == 2">
-                                        <form @submit.prevent="handlePassword">
-                                            <div class="form-group">
-                                                <label htmlFor="password">Password</label>
-                                                <input type="password" v-model="user.password"
-                                                       v-validate="{ required: true, min: 9 }" name="password"
-                                                       class="form-control"
-                                                       :class="{ 'is-invalid': submitted && errors.has('password') }"/>
-                                                <div style="color:red" v-if="submitted && errors.has('password')"
-                                                     class="invalid-feedback">{{ errors.first('password') }}
-                                                </div>
-                                            </div>
-                                            <!--passWord section-->
-                                            <button type="submit" class="btn btn-primary">Enter Password</button>
-
-                                        </form>
-
-
                                     </div>
 
 
@@ -169,6 +172,8 @@
     import router from './../router';
     import {addressesBlancess, dncAddressesBlancess} from '../services/wallet';
 
+    var getAccountFroomJson = require('./../services/getAccountFromJson');
+
     var DncTokenBalance = require('./../services/getTokenBalance');
 
     export default {
@@ -184,7 +189,8 @@
                     password: ''
                 },
 
-                btnText: 'Enter key'
+                btnText: 'Enter key',
+                json_Data: '',
             }
         },
         methods: {
@@ -202,35 +208,35 @@
                 var newFileName = this.fileName.split('.');
                 console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
 
-                if(newFileName[1].length > 46 ||newFileName[1].length < 46 ){
-                    alertify.set('notifier','position', 'top-right');
+                if (newFileName[1].length > 46 || newFileName[1].length < 46) {
+                    alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Invalid file format');
-                    this.fileName ='';
+                    this.fileName = '';
                     return false;
                 }
 
-                if (this.fileName.includes('.pdf')) {
+                // if (this.fileName.includes('.pdf')) {
+                //
+                //      alertify.set('notifier','position', 'top-right');
+                //      alertify.error('Invalid file format');
+                //
+                //     setTimeout(() => {
+                //         window.location.href = "importaccounts"
+                //
+                //     }, 2000);
+                //
+                // }
+                // if (this.fileName.includes('.png')) {
+                //     setTimeout(() => {
+                //
+                //      alertify.set('notifier','position', 'top-right');
+                //      alertify.error('Invalid file format');
+                //     }, 2000);
+                //     window.location.href = "importaccounts"
+                //
+                // }
 
-                     alertify.set('notifier','position', 'top-right');
-                     alertify.error('Invalid file format');
-
-                    setTimeout(() => {
-                        window.location.href = "importaccounts"
-
-                    }, 2000);
-
-                }
-                if (this.fileName.includes('.png')) {
-                    setTimeout(() => {
-
-                     alertify.set('notifier','position', 'top-right');
-                     alertify.error('Invalid file format');
-                    }, 2000);
-                    window.location.href = "importaccounts"
-
-                }
-
-
+                var _this = this;
                 // Reference to the DOM input element
                 var input = event.target;
                 // Ensure that you have a file before attempting to read it
@@ -241,48 +247,13 @@
 
                     reader.onload = (e) => {
 
-                        var json_Data = e.target.result;
+                        _this.json_Data = e.target.result;
 
 
-                        json_Data = JSON.parse(json_Data);
-                        console.log('two');
+                        _this.json_Data = JSON.parse(_this.json_Data);
+                        _this.step = 2;
 
-                        console.log('Datazzzz ' + json_Data.address);
-
-                        console.log('Responsezzzz ' + this.response);
-                        console.log('three');
-                        WalletService.addresses.push(json_Data.address);
-
-                        //Eth key Store Balance
-                        var keystoreBalance;
-                        var balance = WalletService.getBalance(json_Data.address).then((res) => {
-                            keystoreBalance = res;
-                            console.log('Response inside get balance ' + keystoreBalance);
-                        });
-
-                        setTimeout(() => {
-                            console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
-                            WalletService.addressesBlancess.push(keystoreBalance);
-                            console.log('First address is ' + addressesBlancess[0]);
-                        }, 3000);
-
-                        //DNC  Keystore Balance
-
-                        var myDNCkeyStoreBalance;
-                        var keystoreBalancednc = DncTokenBalance.getDncBalance(json_Data.address).then((dncres) => {
-                            myDNCkeyStoreBalance = dncres;
-                            console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
-                        });
-
-                        setTimeout(() => {
-                            console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
-                            WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
-                            console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
-                        }, 3000);
-
-
-                        router.push('/');
-                    }
+                    };
                     // Start the reader job - read file
                     reader.readAsText(input.files[0]);
 
@@ -298,33 +269,12 @@
 
                 _this.$validator.validate().then(valid => {
                     if (valid) {
-
-                        $('#hideImportKey').hide();
-                        _this.step = 2;
-
-                    }
-                });
-
-
-            },
-            handlePassword(e) {
-
-                console.log("Button Clicked");
-                var _this = this;
-                e.preventDefault();
-                _this.submitted = true;
-                this.$validator.validate().then(valid => {
-                    if (valid) {
-
-                        var password = _this.user.password;
-                        $('#spinnerr').show();
-                        console.log(password);
                         setTimeout(() => {
 
-                            _this.walletResponse = WalletService.unlockAccount(_this.userKey, password);
+                            _this.walletResponse = WalletService.unlockAccount(_this.userKey, '123456789');
                             console.log('Unclocked ===> ' + _this.walletResponse);
                             if (_this.walletResponse === false) {
-                                alertify.set('notifier','position', 'top-right');
+                                alertify.set('notifier', 'position', 'top-right');
                                 alertify.error('Invalid Privaate key');
                                 _this.userKey = "";
                                 _this.user.password = "";
@@ -373,6 +323,92 @@
                 });
 
 
+            },
+            handlePassword: async function (e) {
+
+                console.log("Button  zzzzzzzzzzzzzzzzzz");
+                var _this = this;
+                e.preventDefault();
+                console.log("Submiitted" + _this.submitted);
+                _this.submitted = true;
+                console.log("Submiitted" + _this.submitted);
+                // _this.$validator.validate().then(valid => {
+                //     console.log("Valid oiios" + valid);
+                //
+                //     if (valid) {
+                //         console.log("Ener in conditioo");
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater thaan or equal to 9');
+                }
+                else {
+                    var password = _this.user.password;
+                    $('#spinnerr').show();
+                    console.log(password);
+                    console.log('two');
+                    var jsonBackResposne;
+                    var jsonResponseError;
+                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
+                        jsonBackResposne = res;
+                    }).catch((e)=>{
+                        console.log("Error " + e);
+                        jsonResponseError =e;
+                    });
+                    if(jsonResponseError){
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error("Possibly Wrong Password");
+                        _this.user.password ='';
+                        return;
+                    }
+
+
+                    console.log('Datazzzz ' + _this.json_Data.address);
+
+
+                    console.log('three');
+                    WalletService.addresses.push(_this.json_Data.address);
+
+                    console.log("Json resposne is  " + _this.json_Data);
+
+
+                    console.log("Json resposne is  " + _this.json_Data);
+
+                    //Eth key Store Balance
+                    var keystoreBalance;
+                    var balance = WalletService.getBalance(_this.json_Data.address).then((res) => {
+                        keystoreBalance = res;
+                        console.log('Response inside get balance ' + keystoreBalance);
+                    });
+
+                    setTimeout(() => {
+                        console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
+                        WalletService.addressesBlancess.push(keystoreBalance);
+                        console.log('First address is ' + addressesBlancess[0]);
+                    }, 3000);
+
+                    //DNC  Keystore Balance
+
+                    var myDNCkeyStoreBalance;
+                    var keystoreBalancednc = DncTokenBalance.getDncBalance(_this.json_Data.address).then((dncres) => {
+                        myDNCkeyStoreBalance = dncres;
+                        console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
+                    });
+
+                    setTimeout(() => {
+                        console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
+                        WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
+                        console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
+                    }, 3000);
+
+
+                    router.push('/');
+
+
+                    //     }
+                    // });
+
+
+                }
             }
         },
 
