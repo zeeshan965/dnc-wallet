@@ -362,7 +362,7 @@
                                 }, 3000);
 
 
-                                alert('Unlocked address ===> ' + WalletService.addresses);
+                                // alert('Unlocked address ===> ' + WalletService.addresses);
 
                                 router.push('/');
 

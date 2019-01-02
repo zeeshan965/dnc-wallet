@@ -133,11 +133,11 @@
 
                                 <div id="menu3" class="tab-pane fade">
                                     <div class="tab-content">
-                                        <div id="menu33" class="tab-pane active">
+                                        <div id="" class="tab-pane active">
                                             <br>
                                             <form action="#" data-parsley-validate="" novalidate="novalidate"
                                                   @submit.prevent="getPauseValues">
-                                                <!--<p style="color:white;"> {{ pauseTokenTxHash}}</p>-->
+                                                <p style="color:white;"> {{ pauseTokenTxHash}}</p>
                                                 <div class="form-group text-center m-b-0">
                                                     <button type="submit" data-target="#sendToken-modal"
                                                             class="btn btn-default waves-effect waves-light">
