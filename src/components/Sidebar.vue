@@ -27,9 +27,9 @@
                                 Import Accounts </span></router-link>
                     </li>
                     <li>
-                        <router-link to="#" class="waves-effect waves-primary"><img
+                        <a target="_blank" href="http://54.169.155.78/" class="waves-effect waves-primary"><img
                                 src="assets/images/icon/dinar-icon.png">&nbsp;&nbsp;&nbsp;<span>
-                                DNC Explorer </span></router-link>
+                                DNC Explorer </span></a>
                     </li>
                     <li>
                         <a target="_blank" href="http://13.59.238.20/en" class="waves-effect waves-primary"><img
