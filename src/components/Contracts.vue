@@ -284,7 +284,7 @@
                                                         </li>
                                                     </ul>
                                                     <br>
-                                                    <div class="form-group">
+                                                    <div v-if="jsonStep == 1" class="form-group">
 
                                                         <input id="upload" type="file" @change="onFileSelected"
                                                                style="display:none"/>
@@ -299,6 +299,24 @@
                                                         </a>
                                                         &nbsp;
                                                         <span style="color:#fff">{{this.fileName}}</span>
+
+                                                    </div>
+                                                    <div v-if="jsonStep == 2">
+                                                        <form @submit.prevent="handlePassword">
+                                                            <div class="form-group">
+                                                                <label htmlFor="password">Password</label>
+                                                                <input type="password" v-model="user.password"
+                                                                       class="form-control"
+                                                                />
+                                                                <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
+                                                                <!--class="invalid-feedback">{{ errors.first('password') }}-->
+                                                                <!--</div>-->
+                                                            </div>
+                                                            <!--passWord section-->
+                                                            <button type="submit" class="btn btn-primary">Enter Password</button>
+
+                                                        </form>
+
 
                                                     </div>
                                                 </div>
@@ -357,6 +375,12 @@
 
                 //import file private key
                 importPrivateKey:'',
+                json_Data:'',
+                jsonStep: 1,
+                user: {
+                    password: ''
+                },
+
             }
         },
         methods: {
@@ -365,9 +389,21 @@
             getimportsendTokenTxHash: async function(){
 
                 var _this =this;
-
+                var response;
                 console.log("under Import file private key :" + _this.importPrivateKey);
-                await sendTokens.getTransactionCount(_this.importPrivateKey);
+                response  =await sendTokens.getTransactionCount(_this.importPrivateKey).then((res)=>{
+                    console.log("resposne aiewewewew  "  + res);
+                    resposne =res;
+                }).catch((e)=>{
+                    console.log("Error is " + e);
+                });
+                // if(response === undefined){
+                //     alertify.set('notifier', 'position', 'top-right');
+                //     alertify.error("InSuffient Gas Price");
+                //     _this.user.password ='';
+                //     _this.jsonStep =1;
+                //     return;
+                // }
 
             },
             getimportburnTokenTxHash: async function(){
@@ -433,120 +469,12 @@
                     reader.onload = (e) => {
 
 
-                        var json_Data = e.target.result;
+                        _this.json_Data = e.target.result;
+
+                        _this.json_Data = JSON.parse(_this.json_Data);
+                        _this.jsonStep = 2;
 
 
-                        // json_Data = json_Data;
-                        console.log("Json resposne is  " + json_Data);
-                        var jsonBackResposne;
-                        var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
-                            jsonBackResposne = res;
-                            console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                            console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                            _this.importPrivateKey =jsonBackResposne.privateKey.substring(2);
-                            console.log("Import file private key :" + _this.importPrivateKey);
-
-                            switch (this.tabValue) {
-                                case 'SendTokens':
-                                    console.log('Send Token value is ' + this.tabValue);
-                                    // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // sendTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportsendTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =sendTokens.trxHash();
-                                        response.then((res)=>{
-                                            console.log("send token tx hash  " + res);
-                                            _this.sendTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-                                    break;
-                                case 'Burn' :
-                                    console.log('Inside burn' + this.tabValue);
-                                    // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // burnTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportburnTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =burnTokens.trxHash();
-                                        response.then((res)=>{
-                                            console.log("burn token tx hash  " + res);
-                                            _this.burnTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-                                    break;
-                                case 'Mint' :
-                                    console.log('Inside Mint' + this.tabValue);
-                                    // mintTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    // mintTokens.getPrivateKey(_this.privateKey);
-
-                                    _this.getimportmintTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =mintTokens.trxHash();
-                                        response.then((res)=>{
-                                            console.log("mind token tx hash  " + res);
-                                            _this.mintTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-                                    break;
-                                case 'Pause' :
-                                    console.log('Inside Pause' + this.tabValue);
-                                    // pauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    _this.getimportpauseTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =pauseTokens.trxHash();
-                                        response.then((res)=>{
-                                            console.log("pause token tx hash  " + res);
-                                            _this.pauseTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-                                    break;
-                                case 'Unpause' :
-                                    console.log('Inside Unpause' + this.tabValue);
-                                    // unPauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-
-                                    _this.getimportunpauseTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =unPauseTokens.trxHash();
-                                        response.then((res)=>{
-                                            console.log("unpause token tx hash  " + res);
-                                            _this.unPauseTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-                                    break;
-                                case 'updateToken' :
-                                    console.log('Inside Update Token' + this.tabValue);
-                                    // updateToken.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                    // _this.init();
-                                    _this.getimportupdateTokenTxHash();
-                                    setTimeout(function () {
-                                        var response =updateToken.trxHash();
-                                        response.then((res)=>{
-                                            console.log("update token tx hash  " + res);
-                                            _this.updateTokenTxHash =res;
-                                        })
-                                    },2000);
-                                    _this.init();
-
-                                    break;
-                                default:
-                                    alert('Bye');
-                                    _this.init();
-                                    break;
-
-                            }
-                            // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                        });
 
 
                     };
@@ -556,7 +484,167 @@
 
                 }
             },
+            handlePassword: async function(e){
+                console.log("Button  zzzzzzzzzzzzzzzzzz");
+                var _this = this;
+                e.preventDefault();
+                console.log("Submiitted" + _this.submitted);
+                _this.submitted = true;
+                console.log("Submiitted" + _this.submitted);
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater thaan or equal to 9');
+                }
+                else {
+                    var password = _this.user.password;
+                    $('#spinnerr').show();
+                    console.log(password);
+                    console.log('two');
+                    // json_Data = json_Data;
+                    console.log("Json resposne is  " + _this.json_Data);
+                    var jsonBackResposne;
 
+                    var jsonResponseError;
+                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
+                        jsonBackResposne = res;
+
+                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
+                    }).catch((e) => {
+                        console.log("Error is" + e);
+                        jsonResponseError = e;
+                    });
+                    if (jsonResponseError) {
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error("Possibly Wrong Password");
+                        _this.user.password ='';
+                        return;
+                    }
+                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
+                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
+                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
+                    console.log("Import file private key :" + _this.importPrivateKey);
+
+                    switch (this.tabValue) {
+                        case 'SendTokens':
+                            setTimeout(function () {
+                                $('#Mintt').hide();
+                            },1000);
+                            console.log('Send Token value is ' + this.tabValue);
+                            // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            // sendTokens.getPrivateKey(_this.privateKey);
+
+                            _this.getimportsendTokenTxHash();
+                            setTimeout(function () {
+                                var response = sendTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("send token tx hash  " + res);
+                                    _this.sendTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                            break;
+                        case 'Burn' :
+                            setTimeout(function () {
+                                $('#menu11').hide();
+                            },1000);
+                            console.log('Inside burn' + this.tabValue);
+                            // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            // burnTokens.getPrivateKey(_this.privateKey);
+
+                            _this.getimportburnTokenTxHash();
+                            setTimeout(function () {
+                                var response = burnTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("burn token tx hash  " + res);
+                                    _this.burnTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                            break;
+                        case 'Mint' :
+                            setTimeout(function () {
+                                $('#menu22').hide();
+                            },1000);
+                            console.log('Inside Mint' + this.tabValue);
+                            // mintTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            // mintTokens.getPrivateKey(_this.privateKey);
+
+                            _this.getimportmintTokenTxHash();
+                            setTimeout(function () {
+                                var response = mintTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("mind token tx hash  " + res);
+                                    _this.mintTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                            break;
+                        case 'Pause' :
+
+                            setTimeout(function () {
+                                $('#menu33').hide();
+                            },1000);
+                            console.log('Inside Pause' + this.tabValue);
+                            // pauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            _this.getimportpauseTokenTxHash();
+                            setTimeout(function () {
+                                var response = pauseTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("pause token tx hash  " + res);
+                                    _this.pauseTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                            break;
+                        case 'Unpause' :
+                            setTimeout(function () {
+                                $('#menu44').hide();
+                            },1000);
+                            console.log('Inside Unpause' + this.tabValue);
+                            // unPauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+
+                            _this.getimportunpauseTokenTxHash();
+                            setTimeout(function () {
+                                var response = unPauseTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("unpause token tx hash  " + res);
+                                    _this.unPauseTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                            break;
+                        case 'updateToken' :
+                            setTimeout(function () {
+                                $('#menu55').hide();
+                            },1000);
+                            console.log('Inside Update Token' + this.tabValue);
+                            // updateToken.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            _this.getimportupdateTokenTxHash();
+                            setTimeout(function () {
+                                var response = updateToken.trxHash();
+                                response.then((res) => {
+                                    console.log("update token tx hash  " + res);
+                                    _this.updateTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+
+                            break;
+                        default:
+                            alert('Bye');
+                            _this.init();
+                            break;
+
+                    }
+                }
+
+            },
             // Get Tabs Value
             getValues: function () {
                 var _this = this;
@@ -841,6 +929,7 @@
                 _this.step = false;
                 _this.tabValue = '';
                 _this.submitted = false;
+                _this.jsonStep=1;
 
 
             }
