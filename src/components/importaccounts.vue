@@ -287,7 +287,7 @@
                             console.log('Unclocked ===> ' + _this.walletResponse);
                             if (_this.walletResponse === false) {
                                 alertify.set('notifier', 'position', 'top-right');
-                                alertify.error('Invalid Privaate key');
+                                alertify.error('Invalid Private key');
                                 _this.userKey = "";
                                 _this.user.password = "";
                                 _this.step = 1;

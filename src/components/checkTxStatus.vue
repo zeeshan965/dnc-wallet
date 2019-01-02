@@ -87,7 +87,7 @@
                         <tr>
                             <td translate="SEND_amount_short" class="ng-scope">Amount</td>
                             <td class="ng-binding">
-                                {{ this.txResposne.value}}
+                                {{ this.amount }} Ether
                             </td>
                         </tr>
                         <tr>
@@ -163,6 +163,10 @@
 <script>
 
     var transactionStatus = require('./../services/sendToken');
+
+    const Web3 = require("web3");
+    const web3 = new Web3();
+    web3.setProvider(new web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
     export default {
         data: function () {
             return {
@@ -171,6 +175,7 @@
                 step: 1,
                 txError: '',
                 txResposne: '',
+                amount :0,
             }
         },
         methods: {
@@ -187,8 +192,20 @@
 
                             console.log("tx Status ffffffffffffffffffffffffffffffffffffffffffff =>" + res);
                             if (res) {
+
+                                var _this =this;
                                 this.txResposne = JSON.parse(res);
                                 console.log("Tx hash is " + this.txResposne.transactionHash);
+                                console.log("Tx hash is " + this.txResposne.value);
+
+                                this.amount =this.txResposne.value;
+
+                                console.log("AAmooutn" + this.amount);
+                                this.amount =web3.utils.fromWei(this.amount, 'ether');
+
+                                console.log("after" + this.amount);
+                                // this.amount  =web3.fromWei(this.txResposne.value, 'ether');
+
                                 this.txError = false;
                             }
 
