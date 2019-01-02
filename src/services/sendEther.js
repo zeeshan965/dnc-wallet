@@ -79,6 +79,8 @@ var Wallet = require('ethereumjs-wallet');
 
 export async function getTransactionCount(privateKey) {
 
+
+
     var privKey = new Buffer(privateKey, 'hex');
     var wallet = Wallet.fromPrivateKey(privKey);
     var unlocked = wallet.toV3String('123456789');
