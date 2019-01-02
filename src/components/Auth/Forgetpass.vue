@@ -16,26 +16,24 @@
                     <div class="input-group">
                         <input type="email" class="form-control" placeholder="Enter Email" required="">
                         <i class="md md-email form-control-feedback l-h-34" style="left:6px;"></i>
-                        <span class="input-group-btn"> <button type="submit" class="btn btn-email btn-default waves-effect waves-light">Reset</button> </span>
+                        <span class="input-group-btn"> <button type="submit"
+                                                               class="btn btn-email btn-default waves-effect waves-light">Reset</button> </span>
                     </div>
                 </div>
 
             </form>
 
             <div class="form-group m-t-30">
-                    <div class="col-sm-12 text-center">
-                        <router-link to="/login" class="text-muted">Already have account?</router-link>
-                    </div>
+                <div class="col-sm-12 text-center">
+                    <router-link to="/login" class="text-muted">Already have account?</router-link>
                 </div>
+            </div>
         </div>
 
-        
 
     </div>
 </template>
 
 <script>
-    export default {
-
-    }
+    export default {}
 </script>

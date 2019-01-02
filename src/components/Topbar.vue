@@ -21,8 +21,8 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="false">
                                 <!--<img-->
-                                    <!--src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> <span-->
-                                    <!--class="m-t-0 m-b-0 m-l-10">John Deo</span>-->
+                                <!--src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-circle"> <span-->
+                                <!--class="m-t-0 m-b-0 m-l-10">John Deo</span>-->
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
@@ -36,6 +36,5 @@
     </div>
 </template>
 <script>
-export default{
-}
+    export default {}
 </script>

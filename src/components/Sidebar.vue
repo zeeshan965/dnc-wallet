@@ -32,7 +32,7 @@
                                 DNC Explorer </span></router-link>
                     </li>
                     <li>
-                        <a  target="_blank" href="http://13.59.238.20/en" class="waves-effect waves-primary"><img
+                        <a target="_blank" href="http://13.59.238.20/en" class="waves-effect waves-primary"><img
                                 src="assets/images/icon/dnd-icon.png">&nbsp;&nbsp;&nbsp;<span>
                                 Mint DNC </span></a>
                     </li>

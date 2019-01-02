@@ -1,6 +1,6 @@
 <style>
-    .form-group label{
-        color:lightgrey;
+    .form-group label {
+        color: lightgrey;
     }
 </style>
 <template>
@@ -12,7 +12,5 @@
     </div>
 </template>
 <script>
-export default {
-
-}
+    export default {}
 </script>

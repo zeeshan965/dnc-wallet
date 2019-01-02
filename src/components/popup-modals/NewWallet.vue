@@ -2,11 +2,13 @@
     .invalid-feedback {
         color: #ef5350;
     }
-    p{
+
+    p {
         color: #ef5350 !important;
     }
-    .text-white{
-        color: rgba(255, 255, 255, 0.8)  !important;
+
+    .text-white {
+        color: rgba(255, 255, 255, 0.8) !important;
     }
 </style>
 <template>
@@ -114,7 +116,9 @@
                                 </div>
                                 <div id="asd" class="form-group" v-if="step == 3">
 
-                                    <div data-v-92875dbe="" class="form-group"><label data-v-92875dbe="">Save your private key</label><input  type="text" v-model="acconntPrivateKey"  class="form-control">
+                                    <div data-v-92875dbe="" class="form-group"><label data-v-92875dbe="">Save your
+                                        private key</label><input type="text" v-model="acconntPrivateKey"
+                                                                  class="form-control">
                                         <p class="text-white">
                                             **Do not lose it!** It cannot be recovered if you lose it.
 
@@ -273,7 +277,7 @@
                     _this.newAccount = _this.newAccountAddress.address;
 
                     _this.generateKeyStoreFile();
-                  // WalletService.getBalance();
+                    // WalletService.getBalance();
                     console.log("process completed");
                     _this.step = 2; // this one should be here because we want the stoep 2 to arrive after completing the process, or else it will arrive just after clicking button
                     $('#spinnerr').hide();

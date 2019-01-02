@@ -66,7 +66,7 @@
                             <tr v-for="(dncAddr,index) in DNCAddresses " :key="index">
                                 <!-- <tr > -->
                                 <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                <td>{{ dncAddr}}</td>
+                                <td>0x{{ dncAddr}}</td>
                                 <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                               aria-hidden="true"></i> 167.35 </span></strong>
                                     <i class="fa fa-caret-up"
@@ -98,7 +98,7 @@
                             <!--Eth Listing -->
                             <tr v-for="(addr,index) in userAddresses " :key="'eth'+index">
                                 <td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>
-                                <td>{{ addr}}</td>
+                                <td>0x{{ addr}}</td>
                                 <td class="text-success"><strong><span id="currency_price_sl"> <i
                                         class="fa fa-usd"
                                         aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"

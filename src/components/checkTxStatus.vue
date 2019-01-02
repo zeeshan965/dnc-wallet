@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section  class="block txstatus__1">
+        <section class="block txstatus__1">
             <article class="row">
                 <section class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
                     <h1 translate="NAV_CheckTxStatus" class="ng-scope">Check TX Status</h1>
@@ -45,7 +45,7 @@
         <div v-if="txError === false">
             <section class="block txstatus__2">
 
-                <div class="cont-md" >
+                <div class="cont-md">
                     <h3 class="text-success ng-scope" translate="tx_FoundOnChain">Transaction Found</h3>
                     <h5><a href="https://etherscan.io/tx/" target="_blank" rel="noopener noreferrer"
                            class="ng-binding"> </a></h5>
@@ -72,7 +72,7 @@
                             <td translate="OFFLINE_Step1_Label_1" class="ng-scope">From Address</td>
                             <td>
                                 <a target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                   {{ this.txResposne.from}}
+                                    {{ this.txResposne.from}}
                                 </a>
                             </td>
                         </tr>
@@ -135,7 +135,7 @@
         <div v-if="txError === true">
             <section class="block txstatus__2 sh">
 
-                <div class="cont-md" >
+                <div class="cont-md">
                     <h3 class="text-danger ng-scope" translate="tx_notFound">Transaction Not Found</h3>
                     <p>
                         <strong translate="tx_notFound_1" class="ng-scope">This TX cannot be found in the TX Pool of the
@@ -186,7 +186,7 @@
                         var resposne = transactionStatus.transactionStatus(_this.txStatus).then((res) => {
 
                             console.log("tx Status ffffffffffffffffffffffffffffffffffffffffffff =>" + res);
-                            if(res){
+                            if (res) {
                                 this.txResposne = JSON.parse(res);
                                 console.log("Tx hash is " + this.txResposne.transactionHash);
                                 this.txError = false;
@@ -194,8 +194,8 @@
 
                         }).catch((error) => {
 
-                           this.txError = true;
-                           console.log('I am inside error  section ');
+                            this.txError = true;
+                            console.log('I am inside error  section ');
                         });
 
                     }
