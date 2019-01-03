@@ -312,6 +312,7 @@
             },
             showLoader: function (e) {
 
+                document.getElementById("btn_password").disabled = true;
                 e.preventDefault();
                 var _this = this;
 
@@ -319,6 +320,10 @@
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Password must be greater than 0 or equal to 9');
                     _this.user.password = '';
+
+
+
+                    document.getElementById("btn_password").disabled = false;
 
                     return;
 
@@ -354,16 +359,19 @@
                                 jsonBackResposne = true;
                                 if(jsonBackResposne){
                                     _this.listing();
+                                    document.getElementById("btn_password").disabled = false;
                                 }
 
                             }).catch((e)=>{
                                 jsonResponseError = true;
                                 console.log("Error  is" +e);
                                 if (jsonResponseError) {
+
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.error("Possibly Wrong Password");
                                     _this.user.password = '';
                                     _this.loader = false;
+                                    document.getElementById("btn_password").disabled = false;
                                     return;
                                 }
 

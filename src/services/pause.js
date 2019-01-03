@@ -125,7 +125,7 @@ export async function getTransactionCount(privateKey) {
         setTimeout(function () {
             console.log("tx outside is " + txHash);
             return txHash;
-        }, 2000);
+        }, 500);
 
 
         // console.log(rawTransaction);

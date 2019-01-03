@@ -179,9 +179,7 @@
                                                 </button>
                                             </div>
                                         </form>
-                                        <div v-if="loader == true">
-                                            <vue-simple-spinner></vue-simple-spinner>
-                                        </div>
+
                                     </div>
 
                                     <div id="jasonFile" class="tab-pane ">
@@ -234,7 +232,7 @@
 
                                             </div>
                                             <div v-if="jsonStep == 2">
-                                                <form @submit.prevent="handlePassword">
+                                                <form @submit.prevent="showLoader">
                                                     <div class="form-group">
                                                         <label htmlFor="password">Password</label>
                                                         <input type="password" v-model="user.password"
@@ -245,17 +243,18 @@
                                                         <!--</div>-->
                                                     </div>
                                                     <!--passWord section-->
-                                                    <button type="submit" class="btn btn-primary">Enter Password</button>
+                                                    <button type="submit" class="btn btn-primary" id="btn_password">Enter Password</button>
 
                                                 </form>
 
 
                                             </div>
-                                            <div v-if="loader == true">
-                                                <vue-simple-spinner></vue-simple-spinner>
-                                            </div>
+
                                         </div>
 
+                                    </div>
+                                    <div v-if="loader == true">
+                                        <vue-simple-spinner></vue-simple-spinner>
                                     </div>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -272,6 +271,10 @@
 
     var sendEther = require('./../../services/sendEther');
     var getAccountFroomJson = require('./../../services/getAccountFromJson');
+
+    var Web3 = require('web3');
+    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+
     export default {
         data() {
             return {
@@ -279,18 +282,13 @@
                 tabValue: '',
                 //send Tokens
                 address: '',
-                balance: 0,
+                balance: '',
                 privateKey: '',
                 step: false,
                 submitted: false,
-
                 sendEtherTxHash: '',
-
-
                 //import file private key
                 importPrivateKey: '',
-
-
                 loader:false,
                 json_Data: '',
                 jsonStep: 1,
@@ -315,82 +313,6 @@
                 e.preventDefault();
                 $("#upload:hidden").trigger('click');
             },
-
-            // onFileSelected(e) {
-            //     e.preventDefault();
-            //     //    console.log(e);
-            //     var _this = this;
-            //     this.fileName = e.target.files[0].name;
-            //     var newFileName = this.fileName.split('.');
-            //     console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
-            //
-            //     if (newFileName[1].length > 46 || newFileName[1].length < 46) {
-            //         alertify.set('notifier', 'position', 'top-right');
-            //         alertify.error('Invalid file format');
-            //         this.fileName = '';
-            //         return false;
-            //     }
-            //     console.log('File Name ' + this.fileName);
-            //
-            //     // Reference to the DOM input element
-            //     var input = event.target;
-            //     // Ensure that you have a file before attempting to read it
-            //     if (input.files && input.files[0]) {
-            //         // create a new FileReader to read this image and convert to base64 format
-            //         var reader = new FileReader();
-            //         // Define a callback function to run, when FileReader finishes its job
-            //
-            //         reader.onload = (e) => {
-            //
-            //
-            //             var json_Data = e.target.result;
-            //
-            //
-            //             // json_Data = json_Data;
-            //             console.log("Json resposne is  " + json_Data);
-            //             var jsonBackResposne;
-            //             var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
-            //                 jsonBackResposne = res;
-            //                 console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-            //                 console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-            //                 _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-            //                 console.log("Import file private key :" + _this.importPrivateKey);
-            //
-            //                 switch (this.tabValue) {
-            //                     case 'SendEther':
-            //                         console.log('Send ether value is ' + this.tabValue);
-            //                         // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-            //                         // _this.init();
-            //                         // sendTokens.getPrivateKey(_this.privateKey);
-            //
-            //                         _this.getimportsenEtherTxHash();
-            //                         setTimeout(function () {
-            //                             var response = sendEther.trxHash();
-            //                             response.then((res) => {
-            //                                 console.log("send ether tx hash  " + res);
-            //                                 _this.sendEtherTxHash = res;
-            //                             })
-            //                         }, 2000);
-            //                         _this.init();
-            //                         break;
-            //                     default:
-            //                         alert('Bye');
-            //                         _this.init();
-            //                         break;
-            //
-            //                 }
-            //             });
-            //
-            //
-            //         };
-            //         // Start the reader job - read file
-            //         reader.readAsText(input.files[0]);
-            //
-            //
-            //     }
-            // },
-
-
             onFileSelected(e) {
                 e.preventDefault();
                 //    console.log(e);
@@ -431,82 +353,113 @@
 
                 }
             },
+            showLoader: function (e) {
+                document.getElementById("btn_password").disabled = true;
+                e.preventDefault();
+                var _this = this;
+
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater than 0 or equal to 9');
+                    _this.user.password = '';
+
+
+                    document.getElementById("btn_password").disabled = false;
+
+                    return;
+
+                }
+                this.loader = true;
+                _this.handlePassword(e);
+
+
+            },
+            getAccountFromJson:async function(){
+
+                var _this =this;
+                var account = await  web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
+                return account;
+            },
             handlePassword: async function (e) {
                 console.log("Button  zzzzzzzzzzzzzzzzzz");
                 var _this = this;
                 e.preventDefault();
-                console.log("Submiitted" + _this.submitted);
-                _this.submitted = true;
-                console.log("Submiitted" + _this.submitted);
-                if (_this.user.password.length < 9) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Password must be greater thaan or equal to 9');
-                }
-                else {
-                    var password = _this.user.password;
-                    $('#spinnerr').show();
-                    _this.loader = true;
-                    console.log(password);
-                    console.log('two');
-                    // json_Data = json_Data;
-                    console.log("Json resposne is  " + _this.json_Data);
-                    var jsonBackResposne;
+                console.log('two');
+                // json_Data = json_Data;
+                console.log("Json resposne is  " + _this.json_Data);
 
-                    var jsonResponseError;
+                var password = _this.user.password;
+                var jsonBackResposne=false;
+                var jsonResponseError =false;
 
-                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
-                        jsonBackResposne = res;
 
-                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                    }).catch((e) => {
-                        console.log("Error is" + e);
-                        jsonResponseError = e;
+                setTimeout(function () {
+
+                    _this.getAccountFromJson().then((res)=>{
+                        console.log("Bacck json resposne " + JSON.stringify(res));
+                        console.log("Bacck json resposne of private key " + res.privateKey);
+                        _this.importPrivateKey = res.privateKey.substring(2);
+                        console.log("Import file private key :" + _this.importPrivateKey);
+                        jsonBackResposne = true;
+                        if(jsonBackResposne){
+
+
+                            _this.listing();
+                            jsonBackResposne = false;
+
+                            document.getElementById("btn_password").disabled = false;
+
+                        }
+
+                    }).catch((e)=>{
+                        jsonResponseError = true;
+                        console.log("Error  is" +e);
+                        if (jsonResponseError) {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.error("Possibly Wrong Password");
+                            _this.user.password = '';
+                            _this.loader = false;
+                            document.getElementById("btn_password").disabled = false;
+
+                            jsonResponseError =false;
+                            return;
+                        }
+
+
                     });
-                    if (jsonResponseError) {
-                        alertify.set('notifier', 'position', 'top-right');
-                        alertify.error("Possibly Wrong Password");
-                        _this.user.password = '';
-                        return;
-                    }
-                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-                    console.log("Import file private key :" + _this.importPrivateKey);
 
 
-                    switch (this.tabValue) {
-                        case 'SendEther':
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#Mintt').hide();
-                                }, 1000);
-                                console.log('Send Ether value is ' + _this.tabValue);
-                                sendEther.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // sendTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getsendEtherTxHash();
-                                setTimeout(function () {
-                                    var response = sendEther.trxHash();
-                                    response.then((res) => {
-                                        console.log("send ether tx hash  " + res);
-                                        _this.sendEtherTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 1000);
-                            break;
-
-                        default:
-                            alert('Bye');
-                            _this.init();
-                            break;
-
-                    }
-                }
-
+                },500);
             },
-            //get tx hash when providing prviate key from input
+            listing: function(){
+                var _this =this;
+
+                switch (this.tabValue) {
+                    case 'SendEther':
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#Mintt').hide();
+                            }, 1000);
+                            console.log('Send Ether value is ' + _this.tabValue);
+                            _this.getimportsenEtherTxHash();
+                            setTimeout(function () {
+                                var response = sendEther.trxHash();
+                                response.then((res) => {
+                                    console.log("send Ether tx hash  " + res);
+                                    _this.sendEtherTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 1000);
+                        break;
+                    default:
+                        alert('Bye');
+                        _this.init();
+                        break;
+
+
+                }
+            },
             getsendEtherTxHash: async function () {
 
                 var _this = this;
@@ -546,23 +499,23 @@
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
-                // else if(_this.address[0] === '0' && _this.address[1] === 'x')
-                // {
-                //     alertify.set('notifier', 'position', 'top-right');
-                //     alertify.error('Address field start with 0x');
-                // }
+                else if(_this.address.substring(0, 2) != '0x')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field start with 0x');
+                }
                 else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not greater than 42');
+                    alertify.error('Invalid Address');
                 }
                 else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not less than 42');
+                    alertify.error('Invalid Address');
                 }
-                else if (_this.balance === 0) {
+                else if (_this.balance <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required');
                 }
                 else {
                     sendEther.gettoAddress(this.address);
