@@ -192,6 +192,7 @@
     import {addressesBlancess, dncAddressesBlancess} from './../../services/wallet';
 
     var DncTokenBalance = require('./../../services/getTokenBalance');
+    var userKeyClient = require('./../../services/importAccount');
 
     export default {
         data: function () {
@@ -217,8 +218,19 @@
         },
 
         methods: {
+
+            async getImportAccountDetail(accountAddress){
+
+                var accountResposne;
+                var accountResponse =  await  PrivateClient.getImportAccountDetail().then((res) => {
+                    dataResponse = JSON.stringify(res.address);
+                });
+                console.log('Account Response is zzzzzzzzzz ' + dataResponse);
+
+            },
             handleSubmit(e) {
                 this.submitted = true;
+
                 this.$validator.validate().then(valid => {
                     if (valid) {
                         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.user))
@@ -306,6 +318,8 @@
                     _this.fileData
                 );
 
+
+
             },
             clearDinarCheckBox: function () {
                 document.getElementById("myCheck").checked = false;
@@ -315,7 +329,7 @@
 
             },
 
-            removeClick: function () {
+            removeClick:  async function () {
                 $('#spinnerr').show();
 
                 var _this = this;
@@ -325,55 +339,43 @@
 
 
                 _this.loader = true;
-                setTimeout(() => {
 
 
-                    _this.walletResponse = WalletService.unlockAccount(_this.acconntPrivateKey, '123456789');
-                    console.log('Unclocked ===> ' + _this.walletResponse);
-                    if (_this.walletResponse === false) {
-                        alertify.set('notifier', 'position', 'top-right');
-                        alertify.error('Invalid Private key');
-                        _this.userKey = "";
-                        _this.user.password = "";
-                        _this.step = 1;
-                    } else {
 
-                        setTimeout(function () {
+                      _this.walletResponse =  userKeyClient.getImportAccountDetail(_this.acconntPrivateKey);
+                     // _this.walletResponse = JSON.stringify(_this.walletResponse);
+                    // console.log('Response is   ' + JSON.stringify(response));
+
+                  // _this.walletResponse = WalletService.unlockAccount(_this.acconntPrivateKey, '123456789');
+                    console.log('Unclocked ===> ' +  JSON.stringify(_this.walletResponse));
+
+
                             WalletService.addresses.push(_this.walletResponse.address);
 
                             //Eth Private Balance
                             var myBalance;
-                            var balance = WalletService.getBalance(_this.walletResponse.address).then((res) => {
+                            var balance = await WalletService.getBalance(_this.walletResponse.address).then((res) => {
                                 myBalance = res;
                                 console.log('Response inside get balance ' + myBalance);
                             });
-                            setTimeout(() => {
-                                console.log('Balance i get zzzzzzzzzzzzzz' + myBalance);
-                                WalletService.addressesBlancess.push(myBalance);
-                                console.log('First address is ' + addressesBlancess[0]);
-                            }, 3000);
+                            WalletService.addressesBlancess.push(myBalance);
+                            console.log('First address is ' + addressesBlancess[0]);
 
                             //DNC Private Balance
                             var myDNCBalance;
-                            var balancednc = DncTokenBalance.getDncBalance(_this.walletResponse.address).then((dncres) => {
+                            var balancednc = await DncTokenBalance.getDncBalance(_this.walletResponse.address).then((dncres) => {
                                 myDNCBalance = dncres;
                                 console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
                             });
 
-                            setTimeout(() => {
-                                console.log("Balcne i get for dnc is" + myDNCBalance);
-                                WalletService.dncAddressesBlancess.push(myDNCBalance);
-                                console.log("DNC first Address is " + dncAddressesBlancess[0]);
-                            }, 3000);
+                            WalletService.dncAddressesBlancess.push(myDNCBalance);
+                            console.log("DNC first Address is " + dncAddressesBlancess[0]);
 
-                        }, 1000);
+
+
+
                         // alert('Unlocked address ===> ' + WalletService.addresses);
 
-
-                    }
-
-
-                }, 2000);
 
                 $('#spinnerr').hide();
                 $('new_wallet').hide();
@@ -388,10 +390,12 @@
             },
         },
 
-        mounted: function () {
+        mounted:  function () {
             // $("#cb_post").on("click", function() {
             //   $("#hiddenDiv").toggle();
             // });
+
+
 
             $("#cb_post1").on("click", function () {
                 $("#hiddenDiv1").toggle();

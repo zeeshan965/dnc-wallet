@@ -330,7 +330,7 @@
                                                         <!--</div>-->
                                                     </div>
                                                     <!--passWord section-->
-                                                    <button type="submit" class="btn btn-primary">Enter
+                                                    <button type="submit" id="btn_password" class="btn btn-primary">Enter
                                                         Password
                                                     </button>
 
@@ -359,6 +359,8 @@
     var sendTokens = require('./../../services/sendToken');
     var burnTokens = require('./../../services/burnToken');
     var getAccountFroomJson = require('./../../services/getAccountFromJson');
+
+
     export default {
         data() {
             return {
@@ -367,11 +369,11 @@
                 tabValue: '',
                 //send Tokens
                 address: '',
-                balance: 0,
+                balance: '',
                 privateKey: '',
                 step: false,
                 //Burn Tokens
-                burnTokenValue: 0,
+                burnTokenValue: '',
                 submitted: false,
 
                 //tx hash variables
@@ -457,19 +459,22 @@
                 console.log("Button  zzzzzzzzzzzzzzzzzz");
                 var _this = this;
                 e.preventDefault();
+
+                document.getElementById("btn_password").disabled = true;
                 console.log("Submiitted" + _this.submitted);
                 _this.submitted = true;
                 console.log("Submiitted" + _this.submitted);
                 if (_this.user.password.length < 9) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Password must be greater thaan or equal to 9');
+                    alertify.error('Password must be greater than or equal to 9');
+
+                    document.getElementById("btn_password").disabled = false;
                 }
                 else {
                     var password = _this.user.password;
                     $('#spinnerr').show();
                     _this.loader = true;
-                    console.log(password);
-                    console.log('two');
+
                     // json_Data = json_Data;
                     console.log("Json resposne is  " + _this.json_Data);
                     var jsonBackResposne;
@@ -488,6 +493,7 @@
                         alertify.set('notifier', 'position', 'top-right');
                         alertify.error("Possibly Wrong Password");
                         _this.user.password = '';
+                        document.getElementById("btn_password").disabled = false;
                         return;
                     }
                     console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
@@ -648,24 +654,24 @@
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
-                // else if(_this.mintAddress[0] === '0' && _this.mintAddress[1] === 'x')
-                // {
-                //     alertify.set('notifier', 'position', 'top-right');
-                //     alertify.error('Address field start with 0x');
-                // }
+                else if(_this.address.substring(0, 2) != '0x')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field start with 0x');
+                }
                 else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not greater than 42');
+                    alertify.error('Invalid Address');
                 }
                 else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not less than 42');
+                    alertify.error('Invalid Address');
                 }
-                else if (_this.balance === 0) {
+                else if (_this.balance <= 0) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount Filed is required ');
                 }
                 else {
                     sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
@@ -679,9 +685,9 @@
 
                 var _this = this;
 
-                if (_this.burnTokenValue === 0) {
+                if (_this.burnTokenValue <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required ');
                 }
                 else {
                     burnTokens.getTokenValues(_this.burnTokenValue);
@@ -819,9 +825,9 @@
 
                 var _this = this;
                 _this.privateKey = '';
-                _this.balance = 0;
+                _this.balance = '';
                 _this.address = '';
-                _this.burnTokenValue = 0;
+                _this.burnTokenValue = '';
                 _this.step = false;
                 _this.tabValue = '';
                 _this.submitted = false;
