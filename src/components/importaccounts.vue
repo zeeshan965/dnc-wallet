@@ -79,7 +79,7 @@
 
                                     </div>
                                     <div v-if="step == 2">
-                                        <form @submit.prevent="handlePassword">
+                                        <form>
                                             <div class="form-group">
                                                 <label htmlFor="password">Password</label>
                                                 <input type="password" v-model="user.password"
@@ -90,7 +90,9 @@
                                                 <!--</div>-->
                                             </div>
                                             <!--passWord section-->
-                                            <button type="submit" class="btn btn-primary">Enter Password</button>
+                                            <button type="submit" @click="showLoader" id="btn_password"
+                                                    class="btn btn-primary">Enter Password
+                                            </button>
 
                                         </form>
 
@@ -183,6 +185,10 @@
     var getAccountFroomJson = require('./../services/getAccountFromJson');
 
     var DncTokenBalance = require('./../services/getTokenBalance');
+
+    var Web3 = require('web3');
+    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+
 
     export default {
         data: function () {
@@ -338,94 +344,149 @@
 
 
             },
-            handlePassword: async function (e) {
+            showLoader: function (e) {
 
-                console.log("Button  zzzzzzzzzzzzzzzzzz");
-                var _this = this;
                 e.preventDefault();
-                console.log("Submiitted" + _this.submitted);
-                _this.submitted = true;
-                console.log("Submiitted" + _this.submitted);
-                // _this.$validator.validate().then(valid => {
-                //     console.log("Valid oiios" + valid);
-                //
-                //     if (valid) {
-                //         console.log("Ener in conditioo");
+                var _this = this;
+
                 if (_this.user.password.length < 9) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Password must be greater thaan or equal to 9');
+                    alertify.error('Password must be greater than 0 or equal to 9');
+                    _this.user.password = '';
+
+                    return;
+
                 }
-                else {
+                this.loader = true;
+                _this.handlePassword(e);
+
+
+            },
+            getAccountFromJson:async function(){
+
+                var _this =this;
+                var account = await  web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
+                return account;
+            },
+            handlePassword: async function (e) {
+
+                var _this = this;
+
+                alert(_this.user.password);
+
+
+                console.log("Button  zzzzzzzzzzzzzzzzzz");
+
+                e.preventDefault();
+
+                _this.submitted = true;
+
                     var password = _this.user.password;
-                    $('#spinnerr').show();
-                    console.log(password);
-                    _this.loader=true;
-                    console.log('two');
-                    var jsonBackResposne;
-                    var jsonResponseError;
-                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
-                        jsonBackResposne = res;
-                    }).catch((e) => {
-                        console.log("Error " + e);
-                        jsonResponseError = e;
-                    });
-                    if (jsonResponseError) {
-                        alertify.set('notifier', 'position', 'top-right');
-                        alertify.error("Possibly Wrong Password");
-                        _this.user.password = '';
-                        return;
-                    }
 
+                    console.log('Userzzzz password ' + password);
+
+                    var jsonBackResposne=false;
+                    var jsonResponseError =false;
+
+
+                    console.log("Fucnaaiton json data " + JSON.stringify(_this.json_Data));
                     setTimeout(function () {
-                        console.log('Datazzzz ' + _this.json_Data.address);
+
+                            _this.getAccountFromJson().then((res)=>{
+                                console.log("Response isss"  + res);
+                                jsonBackResposne = true;
+                                if(jsonBackResposne){
+                                    _this.listing();
+                                }
+
+                            }).catch((e)=>{
+                                jsonResponseError = true;
+                                console.log("Error  is" +e);
+                                if (jsonResponseError) {
+                    alert("Azeem");
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.error("Possibly Wrong Password");
+                                    _this.user.password = '';
+                                    _this.loader = false;
+                                    return;
+                                }
 
 
-                        console.log('three');
-                        WalletService.addresses.push(_this.json_Data.address);
-
-                        console.log("Json resposne is  " + _this.json_Data);
+                            });
 
 
-                        console.log("Json resposne is  " + _this.json_Data);
+                    },500);
 
-                        //Eth key Store Balance
-                        var keystoreBalance;
-                        var balance = WalletService.getBalance(_this.json_Data.address).then((res) => {
-                            keystoreBalance = res;
-                            console.log('Response inside get balance ' + keystoreBalance);
-                        });
-
-                        setTimeout(() => {
-                            console.log('Balance i get zzzzzzzzzzzzzz' + keystoreBalance);
-                            WalletService.addressesBlancess.push(keystoreBalance);
-                            console.log('First address is ' + addressesBlancess[0]);
-                        }, 3000);
-
-                        //DNC  Keystore Balance
-
-                        var myDNCkeyStoreBalance;
-                        var keystoreBalancednc = DncTokenBalance.getDncBalance(_this.json_Data.address).then((dncres) => {
-                            myDNCkeyStoreBalance = dncres;
-                            console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
-                        });
-
-                        setTimeout(() => {
-                            console.log("Balcne i get for dnc keystoreis" + myDNCkeyStoreBalance);
-                            WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
-                            console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
-                        }, 3000);
-
-
-                    }, 1000);
-
-                    router.push('/');
-
-
-                    //     }
+                          // jsonBackResposne = res;
+                    // }).catch((e) => {
+                    //     console.log("Error " + e);
+                    //     jsonResponseError = e;
+                    //
+                    //
                     // });
 
 
-                }
+                    // console.log("Accoutn" + JSON.stringify(account.privateKey));
+
+                    // var resposne =await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
+                    //     jsonBackResposne = res;
+                    // }).catch((e) => {
+                    //     console.log("Error " + e);
+                    //     jsonResponseError = e;
+                    //
+                    //     _this.loader =false;
+                    // });
+                    //
+
+
+                // $('#spinnerr').hide();
+
+
+
+
+
+                //     }
+                // });
+
+
+            },
+            listing:async function () {
+
+                var _this =this;
+                WalletService.addresses.push(_this.json_Data.address);
+
+                console.log("Json resposne is  " + _this.json_Data);
+
+
+                //Eth key Store Balance
+                var keystoreBalance;
+                var balance = await WalletService.getBalance(_this.json_Data.address).then((res) => {
+                    keystoreBalance = res;
+                    console.log('Response inside get balance ' + keystoreBalance);
+                });
+
+
+                WalletService.addressesBlancess.push(keystoreBalance);
+                console.log('First address is ' + addressesBlancess[0]);
+
+
+                //DNC  Keystore Balance
+
+                var myDNCkeyStoreBalance;
+                var keystoreBalancednc = await DncTokenBalance.getDncBalance(_this.json_Data.address).then((dncres) => {
+                    myDNCkeyStoreBalance = dncres;
+                    console.log("Dnc issdsdsds balcne keystore is for then resposne" + myDNCkeyStoreBalance);
+                });
+
+
+                WalletService.dncAddressesBlancess.push(myDNCkeyStoreBalance);
+                console.log("DNC first keystotre Address is " + dncAddressesBlancess[0]);
+
+
+                _this.loader = false;
+                router.push('/');
+
+
             }
         },
 
