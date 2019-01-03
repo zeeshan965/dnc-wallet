@@ -177,7 +177,11 @@
                 _this.spinnerr = false;
 
                 console.log('destroyed')
-
+$(window).on('load',function(){
+        $('#new_wallet').modal('show');
+    });
+    
+                console.log('destroyed2222')
 
             }, 2000)
         },

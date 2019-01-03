@@ -73,6 +73,9 @@
 <script>
     export default {
         mounted: function () {
+            $(window).on('load',function(){
+        $('#new_wallet').modal('show');
+    });
         }
     }
 </script>

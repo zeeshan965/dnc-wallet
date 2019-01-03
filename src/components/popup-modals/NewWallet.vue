@@ -22,6 +22,9 @@
                         <h4 class="modal-title" id="myModalLabel">Create a New Account</h4>
                     </div>
                     <div class="modal-body">
+                        <router-link to="/importaccounts">
+                           <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Import Accounts</button>
+                        </router-link>
                         <h4>We need a few more details before we create new account address for your digital assets</h4>
                         <div class="alert alert-danger">
                             <p>
