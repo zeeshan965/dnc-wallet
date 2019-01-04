@@ -216,7 +216,7 @@
                                             </li>
                                             <li class="">
                                                 <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                                    <span>Jason File</span>
+                                                    <span>JSON File</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -306,7 +306,7 @@
 
                                                     </div>
                                                     <div v-if="jsonStep == 2">
-                                                        <form @submit.prevent="handlePassword">
+                                                        <form @submit.prevent="showLoader">
                                                             <div class="form-group">
                                                                 <label htmlFor="password">Password</label>
                                                                 <input type="password" v-model="user.password"
@@ -317,7 +317,7 @@
                                                                 <!--</div>-->
                                                             </div>
                                                             <!--passWord section-->
-                                                            <button type="submit" class="btn btn-primary">Enter
+                                                            <button type="submit" id="btn_password" class="btn btn-primary">Enter
                                                                 Password
                                                             </button>
 
@@ -351,6 +351,10 @@
     var unPauseTokens = require('./../services/unpause');
     var updateToken = require('./../services/updateRate');
     var getAccountFroomJson = require('./../services/getAccountFromJson');
+    var Web3 = require('web3');
+    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
+
+
     export default {
         data: function () {
             return {
@@ -360,18 +364,18 @@
                 tabValue: '',
                 //send Tokens
                 address: '',
-                balance: 0,
+                balance: '',
                 privateKey: '',
                 step: false,
                 submitted: false,
                 //Burn Tokens
-                burnTokenValue: 0,
+                burnTokenValue: '',
                 //Mint Token
                 mintAddress: '',
-                mintBalance: 0,
+                mintBalance: '',
 
                 //Update Toekn  price
-                updateTokenValue: 0,
+                updateTokenValue: '',
                 loader: false,
                 //tx hash variables
 
@@ -402,17 +406,11 @@
                 console.log("under Import file private key :" + _this.importPrivateKey);
                 response = await sendTokens.getTransactionCount(_this.importPrivateKey).then((res) => {
                     console.log("resposne aiewewewew  " + res);
-                    resposne = res;
+                    response = res;
                 }).catch((e) => {
                     console.log("Error is " + e);
                 });
-                // if(response === undefined){
-                //     alertify.set('notifier', 'position', 'top-right');
-                //     alertify.error("InSuffient Gas Price");
-                //     _this.user.password ='';
-                //     _this.jsonStep =1;
-                //     return;
-                // }
+
 
             },
             getimportburnTokenTxHash: async function () {
@@ -491,181 +489,205 @@
 
                 }
             },
+            showLoader: function (e) {
+
+                document.getElementById("btn_password").disabled = true;
+                e.preventDefault();
+                var _this = this;
+
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater than 0 or equal to 9');
+                    _this.user.password = '';
+
+
+                    document.getElementById("btn_password").disabled = false;
+
+                    return;
+
+                }
+                this.loader = true;
+                _this.handlePassword(e);
+
+
+            },
+            getAccountFromJson:async function(){
+
+                var _this =this;
+                var account = await  web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
+                return account;
+            },
             handlePassword: async function (e) {
                 console.log("Button  zzzzzzzzzzzzzzzzzz");
                 var _this = this;
                 e.preventDefault();
-                console.log("Submiitted" + _this.submitted);
-                _this.submitted = true;
-                console.log("Submiitted" + _this.submitted);
-                if (_this.user.password.length < 9) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Password must be greater thaan or equal to 9');
-                }
-                else {
-                    var password = _this.user.password;
-                    $('#spinnerr').show();
-                    _this.loader = true;
-                    console.log(password);
-                    console.log('two');
-                    // json_Data = json_Data;
-                    console.log("Json resposne is  " + _this.json_Data);
-                    var jsonBackResposne;
+                console.log('two');
+                // json_Data = json_Data;
+                console.log("Json resposne is  " + _this.json_Data);
 
-                    var jsonResponseError;
+                var password = _this.user.password;
+                var jsonBackResposne=false;
+                var jsonResponseError =false;
 
-                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
-                        jsonBackResposne = res;
 
-                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                    }).catch((e) => {
-                        console.log("Error is" + e);
-                        jsonResponseError = e;
+                setTimeout(function () {
+
+                    _this.getAccountFromJson().then((res)=>{
+                        console.log("Bacck json resposne " + JSON.stringify(res));
+                        console.log("Bacck json resposne of private key " + res.privateKey);
+                        _this.importPrivateKey = res.privateKey.substring(2);
+                        console.log("Import file private key :" + _this.importPrivateKey);
+                        jsonBackResposne = true;
+                        if(jsonBackResposne){
+
+
+                            _this.listing();
+                            jsonBackResposne = false;
+
+
+                            document.getElementById("btn_password").disabled = false;
+                        }
+
+                    }).catch((e)=>{
+                        jsonResponseError = true;
+                        console.log("Error  is" +e);
+                        if (jsonResponseError) {
+
+
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.error("Possibly Wrong Password");
+                            _this.user.password = '';
+                            _this.loader = false;
+
+                            jsonResponseError =false;
+
+                            document.getElementById("btn_password").disabled = false;
+                            return;
+                        }
+
+
                     });
-                    if (jsonResponseError) {
-                        alertify.set('notifier', 'position', 'top-right');
-                        alertify.error("Possibly Wrong Password");
-                        _this.user.password = '';
-                        return;
-                    }
-                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-                    console.log("Import file private key :" + _this.importPrivateKey);
 
 
-                    switch (this.tabValue) {
-                        case 'SendTokens':
+                },500);
+            },
+            listing: function(){
+                var _this =this;
+
+                switch (this.tabValue) {
+                    case 'SendTokens':
+                        setTimeout(function () {
                             setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#Mintt').hide();
-                                }, 1000);
-                                console.log('Send Token value is ' + this.tabValue);
-                                // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // sendTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getimportsendTokenTxHash();
-                                setTimeout(function () {
-                                    var response = sendTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("send token tx hash  " + res);
-                                        _this.sendTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
+                                $('#Mintt').hide();
                             }, 1000);
-                            break;
-                        case 'Burn':
+                            console.log('Send Token value is ' + _this.tabValue);
+                            _this.getimportsendTokenTxHash();
                             setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu11').hide();
-                                }, 1000);
-                                console.log('Inside burn' + this.tabValue);
-                                // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // burnTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getimportburnTokenTxHash();
-                                setTimeout(function () {
-                                    var response = burnTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("burn token tx hash  " + res);
-                                        _this.burnTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
+                                var response = sendTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("send token tx hash  " + res);
+                                    _this.sendTokenTxHash = res;
+                                })
                             }, 2000);
-                            break;
-                        case 'Mint' :
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu22').hide();
-                                }, 1000);
-                                console.log('Inside Mint' + this.tabValue);
-                                // mintTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // mintTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getimportmintTokenTxHash();
-                                setTimeout(function () {
-                                    var response = mintTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("mind token tx hash  " + res);
-                                        _this.mintTokenTxHash = res;
-                                    })
-                                }, 2000);
-
-                                _this.init();
-                            }, 2000);
-                            break;
-
-                        case 'Pause' :
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu33').hide();
-                                }, 1000);
-                                console.log('Inside Pause' + this.tabValue);
-                                // pauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                _this.getimportpauseTokenTxHash();
-                                setTimeout(function () {
-                                    var response = pauseTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("pause token tx hash  " + res);
-                                        _this.pauseTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 2000);
-                            break;
-                        case 'Unpause' :
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu44').hide();
-                                }, 1000);
-                                console.log('Inside Unpause' + this.tabValue);
-                                // unPauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-
-                                _this.getimportunpauseTokenTxHash();
-                                setTimeout(function () {
-                                    var response = unPauseTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("unpause token tx hash  " + res);
-                                        _this.unPauseTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 2000);
-                            break;
-                        case 'updateToken' :
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu55').hide();
-                                }, 1000);
-                                console.log('Inside Update Token' + this.tabValue);
-                                // updateToken.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                _this.getimportupdateTokenTxHash();
-                                setTimeout(function () {
-                                    var response = updateToken.trxHash();
-                                    response.then((res) => {
-                                        console.log("update token tx hash  " + res);
-                                        _this.updateTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 2000);
-                            break;
-                        default:
-                            alert('Bye');
                             _this.init();
-                            break;
+                        }, 2000);
+                        break;
+                    case 'Burn':
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu11').hide();
+                            }, 1000);
+                            console.log('Inside burn' + _this.tabValue);
+                            _this.getimportburnTokenTxHash();
+                            setTimeout(function () {
+                                var response = burnTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("burn token tx hash  " + res);
+                                    _this.burnTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 2000);
+                        break;
+                    case 'Mint' :
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu22').hide();
+                            }, 1000);
+                            console.log('Inside Mint' + _this.tabValue);
+                            _this.getimportmintTokenTxHash();
+                            setTimeout(function () {
+                                var response = mintTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("mind token tx hash  " + res);
+                                    _this.mintTokenTxHash = res;
+                                })
+                            }, 2000);
 
-                    }
+                            _this.init();
+                        }, 2000);
+                        break;
+
+                    case 'Pause' :
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu33').hide();
+                            }, 500);
+                            console.log('Inside Pause' + _this.tabValue);
+                            // pauseTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
+                            // _this.init();
+                            _this.getimportpauseTokenTxHash();
+                            setTimeout(function () {
+                                var response = pauseTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("pause token tx hash  " + res);
+                                    _this.pauseTokenTxHash = res;
+                                })
+                            }, 500);
+                            _this.init();
+                        }, 500);
+                        break;
+                    case 'Unpause' :
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu44').hide();
+                            }, 1000);
+                            console.log('Inside Unpause' + _this.tabValue);
+                            _this.getimportunpauseTokenTxHash();
+                            setTimeout(function () {
+                                var response = unPauseTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("unpause token tx hash  " + res);
+                                    _this.unPauseTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 2000);
+                        break;
+                    case 'updateToken' :
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu55').hide();
+                            }, 1000);
+                            console.log('Inside Update Token' + _this.tabValue);
+                            _this.getimportupdateTokenTxHash();
+                            setTimeout(function () {
+                                var response = updateToken.trxHash();
+                                response.then((res) => {
+                                    console.log("update token tx hash  " + res);
+                                    _this.updateTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 2000);
+                        break;
+                    default:
+                        alert('Bye');
+                        _this.init();
+                        break;
+
+
                 }
-
             },
             // Get Tabs Value
             getValues: function () {
@@ -676,23 +698,23 @@
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
-                // else if(_this.address[0] === '0' && _this.address[1] === 'x')
-                // {
-                //     alertify.set('notifier', 'position', 'top-right');
-                //     alertify.error('Address field start with 0x');
-                // }
+                else if(_this.address.substring(0, 2) != '0x')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field start with 0x');
+                }
                 else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not greater than 42');
+                    alertify.error('Invalid Address');
                 }
                 else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not less than 42');
+                    alertify.error('Invalid Address');
                 }
-                else if (_this.balance === 0) {
+                else if (_this.balance <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required');
                 }
                 else {
                     sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
@@ -705,9 +727,9 @@
             getTokenValue: function () {
                 var _this = this;
 
-                if (_this.burnTokenValue === 0) {
+                if (_this.burnTokenValue <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required ');
                 }
                 else {
                     burnTokens.getTokenValues(_this.burnTokenValue);
@@ -723,23 +745,23 @@
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
                 }
-                // else if(_this.mintAddress[0] === '0' && _this.mintAddress[1] === 'x')
-                // {
-                //     alertify.set('notifier', 'position', 'top-right');
-                //     alertify.error('Address field start with 0x');
-                // }
+                else if(_this.mintAddress.substring(0, 2) != '0x')
+                {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Address field start with 0x');
+                }
                 else if (_this.mintAddress.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not greater than 42');
+                    alertify.error('Invalid Address');
                 }
                 else if (_this.mintAddress.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is not less than 42');
+                    alertify.error('Invalid Address');
                 }
                 else if (_this.mintBalance === 0) {
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required ');
                 }
                 else {
                     mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
@@ -759,10 +781,10 @@
             },
             getUpdateTokenValue: function () {
                 var _this = this;
-                if (_this.updateTokenValue === 0) {
+                if (_this.updateTokenValue <= 0) {
 
                     alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Address field is required and not equal to 0 ');
+                    alertify.error('Amount field is required');
                 }
                 else {
                     updateToken.getTokenValues(_this.updateTokenValue);
@@ -953,19 +975,20 @@
 
                 var _this = this;
                 _this.privateKey = '';
-                _this.balance = 0;
+                _this.balance = '';
                 _this.address = '';
-                _this.burnTokenValue = 0;
+                _this.burnTokenValue = '';
                 _this.mintAddress = '';
-                _this.mintBalance = 0;
-                _this.updateTokenValue = 0;
+                _this.mintBalance = '';
+                _this.updateTokenValue = '';
                 _this.fileName = '';
                 _this.step = false;
                 _this.tabValue = '';
                 _this.submitted = false;
                 _this.jsonStep = 1;
                 _this.loader=false;
-
+                _this.user.password =''
+;
 
             }
         },

@@ -210,7 +210,7 @@
                                     </li>
                                     <li class="">
                                         <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                            <span>Jason File</span>
+                                            <span>JSON File</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -244,10 +244,6 @@
                                             </div>
                                         </form>
 
-                                    </div>
-
-                                    <div v-if="loader == true">
-                                        <vue-simple-spinner></vue-simple-spinner>
                                     </div>
                                     <div id="jasonFile" class="tab-pane ">
                                         <div>
@@ -319,15 +315,12 @@
 
                                             </div>
                                             <div v-if="jsonStep == 2">
-                                                <form @submit.prevent="handlePassword">
+                                                <form @submit.prevent="showLoader">
                                                     <div class="form-group">
                                                         <label htmlFor="password">Password</label>
                                                         <input type="password" v-model="user.password"
                                                                class="form-control"
                                                         />
-                                                        <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
-                                                        <!--class="invalid-feedback">{{ errors.first('password') }}-->
-                                                        <!--</div>-->
                                                     </div>
                                                     <!--passWord section-->
                                                     <button type="submit" id="btn_password" class="btn btn-primary">Enter
@@ -338,10 +331,11 @@
 
 
                                             </div>
-                                            <div v-if="loader == true">
-                                                <vue-simple-spinner></vue-simple-spinner>
-                                            </div>
+
                                         </div>
+                                    </div>
+                                    <div v-if="loader == true">
+                                        <vue-simple-spinner></vue-simple-spinner>
                                     </div>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -360,6 +354,8 @@
     var burnTokens = require('./../../services/burnToken');
     var getAccountFroomJson = require('./../../services/getAccountFromJson');
 
+    var Web3 = require('web3');
+    var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/t2utzUdkSyp5DgSxasQX"));
 
     export default {
         data() {
@@ -455,198 +451,137 @@
 
                 }
             },
+
+
+            showLoader: function (e) {
+
+                document.getElementById("btn_password").disabled = true;
+                e.preventDefault();
+                var _this = this;
+
+                if (_this.user.password.length < 9) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Password must be greater than 0 or equal to 9');
+                    _this.user.password = '';
+
+
+                    document.getElementById("btn_password").disabled = false;
+
+                    return;
+
+                }
+                this.loader = true;
+                _this.handlePassword(e);
+
+
+            },
+            getAccountFromJson:async function(){
+
+                var _this =this;
+                var account = await  web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
+                return account;
+            },
             handlePassword: async function (e) {
                 console.log("Button  zzzzzzzzzzzzzzzzzz");
                 var _this = this;
                 e.preventDefault();
+                console.log('two');
+                // json_Data = json_Data;
+                console.log("Json resposne is  " + _this.json_Data);
 
-                document.getElementById("btn_password").disabled = true;
-                console.log("Submiitted" + _this.submitted);
-                _this.submitted = true;
-                console.log("Submiitted" + _this.submitted);
-                if (_this.user.password.length < 9) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Password must be greater than or equal to 9');
+                var password = _this.user.password;
+                var jsonBackResposne=false;
+                var jsonResponseError =false;
 
-                    document.getElementById("btn_password").disabled = false;
-                }
-                else {
-                    var password = _this.user.password;
-                    $('#spinnerr').show();
-                    _this.loader = true;
 
-                    // json_Data = json_Data;
-                    console.log("Json resposne is  " + _this.json_Data);
-                    var jsonBackResposne;
+                setTimeout(function () {
 
-                    var jsonResponseError;
+                    _this.getAccountFromJson().then((res)=>{
+                        console.log("Bacck json resposne " + JSON.stringify(res));
+                        console.log("Bacck json resposne of private key " + res.privateKey);
+                        _this.importPrivateKey = res.privateKey.substring(2);
+                        console.log("Import file private key :" + _this.importPrivateKey);
+                        jsonBackResposne = true;
+                        if(jsonBackResposne){
 
-                    var resposne = await getAccountFroomJson.getprivateKeyFromJson(_this.json_Data, _this.user.password).then((res) => {
-                        jsonBackResposne = res;
 
-                        // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-                    }).catch((e) => {
-                        console.log("Error is" + e);
-                        jsonResponseError = e;
+                            _this.listing();
+                            jsonBackResposne = false;
+                            document.getElementById("btn_password").disabled = false;
+                        }
+
+                    }).catch((e)=>{
+                        jsonResponseError = true;
+                        console.log("Error  is" +e);
+                        if (jsonResponseError) {
+
+
+
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.error("Possibly Wrong Password");
+                            _this.user.password = '';
+                            _this.loader = false;
+
+                            jsonResponseError =false;
+
+                            document.getElementById("btn_password").disabled = false;
+                            return;
+                        }
+
+
                     });
-                    if (jsonResponseError) {
-                        alertify.set('notifier', 'position', 'top-right');
-                        alertify.error("Possibly Wrong Password");
-                        _this.user.password = '';
-                        document.getElementById("btn_password").disabled = false;
-                        return;
-                    }
-                    console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-                    console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-                    _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-                    console.log("Import file private key :" + _this.importPrivateKey);
 
 
-                    switch (this.tabValue) {
-                        case 'SendTokens':
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#Mintt').hide();
-                                }, 1000);
-                                console.log('Send Token value is ' + this.tabValue);
-                                // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // sendTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getimportsendTokenTxHash();
-                                setTimeout(function () {
-                                    var response = sendTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("send token tx hash  " + res);
-                                        _this.sendTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 1000);
-                            break;
-                        case 'Burn':
-                            setTimeout(function () {
-                                setTimeout(function () {
-                                    $('#menu11').hide();
-                                }, 1000);
-                                console.log('Inside burn' + this.tabValue);
-                                // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-                                // _this.init();
-                                // burnTokens.getPrivateKey(_this.privateKey);
-
-                                _this.getimportburnTokenTxHash();
-                                setTimeout(function () {
-                                    var response = burnTokens.trxHash();
-                                    response.then((res) => {
-                                        console.log("burn token tx hash  " + res);
-                                        _this.burnTokenTxHash = res;
-                                    })
-                                }, 2000);
-                                _this.init();
-                            }, 2000);
-                            break;
-
-                        default:
-                            alert('Bye');
-                            _this.init();
-                            break;
-
-                    }
-                }
-
+                },500);
             },
-            // onFileSelected(e) {
-            //     e.preventDefault();
-            //     //    console.log(e);
-            //     var _this = this;
-            //     this.fileName = e.target.files[0].name;
-            //     var newFileName = this.fileName.split('.');
-            //     console.log('New File name zzzzzzzzzzzzzzzz' + newFileName[1].length);
-            //
-            //     if (newFileName[1].length > 46 || newFileName[1].length < 46) {
-            //         alertify.set('notifier', 'position', 'top-right');
-            //         alertify.error('Invalid file format');
-            //         this.fileName = '';
-            //         return false;
-            //     }
-            //     console.log('File Name ' + this.fileName);
-            //
-            //     // Reference to the DOM input element
-            //     var input = event.target;
-            //     // Ensure that you have a file before attempting to read it
-            //     if (input.files && input.files[0]) {
-            //         // create a new FileReader to read this image and convert to base64 format
-            //         var reader = new FileReader();
-            //         // Define a callback function to run, when FileReader finishes its job
-            //
-            //         reader.onload = (e) => {
-            //
-            //
-            //             var json_Data = e.target.result;
-            //
-            //
-            //             // json_Data = json_Data;
-            //             console.log("Json resposne is  " + json_Data);
-            //             var jsonBackResposne;
-            //             var resposne = getAccountFroomJson.getprivateKeyFromJson(json_Data).then((res) => {
-            //                 jsonBackResposne = res;
-            //
-            //                 console.log("Bacck json resposne " + JSON.stringify(jsonBackResposne));
-            //                 console.log("Bacck json resposne of private key " + jsonBackResposne.privateKey);
-            //                 _this.importPrivateKey = jsonBackResposne.privateKey.substring(2);
-            //                 console.log("Import file private key :" + _this.importPrivateKey);
-            //
-            //                 switch (this.tabValue) {
-            //                     case 'SendTokens':
-            //                         console.log('Send Token value is ' + this.tabValue);
-            //                         // sendTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-            //                         // _this.init();
-            //                         // sendTokens.getPrivateKey(_this.privateKey);
-            //
-            //                         _this.getimportsendTokenTxHash();
-            //                         setTimeout(function () {
-            //                             var response = sendTokens.trxHash();
-            //                             response.then((res) => {
-            //                                 console.log("send token tx hash  " + res);
-            //                                 _this.sendTokenTxHash = res;
-            //                             })
-            //                         }, 2000);
-            //                         _this.init();
-            //                         break;
-            //                     case 'Burn' :
-            //                         console.log('Inside burn' + this.tabValue);
-            //                         // burnTokens.getTransactionCount(jsonBackResposne.privateKey.substring(2));
-            //                         // _this.init();
-            //                         // burnTokens.getPrivateKey(_this.privateKey);
-            //
-            //                         _this.getimportburnTokenTxHash();
-            //                         setTimeout(function () {
-            //                             var response = burnTokens.trxHash();
-            //                             response.then((res) => {
-            //                                 console.log("burn token tx hash  " + res);
-            //                                 _this.burnTokenTxHash = res;
-            //                             })
-            //                         }, 2000);
-            //                         _this.init();
-            //                         break;
-            //                     default:
-            //                         alert('Bye');
-            //                         _this.init();
-            //                         break;
-            //
-            //                 }
-            //                 // sendTokens.getPrivateKey(jsonBackResposne.privateKey.substring(2));
-            //             });
-            //
-            //
-            //         };
-            //         // Start the reader job - read file
-            //         reader.readAsText(input.files[0]);
-            //
-            //
-            //     }
-            // },
-            // Send tokens Tab
+            listing: function(){
+                var _this =this;
+
+                switch (this.tabValue) {
+                    case 'SendTokens':
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#Mintt').hide();
+                            }, 1000);
+                            console.log('Send Token value is ' + _this.tabValue);
+                            _this.getimportsendTokenTxHash();
+                            setTimeout(function () {
+                                var response = sendTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("send token tx hash  " + res);
+                                    _this.sendTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 2000);
+                        break;
+                    case 'Burn':
+                        setTimeout(function () {
+                            setTimeout(function () {
+                                $('#menu11').hide();
+                            }, 1000);
+                            console.log('Inside burn' + _this.tabValue);
+                            _this.getimportburnTokenTxHash();
+                            setTimeout(function () {
+                                var response = burnTokens.trxHash();
+                                response.then((res) => {
+                                    console.log("burn token tx hash  " + res);
+                                    _this.burnTokenTxHash = res;
+                                })
+                            }, 2000);
+                            _this.init();
+                        }, 2000);
+                        break;
+
+                    default:
+                        alert('Bye');
+                        _this.init();
+                        break;
+
+
+                }
+            },
+                      // Send tokens Tab
             getValues: function () {
 
                 var _this = this;
@@ -773,54 +708,7 @@
 
 
             },
-            // getPrivateKey: function (e) {
-            //
-            //     var _this = this;
-            //     e.preventDefault();
-            //     _this.submitted = true;
-            //     this.$validator.validate().then(valid => {
-            //         if (valid) {
-            //
-            //             switch (this.tabValue) {
-            //                 case 'SendTokens':
-            //                     console.log('Send Token value is ' + this.tabValue);
-            //                     _this.getsendTokenTxHash();
-            //                     setTimeout(function () {
-            //                         var response = sendTokens.trxHash();
-            //                         response.then((res) => {
-            //                             console.log("send token tx hash  " + res);
-            //                             _this.sendTokenTxHash = res;
-            //                         })
-            //                     }, 2000);
-            //
-            //
-            //                     _this.init();
-            //                     break;
-            //                 case 'Burn' :
-            //                     console.log('Inside burn' + this.tabValue);
-            //                     // burnTokens.getPrivateKey(_this.privateKey);
-            //
-            //                     _this.getburnTokenTxHash();
-            //                     setTimeout(function () {
-            //                         var response = burnTokens.trxHash();
-            //                         response.then((res) => {
-            //                             console.log("burn token tx hash " + res);
-            //                             _this.burnTokenTxHash = res;
-            //                         })
-            //                     }, 2000);
-            //                     _this.init();
-            //                     break;
-            //                 default:
-            //                     alert('Bye');
-            //                     _this.init();
-            //                     break;
-            //
-            //             }
-            //         }
-            //     });
-            //
-            //
-            // },
+
             init: function () {
 
                 var _this = this;
