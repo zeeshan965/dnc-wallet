@@ -210,7 +210,7 @@
                                     </li>
                                     <li class="">
                                         <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                            <span>Jason File</span>
+                                            <span>JSON File</span>
                                         </a>
                                     </li>
                                 </ul>
