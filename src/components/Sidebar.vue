@@ -1,6 +1,6 @@
 <template>
-    <div class="left side-menu" style="overflow: hidden;text-align:left">
-        <div class="sidebar-inner slimscrollleft" style="overflow: hidden;">
+    <div class="left side-menu" style="overflow: visible;text-align:left">
+        <div class="sidebar-inner slimscrollleft" style="verflow: visible;">
             <div id="sidebar-menu">
                 <ul>
                     <li class="text-muted menu-title">Main</li>
@@ -79,3 +79,87 @@
         }
     }
 </script>
+<style>
+    #sidebar-menu > ul > li > a:hover {
+        background: #202532 !important;
+        border-left: 2px solid #3bafda;
+        text-decoration: none;
+        z-index: 1000;
+    }
+    #wrapper.enlarged .left.side-menu #sidebar-menu > ul > li > a {
+        padding: 15px 20px;
+    }
+
+    #wrapper.enlarged .left.side-menu #sidebar-menu > ul > li > a {
+        padding-left: 10px;
+    }
+    #sidebar-menu > ul > li > a {
+        color: #a2acae;
+        border-left: 2px solid transparent;
+        display: block;
+        padding: 12px 25px;
+    }
+    #sidebar-menu a {
+        line-height: 1.3;
+    }
+    #sidebar-menu, #sidebar-menu ul, #sidebar-menu li, #sidebar-menu a {
+        border: 0;
+        font-weight: normal;
+        line-height: 1;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        text-decoration: none;
+    }
+    a:hover, a:focus, a:visited {
+        outline: 0;
+        color: #337ab7;
+        text-decoration: none;
+    }
+    .waves-effect {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        vertical-align: middle;
+        z-index: 1;
+        will-change: opacity, transform;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+    }
+    a {
+        outline: 0;
+        color: #337ab7;
+        text-decoration: none;
+    }
+    a {
+        color: #337ab7;
+        text-decoration: none;
+    }
+    a {
+        background-color: transparent;
+    }
+    * {
+        outline: none !important;
+    }
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    user agent stylesheet
+    a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+</style>
