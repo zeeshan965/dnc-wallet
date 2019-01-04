@@ -15,11 +15,21 @@
     .container.text-left {
         padding-bottom: 60px;
     }
+    .bg-importaccount{
+        margin: 1.5rem 2rem !important;
+        background-color: #262c3b;
+        -webkit-box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        padding: 1.5rem 2rem;
+        min-height: 1.5rem;
+        margin: 1rem auto;
+        position: relative !important;
+    }
 </style>
 <template>
     <div>
         <div class="content m-t-40">
-            <div class="container text-left">
+            <div class="container text-left bg-importaccount">
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <ul class="nav nav-pills">

@@ -1,4 +1,26 @@
 <style scoped>
+    .bg-contract {
+        margin: 1.5rem 2rem !important;
+        background-color: #262c3b;
+        -webkit-box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        padding: 1.5rem 2rem;
+        min-height: 1.5rem;
+        margin: 1rem auto;
+        position: relative !important;
+    }
+
+    .bg-contract1 {
+        margin: 1.5rem 2rem !important;
+        /*background-color: #262c3b;*/
+        -webkit-box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
+        padding: 1.5rem 2rem;
+        min-height: 1.5rem;
+        margin: 1rem auto;
+        position: relative !important;
+    }
+
     input, select, textarea, button {
         border-radius: 0px;
         height: 40px;
@@ -19,7 +41,7 @@
 <template>
     <div>
         <div class="content m-t-40">
-            <div class="container text-left">
+            <div class="container text-left bg-contract">
                 <div class="col-md-12 col-md-offset-2">
                     <div class="row">
                         <ul class="nav nav-pills">
@@ -59,10 +81,10 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div v-if="sendTokenTxHash">
-                                            <h2>Save your hash</h2>
-                                            <p style="color:white;"> {{ sendTokenTxHash }}</p>
-                                        </div>
+                                    </div>
+                                    <div v-if="sendTokenTxHash">
+                                        <h2>Save your hash</h2>
+                                        <p style="color:white;"> {{ sendTokenTxHash }}</p>
                                     </div>
                                 </div>
                                 <div id="menu1" class="tab-pane fade">
@@ -205,142 +227,145 @@
                                     </div>
                                 </div>
 
-                                <!--modal start -->
-                                <div v-if="step === true">
-                                    <div class=" p-0" style="margin-top: 15px">
-                                        <ul class="nav nav-tabs navtab-custom nav-justified">
-                                            <li class="active">
-                                                <a href="#privateKey" data-toggle="tab" aria-expanded="true">
-                                                    <span>Private key</span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
-                                                    <span>JSON File</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div id="privateKey" class="tab-pane active">
-                                                <form data-v-92875dbe="" action="#"
-                                                      @submit.prevent="getPrivateKey" data-parsley-validate=""
-                                                      novalidate="novalidate">
-                                                    <div data-v-92875dbe="" class="form-group">
-                                                        <label data-v-92875dbe="">Enter Your Private Key</label>
-                                                        <input v-model="privateKey
-
-" v-validate="{ required: true, min: 64,max:64 }" name="password" class="form-control"
-                                                               :class="{ 'is-invalid': submitted && errors.has('password') }"
-                                                               data-v-92875dbe=""
-                                                               type="password" placeholder=""
-                                                               data-parsley-id="8">
-                                                    </div>
-                                                    <div style="color:red;" v-if="submitted && errors.has('password')"
-                                                         class="invalid-feedback">{{ errors.first('password') }}
-                                                    </div>
-
-                                                    <div data-v-92875dbe="" class="form-group text-right m-b-0">
-
-                                                        <button type="submit" data-v-92875dbe=""
-                                                                data-toggle="modal"
-                                                                data-target="#sendToken-modal"
-                                                                class="btn btn-default waves-effect waves-light">
-                                                            Send Transaction
-                                                        </button>
-                                                    </div>
-                                                </form>
-
-                                                <div v-if="loader == true">
-                                                    <vue-simple-spinner></vue-simple-spinner>
-                                                </div>
-                                            </div>
-                                            <div id="jasonFile" class="tab-pane ">
-                                                <div>
-                                                    <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
-                                                    <h5 style="color:  rgb(217, 83, 79);">
-                                                        This is <u>not</u> a recommended way to access your wallet.
-                                                    </h5>
-                                                    <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
-                                                        Entering your private key on a website dangerous. If our website
-                                                        is
-                                                        compromised or you accidentally visit a different website, your
-                                                        funds will
-                                                        be stolen. Please consider:
-                                                    </div>
-                                                    <ul style="color: white;">
-                                                        <li>
-                                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                                MetaMask
-                                                            </a>
-                                                            or
-                                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                                A Hardware Wallet
-                                                            </a>
-                                                            or
-                                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                                Running MEW Offline &amp; Locally
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="" target="_blank" rel="noopener noreferrer">
-                                                                Learning How to Protect Yourself and Your Funds
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <br>
-                                                    <div v-if="jsonStep == 1" class="form-group">
-
-                                                        <input id="upload" type="file" @change="onFileSelected"
-                                                               style="display:none"/>
-                                                        <a tabindex="0" type="file" role="button"
-                                                           class="btn btn-primary  ng-hide"
-                                                           id="upload_link" @click="upload_link"
-                                                           translate="ADD_Label_6_short">SELECT
-                                                            WALLET
-                                                            FILE...
-
-
-                                                        </a>
-                                                        &nbsp;
-                                                        <span style="color:#fff">{{this.fileName}}</span>
-
-                                                    </div>
-                                                    <div v-if="jsonStep == 2">
-                                                        <form @submit.prevent="showLoader">
-                                                            <div class="form-group">
-                                                                <label htmlFor="password">Password</label>
-                                                                <input type="password" v-model="user.password"
-                                                                       class="form-control"
-                                                                />
-                                                                <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
-                                                                <!--class="invalid-feedback">{{ errors.first('password') }}-->
-                                                                <!--</div>-->
-                                                            </div>
-                                                            <!--passWord section-->
-                                                            <button type="submit" id="btn_password" class="btn btn-primary">Enter
-                                                                Password
-                                                            </button>
-
-                                                        </form>
-
-
-                                                    </div>
-                                                    <div v-if="loader == true">
-                                                        <vue-simple-spinner></vue-simple-spinner>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-
-                                </div>
-                                <!--modal end-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--modal start -->
+        <div v-if="step === true">
+            <div class="bg-contract1">
+                <div class=" p-0" style="margin-top: 15px">
+                    <ul class="nav nav-tabs navtab-custom nav-justified">
+                        <li class="active">
+                            <a href="#privateKey" data-toggle="tab" aria-expanded="true">
+                                <span>Private key</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#jasonFile" data-toggle="tab" aria-expanded="false">
+                                <span>JSON File</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="privateKey" class="tab-pane active">
+                            <form data-v-92875dbe="" action="#"
+                                  @submit.prevent="getPrivateKey" data-parsley-validate=""
+                                  novalidate="novalidate">
+                                <div data-v-92875dbe="" class="form-group">
+                                    <label data-v-92875dbe="">Enter Your Private Key</label>
+                                    <input v-model="privateKey
+
+" v-validate="{ required: true, min: 64,max:64 }" name="password" class="form-control"
+                                           :class="{ 'is-invalid': submitted && errors.has('password') }"
+                                           data-v-92875dbe=""
+                                           type="password" placeholder=""
+                                           data-parsley-id="8">
+                                </div>
+                                <div style="color:red;" v-if="submitted && errors.has('password')"
+                                     class="invalid-feedback">{{ errors.first('password') }}
+                                </div>
+
+                                <div data-v-92875dbe="" class="form-group text-right m-b-0">
+
+                                    <button type="submit" data-v-92875dbe=""
+                                            data-toggle="modal"
+                                            data-target="#sendToken-modal"
+                                            class="btn btn-default waves-effect waves-light">
+                                        Send Transaction
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div v-if="loader == true">
+                                <vue-simple-spinner></vue-simple-spinner>
+                            </div>
+                        </div>
+                        <div id="jasonFile" class="tab-pane ">
+                            <div>
+                                <h4 translate="ADD_Radio_2_alt">Select Your Wallet File</h4>
+                                <h5 style="color:  rgb(217, 83, 79);">
+                                    This is <u>not</u> a recommended way to access your wallet.
+                                </h5>
+                                <div class="form-group" style="color:  rgba(255, 255, 255, 0.8);">
+                                    Entering your private key on a website dangerous. If our website
+                                    is
+                                    compromised or you accidentally visit a different website, your
+                                    funds will
+                                    be stolen. Please consider:
+                                </div>
+                                <ul style="color: white;">
+                                    <li>
+                                        <a href="" target="_blank" rel="noopener noreferrer">
+                                            MetaMask
+                                        </a>
+                                        or
+                                        <a href="" target="_blank" rel="noopener noreferrer">
+                                            A Hardware Wallet
+                                        </a>
+                                        or
+                                        <a href="" target="_blank" rel="noopener noreferrer">
+                                            Running MEW Offline &amp; Locally
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" target="_blank" rel="noopener noreferrer">
+                                            Learning How to Protect Yourself and Your Funds
+                                        </a>
+                                    </li>
+                                </ul>
+                                <br>
+                                <div v-if="jsonStep == 1" class="form-group">
+
+                                    <input id="upload" type="file" @change="onFileSelected"
+                                           style="display:none"/>
+                                    <a tabindex="0" type="file" role="button"
+                                       class="btn btn-primary  ng-hide"
+                                       id="upload_link" @click="upload_link"
+                                       translate="ADD_Label_6_short">SELECT
+                                        WALLET
+                                        FILE...
+
+
+                                    </a>
+                                    &nbsp;
+                                    <span style="color:#fff">{{this.fileName}}</span>
+
+                                </div>
+                                <div v-if="jsonStep == 2">
+                                    <form @submit.prevent="showLoader">
+                                        <div class="form-group">
+                                            <label htmlFor="password">Password</label>
+                                            <input type="password" v-model="user.password"
+                                                   class="form-control"
+                                            />
+                                            <!--<div style="color:red" v-if="submitted && errors.has('password')"-->
+                                            <!--class="invalid-feedback">{{ errors.first('password') }}-->
+                                            <!--</div>-->
+                                        </div>
+                                        <!--passWord section-->
+                                        <button type="submit" id="btn_password" class="btn btn-primary">Enter
+                                            Password
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+                                <div v-if="loader == true">
+                                    <vue-simple-spinner></vue-simple-spinner>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+
+            </div>
+        </div>
+        <!--modal end-->
     </div>
 </template>
 <script>
@@ -511,10 +536,10 @@
 
 
             },
-            getAccountFromJson:async function(){
+            getAccountFromJson: async function () {
 
-                var _this =this;
-                var account = await  web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
+                var _this = this;
+                var account = await web3.eth.accounts.decrypt(_this.json_Data, _this.user.password);
                 return account;
             },
             handlePassword: async function (e) {
@@ -526,19 +551,19 @@
                 console.log("Json resposne is  " + _this.json_Data);
 
                 var password = _this.user.password;
-                var jsonBackResposne=false;
-                var jsonResponseError =false;
+                var jsonBackResposne = false;
+                var jsonResponseError = false;
 
 
                 setTimeout(function () {
 
-                    _this.getAccountFromJson().then((res)=>{
+                    _this.getAccountFromJson().then((res) => {
                         console.log("Bacck json resposne " + JSON.stringify(res));
                         console.log("Bacck json resposne of private key " + res.privateKey);
                         _this.importPrivateKey = res.privateKey.substring(2);
                         console.log("Import file private key :" + _this.importPrivateKey);
                         jsonBackResposne = true;
-                        if(jsonBackResposne){
+                        if (jsonBackResposne) {
 
 
                             _this.listing();
@@ -548,9 +573,9 @@
                             document.getElementById("btn_password").disabled = false;
                         }
 
-                    }).catch((e)=>{
+                    }).catch((e) => {
                         jsonResponseError = true;
-                        console.log("Error  is" +e);
+                        console.log("Error  is" + e);
                         if (jsonResponseError) {
 
 
@@ -559,7 +584,7 @@
                             _this.user.password = '';
                             _this.loader = false;
 
-                            jsonResponseError =false;
+                            jsonResponseError = false;
 
                             document.getElementById("btn_password").disabled = false;
                             return;
@@ -569,10 +594,10 @@
                     });
 
 
-                },500);
+                }, 500);
             },
-            listing: function(){
-                var _this =this;
+            listing: function () {
+                var _this = this;
 
                 switch (this.tabValue) {
                     case 'SendTokens':
@@ -697,26 +722,20 @@
                 if (_this.address === '') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
-                }
-                else if(_this.address.substring(0, 2) != '0x')
-                {
+                } else if (_this.address.substring(0, 2) != '0x') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field start with 0x');
-                }
-                else if (_this.address.length > 42) {
+                } else if (_this.address.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Invalid Address');
-                }
-                else if (_this.address.length < 42) {
+                } else if (_this.address.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Invalid Address');
-                }
-                else if (_this.balance <= 0) {
+                } else if (_this.balance <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Amount field is required');
-                }
-                else {
+                } else {
                     sendTokens.getAddressAndTokenValues(_this.address, _this.balance);
                     this.step = true;
                     this.tabValue = 'SendTokens';
@@ -730,8 +749,7 @@
                 if (_this.burnTokenValue <= 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Amount field is required ');
-                }
-                else {
+                } else {
                     burnTokens.getTokenValues(_this.burnTokenValue);
                     this.step = true;
                     this.tabValue = "Burn";
@@ -744,26 +762,20 @@
                 if (_this.mintAddress === '') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field is required');
-                }
-                else if(_this.mintAddress.substring(0, 2) != '0x')
-                {
+                } else if (_this.mintAddress.substring(0, 2) != '0x') {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Address field start with 0x');
-                }
-                else if (_this.mintAddress.length > 42) {
+                } else if (_this.mintAddress.length > 42) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Invalid Address');
-                }
-                else if (_this.mintAddress.length < 42) {
+                } else if (_this.mintAddress.length < 42) {
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Invalid Address');
-                }
-                else if (_this.mintBalance === 0) {
+                } else if (_this.mintBalance === 0) {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Amount field is required ');
-                }
-                else {
+                } else {
                     mintTokens.getAddressAndTokenValues(_this.mintAddress, _this.mintBalance);
                     this.step = true;
                     this.tabValue = 'Mint';
@@ -785,8 +797,7 @@
 
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.error('Amount field is required');
-                }
-                else {
+                } else {
                     updateToken.getTokenValues(_this.updateTokenValue);
                     this.step = true;
                     this.tabValue = 'updateToken';
@@ -986,9 +997,9 @@
                 _this.tabValue = '';
                 _this.submitted = false;
                 _this.jsonStep = 1;
-                _this.loader=false;
-                _this.user.password =''
-;
+                _this.loader = false;
+                _this.user.password = ''
+                ;
 
             }
         },

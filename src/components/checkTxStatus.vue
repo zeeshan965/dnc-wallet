@@ -53,82 +53,84 @@
                         and is on the blockchain.</strong></p>
 
                 </div>
-                <div>
+                <div class="table-responsive">
                     <h4 translate="tx_Details" class="cont-md ng-scope">Transaction Details</h4>
                     <br>
-                    <table class="table table-striped txstatus__2 cont-md">
-                        <!-- ng-show="tx.status=='foundOnChain' || foundInPending'"-->
-                        <tbody>
-                        <tr>
-                            <td>TX Hash</td>
-                            <td>
-                                <a href="https://ropsten.etherscan.io/tx/0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9"
-                                   target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    {{ this.txResposne.hash}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td translate="OFFLINE_Step1_Label_1" class="ng-scope">From Address</td>
-                            <td>
-                                <a target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    {{ this.txResposne.from}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td translate="OFFLINE_Step2_Label_1" class="ng-scope">To Address</td>
-                            <td>
-                                <a target="_blank" rel="noopener noreferrer" class="ng-binding">
-                                    {{ this.txResposne.to}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td translate="SEND_amount_short" class="ng-scope">Amount</td>
-                            <td class="ng-binding">
-                                {{ this.amount }} Ether
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="account-help-icon"
-                                   href="https://kb.myetherwallet.com/transactions/what-is-nonce.html" target="_blank"
-                                   rel="noopener noreferrer">
-                                </a>
-                                <span translate="OFFLINE_Step2_Label_5" class="ng-scope">Nonce</span>
-                            </td>
-                            <td class="ng-binding">
-                                {{ this.txResposne.nonce}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="account-help-icon"
-                                   href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html" target="_blank"
-                                   rel="noopener noreferrer">
-                                </a>
-                                <span translate="OFFLINE_Step2_Label_4" class="ng-scope">Gas </span>
-                            </td>
-                            <td class="ng-binding">
-                                {{ this.txResposne.gas}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="account-help-icon"
-                                   href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html" target="_blank"
-                                   rel="noopener noreferrer">
-                                </a>
-                                <span translate="OFFLINE_Step2_Label_3" class="ng-scope">Gas Price</span>
-                            </td>
-                            <td class="ng-binding">
-                                {{ this.txResposne.gasPrice}}
-                            </td>
-                        </tr>
+                    <div class="">
+                        <table class="table table-striped txstatus__2 cont-md">
+                            <!-- ng-show="tx.status=='foundOnChain' || foundInPending'"-->
+                            <tbody>
+                            <tr>
+                                <td>TX Hash</td>
+                                <td>
+                                    <a href="https://ropsten.etherscan.io/tx/0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9"
+                                       target="_blank" rel="noopener noreferrer" class="ng-binding">
+                                        {{ this.txResposne.hash}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td translate="OFFLINE_Step1_Label_1" class="ng-scope">From Address</td>
+                                <td>
+                                    <a target="_blank" rel="noopener noreferrer" class="ng-binding">
+                                        {{ this.txResposne.from}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td translate="OFFLINE_Step2_Label_1" class="ng-scope">To Address</td>
+                                <td>
+                                    <a target="_blank" rel="noopener noreferrer" class="ng-binding">
+                                        {{ this.txResposne.to}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td translate="SEND_amount_short" class="ng-scope">Amount</td>
+                                <td class="ng-binding">
+                                    {{ this.amount }} Ether
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="account-help-icon"
+                                       href="https://kb.myetherwallet.com/transactions/what-is-nonce.html" target="_blank"
+                                       rel="noopener noreferrer">
+                                    </a>
+                                    <span translate="OFFLINE_Step2_Label_5" class="ng-scope">Nonce</span>
+                                </td>
+                                <td class="ng-binding">
+                                    {{ this.txResposne.nonce}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="account-help-icon"
+                                       href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html" target="_blank"
+                                       rel="noopener noreferrer">
+                                    </a>
+                                    <span translate="OFFLINE_Step2_Label_4" class="ng-scope">Gas </span>
+                                </td>
+                                <td class="ng-binding">
+                                    {{ this.txResposne.gas}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="account-help-icon"
+                                       href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html" target="_blank"
+                                       rel="noopener noreferrer">
+                                    </a>
+                                    <span translate="OFFLINE_Step2_Label_3" class="ng-scope">Gas Price</span>
+                                </td>
+                                <td class="ng-binding">
+                                    {{ this.txResposne.gasPrice}}
+                                </td>
+                            </tr>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
         </div>
@@ -249,7 +251,7 @@
         min-height: 1.5rem;
         margin: 1rem auto;
         position: relative !important;
-        z-index: 99;
+        z-index: 1;
     }
 
     p {
