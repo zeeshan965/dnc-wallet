@@ -63,7 +63,7 @@
                             <tr>
                                 <td>TX Hash</td>
                                 <td>
-                                    <a href="https://ropsten.etherscan.io/tx/0x15e1e7ea0057d89cffbe326c6b36744cbe8db332888d728b28c059502da834c9"
+                                    <a :href="'https://ropsten.etherscan.io/tx/'+'{{ this.txResposne.hash}}'"
                                        target="_blank" rel="noopener noreferrer" class="ng-binding">
                                         {{ this.txResposne.hash}}
                                     </a>

@@ -23,7 +23,7 @@
                     </div>
                     <div class="modal-body">
                         <router-link to="/importaccounts">
-                           <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Import Accounts</button>
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Import Accounts</button>
                         </router-link>
                         <h4>We need a few more details before we create new account address for your digital assets</h4>
                         <div class="alert alert-danger">
@@ -342,39 +342,39 @@
 
 
 
-                      _this.walletResponse =  userKeyClient.getImportAccountDetail(_this.acconntPrivateKey);
-                     // _this.walletResponse = JSON.stringify(_this.walletResponse);
-                    // console.log('Response is   ' + JSON.stringify(response));
+                _this.walletResponse =  userKeyClient.getImportAccountDetail(_this.acconntPrivateKey);
+                // _this.walletResponse = JSON.stringify(_this.walletResponse);
+                // console.log('Response is   ' + JSON.stringify(response));
 
-                  // _this.walletResponse = WalletService.unlockAccount(_this.acconntPrivateKey, '123456789');
-                    console.log('Unclocked ===> ' +  JSON.stringify(_this.walletResponse));
-
-
-                            WalletService.addresses.push(_this.walletResponse.address);
-
-                            //Eth Private Balance
-                            var myBalance;
-                            var balance = await WalletService.getBalance(_this.walletResponse.address).then((res) => {
-                                myBalance = res;
-                                console.log('Response inside get balance ' + myBalance);
-                            });
-                            WalletService.addressesBlancess.push(myBalance);
-                            console.log('First address is ' + addressesBlancess[0]);
-
-                            //DNC Private Balance
-                            var myDNCBalance;
-                            var balancednc = await DncTokenBalance.getDncBalance(_this.walletResponse.address).then((dncres) => {
-                                myDNCBalance = dncres;
-                                console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
-                            });
-
-                            WalletService.dncAddressesBlancess.push(myDNCBalance);
-                            console.log("DNC first Address is " + dncAddressesBlancess[0]);
+                // _this.walletResponse = WalletService.unlockAccount(_this.acconntPrivateKey, '123456789');
+                console.log('Unclocked ===> ' +  JSON.stringify(_this.walletResponse));
 
 
+                WalletService.addresses.push(_this.walletResponse.address);
+
+                //Eth Private Balance
+                var myBalance;
+                var balance = await WalletService.getBalance(_this.walletResponse.address).then((res) => {
+                    myBalance = res;
+                    console.log('Response inside get balance ' + myBalance);
+                });
+                WalletService.addressesBlancess.push(myBalance);
+                console.log('First address is ' + addressesBlancess[0]);
+
+                //DNC Private Balance
+                var myDNCBalance;
+                var balancednc = await DncTokenBalance.getDncBalance(_this.walletResponse.address).then((dncres) => {
+                    myDNCBalance = dncres;
+                    console.log("Dnc issdsdsds balcne is for then resposne" + myDNCBalance);
+                });
+
+                WalletService.dncAddressesBlancess.push(myDNCBalance);
+                console.log("DNC first Address is " + dncAddressesBlancess[0]);
 
 
-                        // alert('Unlocked address ===> ' + WalletService.addresses);
+
+
+                // alert('Unlocked address ===> ' + WalletService.addresses);
 
 
                 $('#spinnerr').hide();

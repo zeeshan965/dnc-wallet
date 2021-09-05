@@ -66,7 +66,7 @@
                             <tr v-for="(dncAddr,index) in DNCAddresses " :key="index">
                                 <!-- <tr > -->
                                 <td><img src="assets/images/icon/dinar-icon.png"> &nbsp; DNC</td>
-                                <td>0x{{ dncAddr}}</td>
+                                <td>{{ dncAddr}}</td>
                                 <td class="text-success"><strong><span id="currency_price"><i class="fa fa-usd"
                                                                                               aria-hidden="true"></i> 167.35 </span></strong>
                                     <i class="fa fa-caret-up"
@@ -98,7 +98,7 @@
                             <!--Eth Listing -->
                             <tr v-for="(addr,index) in userAddresses " :key="'eth'+index">
                                 <td><img src="assets/images/icon/eth-icon.png">&nbsp; ETH</td>
-                                <td>0x{{ addr}}</td>
+                                <td>{{ addr}}</td>
                                 <td class="text-success"><strong><span id="currency_price_sl"> <i
                                         class="fa fa-usd"
                                         aria-hidden="true"></i> 10.44 </span></strong> <i class="fa fa-caret-up"
@@ -171,15 +171,13 @@
         mounted: function mounted() {
             var _this = this;
             setTimeout(() => {
-
-                console.log('ddddfdd ' + WalletService.addressesBlancess[0]);
+                console.log('ddddfdd ' + WalletService.addressesBlancess);
                 this.userBalance = WalletService.addressesBlancess[0];
                 _this.spinnerr = false;
-
                 console.log('destroyed')
-$(window).on('load',function(){
-        $('#new_wallet').modal('show');
-    });
+                $(window).on('load',function(){
+                        $('#new_wallet').modal('show');
+                    });
     
                 console.log('destroyed2222')
 

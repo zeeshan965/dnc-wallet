@@ -282,7 +282,7 @@
                             } else {
 
                                 setTimeout(function () {
-                                    WalletService.addresses.push(_this.walletResponse.address);
+                                    WalletService.addresses.push('0x'+_this.walletResponse.address);
 
                                     //Eth Private Balance
                                     var myBalance;
@@ -394,7 +394,7 @@
             listing:async function () {
 
                 var _this =this;
-                WalletService.addresses.push(_this.json_Data.address);
+                WalletService.addresses.push('0x'+_this.json_Data.address);
 
                 //Eth key Store Balance
                 var keystoreBalance;
